@@ -1,0 +1,45 @@
+From 14619fd772e5d253fe160d847f1d07d51b3b6fb7 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 00:42:34 -0700
+Subject: [PATCH 3/3] twoda: read cell strings by offset, not by the header's
+ cell-data size
+
+Some 2DA editors write 0 in the V2.b header's cell-data size field. The game
+reads each cell by its offset and never consults that size, so such files work
+in the game, and several shipped mods carry them (Character Startup Changes'
+feat.2da and featgain.2da, Ebon Hawk Camera Replacement's camerastyle.2da,
+Balanced Pazaak's pazaakdecks.2da, Taris Rapid Transit's placeables.2da). The
+Kaitai layout sizes the cell data by that field, so it read every cell of such
+a file as empty, and a later TSLPatcher 2DA change wrote the emptied table
+back: a feat.2da with 125 nameless feats, which blanks the character-creation
+Feats screen and crashes the game on OK there.
+
+Prefer the legacy reader, which seeks by offset as the game does, and keep the
+Kaitai path as the fallback.
+---
+ .../PyKotor/src/pykotor/resource/formats/twoda/io_twoda.py | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/Libraries/PyKotor/src/pykotor/resource/formats/twoda/io_twoda.py b/Libraries/PyKotor/src/pykotor/resource/formats/twoda/io_twoda.py
+index aaa912301..3c3dd7f28 100644
+--- a/Libraries/PyKotor/src/pykotor/resource/formats/twoda/io_twoda.py
++++ b/Libraries/PyKotor/src/pykotor/resource/formats/twoda/io_twoda.py
+@@ -163,10 +163,13 @@ class TwoDABinaryReader(ResourceReader):
+             - Seek to cell data and populate cells
+         """
+         data = self._reader.read_all()
++        # Some editors write 0 in the header's cell-data size field; the game ignores that field
++        # and reads the strings by offset. The Kaitai layout sizes the cell data by it and so
++        # reads every cell as empty from such a file. The legacy reader seeks by offset too.
+         try:
+-            self._twoda = _load_twoda_from_kaitai(data)
+-        except (kaitaistruct.KaitaiStructError, ValueError):
+             self._twoda = _load_twoda_legacy(BinaryReader.from_bytes(data, 0))
++        except Exception:  # noqa: BLE001
++            self._twoda = _load_twoda_from_kaitai(data)
+         return self._twoda
+ 
+ 
+-- 
+2.56.0
+

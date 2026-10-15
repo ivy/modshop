@@ -1,0 +1,169 @@
+From 5877cbd4ad77a177a0d5a45c273b2588001bc40c Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 00:40:54 -0700
+Subject: [PATCH 1/5] Tools: an XPRESS-with-Huffman encoder, for building the
+ banks off Windows
+
+tools/build_native_assets.py compresses the embedded banks through the Windows
+Compression API (cabinet.dll, COMPRESS_ALGORITHM_XPRESS_HUFF), which exists only
+on Windows. This is that encoding without the API, in exactly the form
+K1Xpress.cpp decodes: the 24-byte container header, then per 65,536-byte chunk
+its stored size and bytes, a chunk stored whole where coding would not shrink
+it; inside a chunk the 256-byte table of 512 four-bit code lengths, then the
+codes most significant bit first in 16-bit little-endian words, with one zero
+word after the last for the decoder's two words of lookahead.
+
+Matches are 3 to 17 bytes, so a length never spills into the byte stream and no
+length byte is ever interleaved with the code words. Canonical codes are
+assigned in the order BuildTable fills its table (rising length, then rising
+symbol); a distribution whose longest code would pass 15 bits is flattened
+until it fits.
+
+Round-tripped through K1Xpress.cpp compiled natively on seven inputs (an empty
+run of 65,536 zeros, 70,000 random bytes, one byte, a 23-byte string, a vanilla
+.gui, repeated text, a controller texture): every one decoded to its input.
+Ratios on the compressible ones are within a few percent of zlib's.
+---
+ tools/xpress_huff.py | 130 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 130 insertions(+)
+ create mode 100644 tools/xpress_huff.py
+
+diff --git a/tools/xpress_huff.py b/tools/xpress_huff.py
+new file mode 100644
+index 0000000..2b1090b
+--- /dev/null
++++ b/tools/xpress_huff.py
+@@ -0,0 +1,130 @@
++#!/usr/bin/env python3
++"""XPRESS with Huffman (the Windows Compression API's COMPRESS_ALGORITHM_XPRESS_HUFF,
++[MS-XCA] 2.2) written without that API, in the form K1Xpress.cpp decodes: the 24-byte
++container header, then per 65,536-byte chunk its stored size and bytes; a chunk whose
++stored size is its decoded size is stored. Inside a chunk, a 256-byte table of 512
++four-bit code lengths, then the codes, most significant bit first, in 16-bit
++little-endian words, with one zero word after the last (the decoder keeps two words
++of lookahead). Matches are 3 to 17 bytes, so the length never spills into the byte
++stream and no length byte is ever interleaved with the words.
++"""
++from __future__ import annotations
++import heapq
++import struct
++
++MAGIC = b'\x0a\x51\xe5\xc0'
++CHUNK = 65536
++MIN_MATCH, MAX_MATCH = 3, 17
++MAX_CODE = 15
++
++
++def _lengths(freq: list[int]) -> list[int]:
++    """Canonical Huffman code lengths for 512 symbols, none longer than 15 bits."""
++    used = [s for s, f in enumerate(freq) if f]
++    if len(used) == 1:
++        used.append((used[0] + 1) % 512)
++    scale = 1
++    while True:
++        heap = [(max(1, freq[s] // scale) if freq[s] else 1, s, [s]) for s in used]
++        heapq.heapify(heap)
++        depth = [0] * 512
++        while len(heap) > 1:
++            fa, _, a = heapq.heappop(heap)
++            fb, _, b = heapq.heappop(heap)
++            for s in a + b:
++                depth[s] += 1
++            heapq.heappush(heap, (fa + fb, min(a + b), a + b))
++        if max(depth) <= MAX_CODE:
++            return depth
++        scale *= 2   # flatten the distribution until the longest code fits
++
++
++def _canonical_codes(lengths: list[int]) -> dict[int, tuple[int, int]]:
++    """symbol -> (code, length), assigned by rising length then rising symbol: the order
++    K1Xpress.cpp's BuildTable fills its lookup table in."""
++    codes = {}
++    code = 0
++    for length in range(1, MAX_CODE + 1):
++        for symbol in range(512):
++            if lengths[symbol] == length:
++                codes[symbol] = (code, length)
++                code += 1
++        code <<= 1
++    return codes
++
++
++def _tokens(data: bytes) -> list[tuple[int, int, int]]:
++    """(symbol, extra bits, extra bit count) per literal or match, greedy with a hash
++    chain over 3-byte prefixes; offsets stay inside the chunk, as the decoder requires."""
++    out = []
++    head: dict[bytes, list[int]] = {}
++    i, n = 0, len(data)
++    while i < n:
++        best_len, best_off = 0, 0
++        if i + MIN_MATCH <= n:
++            key = data[i:i + MIN_MATCH]
++            for j in reversed(head.get(key, ())[-64:]):
++                if i - j > 65535:
++                    break
++                length = MIN_MATCH
++                while length < MAX_MATCH and i + length < n and data[j + length] == data[i + length]:
++                    length += 1
++                if length > best_len:
++                    best_len, best_off = length, i - j
++                    if length == MAX_MATCH:
++                        break
++        if best_len >= MIN_MATCH:
++            bits = best_off.bit_length() - 1          # offsetBits: offset = 2^bits + extra
++            out.append((256 + (bits << 4) + (best_len - 3), best_off - (1 << bits), bits))
++            step = best_len
++        else:
++            out.append((data[i], 0, 0))
++            step = 1
++        for k in range(i, min(i + step, n - MIN_MATCH + 1)):
++            head.setdefault(data[k:k + MIN_MATCH], []).append(k)
++        i += step
++    return out
++
++
++def encode_chunk(data: bytes) -> bytes:
++    tokens = _tokens(data)
++    freq = [0] * 512
++    for symbol, _, _ in tokens:
++        freq[symbol] += 1
++    lengths = _lengths(freq)
++    codes = _canonical_codes(lengths)
++    table = bytes(lengths[2 * i] | lengths[2 * i + 1] << 4 for i in range(256))
++    acc, nbits, words = 0, 0, bytearray()
++    for symbol, extra, extra_bits in tokens:
++        code, length = codes[symbol]
++        acc = (acc << length) | code
++        nbits += length
++        if extra_bits:
++            acc = (acc << extra_bits) | extra
++            nbits += extra_bits
++        while nbits >= 16:
++            nbits -= 16
++            words += struct.pack('<H', (acc >> nbits) & 0xFFFF)
++            acc &= (1 << nbits) - 1
++    if nbits:
++        words += struct.pack('<H', (acc << (16 - nbits)) & 0xFFFF)
++    words += b'\0\0'
++    return table + bytes(words)
++
++
++def compress(data: bytes, chunk: int = CHUNK) -> bytes:
++    data = bytes(data)
++    chunk = min(chunk, len(data)) or 1
++    out = bytearray(MAGIC + struct.pack('<HBB', 24, 0, 4) + struct.pack('<QQ', len(data), chunk))
++    for at in range(0, len(data), chunk):
++        piece = data[at:at + chunk]
++        packed = encode_chunk(piece)
++        if len(packed) >= len(piece):
++            packed = piece
++        out += struct.pack('<I', len(packed)) + packed
++    return bytes(out)
++
++
++if __name__ == '__main__':
++    import sys
++    sys.stdout.buffer.write(compress(open(sys.argv[1], 'rb').read()))
+-- 
+2.56.0
+

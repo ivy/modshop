@@ -1,0 +1,12 @@
+# Copy to local.toml (gitignored). Names of machines and paths that the docs
+# refer to as "the handheld" and "the build host". Nothing here is read by the
+# scripts yet; it is the one place for an agent or a person to look them up.
+
+[handheld]
+ssh = "handheld"                      # ssh host alias of the device that runs the game
+game_dir = "~/.local/share/Steam/steamapps/common/swkotor"
+proton_dir = "~/.local/share/Steam/steamapps/common/Proton 11.0"
+steam_userdata = "~/.local/share/Steam/userdata/<id>"   # background recordings live under gamerecordings/
+
+[build_host]
+data = "games/kotor/data"             # relative to this checkout; KOTOR_DATA overrides it

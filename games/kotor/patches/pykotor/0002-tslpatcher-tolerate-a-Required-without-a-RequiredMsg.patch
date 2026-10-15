@@ -1,0 +1,41 @@
+From 94b56a1be61f7c3ecd328184a030bf438c325f76 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 00:42:33 -0700
+Subject: [PATCH 2/3] tslpatcher: tolerate a Required without a RequiredMsg,
+ and the reverse
+
+The [Settings] reader raised "Required files definitions must match required
+msg count" when a changes.ini had one and not the other, and HoloPatcher
+refused the mod. TSLPatcher itself takes either alone: Dodonna's Transmission's
+Revisited ini carries RequiredMsg=0 and no Required, and Republic Soldier's New
+Shade's option inis carry Required= and no RequiredMsg. Pad the shorter list
+with a generic message, or drop the surplus messages, and warn.
+---
+ Libraries/PyKotor/src/pykotor/tslpatcher/reader.py | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/Libraries/PyKotor/src/pykotor/tslpatcher/reader.py b/Libraries/PyKotor/src/pykotor/tslpatcher/reader.py
+index 6b4b3a7ca..8bd76bfbc 100644
+--- a/Libraries/PyKotor/src/pykotor/tslpatcher/reader.py
++++ b/Libraries/PyKotor/src/pykotor/tslpatcher/reader.py
+@@ -284,10 +284,13 @@ class ConfigReader:
+                         f"Key '{key}' improperly defined in settings ini. Expected (Required) or (RequiredMsg)"
+                     )
+                 self.config.required_messages.append(value.strip())
+-        if len(self.config.required_files) != len(self.config.required_messages):
+-            raise ValueError(
+-                f"Required files definitions must match required msg count ({len(self.config.required_files)}/{len(self.config.required_messages)})"
+-            )
++        # TSLPatcher tolerates a lone Required= or RequiredMsg=; pad rather than refuse.
++        rf, rm = self.config.required_files, self.config.required_messages
++        if len(rf) != len(rm):
++            self.log.add_warning(f"Required files/messages count mismatch ({len(rf)}/{len(rm)}); padding")
++            while len(rm) < len(rf):
++                rm.append("A required file is missing.")
++            del rm[len(rf):]
+         self.config.save_processed_scripts = int(settings_ini.get("SaveProcessedScripts", 0))
+         self.config.log_level = LogLevel(int(settings_ini.get("LogLevel", LogLevel.WARNINGS.value)))
+ 
+-- 
+2.56.0
+

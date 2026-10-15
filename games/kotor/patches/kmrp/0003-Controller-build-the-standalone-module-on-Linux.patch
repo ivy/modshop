@@ -1,0 +1,75 @@
+From c6fb5bcc7bbf2b9bed76fd712b85eb3ea20b09f9 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 00:40:54 -0700
+Subject: [PATCH 3/5] Controller: build the standalone module on Linux
+
+The same sources, defines and link inputs as build_controller_standalone.cmd,
+compiled by clang in cl mode for i686-pc-windows-msvc with Microsoft's CRT and
+SDK laid out by xwin (https://github.com/Jake-Shadle/xwin), and linked by lld,
+from the llvm-mingw container image; the Python steps run on the host. The
+MSVC ABI rather than mingw's because the sources are shaped for it: Itanium
+mangling leaves calling conventions out, so EngineFn's __thiscall and __cdecl
+instantiations collide, and mingw's headers declare a POSIX open() that shadows
+K1ControllerLayout.cpp's own.
+
+Measured on 2026-10-15 against master 6d93283: 11,715,072 bytes, 37 exports as
+controller-exports.def names them, imports only KERNEL32, USER32, GDI32 and
+bcrypt (the CRT static, /MT), and the module ran in the game under Proton on a
+Steam Deck-class handheld, Stealth in the action row included.
+---
+ .../build_controller_standalone_linux.sh      | 43 +++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+ create mode 100755 src/controller-native/build_controller_standalone_linux.sh
+
+diff --git a/src/controller-native/build_controller_standalone_linux.sh b/src/controller-native/build_controller_standalone_linux.sh
+new file mode 100755
+index 0000000..8f16874
+--- /dev/null
++++ b/src/controller-native/build_controller_standalone_linux.sh
+@@ -0,0 +1,43 @@
++#!/usr/bin/env bash
++# The standalone controller patch (kmrp-controller.dll), built on Linux with clang
++# targeting the MSVC ABI: the same sources, defines and link inputs as
++# build_controller_standalone.cmd, with Microsoft's CRT and SDK laid out by xwin
++# (https://github.com/Jake-Shadle/xwin) and clang + lld from the llvm-mingw image.
++#
++#   XWIN=~/.cache/xwin/sdk PYTHON=venv/bin/python src/controller-native/build_controller_standalone_linux.sh
++#
++# The Python steps run on the host (pykotor, Pillow, numpy); the asset bank is
++# compressed by tools/xpress_huff.py, since the Windows Compression API is not here.
++set -euo pipefail
++cd "$(dirname "$0")/../.."
++XWIN="${XWIN:-$HOME/.cache/xwin/sdk}"
++PYTHON="${PYTHON:-python3}"
++IMAGE="${IMAGE:-docker.io/mstorsjo/llvm-mingw:latest}"
++SDL=build/deps/SDL3-3.4.16
++B=build/controller-standalone
++S=src/controller-native
++mkdir -p "$B" build/deps
++if [ ! -d "$SDL" ]; then
++    curl -sL -o build/deps/SDL3-devel-3.4.16-VC.zip https://github.com/libsdl-org/SDL/releases/download/release-3.4.16/SDL3-devel-3.4.16-VC.zip
++    unzip -q -o build/deps/SDL3-devel-3.4.16-VC.zip -d build/deps
++    cp "$SDL/lib/x86/SDL3.dll" build/deps/kmrp-sdl3.dll
++fi
++"$PYTHON" tools/build_controller_assets.py
++"$PYTHON" tools/build_controller_kpatch.py --write-def "$B/controller-exports.def"
++podman run --rm -v "$PWD":/w:Z -v "$XWIN":/xwin:ro,Z -w /w "$IMAGE" sh -euc '
++  B='"$B"'; S='"$S"'
++  INC="/imsvc/xwin/crt/include /imsvc/xwin/sdk/include/ucrt /imsvc/xwin/sdk/include/um /imsvc/xwin/sdk/include/shared"
++  LIBS="/LIBPATH:/xwin/crt/lib/x86 /LIBPATH:/xwin/sdk/lib/um/x86 /LIBPATH:/xwin/sdk/lib/ucrt/x86"
++  llvm-rc /I "$B" /FO "$B/controller-assets.res" "$B/controller-assets.rc"
++  clang --driver-mode=cl --target=i686-pc-windows-msvc -fuse-ld=lld $INC \
++    /nologo /Brepro /std:c++17 /O2 /fp:strict /EHsc /MT /LD /DKMRP_CONTROLLER_STANDALONE \
++    /I"$B" /I"$S" /I'"$SDL"'/include \
++    "$S/K1ControllerStandalone.cpp" "$S/K1Xpress.cpp" "$S/K1NativeJoystick.cpp" "$S/K1ControllerBackend.cpp" \
++    "$S/K1ControllerLayout.cpp" "$S/K1Rumble.cpp" "$S/K1XboxHud.cpp" \
++    "$S/vendor/K1XboxControls.cpp" "$S/vendor/K1XboxControlsXInput.cpp" \
++    "$B/controller-assets.res" \
++    /Fo"$B/" /Fe"$B/kmrp-controller.dll" \
++    /link /Brepro user32.lib gdi32.lib bcrypt.lib $LIBS /DEF:"$B/controller-exports.def" /INCREMENTAL:NO /MAP:"$B/kmrp-controller.map"
++'
++ls -la "$B/kmrp-controller.dll"
++sha256sum "$B/kmrp-controller.dll"
+-- 
+2.56.0
+

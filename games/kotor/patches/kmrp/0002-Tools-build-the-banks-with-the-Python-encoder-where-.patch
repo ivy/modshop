@@ -1,0 +1,77 @@
+From 5a6f87e3153ad573b73472eccefb60e0702d54c4 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 00:40:54 -0700
+Subject: [PATCH 2/5] Tools: build the banks with the Python encoder where
+ cabinet.dll is not there
+
+Compressor took the Windows Compression API for granted and so the bank tools
+could only run on Windows. Off Windows (no ctypes.WinDLL) it now encodes with
+tools/xpress_huff.py, the same container and codes as the API's XPRESS with
+Huffman, which the module's own decoder reads. LZMS (--lzms, KNASL002) still
+needs Windows, and the module refuses that bank anyway (issue 30).
+
+Compressor.stored writes the same container with every chunk stored, for a
+build that wants the bank uncompressed: the controller's bank is 181 MB that
+way against 11 MB coded, and the module embeds it as a resource, so it is not
+the default.
+---
+ tools/build_native_assets.py | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
+
+diff --git a/tools/build_native_assets.py b/tools/build_native_assets.py
+index 351277e..3d5bb54 100644
+--- a/tools/build_native_assets.py
++++ b/tools/build_native_assets.py
+@@ -61,7 +61,16 @@ HELPER_INPUTS = ('kmrp_prompts.txt', 'dialogfont16x16.txi')
+ 
+ 
+ class Compressor:
++    # Off Windows there is no cabinet.dll: the bank is then written by tools/xpress_huff.py,
++    # the same container and codes as the API's XPRESS with Huffman, which the module's
++    # own decoder (K1Xpress.cpp) reads. Only that algorithm (4) is written there; LZMS (5)
++    # needs Windows. Compressor.stored writes the same container with every chunk stored.
+     def __init__(self, algorithm=4):
++        if not hasattr(ctypes, 'WinDLL'):
++            if algorithm != 4:
++                raise RuntimeError('algorithm %d needs the Windows Compression API' % algorithm)
++            self.api = None
++            return
+         self.api = ctypes.WinDLL('cabinet', use_last_error=True)
+         self.api.CreateCompressor.argtypes = [wintypes.DWORD, ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p)]
+         self.api.Compress.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_size_t,
+@@ -72,6 +81,9 @@ class Compressor:
+             raise ctypes.WinError(ctypes.get_last_error())
+ 
+     def compress(self, data):
++        if self.api is None:
++            import xpress_huff
++            return xpress_huff.compress(data)
+         size = ctypes.c_size_t()
+         self.api.Compress(self.handle, data, len(data), None, 0, ctypes.byref(size))
+         out = ctypes.create_string_buffer(size.value)
+@@ -79,8 +91,21 @@ class Compressor:
+             raise ctypes.WinError(ctypes.get_last_error())
+         return out.raw[:size.value]
+ 
++    @staticmethod
++    def stored(data, chunk=65536):
++        """The Compression API's container (K1Xpress.cpp: a 24-byte header, then per
++        chunk its stored size as 32 bits and its bytes) with every chunk stored."""
++        data = bytes(data)
++        chunk = min(chunk, len(data)) or 1
++        out = bytearray(b'\x0a\x51\xe5\xc0' + struct.pack('<HBB', 24, 0, 4) + struct.pack('<QQ', len(data), chunk))
++        for at in range(0, len(data), chunk):
++            piece = data[at:at + chunk]
++            out += struct.pack('<I', len(piece)) + piece
++        return bytes(out)
++
+     def close(self):
+-        self.api.CloseCompressor(self.handle)
++        if self.api is not None:
++            self.api.CloseCompressor(self.handle)
+ 
+ 
+ def text(value):
+-- 
+2.56.0
+

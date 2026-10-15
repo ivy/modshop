@@ -1,0 +1,110 @@
+From 827fd6c40efd64549b0e6f369e3edc939291b0eb Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 03:21:22 -0700
+Subject: [PATCH 5/5] Controller: the left stick walks a conversation's replies
+ as the D-pad does
+
+CSWGuiDialog keeps the reply index itself and answers only its own
+previous and next events, which the module sends for the D-pad as the
+direction codes; the stick's latched direction went to the focus layer,
+which has nothing to move on that panel, so in a conversation the stick
+did nothing while the D-pad worked (reported from play on a pad-only
+device, 2026-10-15). In the dialogue input class the stick's latched
+up or down is folded into the button word before the D-pad loop, with
+the real D-pad taking precedence while held, so it gets the pad's press,
+release and hold-repeat unchanged.
+---
+ CHANGELOG.md                               | 12 +++++++++++
+ docs/controller-behaviour-matrix.md        |  4 ++--
+ src/controller-native/K1NativeJoystick.cpp | 23 ++++++++++++++++++++--
+ 3 files changed, 35 insertions(+), 4 deletions(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 0168362..eddc58e 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -117,6 +117,18 @@ proxy, and it applies the executable changes above as well.
+ 
+ ## [Unreleased]
+ 
++- **Controller: the left stick walks a conversation's replies** (2026-10-15;
++  `src/controller-native/K1NativeJoystick.cpp`, `FillNativeJoystickBufferK1`;
++  `docs/controller-behaviour-matrix.md`, the Dialogue row and the left stick's). Reported from
++  play on a pad-only device: in a conversation the D-pad moved the highlight and the stick did
++  nothing. `CSWGuiDialog` keeps the reply index itself and answers only its previous and next
++  events (`0x31`, `0x32`), which the module sends for the D-pad as the direction codes; the
++  stick's latched direction went to the focus layer, which has nothing to move on that panel.
++  In the dialogue input class the stick's latched up or down is now folded into the button
++  word before the D-pad loop, with the real D-pad taking precedence while held, so it gets the
++  pad's press, release and hold-repeat unchanged; nothing changes in any other class. **Built
++  on Linux and played: the stick walks the replies, the D-pad still does.**
++
+ - **Controller: the stick's movement vector stays inside the unit circle** (2026-10-15;
+   `src/controller-native/K1NativeJoystick.cpp`, `FillNativeJoystickBufferK1`;
+   `docs/controller-native-path.md`, "Deadzone"). Reported from play on a ROG Ally X under
+diff --git a/docs/controller-behaviour-matrix.md b/docs/controller-behaviour-matrix.md
+index c99a2ae..d015752 100644
+--- a/docs/controller-behaviour-matrix.md
++++ b/docs/controller-behaviour-matrix.md
+@@ -92,7 +92,7 @@ Skills, Feats and Powers and Random Name on Name; X is Feats' OK and Powers'
+ Select. A on those five screens presses the focused button when one is focused
+ (`GuardChargenConfirmK1`).
+ | **Options sub-screens** | activate | close | — | — | list scroll | list scroll | — | — | — | — | nav | nav | — | — | — |
+-| **Dialogue** | **select / skip** | — | — | — | **terminal scroll** | **terminal scroll** | — | — | — | — | **Up/Down = reply** | — | — | camera | — |
++| **Dialogue** | **select / skip** | — | — | — | **terminal scroll** | **terminal scroll** | — | — | — | — | **Up/Down = reply** | **Up/Down = reply** (as the D-pad, since 2026-10-15; see below) | — | camera | — |
+ 
+ Rows in bold were verified live with the virtual pad. The rest are statically
+ proven and marked per screen below.
+@@ -308,7 +308,7 @@ What holds everywhere, which is what a prompt can safely claim:
+ | **LT / RT** | **previous / next tab**, in the in-game menu only | no effect anywhere else, including the main menu and gameplay |
+ | **LB / RB** | **scroll the focused list** | only meaningful on the 17–19 panels with a list; silent elsewhere |
+ | **D-pad** | **move focus** | on the six native-direction screens the engine moves its own selection instead |
+-| **Left stick** | **move** in gameplay, **move focus** in a GUI | never both: gated on input class |
++| **Left stick** | **move** in gameplay, **move focus** in a GUI, **the D-pad's Up/Down in a conversation** | never more than one: gated on input class. In the dialogue class the stick's latched direction is folded into the button word before the D-pad loop, so it sends the same direction codes with the same press, release and hold-repeat; `CSWGuiDialog` keeps the reply index itself and the focus layer has nothing to move there. Played on a ROG Ally X under Proton, 2026-10-15. |
+ | **Start** | **open the in-game menu**, from gameplay only | does **not** close it — B does |
+ | **Back** | nothing | `JOURNAL` alone implements it |
+ | **X** | **per-screen**, no consistent meaning | Inventory filter, Journal sort, Map transit, Character sheet, Save/Load delete |
+diff --git a/src/controller-native/K1NativeJoystick.cpp b/src/controller-native/K1NativeJoystick.cpp
+index f1f97cd..020bcee 100644
+--- a/src/controller-native/K1NativeJoystick.cpp
++++ b/src/controller-native/K1NativeJoystick.cpp
+@@ -1467,6 +1467,24 @@ void FillNativeJoystickBufferK1(int deviceIndex, void* outBuffer)
+     const bool kmrpVertical = KmrpOwnsDirectionsK1(true);
+     const bool kmrpHorizontal = KmrpOwnsDirectionsK1(false);
+ 
++    // In a conversation the left stick is the D-pad. CSWGuiDialog keeps the
++    // reply index itself and answers only its own previous/next events (0x31,
++    // 0x32), which reach it as the direction codes below, so the focus layer the
++    // stick otherwise drives has nothing to move there. The stick's latched
++    // direction (hysteresis and all) is folded into the button word before the
++    // D-pad loop, so it gets the same press, release and hold-repeat as the pad,
++    // and lastButtons remembers it the same way. The real D-pad wins while held.
++    const std::uint16_t padButtons = buttons;
++    if (InputClassK1() == K1_CLASS_DIALOG &&
++        (buttons & (K1_DPAD[0].xinputMask | K1_DPAD[1].xinputMask)) == 0) {
++        UpdateStickNavigationK1(nx, ny);
++        if (g_stick.stickNavY < 0) {
++            buttons |= K1_DPAD[0].xinputMask;      // Up: previous reply
++        } else if (g_stick.stickNavY > 0) {
++            buttons |= K1_DPAD[1].xinputMask;      // Down: next reply
++        }
++    }
++
+     // The direction codes are 0x384, 0x388, 0x38C, 0x390 -- the same values the
+     // engine's own POV decoder produces -- reached here through the slot each
+     // binding names. Hoisted out of the loop because the repeat below needs them.
+@@ -1568,8 +1586,9 @@ void FillNativeJoystickBufferK1(int deviceIndex, void* outBuffer)
+                     edge = true;
+                 }
+             }
+-        } else {
+-            g_stick.stickNavX = 0;
++        } else if ((padButtons & (K1_DPAD[0].xinputMask | K1_DPAD[1].xinputMask |
++                                  K1_DPAD[2].xinputMask | K1_DPAD[3].xinputMask)) != 0) {
++            g_stick.stickNavX = 0;             // the real D-pad asked; not the fold above
+             g_stick.stickNavY = 0;
+         }
+         RequestNavigationK1(dx, dy, edge, fromDpad);
+-- 
+2.56.0
+

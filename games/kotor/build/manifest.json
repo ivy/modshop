@@ -1,0 +1,2202 @@
+[
+ {
+  "mod": "001-kotor-dialogue-fixes",
+  "steps": [
+   {
+    "do": "tlk",
+    "src": "*/PC Response Moderation version/dialog.tlk"
+   }
+  ]
+ },
+ {
+  "mod": "002-character-startup-changes",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "mega:character-startup-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Character_Startup_Changes_Patch/Override"
+   }
+  ]
+ },
+ {
+  "mod": "003-thematic-kotor-companions",
+  "skip": "crashes with KMRP (its issue #15)",
+  "steps": []
+ },
+ {
+  "mod": "004-jc-s-minor-fixes",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Straight Fixes"
+   },
+   {
+    "do": "copy",
+    "src": "*/Resolution Fixes"
+   },
+   {
+    "do": "copy",
+    "src": "*/Aesthetic Improvements"
+   },
+   {
+    "do": "copy",
+    "src": "*/Things What Bother Me Fixes",
+    "exclude": [
+     "N_AdmrlSaulKar.*",
+     "N_SithCom*"
+    ]
+   }
+  ]
+ },
+ {
+  "mod": "mega:ajunta-pall-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "Ajunta Pall Unique Appearance/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "005-ajunta-pall-appearance",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Non-Transparent Skins",
+    "pattern": "*.tga"
+   }
+  ]
+ },
+ {
+  "mod": "006-kotor-community-patch",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "K1_Community_Patch*/tslpatchdata",
+    "allow_errors": 1
+   },
+   {
+    "do": "holopatcher",
+    "src": "data/archives/k1cp-fix/tslpatchdata"
+   },
+   {
+    "do": "copy",
+    "src": "K1CP_v1.10.1*"
+   }
+  ]
+ },
+ {
+  "mod": "mega:k1cp-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "K1CP Patch/K1CP Patch"
+   }
+  ]
+ },
+ {
+  "mod": "007-droid-claw-fix",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "008-ported-vo-replacements",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   },
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "009-ultimate-korriban",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "010-ultimate-kashyyyk",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "011-ultimate-tatooine",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "012-ultimate-dantooine",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "013-ultimate-endar-spire",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "014-ultimate-manaan",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "mega:korriban-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Korriban Patch"
+   }
+  ]
+ },
+ {
+  "mod": "015-ultimate-taris",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*/*/Override",
+    "names": [
+     "LSI_win01.tpc",
+     "LSI_box01.tpc"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "016-ultimate-character-overhaul",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Ultimate Character Overhaul*/*"
+   }
+  ]
+ },
+ {
+  "mod": "017-ultimate-unknown-world",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*/*/Override",
+    "names": [
+     "LUN_blst01.tpc",
+     "LUN_blst02.tpc"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "018-korriban-sith-art",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Door Mural*/Override"
+   },
+   {
+    "do": "copy",
+    "src": "Sith Art*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "mega:duncan-on-manaan",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Duncan on Manaan",
+    "exclude": [
+     "*.kmm"
+    ]
+   }
+  ]
+ },
+ {
+  "mod": "020-consistent-conditioning",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "021-hd-pazaak-cards",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "022-hd-pc-portraits",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "023-pmha05-hd",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "024-pmha02-hd",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "025-pmha01-hd",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "026-pfhc05-hd",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "027-pfhb02-eye-fix",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/UPSCALED/FOR OVERRIDE"
+   }
+  ]
+ },
+ {
+  "mod": "028-high-poly-grenades",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "029-hd-gizka",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Creatures"
+   }
+  ]
+ },
+ {
+  "mod": "030-gammorean-reskin-pack",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Quanon_Gammoreans"
+   }
+  ]
+ },
+ {
+  "mod": "031-war-droids-hd",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "032-hd-cleaning-droids",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "033-hd-jawas",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "034-hd-sand-people",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "mega:sand-people-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "HD Realistic Sand People Patch"
+   }
+  ]
+ },
+ {
+  "mod": "035-better-twi-lek-heads",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "036-hd-twi-lek-females",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "037-thigh-high-boots-for-twi-lek",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/NPC Replacement"
+   }
+  ]
+ },
+ {
+  "mod": "038-shaleena-lashowe-mouth-fix",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "mega:calo-nord",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Calo Nord Recolor/CN_Recolor/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "040-hd-darth-malak",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Malak (Red Eyes)"
+   }
+  ]
+ },
+ {
+  "mod": "041-cinemalak",
+  "steps": [
+   {
+    "do": "copy",
+    "src": ".",
+    "pattern": "*.tga"
+   }
+  ]
+ },
+ {
+  "mod": "042-detran-s-darth-revan",
+  "steps": [
+   {
+    "do": "stage_copy_as",
+    "src": "*/N_DarthRevan01.tga",
+    "new": "PMBJ01.tga"
+   },
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "043-darth-bandon-hd",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "044-hd-vrook",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "045-hd-ui-elements",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Party Selection"
+   },
+   {
+    "do": "copy",
+    "src": "*/*/Planet Icons"
+   }
+  ]
+ },
+ {
+  "mod": "046-hd-npc-portraits",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "047-male-npc-clothing",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "NPC clothing M",
+    "names": [
+     "n_commm07.tga",
+     "N_CommMD01.tga",
+     "N_CommM08.tga"
+    ]
+   },
+   {
+    "do": "stage_copy_as",
+    "src": "NPC clothing M/N_CommM0801.tga",
+    "new": "N_CommM08.tga"
+   },
+   {
+    "do": "copy",
+    "src": "NPC clothing M"
+   }
+  ]
+ },
+ {
+  "mod": "048-juhani-appearance-overhaul",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "mega:jao-saber-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "JAO_Saber_Replacement/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "049-juhani-cathar-head",
+  "skip": "crashes with KMRP (its issue #15)",
+  "steps": []
+ },
+ {
+  "mod": "050-korriban-back-in-black",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "allow_errors": 1,
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "051-cloaked-jedi-robes",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 4
+   }
+  ]
+ },
+ {
+  "mod": "052-jc-s-jedi-tailor",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "053-cloaks-with-shadows",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Jedi Robes Override"
+   }
+  ]
+ },
+ {
+  "mod": "054-qel-droma-reskin",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "mod": "055-quanon-s-hk-47",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*/Quanons_HK47_Reskin",
+    "names": [
+     "PO_phk47.tga"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*/Quanons_HK47_Reskin"
+   }
+  ]
+ },
+ {
+  "mod": "056-hd-sign-placeable",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "057-hd-kiosk",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Kiosk HD*"
+   },
+   {
+    "do": "copy",
+    "src": "Kiosk Model Fix*/*/K1"
+   }
+  ]
+ },
+ {
+  "mod": "058-hd-desk",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "059-hd-escape-pod",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "060-hd-weapon-placeables",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "061-k2-swoops-to-k1",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "062-hd-stun-batons",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "063-unique-sith-governor",
+  "skip": "build warns it crashes on Linux",
+  "steps": []
+ },
+ {
+  "mod": "064-hd-ithorians",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "065-hd-duros",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "066-hd-quarren",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "067-hd-davik",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "068-hd-doctors",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "069-kebla-yurt-hd",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*",
+    "names": [
+     "N_CommF02.tga",
+     "N_CommF02.txi"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "070-hd-deadeye-duncan",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "071-n-oldamh01-hd",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "072-hd-astromech-droids",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*",
+    "names": [
+     "po_pt3m33.tga"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "073-hd-protocol-droids",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "074-davik-s-trophies",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "075-hd-carth-onasi",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*",
+    "names": [
+     "PO_pcarth3.tga"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "076-hd-canderous-ordo",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "mega:canderous-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Canderous Patch"
+   }
+  ]
+ },
+ {
+  "mod": "077-quanon-s-canderous",
+  "steps": [
+   {
+    "do": "copy_files",
+    "src": "*/Quanon_CandOrdo_Reskin",
+    "names": [
+     "P_CandH01.tga"
+    ]
+   }
+  ]
+ },
+ {
+  "mod": "078-jolee-hd",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "079-fen-s-jolee",
+  "steps": [
+   {
+    "do": "copy_files",
+    "src": "*/*",
+    "names": [
+     "P_joleeh01.tga",
+     "P_joleeh01.txi"
+    ]
+   }
+  ]
+ },
+ {
+  "mod": "080-zaalbar-hd",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*",
+    "names": [
+     "po_pzaalbar3.tga"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "081-sith-uniform-reformation-revised",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "082-stylized-portraits",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/NPCs"
+   }
+  ]
+ },
+ {
+  "mod": "083-star-map-revamp",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Star-Map*"
+   }
+  ]
+ },
+ {
+  "mod": "084-background-improvements",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "085-kebla-yurt-renovation",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "086-hi-res-ebon-hawk",
+  "skip": "GameFront refuses the download",
+  "steps": []
+ },
+ {
+  "mod": "087-ebon-hawk-repairs",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/To Override"
+   },
+   {
+    "do": "copy",
+    "src": "*/*/Animated Monitors"
+   }
+  ]
+ },
+ {
+  "mod": "088-hq-cockpit-skyboxes",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "089-yavin-station-hangar",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   },
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 1
+   },
+   {
+    "do": "copy",
+    "src": "*/HQ Cockpit Skybox Textures/1024x1024 (M)"
+   },
+   {
+    "do": "delete",
+    "names": [
+     "ebo_yab.tga",
+     "ebo_yaf.tga",
+     "ebo_yal.tga",
+     "ebo_yar.tga",
+     "ebo_yat.tga"
+    ]
+   }
+  ]
+ },
+ {
+  "mod": "090-ebon-hawk-cockpit-upgrade-i",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*",
+    "pattern": "*.tpc"
+   }
+  ]
+ },
+ {
+  "mod": "091-ebon-hawk-cockpit-upgrade-ii",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/No Overlays"
+   }
+  ]
+ },
+ {
+  "mod": "092-taris-reskin",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part1",
+    "names": [
+     "LTS_Bsky01.tga",
+     "LTS_Bsky02.tga",
+     "LTS_sky0001.tga",
+     "LTS_sky0002.tga",
+     "LTS_sky0003.tga",
+     "LTS_sky0004.tga",
+     "LTS_sky0005.tga"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part1"
+   },
+   {
+    "do": "copy",
+    "src": "*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part2"
+   }
+  ]
+ },
+ {
+  "mod": "mega:taris-reskin-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Taris Reskin Patch/Taris Reskin Patch"
+   }
+  ]
+ },
+ {
+  "mod": "093-high-quality-starfields",
+  "skip": "crashes with KMRP (its issue #15)",
+  "steps": []
+ },
+ {
+  "mod": "094-hq-skyboxes-ii",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "HQSkyboxesII_K1/Override",
+    "names": [
+     "m36aa_01_lm0.tga",
+     "m36aa_01_lm1.tga",
+     "m36aa_01_lm2.tga"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "HQSkyboxesII_K1/Override"
+   },
+   {
+    "do": "copy",
+    "src": "High quality skyboxes model fixes/*/override"
+   }
+  ]
+ },
+ {
+  "mod": "095-ebon-hawk-transparent-cockpit-windows",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Main Installation/Override"
+   },
+   {
+    "do": "copy",
+    "src": "*/Compatibility Patches/Leviathan - K1CP Forcefield"
+   },
+   {
+    "do": "copy",
+    "src": "*/Compatibility Patches/High Quality Skyboxes by Kexikus"
+   },
+   {
+    "do": "copy",
+    "src": "*/Compatibility Patches/Yavin Station Hangar by WildKarrde"
+   }
+  ]
+ },
+ {
+  "mod": "096-hires-beam-effects",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "097-hd-fire-ice",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "098-animated-energy-shields",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "099-animated-cantina-sign",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "100-revamped-fx",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/To Override"
+   }
+  ]
+ },
+ {
+  "mod": "101-terminal-texture",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "102-hd-workbench",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "103-animated-swoop-monitors",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/to_Override"
+   }
+  ]
+ },
+ {
+  "mod": "104-loadscreens-in-color",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "105-reflective-lightsaber-blades",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "106-darth-malak-s-lightsaber",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "107-blaster-visual-effects",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "108-wookiee-warblade-fix",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "109-kill-the-czerka-guard",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "110-korriban-workbench",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "111-senni-vek-mod",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "112-male-twi-lek-diversity",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 0
+   },
+   {
+    "do": "copy",
+    "src": "*/*/Optional - Upscaled Textures",
+    "recursive": true
+   },
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 2
+   }
+  ]
+ },
+ {
+  "mod": "113-ixgil-the-bith",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "114-hidden-bek-control-room",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/For Override",
+    "recursive": true
+   }
+  ]
+ },
+ {
+  "mod": "115-swoop-bike-upgrades",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/TSLPatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "116-jedi-choice-dialogue-enhancement",
+  "steps": [
+   {
+    "do": "copy_files",
+    "src": "*/*",
+    "names": [
+     "dan13_dorak.dlg"
+    ]
+   }
+  ]
+ },
+ {
+  "mod": "117-juhani-restoration",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/Installation",
+    "recursive": true
+   }
+  ]
+ },
+ {
+  "mod": "118-vision-enhancement",
+  "skip": "build marks it Steam Deck-incompatible",
+  "steps": []
+ },
+ {
+  "mod": "119-new-leviathan-dialogue",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "mod": "120-balanced-pazaak",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "121-camera-replacement",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "mod": "122-rebalanced-grenades",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "123-hd-grenades-mines",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*",
+    "names": [
+     "ii_trapkit_001.tga",
+     "ii_trapkit_002.tga",
+     "ii_trapkit_003.tga",
+     "ii_trapkit_004.tga"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "124-turret-minigame-remover",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "mod": "125-tutorial-remover",
+  "skip": "crashes with KMRP (its issue #15)",
+  "steps": []
+ },
+ {
+  "mod": "126-leviathan-prison-break",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "127-ain-t-no-air-in-space",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "128-party-conversations-on-the-ebon-hawk",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "129-dark-sacrifice",
+  "skip": "crashes with KMRP (its issue #15)",
+  "steps": []
+ },
+ {
+  "mod": "130-saber-throw-knockdown",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "131-sunry-enhancement",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "132-davik-slave-change",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "133-taris-rapid-transit",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/Tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "134-manaan-rapid-transit",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/English/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "135-recruit-t3-m4-early",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "mod": "136-security-spikes-for-k1",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "137-hq-blasters",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*/*/tslpatchdata",
+    "names": [
+     "keblastore.utm"
+    ]
+   },
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "allow_errors": 2
+   },
+   {
+    "do": "rename",
+    "old": "w_ionrfl_04.mdl",
+    "new": "w_ionrfl_004.mdl"
+   },
+   {
+    "do": "rename",
+    "old": "w_ionrfl_04.mdx",
+    "new": "w_ionrfl_004.mdx"
+   },
+   {
+    "do": "delete",
+    "names": [
+     "w_rptnblstr_004.mdl",
+     "w_rptnblstr_004.mdx",
+     "w_blstrpstl_006.mdl",
+     "w_blstrpstl_006.mdx",
+     "g1_w_rptnblstr01.uti"
+    ]
+   }
+  ]
+ },
+ {
+  "mod": "138-crashed-republic-cruiser",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 0
+   },
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 1
+   },
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 2
+   }
+  ]
+ },
+ {
+  "mod": "139-trandoshans-rescaled",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "140-custom-selkath-animation",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "141-bastila-has-tsl-battle-meditation",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "142-sneak-attack-restoration",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "143-sentinel-sneak-attack",
+  "skip": "crashes with KMRP (its issue #15)",
+  "steps": []
+ },
+ {
+  "mod": "144-thematic-the-one",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "145-sherruk-with-lightsabers",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "mega:sherruk-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "SAWL Patch/*/Override"
+   }
+  ]
+ },
+ {
+  "mod": "146-improved-cantina-sitters",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "147-helena-shan-improvement",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "148-bastila-s-dark-bodysuit",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "149-dueling-arena-adjustment",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "150-bendak-non-darkside-option",
+  "steps": [
+   {
+    "do": "copy",
+    "src": ".",
+    "pattern": "*.dlg"
+   }
+  ]
+ },
+ {
+  "mod": "151-kashyyyk-forcefield-rework",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "152-swoop-platform-repair",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "153-engine-lab-bench",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "154-missing-lamps-fix",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "155-czerka-business-attire",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "mega:czerka-ithorian-patch",
+  "stage": "mega",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "Czerka Business Attire*"
+   }
+  ]
+ },
+ {
+  "mod": "156-sith-texture-restoration",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "157-diversified-republic-soldiers",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "158-diversified-jedi-captives",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "159-juhani-romance-enhancement",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "160-dodonna-s-transmission",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "161-endgame-hologram-fix",
+  "skip": "build warns it crashes on Linux",
+  "steps": []
+ },
+ {
+  "mod": "162-twisted-rancor-trio-fix",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "163-rakatan-hologram-fix",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "164-ending-enhancement",
+  "skip": "crashes with KMRP (its issue #15)",
+  "steps": []
+ },
+ {
+  "mod": "165-elder-droid-unique-vo",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "166-ajunta-pall-s-swords",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "167-ajunta-pall-s-blade",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 2
+   }
+  ]
+ },
+ {
+  "mod": "168-jc-s-mandalorian-armor",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/opt_a/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "169-multifire-autofire",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 2
+   }
+  ]
+ },
+ {
+  "mod": "170-blaster-adjustment",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "171-hq-gaffi-stick",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "172-hd-quarterstaffs",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/*/For Override",
+    "recursive": true
+   }
+  ]
+ },
+ {
+  "mod": "173-training-lightsabers",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "174-logical-datapads",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "175-realistic-visual-effects",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "176-minor-music-tweaks",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "177-npc-alignment-fix",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "178-repair-affects-stun-droid",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "mod": "179-alignment-affects-force-powers",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/Main Install/tslpatchdata",
+    "option": 1
+   }
+  ]
+ },
+ {
+  "mod": "180-galaxy-map-fix",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/tslpatchdata",
+    "option": 0
+   }
+  ]
+ },
+ {
+  "mod": "181-remove-duplicate-tga-tpc",
+  "steps": [
+   {
+    "do": "dedupe_tpc"
+   }
+  ]
+ },
+ {
+  "mod": "182-ultimate-character-overhaul-patches",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "JC's Minor Fixes*/*/Aesthetic Improvements",
+    "names": [
+     "N_CommM02.tga",
+     "N_CommM03.tga",
+     "N_CommM04.tga",
+     "N_CommM05.tga",
+     "N_CommM06.tga",
+     "N_CommM08.tga"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "JC's Minor Fixes*/*/Aesthetic Improvements"
+   },
+   {
+    "do": "copy",
+    "src": "JC's Minor Fixes*/*/Resolution Fixes"
+   },
+   {
+    "do": "copy",
+    "src": "JC's Minor Fixes*/*/Straight Fixes"
+   },
+   {
+    "do": "stage_delete",
+    "src": "KOTOR 1 Community Patch*/*",
+    "names": [
+     "PLC_SSldCrps.tpc",
+     "N_CommM01.tpc",
+     "N_CommM02.tpc",
+     "N_CommM03.tpc",
+     "N_CommM04.tpc",
+     "N_CommM05.tpc",
+     "N_CommM06.tpc",
+     "N_CommM08.tpc"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "KOTOR 1 Community Patch*/*"
+   },
+   {
+    "do": "copy",
+    "src": "Miscellaneous*/*/Sherruk with Lightsabers - Patch"
+   },
+   {
+    "do": "copy",
+    "src": "Miscellaneous*/*/Thigh-High Boots for Twi'lek - Patch/NPC Replacement"
+   },
+   {
+    "do": "copy",
+    "src": "Miscellaneous*/*/Thigh-High Boots for Twi'lek - Patch/NPC Replacement/Optional"
+   }
+  ]
+ },
+ {
+  "mod": "183-republic-soldier-fix",
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/Override"
+   },
+   {
+    "do": "copy",
+    "src": "*/Player Clothing",
+    "pattern": "pfbbl*"
+   },
+   {
+    "do": "copy",
+    "src": "*/Player Clothing",
+    "pattern": "pmbbl*"
+   }
+  ]
+ },
+ {
+  "mod": "184-republic-soldier-s-new-shade",
+  "steps": [
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 3
+   },
+   {
+    "do": "holopatcher",
+    "src": "*/*/tslpatchdata",
+    "option": 5
+   }
+  ]
+ },
+ {
+  "mod": "185-character-textures-model-fixes",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "src": "*/Copy contents to KotOR's Override folder",
+    "names": [
+     "P_BastilaH04.tpc",
+     "C_DrdAstro01.tpc",
+     "C_DrdAstro03.tpc",
+     "P_T3M3_01.tpc",
+     "C_DrdProt01.tpc",
+     "C_DrdProt02.tpc",
+     "C_DrdProt03.tpc",
+     "C_DrdProt04.tpc",
+     "C_DrdWar01.tpc",
+     "C_DrdWar02.tpc",
+     "C_DrdWar03.tpc",
+     "C_DrdWar04.tpc",
+     "C_DrdWar05.tpc",
+     "C_Gammorean_Low.tpc",
+     "C_Gammorean01.tpc",
+     "C_Gammorean02.tpc",
+     "C_Gammorean03.tpc",
+     "C_Gammorean04.tpc",
+     "C_Ithorian01.tpc",
+     "C_Ithorian02.tpc",
+     "C_Ithorian03.tpc",
+     "L_Alien02.mdl",
+     "L_Alien02.mdx",
+     "L_Alien05.mdl",
+     "L_Alien05.mdx",
+     "N_astromech01.tpc",
+     "N_astromech02.tpc",
+     "N_CommM01.tpc",
+     "N_CommM02.tpc",
+     "N_CommM03.tpc",
+     "N_CommM04.tpc",
+     "N_CommM05.tpc",
+     "N_CommM06.tpc",
+     "N_CommM08.tpc",
+     "N_DarthMalak01.tpc",
+     "N_DarthMalakH01.tpc",
+     "N_JediMalekH02.tpc",
+     "N_DarthRevan01.tpc",
+     "PMBJ01.tpc",
+     "N_Duros01.tpc",
+     "N_Duros02.tpc",
+     "N_Duros03.tpc",
+     "N_Repsold.mdl",
+     "N_Repsold.mdx",
+     "N_RepSold_F.mdl",
+     "N_RepSold_F.mdx",
+     "N_RepSold_F01.tpc",
+     "N_RepSold01.tpc",
+     "N_Selkath.mdl",
+     "N_Selkath.mdx",
+     "N_SithSoldier.mdl",
+     "N_SithSoldier.mdx",
+     "N_Tusken_F.tpc",
+     "N_Tusken_F2.tpc",
+     "N_Tusken02.tpc",
+     "N_Tusken03.tpc",
+     "N_Tusken04.tpc",
+     "N_Tusken05.tpc",
+     "N_TwilekF.mdl",
+     "N_TwilekF.mdx",
+     "N_TwilekFB01.tpc",
+     "N_TwilekFC01.tpc",
+     "P_BastilaBB02.mdl",
+     "P_BastilaBB02.mdx",
+     "P_CandBA01.tpc",
+     "P_CandBB01.tpc",
+     "P_CandH01.tpc",
+     "P_CarthBB01.tpc",
+     "P_HK47_01.tpc",
+     "P_JoleeBA01.tpc",
+     "P_JoleeBB01.tpc",
+     "P_JoleeH01.tpc",
+     "P_JuhaniBB.mdl",
+     "P_JuhaniBB.mdx",
+     "P_JuhaniBB01.tpc",
+     "P_Zaalbar02.tpc",
+     "PFBBL.mdl",
+     "PFBBL.mdx",
+     "PFBBL01.tpc",
+     "PMBBL.mdl",
+     "PMBBL.mdx",
+     "PMBBL01.tpc",
+     "PFBE07.tpc",
+     "PMBE07.tpc",
+     "PFBH04.tpc",
+     "PFBH07.tpc",
+     "PMBH04.tpc",
+     "PMBH07.tpc",
+     "PFBI01.tpc",
+     "PFBI02.tpc",
+     "PFBI03.tpc",
+     "PFBI04.tpc",
+     "PFBIL.mdl",
+     "PFBIL.mdx",
+     "PFBIM.mdl",
+     "PFBIM.mdx",
+     "PFBIS.mdl",
+     "PFBIS.mdx",
+     "PMBI01.tpc",
+     "PMBI02.tpc",
+     "PMBI03.tpc",
+     "PMBI04.tpc",
+     "PMBIL.mdl",
+     "PMBIL.mdx",
+     "PMBIM.mdl",
+     "PMBIM.mdx",
+     "PMBIS.mdl",
+     "PMBIS.mdx",
+     "Twilek_F01.tpc",
+     "Twilek_F02.tpc",
+     "Twilek_F03.tpc",
+     "Twilek_F04.tpc"
+    ]
+   },
+   {
+    "do": "copy",
+    "src": "*/Copy contents to KotOR's Override folder"
+   },
+   {
+    "do": "dedupe_tpc"
+   }
+  ]
+ },
+ {
+  "mod": "186-4gb-patcher",
+  "skip": "replaced by KMRP",
+  "steps": []
+ }
+]
