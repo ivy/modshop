@@ -1,6 +1,6 @@
 # Proposal: a reproducible, incremental build and deploy pipeline for KotOR
 
-Status: accepted plan; built in `games/kotor/build/` (`build.py`, `base.sh`, `deploy.py`), awaiting the first vanilla download. The Wine experiment succeeded: KMRP's installer runs in a container on the build host and is a step of the chain, so the handheld is a pure deploy target. The KotOR procedure in [`../../games/kotor/README.md`](../../games/kotor/README.md) works today but is resumable rather than incremental, has no pristine base, and ends in hand steps on the handheld. This document is the next shape of that pipeline and the reasons for it. The README stays the how-to; this is the why and the what.
+Status: delivered on 2026-10-15. `games/kotor/build/` holds `build.py`, `base.sh` and `deploy.py`; the vanilla base is pinned by depot manifest id; the chain of 190 entries builds from it in about 25 minutes, a no-op rebuild takes a second, `prove` rebuilt every entry uncached to the same tree hash, and the first deploy to the handheld left a clean drift check. KMRP's installer runs in a container on the build host as a step of the chain, so the handheld is a pure deploy target. The first hand build turned out to have carried four hidden repairs in its stage (a folder for a namespaces mod, an edited change file, bytecode compiled elsewhere, and an edit the Community Patch failed to make), all now steps or patches, and had lost one Community Patch change to `featgain.2da` that the chain applies. The KotOR procedure in [`../../games/kotor/README.md`](../../games/kotor/README.md) works today but is resumable rather than incremental, has no pristine base, and ends in hand steps on the handheld. This document is the next shape of that pipeline and the reasons for it. The README stays the how-to; this is the why and the what.
 
 ## The goal
 
@@ -122,5 +122,5 @@ So the hours of the first build were download, extraction and debugging, not the
 ## Open questions
 
 - Answered: KMRP's installer runs under Wine in a Fedora container (wine-mono needs an `iconv.dll` placed by hand), takes the resolution as an argument and its Advanced Settings from a file, and two runs differ only by two timestamps in its state file, which the step fixes.
-- Does `steamcmd` serve the Windows depot from Linux to an owning account?
-- Is HoloPatcher deterministic?
+- Answered in the negative for practical purposes: `steamcmd` serves it but writes the depot under a backslashed path inside its own directory; DepotDownloader does it cleanly and is what `base.sh` uses.
+- Answered: HoloPatcher is deterministic across the 79 runs; the proof matched at every entry.
