@@ -2275,6 +2275,23 @@
   ]
  },
  {
+  "mod": "ini",
+  "inputs": [
+   "original-steam-files/swkotor.ini"
+  ],
+  "steps": [
+   {
+    "do": "copy_files",
+    "src": ".",
+    "names": [
+     "swkotor.ini"
+    ],
+    "dest": ".",
+    "if_absent": true
+   }
+  ]
+ },
+ {
   "mod": "kmrp",
   "inputs": [
    "KMRP-Windows-1.5.1.exe",

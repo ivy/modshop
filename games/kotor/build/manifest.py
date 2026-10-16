@@ -13,7 +13,7 @@ def mod(n,*steps,skip=None,inputs=None):
     if skip: e['skip']=skip
     e['steps']=[dict(s) for s in steps]; M.append(e)
 def cp(src='*',**kw): return {'do':'copy','src':src,**kw}
-def cpf(src,names): return {'do':'copy_files','src':src,'names':names}
+def cpf(src,names,**kw): return {'do':'copy_files','src':src,'names':names,**kw}
 def hp(src='*/tslpatchdata',option=None,**kw):
     d={'do':'holopatcher','src':src,**kw}
     if option is not None: d['option']=option
@@ -130,6 +130,9 @@ mod('repair:08-wounded-republic-detonate-controller', {'do':'repair','name':'08-
 mod('cutscenes', cp('*/1920x1080', pattern='*.bik', dest='movies'), inputs=['cutscenes'])
 # KMRP's installer, in a Wine container, with what its Advanced Settings would hold; then the
 # controller module built from source (../kmrp-build/README.md), replacing the one it shipped
+# the game's settings file, which a never-launched tree may lack and the KMRP installer needs:
+# the one Steam's install produced, kept with the other original files
+mod('ini', cpf('.', ['swkotor.ini'], dest='.', if_absent=True), inputs=['original-steam-files/swkotor.ini'])
 mod('kmrp', {'do':'kmrp','installer':'KMRP-Windows-1.5.1.exe',
              'settings':{'driverCompatibility':True,'markerFixes':True,'controllerSupport':True,'highFpsFix':True}},
     inputs=['KMRP-Windows-1.5.1.exe','./../kmrp-build/wine/Containerfile','image:modshop-wine','local:handheld.home','local:handheld.game_dir','local:handheld.display'])

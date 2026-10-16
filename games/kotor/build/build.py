@@ -19,6 +19,7 @@ Commands:
   build.py status           which entries have checkpoints, without building
   build.py base             normalise the vanilla tree and write its manifest
   build.py verify [KEY]     rehash a checkpoint in full and compare with its manifest
+  build.py verify-inputs    rehash every archive the manifest uses, reporting any cached hash that lies
   build.py checkout KEY DIR reflink-copy a checkpoint's tree to DIR, for a bisect
   build.py tag NAME [KEY]   name a checkpoint (default: the chain's end); gc keeps it
   build.py gc [--keep N]    remove checkpoints not in the chain, not tagged, beyond the newest N
@@ -408,9 +409,15 @@ def s_copy(st, src='.', pattern='*', exclude=(), recursive=False, dest=None):
     if n == 0: raise RuntimeError('copied nothing')
 
 
-def s_copy_files(st, src, names, dest=None):
-    for n in names: put(ci_path(st, f'{src}/{n}'), GAME / dest if dest else None)
-    log('   copied', len(names), 'named files from', src)
+def s_copy_files(st, src, names, dest=None, if_absent=False):
+    """Copy named files from the stage into Override (or GAME/dest); with if_absent, only those the
+    tree does not already have."""
+    n = 0
+    for name in names:
+        d = GAME / dest if dest else OVR
+        if if_absent and d.is_dir() and ci_find(d, name): continue
+        put(ci_path(st, f'{src}/{name}'), d); n += 1
+    log('   copied', n, 'named files from', src)
 
 
 def s_delete(st, names):
@@ -676,6 +683,13 @@ def cmd_verify(key=None):
     sys.exit(1 if bad else 0)
 
 
+def cmd_verify_inputs():
+    global LOG; LOG = open(LOGS / 'build.log', 'a')
+    n = 0
+    for entry in load_manifest(): n += len(inputs_hash(entry, full=True))
+    print(f'{n} input files rehashed')
+
+
 def cmd_checkout(key, dest):
     dest = pathlib.Path(dest)
     if dest.exists(): sys.exit(f'{dest} exists')
@@ -731,6 +745,7 @@ def main(argv):
     if c == 'status': return cmd_status()
     if c == 'base': return cmd_base()
     if c == 'verify': return cmd_verify(*a)
+    if c == 'verify-inputs': return cmd_verify_inputs()
     if c == 'checkout': return cmd_checkout(*a)
     if c == 'tag': return cmd_tag(*a)
     if c == 'gc': return cmd_gc(int(a[1]) if a[:1] == ['--keep'] else 5)
