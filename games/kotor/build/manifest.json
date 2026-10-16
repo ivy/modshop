@@ -1890,7 +1890,8 @@
   "steps": [
    {
     "do": "holopatcher",
-    "src": "*/opt_a/tslpatchdata"
+    "src": "*/tslpatchdata",
+    "option": 0
    }
   ]
  },

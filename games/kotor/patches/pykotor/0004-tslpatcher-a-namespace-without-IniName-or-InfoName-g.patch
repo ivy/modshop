@@ -1,0 +1,34 @@
+From a12fd9f8edcb6e136f728f3c5c058a86a90739bd Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 18:41:19 -0700
+Subject: [PATCH] tslpatcher: a namespace without IniName or InfoName gets
+ TSLPatcher's defaults
+
+TSLPatcher reads changes.ini and info.rtf from a namespace's DataPath when
+the section names neither; mods ship namespaces.ini files that rely on it
+(JC's Mandalorian Armor for K1 2.0.0 names only DataPath, Name and
+Description). The reader raised KeyError('ininame') on them.
+---
+ Libraries/PyKotor/src/pykotor/tslpatcher/reader.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Libraries/PyKotor/src/pykotor/tslpatcher/reader.py b/Libraries/PyKotor/src/pykotor/tslpatcher/reader.py
+index 8bd76bfbc..226ffd818 100644
+--- a/Libraries/PyKotor/src/pykotor/tslpatcher/reader.py
++++ b/Libraries/PyKotor/src/pykotor/tslpatcher/reader.py
+@@ -124,9 +124,9 @@ class NamespaceReader:
+ 
+             this_namespace_section = CaseInsensitiveDict(self.ini[namespace_section_key])
+ 
+-            # required
+-            ini_filename: str = this_namespace_section["IniName"]
+-            info_filename: str = this_namespace_section["InfoName"]
++            # TSLPatcher treats both as optional, with its usual file names as the defaults
++            ini_filename: str = this_namespace_section.get("IniName", "changes.ini")
++            info_filename: str = this_namespace_section.get("InfoName", "info.rtf")
+             namespace = PatcherNamespace(ini_filename, info_filename)
+ 
+             # optional
+-- 
+2.56.0
+
