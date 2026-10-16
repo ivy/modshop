@@ -1,5 +1,21 @@
 [
  {
+  "mod": "aliases",
+  "inputs": [],
+  "steps": [
+   {
+    "do": "symlink",
+    "link": "Modules",
+    "target": "modules"
+   },
+   {
+    "do": "symlink",
+    "link": "override",
+    "target": "Override"
+   }
+  ]
+ },
+ {
   "mod": "001-kotor-dialogue-fixes",
   "steps": [
    {
@@ -19,7 +35,9 @@
  },
  {
   "mod": "mega:character-startup-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/Character_Startup_Changes_Patch.zip"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -59,7 +77,9 @@
  },
  {
   "mod": "mega:ajunta-pall-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/Ajunta Pall Unique Appearance.zip"
+  ],
   "steps": [
    {
     "do": "holopatcher",
@@ -79,6 +99,10 @@
  },
  {
   "mod": "006-kotor-community-patch",
+  "inputs": [
+   "006-kotor-community-patch",
+   "./fixes/k1cp-sithtroop"
+  ],
   "steps": [
    {
     "do": "holopatcher",
@@ -87,7 +111,7 @@
    },
    {
     "do": "holopatcher",
-    "src": "data/archives/k1cp-fix/tslpatchdata"
+    "src": "k1cp-sithtroop/tslpatchdata"
    },
    {
     "do": "copy",
@@ -97,7 +121,9 @@
  },
  {
   "mod": "mega:k1cp-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/K1CP Patch.rar"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -185,7 +211,9 @@
  },
  {
   "mod": "mega:korriban-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/Korriban Patch.7z"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -251,7 +279,9 @@
  },
  {
   "mod": "mega:duncan-on-manaan",
-  "stage": "mega",
+  "inputs": [
+   "mega/Duncan on Manaan.7z"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -399,7 +429,9 @@
  },
  {
   "mod": "mega:sand-people-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/HD Realistic Sand People Patch.zip"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -446,7 +478,9 @@
  },
  {
   "mod": "mega:calo-nord",
-  "stage": "mega",
+  "inputs": [
+   "mega/Calo Nord Recolor.zip"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -562,7 +596,9 @@
  },
  {
   "mod": "mega:jao-saber-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/JAO_Saber_Replacement.7z"
+  ],
   "steps": [
    {
     "do": "holopatcher",
@@ -854,7 +890,9 @@
  },
  {
   "mod": "mega:canderous-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/Canderous Patch.rar"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -1061,7 +1099,9 @@
  },
  {
   "mod": "mega:taris-reskin-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/Taris Reskin Patch.7z"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -1623,7 +1663,9 @@
  },
  {
   "mod": "mega:sherruk-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/SAWL Patch.rar"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -1727,7 +1769,9 @@
  },
  {
   "mod": "mega:czerka-ithorian-patch",
-  "stage": "mega",
+  "inputs": [
+   "mega/Czerka Business Attire - Dark Hope Ithorian Compatch.7z"
+  ],
   "steps": [
    {
     "do": "copy",
@@ -2198,5 +2242,36 @@
   "mod": "186-4gb-patcher",
   "skip": "replaced by KMRP",
   "steps": []
+ },
+ {
+  "mod": "repair:08-wounded-republic-detonate-controller",
+  "inputs": [
+   "157-diversified-republic-soldiers",
+   "./../repairs/08-wounded-republic-detonate-controller"
+  ],
+  "steps": [
+   {
+    "do": "repair",
+    "name": "08-wounded-republic-detonate-controller",
+    "args": [
+     "Override",
+     "archives/157-diversified-republic-soldiers/[K1]_Diversified_Wounded_Republic_Soldiers_On_Taris_v1.4.7z"
+    ]
+   }
+  ]
+ },
+ {
+  "mod": "cutscenes",
+  "inputs": [
+   "cutscenes"
+  ],
+  "steps": [
+   {
+    "do": "copy",
+    "src": "*/1920x1080",
+    "pattern": "*.bik",
+    "dest": "movies"
+   }
+  ]
  }
 ]

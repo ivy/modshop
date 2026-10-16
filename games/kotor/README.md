@@ -11,19 +11,24 @@ Two machines are involved, named in `local.toml`:
 
 | Path | What |
 | --- | --- |
-| `build/` | `download.py` fetches the build's archives, `manifest.py` turns the build's instructions into `manifest.json`, `install.py` applies it to a game folder, `setup-venv.sh` makes the patcher's venv |
+| `build/` | `download.py` fetches the build's archives, `base.sh` downloads the vanilla game by depot manifest id, `manifest.py` turns the build's instructions into `manifest.json`, `build.py` builds it as a chain of checkpoints, `deploy.py` puts a checkpoint on the handheld, `setup-venv.sh` makes the patcher's venv; `fixes/` holds our own TSLPatcher changes |
 | `repairs/` | scripts that patch what the build installs where it is broken under Proton; each has a README with the evidence |
 | `patches/` | our fixes to two other projects as `git format-patch` series: pykotor (the patcher's library) and KMRP |
 | `kmrp-build/` | building KMRP's controller module on Linux and installing it into the game folder |
-| `data/` | gitignored: `archives/` (one folder per mod, the KMRP installer, the Community Patch, the cutscenes), `game/` (the pristine and the built game copies), `stage/`, `logs/`, `venv/`, build outputs |
+| `data/` | gitignored: `archives/` (one folder per mod, the KMRP installer, the Community Patch, the cutscenes), `game/` (`vanilla/`, the checkpoints in `ckpt/`, the working tree, `build` pointing at the chain's end), `stage/`, `logs/`, `venv/`, build outputs |
 
 ## Procedure
 
 ### 1. The game, pristine
 
-On the handheld, install KotOR from Steam into an empty folder (Steam's "verify integrity" is not a way back to vanilla: it rewrites changed files but never deletes added ones). Copy it to the build host as `data/game/vanilla/` and never touch that copy; the build works on a copy of it. On a copy-on-write filesystem (btrfs, XFS) `cp -a --reflink=always data/game/vanilla data/game/build` is instant and free.
+```bash
+build/base.sh <steam account>    # steamcmd in a container; asks for the password and a Steam Guard code the first time
+build/build.py base              # normalises timestamps, writes data/game/vanilla/manifest.txt
+```
 
-Keep `swkotor.ini`, `binkw32.dll`, the `movies` folder and the saves out of any sync: the first two are changed on the handheld by KMRP's installer, the movies are replaced on the handheld by the cutscene pack, and saves are the player's.
+`base.json` names the app, its Windows depot and the exact depot manifest id, so the base is a definition rather than a copy of some install: `steamcmd` downloads that manifest with the platform forced to Windows and `base.sh` moves the result to `data/game/vanilla/tree`. The handheld's own Steam install is not an input to anything; a fresh install there is not a way back either, since Steam's "verify integrity" rewrites changed files but never deletes added ones. `steamcmd`'s login state stays in a podman volume, outside the repository and `data/`.
+
+The build host's `data/game` must be on a filesystem with reflinks (XFS with `reflink=1`, btrfs); `build.py` checks and refuses otherwise. Every checkpoint is a reflink copy, so the chain costs only the bytes each mod rewrites.
 
 ### 2. The archives
 
@@ -40,22 +45,23 @@ Without the three pykotor fixes in `patches/pykotor/` the build is wrong: a Type
 ### 4. The build
 
 ```bash
-build/manifest.py                                              # writes build/manifest.json from the build's instructions
-KOTOR_GAME=$PWD/data/game/build HOLOPATCHER=$PWD/data/venv/bin/holopatcher python3 -I build/install.py
+build/manifest.py        # writes build/manifest.json from the build's instructions
+build/build.py           # builds the chain, or does nothing if every checkpoint exists
+build/build.py status    # which entries have checkpoints
 ```
 
-`install.py` applies `manifest.json` step by step: copies, renames, deletions, TLK merges, HoloPatcher runs, with a wildcard-and-case-tolerant path lookup for mods whose archives name files loosely. It logs to `data/logs/install.log`, keeps each patcher run's output in `data/logs/holopatcher/`, and records finished steps in `data/logs/install.state.json`, so a stopped run resumes and a finished one is a no-op. `python3 -I build/install.py <mod folder>` reruns one mod.
+`manifest.json` is the build as a list of entries, one per mod, each a few steps: copies, renames, deletions, TLK merges, HoloPatcher runs, with a wildcard-and-case-tolerant path lookup for mods whose archives name files loosely. The first entry makes two symlinks the patcher and some mods' installers need (`Modules` for `modules`, because the patcher opens module paths by exact name, and `override` for `Override`, because some installer files spell it that way); the last entries are the repairs and the cutscene pack. What the manifest skips, and why, is in the file itself: the mods KMRP's author lists as crashing with it, two the build warns crash on Linux, one Steam Deck-incompatible, one unobtainable, and the whole widescreen section, which KMRP replaces. Where the build offers a choice, the manifest records the one made.
 
-What the manifest skips, and why, is in `manifest.json` itself: the mods KMRP's author lists as crashing with it, two the build warns crash on Linux, one Steam Deck-incompatible, one unobtainable, and the whole widescreen section, which KMRP replaces. Where the build offers a choice, the manifest records the one made.
+`build.py` gives each entry a key that names everything that could change its result (the previous entry's key and tree hash, the entry, the hashes of the files it reads, the driver's own code, the patcher's venv and patch series, the tool versions) and keeps a checkpoint per key under `data/game/ckpt/`: a reflink copy of the game folder after the entry ran, a manifest of every file's hash, and the list of paths the entry changed. A run walks the chain and builds from the first entry whose checkpoint is missing; a run with nothing to do takes a few seconds. Every mod is unpacked fresh for its own steps and the stage deleted after, so nothing outside the checkpoints carries state between runs. Timestamps in a checkpoint are all the same fixed value, so no comparison ever depends on an archive's clock. On a failure the working tree is discarded and the next run restores the last checkpoint. `data/game/build` points at the chain's end. Logs: `data/logs/build.log`, one file per patcher run in `data/logs/holopatcher/`.
 
-Two things about the patcher's path handling matter on Linux: it matches module names exactly, so the game folder gets a `Modules` link beside `modules` and per-run case aliases, which the installer makes; and some mods' installer files spell `override` in lower case, so a second folder appears and is merged into `Override` afterwards, newer file winning.
+Other commands: `verify [KEY]` rehashes a checkpoint in full against its manifest; `checkout KEY DIR` gives a reflink copy of any checkpoint for a bisect; `tag NAME` names one; `gc --keep N` removes checkpoints that are neither in the chain nor tagged nor among the N newest. Archive hashes are cached in `data/archives/.hashcache.json` by size and mtime; the archives are immutable downloads, and the cache is the one place the pipeline trusts a timestamp.
 
 ### 5. Repairs
 
-Each folder in `repairs/` is one scripted fix with its README. Run the ones the build needs after the build, pointing at the built game's `Override`; they take their inputs from your archives. Today:
+Each folder in `repairs/` is one scripted fix with its README, taking its input from your archives. The ones the build needs are entries at the end of the manifest and run with it. Today:
 
-- `08-wounded-republic-detonate-controller`: a mod's room model carries a `detonate` controller on its bubble emitters that ends the game under Proton the first time the room is in view. Needed.
-- `07-kmrp-pot-gui-textures`: KMRP's three 768x768 interface textures at a power-of-two size. Unproven; see its README.
+- `08-wounded-republic-detonate-controller`: a mod's room model carries a `detonate` controller on its bubble emitters that ends the game under Proton the first time the room is in view. In the manifest.
+- `07-kmrp-pot-gui-textures`: KMRP's three 768x768 interface textures at a power-of-two size. Unproven, not in the manifest; see its README.
 
 ### 6. KMRP
 
@@ -69,14 +75,20 @@ DISPLAY=:0 protontricks-launch --appid 32370 <KMRP installer.exe> --in-place 'Z:
 
 Building the controller module from source, which is how an unreleased fix (or ours) gets onto the handheld, is [`kmrp-build/README.md`](kmrp-build/README.md).
 
-### 7. Sync to the handheld
+### 7. Deploy to the handheld
 
-`rsync` the built game folder over the handheld's, mirroring `Override` and `modules` with `--delete` and merging the rest, excluding `binkw32.dll`, `swkotor.ini`, `Saves` and `movies`. The cutscene pack's `.bik` files go into `movies` on the handheld directly (12 GB; KMRP plays them at the game's resolution). Then take a copy-on-write copy of the result on the handheld as the known-good reference. The build assumes a new game: areas a save has already visited keep their old state.
+```bash
+build/deploy.py            # the chain's end, by content
+build/deploy.py --check    # only report what differs on the handheld
+```
+
+`deploy.py` reads the handheld's address and game folder from `local.toml`, refuses while the game runs, and syncs the checkpoint into a reflink copy of the handheld's live folder with `rsync --checksum --delete`, so a rebuilt file with identical content moves nothing and a second run reports nothing to do. When a dry run afterwards finds nothing left, the copy becomes the live folder by rename and the previous one stays beside it as `.prev`, the rollback. One explicit list of paths is outside the comparison and printed on every run: the saves, the logs, and, until KMRP's installer runs on the build host, everything that installer writes. `--check` is the drift check: anything in the handheld's folder that the build did not put there is listed by path. The build assumes a new game: areas a save has already visited keep their old state.
 
 ## When it breaks
 
 What has been needed to diagnose crashes under Proton, in the order it helped:
 
+- **The drift check**: `build/deploy.py --check` says, by path, how the handheld's folder differs from the build. Run it before and after a debugging session; a difference is either turned into a step (a repair, a manifest entry, a patch) or reverted, never left.
 - **Proton's log**: `user_settings.py` in the Proton directory with `PROTON_LOG` and `PROTON_LOG_DIR`. Proton rewrites the log at every launch, so copy it when the game exits (a loop around `pgrep -x swkotor.exe` does). Wine's crash report in it has registers and one stack frame; `PROTON_CRASH_REPORT_DIR` did not produce a minidump here. glibc's own messages (`corrupted double-linked list`) appear in it without a timestamp.
 - **KMRP's logs**, with `debug-logs=2` in the module's `configs/*.ini`: the pad on every change and the engine's movement fields in `kmrp-controller-events.log`, timestamped with `GetTickCount`, which is the same clock as the Proton log's seconds.
 - **Steam's background recording**, on by default on the handheld: 3-second fMP4 chunks under the Steam userdata directory's `gamerecordings/video/bg_*`. `cat init-stream0.m4s chunk-stream0-*.m4s > clip.mp4` then `ffmpeg -vf fps=2` gives frames to read. It showed what was on screen at each crash when the logs could not.

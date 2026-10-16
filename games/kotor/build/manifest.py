@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build manifest.json: the KOTOR 1 Full Build (Revision 12) as steps for install.py,
+"""Build manifest.json: the KOTOR 1 Full Build (Revision 12) as entries for build.py,
 minus what KMRP replaces or crashes with, and the two mods that crash on Linux."""
 import json,re,pathlib
 import os
@@ -7,9 +7,9 @@ here=pathlib.Path(__file__).parent
 archives=pathlib.Path(os.environ.get('KOTOR_DATA', str(here.parent/'data')))/'archives'
 dirs={int(p.name[:3]):p.name for p in archives.iterdir() if p.is_dir() and p.name[:3].isdigit()}
 M=[]
-def mod(n,*steps,skip=None,stage=None):
+def mod(n,*steps,skip=None,inputs=None):
     e={'mod':dirs[n] if isinstance(n,int) else n}
-    if stage: e['stage']=stage
+    if inputs is not None: e['inputs']=inputs
     if skip: e['skip']=skip
     e['steps']=[dict(s) for s in steps]; M.append(e)
 def cp(src='*',**kw): return {'do':'copy','src':src,**kw}
@@ -21,38 +21,40 @@ def hp(src='*/tslpatchdata',option=None,**kw):
 def sdel(src,names): return {'do':'stage_delete','src':src,'names':names}
 def odel(names): return {'do':'delete','names':names}
 KMRP='crashes with KMRP (its issue #15)'; LINUX='build warns it crashes on Linux'; REPL='replaced by KMRP'
+# the two names the patcher and some mods' installers need beside the game's own folders
+mod('aliases', {'do':'symlink','link':'Modules','target':'modules'}, {'do':'symlink','link':'override','target':'Override'}, inputs=[])
 mod(1, {'do':'tlk','src':'*/PC Response Moderation version/dialog.tlk'})
 mod(2, hp('*/tslpatchdata'))
-mod('mega:character-startup-patch', cp('Character_Startup_Changes_Patch/Override'), stage='mega')
+mod('mega:character-startup-patch', cp('Character_Startup_Changes_Patch/Override'), inputs=['mega/Character_Startup_Changes_Patch.zip'])
 mod(3, skip=KMRP)
 mod(4, cp('*/Straight Fixes'), cp('*/Resolution Fixes'), cp('*/Aesthetic Improvements'),
        cp('*/Things What Bother Me Fixes', exclude=['N_AdmrlSaulKar.*','N_SithCom*']))
-mod('mega:ajunta-pall-patch', hp('Ajunta Pall Unique Appearance/tslpatchdata'), stage='mega')
+mod('mega:ajunta-pall-patch', hp('Ajunta Pall Unique Appearance/tslpatchdata'), inputs=['mega/Ajunta Pall Unique Appearance.zip'])
 mod(5, cp('*/Non-Transparent Skins', pattern='*.tga'))
-mod(6, hp('K1_Community_Patch*/tslpatchdata', allow_errors=1), hp('data/archives/k1cp-fix/tslpatchdata'), cp('K1CP_v1.10.1*'))
-mod('mega:k1cp-patch', cp('K1CP Patch/K1CP Patch'), stage='mega')
+mod(6, hp('K1_Community_Patch*/tslpatchdata', allow_errors=1), hp('k1cp-sithtroop/tslpatchdata'), cp('K1CP_v1.10.1*'), inputs=[dirs[6],'./fixes/k1cp-sithtroop'])
+mod('mega:k1cp-patch', cp('K1CP Patch/K1CP Patch'), inputs=['mega/K1CP Patch.rar'])
 mod(7, hp()); mod(8, hp(option=0), hp(option=1))
 for n in (9,10,11,12,13,14): mod(n, cp('*/*/Override'))
-mod('mega:korriban-patch', cp('Korriban Patch'), stage='mega')
+mod('mega:korriban-patch', cp('Korriban Patch'), inputs=['mega/Korriban Patch.7z'])
 mod(15, sdel('*/*/Override',['LSI_win01.tpc','LSI_box01.tpc']), cp('*/*/Override'))
 mod(16, cp('Ultimate Character Overhaul*/*'))
 mod(17, sdel('*/*/Override',['LUN_blst01.tpc','LUN_blst02.tpc']), cp('*/*/Override'))
 mod(18, cp('Door Mural*/Override'), cp('Sith Art*/Override'))
-mod('mega:duncan-on-manaan', cp('Duncan on Manaan', exclude=['*.kmm']), stage='mega')
+mod('mega:duncan-on-manaan', cp('Duncan on Manaan', exclude=['*.kmm']), inputs=['mega/Duncan on Manaan.7z'])
 mod(20, cp('*/*/Override')); mod(21, cp('*')); mod(22, cp('*/*/Override'))
 for n in (23,24,25,26): mod(n, cp('*'))
 mod(27, cp('*/UPSCALED/FOR OVERRIDE')); mod(28, cp('*')); mod(29, cp('*/Creatures')); mod(30, cp('*/Quanon_Gammoreans'))
 for n in (31,32,33,34): mod(n, cp('*'))
-mod('mega:sand-people-patch', cp('HD Realistic Sand People Patch'), stage='mega')
+mod('mega:sand-people-patch', cp('HD Realistic Sand People Patch'), inputs=['mega/HD Realistic Sand People Patch.zip'])
 mod(35, hp(option=0)); mod(36, cp('*')); mod(37, cp('*/*/NPC Replacement')); mod(38, cp('*/Override'))
-mod('mega:calo-nord', cp('Calo Nord Recolor/CN_Recolor/*/Override'), stage='mega')
+mod('mega:calo-nord', cp('Calo Nord Recolor/CN_Recolor/*/Override'), inputs=['mega/Calo Nord Recolor.zip'])
 mod(40, cp('*/Malak (Red Eyes)')); mod(41, cp('.', pattern='*.tga'))
 mod(42, {'do':'stage_copy_as','src':'*/N_DarthRevan01.tga','new':'PMBJ01.tga'}, cp('*'))
 mod(43, cp('*')); mod(44, cp('*')); mod(45, cp('*/*/Party Selection'), cp('*/*/Planet Icons')); mod(46, cp('*/*/Override'))
 mod(47, sdel('NPC clothing M',['n_commm07.tga','N_CommMD01.tga','N_CommM08.tga']),
         {'do':'stage_copy_as','src':'NPC clothing M/N_CommM0801.tga','new':'N_CommM08.tga'}, cp('NPC clothing M'))
 mod(48, hp(option=0))
-mod('mega:jao-saber-patch', hp('JAO_Saber_Replacement/*/tslpatchdata'), stage='mega')
+mod('mega:jao-saber-patch', hp('JAO_Saber_Replacement/*/tslpatchdata'), inputs=['mega/JAO_Saber_Replacement.7z'])
 mod(49, skip=KMRP)
 mod(50, hp(option=1, allow_errors=1)); mod(51, hp(option=4)); mod(52, hp(option=0)); mod(53, cp('*/Jedi Robes Override')); mod(54, cp('*/*'))
 mod(55, sdel('*/Quanons_HK47_Reskin',['PO_phk47.tga']), cp('*/Quanons_HK47_Reskin'))
@@ -62,7 +64,7 @@ for n in (64,65,66,67,68): mod(n, cp('*'))
 mod(69, sdel('*',['N_CommF02.tga','N_CommF02.txi']), cp('*')); mod(70, cp('*')); mod(71, cp('*'))
 mod(72, sdel('*',['po_pt3m33.tga']), cp('*')); mod(73, cp('*')); mod(74, cp('*/*/Override'))
 mod(75, sdel('*',['PO_pcarth3.tga']), cp('*')); mod(76, cp('*'))
-mod('mega:canderous-patch', cp('Canderous Patch'), stage='mega')
+mod('mega:canderous-patch', cp('Canderous Patch'), inputs=['mega/Canderous Patch.rar'])
 mod(77, cpf('*/Quanon_CandOrdo_Reskin',['P_CandH01.tga'])); mod(78, cp('*'))
 mod(79, cpf('*/*',['P_joleeh01.tga','P_joleeh01.txi']))
 mod(80, sdel('*',['po_pzaalbar3.tga']), cp('*')); mod(81, hp(option=1)); mod(82, cp('*/NPCs')); mod(83, cp('*/Star-Map*'))
@@ -73,7 +75,7 @@ mod(89, hp(option=0), hp(option=1), cp('*/HQ Cockpit Skybox Textures/1024x1024 (
 mod(90, cp('*', pattern='*.tpc')); mod(91, cp('*/No Overlays'))
 mod(92, sdel('*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part1',['LTS_Bsky01.tga','LTS_Bsky02.tga','LTS_sky0001.tga','LTS_sky0002.tga','LTS_sky0003.tga','LTS_sky0004.tga','LTS_sky0005.tga']),
         cp('*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part1'), cp('*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part2'))
-mod('mega:taris-reskin-patch', cp('Taris Reskin Patch/Taris Reskin Patch'), stage='mega')
+mod('mega:taris-reskin-patch', cp('Taris Reskin Patch/Taris Reskin Patch'), inputs=['mega/Taris Reskin Patch.7z'])
 mod(93, skip=KMRP)
 mod(94, sdel('HQSkyboxesII_K1/Override',['m36aa_01_lm0.tga','m36aa_01_lm1.tga','m36aa_01_lm2.tga']), cp('HQSkyboxesII_K1/Override'), cp('High quality skyboxes model fixes/*/override'))
 mod(95, cp('*/Main Installation/Override'), cp('*/Compatibility Patches/Leviathan - K1CP Forcefield'),
@@ -96,11 +98,11 @@ mod(137, sdel('*/*/tslpatchdata',['keblastore.utm']), hp('*/*/tslpatchdata', all
 mod(138, hp('*/*/tslpatchdata', option=0), hp('*/*/tslpatchdata', option=1), hp('*/*/tslpatchdata', option=2))
 for n in (139,140,141,142): mod(n, hp('*/*/tslpatchdata'))
 mod(143, skip=KMRP); mod(144, hp('*/*/tslpatchdata')); mod(145, hp())
-mod('mega:sherruk-patch', cp('SAWL Patch/*/Override'), stage='mega')
+mod('mega:sherruk-patch', cp('SAWL Patch/*/Override'), inputs=['mega/SAWL Patch.rar'])
 mod(146, hp('*/*/tslpatchdata')); mod(147, hp()); mod(148, hp('*/*/tslpatchdata', option=0)); mod(149, hp('*/*/tslpatchdata'))
 mod(150, cp('.', pattern='*.dlg')); mod(151, hp('*/*/tslpatchdata')); mod(152, hp('*/*/tslpatchdata', option=0)); mod(153, hp('*/*/tslpatchdata'))
 mod(154, hp('*/*/tslpatchdata', option=1)); mod(155, hp())
-mod('mega:czerka-ithorian-patch', cp('Czerka Business Attire*'), stage='mega')
+mod('mega:czerka-ithorian-patch', cp('Czerka Business Attire*'), inputs=['mega/Czerka Business Attire - Dark Hope Ithorian Compatch.7z'])
 mod(156, hp(option=0)); mod(157, hp('*/*/tslpatchdata')); mod(158, hp('*/*/tslpatchdata', option=0)); mod(159, hp())
 mod(160, hp('*/*/tslpatchdata', option=1)); mod(161, skip=LINUX); mod(162, hp('*/*/tslpatchdata')); mod(163, hp('*/*/tslpatchdata'))
 mod(164, skip=KMRP); mod(165, hp('*/*/tslpatchdata', option=0)); mod(166, hp(option=0)); mod(167, hp('*/*/tslpatchdata', option=2))
@@ -121,5 +123,10 @@ clean=[l.split(',') for l in (here/'cleanlist_k1.txt').read_text().splitlines() 
 dele=[f for row in clean if 'Juhani Real Cathar Head' not in row[0] for f in row[1:]]
 mod(185, sdel("*/Copy contents to KotOR's Override folder", dele), cp("*/Copy contents to KotOR's Override folder"), {'do':'dedupe_tpc'})
 mod(186, skip=REPL)
+# after the build: the repairs, then the rescaled cutscenes over the game's movies
+a157=next(archives.joinpath(dirs[157]).glob('*.7z')).name
+mod('repair:08-wounded-republic-detonate-controller', {'do':'repair','name':'08-wounded-republic-detonate-controller','args':['Override',f'archives/{dirs[157]}/{a157}']},
+    inputs=[dirs[157],'./../repairs/08-wounded-republic-detonate-controller'])
+mod('cutscenes', cp('*/1920x1080', pattern='*.bik', dest='movies'), inputs=['cutscenes'])
 json.dump(M, open(here/'manifest.json','w'), indent=1)
 print(len(M),'entries;',sum(1 for e in M if e.get('skip')),'skipped')
