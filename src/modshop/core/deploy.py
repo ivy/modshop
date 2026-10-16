@@ -5,7 +5,9 @@ comparing checksums and never timestamps, so a rebuilt file with identical conte
 and a file the game rewrote with the same bytes is not drift;
 then a dry run must find nothing left to do, the old folder becomes `<game_dir>.prev` (the
 rollback) and the copy becomes live. The target's exclusions are the one list of paths the
-deploy never touches and the drift check never reports.
+deploy never touches and the drift check never reports, with one refinement: a managed settings
+file is excluded as a whole, because the game rewrites it as it is played, but the keys the target
+names in it are set to the tree's values on deploy and reported when they differ.
 """
 
 from __future__ import annotations
@@ -18,6 +20,7 @@ from pathlib import Path
 from subprocess import CompletedProcess
 from typing import Protocol
 
+from modshop.core import ini
 from modshop.core.errors import ModshopError
 
 
@@ -34,6 +37,12 @@ class Transport(Protocol):
         """dst becomes a copy of the directory src on the target (a reflink copy where possible)."""
         ...
 
+    def read(self, path: str) -> bytes | None:
+        """The file's bytes, or None when it is absent."""
+        ...
+
+    def write(self, path: str, data: bytes) -> None: ...
+
 
 @dataclass(frozen=True, slots=True)
 class SshTransport:
@@ -47,6 +56,20 @@ class SshTransport:
 
     def snapshot(self, src: str, dst: str) -> None:
         self.run(f"rm -rf {shlex.quote(dst)} && cp -a --reflink=always {shlex.quote(src)} {shlex.quote(dst)}")
+
+    def read(self, path: str) -> bytes | None:
+        q = shlex.quote(path)
+        r = subprocess.run(["ssh", self.host, f"test -e {q} || exit 3; cat {q}"], capture_output=True)
+        if r.returncode == 3:
+            return None
+        if r.returncode != 0:
+            raise DeployError(f"reading {path} failed:\n{r.stderr.decode(errors='replace')}")
+        return r.stdout
+
+    def write(self, path: str, data: bytes) -> None:
+        subprocess.run(
+            ["ssh", self.host, f"cat > {shlex.quote(path)}"], input=data, check=True, capture_output=True
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -64,14 +87,29 @@ class LocalTransport:
             shutil.rmtree(dst)
         shutil.copytree(src, dst, symlinks=True)
 
+    def read(self, path: str) -> bytes | None:
+        p = Path(path)
+        return p.read_bytes() if p.exists() else None
+
+    def write(self, path: str, data: bytes) -> None:
+        Path(path).write_bytes(data)
+
+
+@dataclass(frozen=True, slots=True)
+class ManagedIni:
+    """A settings file the game rewrites, in which the build owns some keys."""
+
+    path: str  # relative to the game folder; it must also be excluded from the sync
+    keys: tuple[tuple[str, str], ...]  # (section, key) pairs set to the tree's values
+
 
 @dataclass(frozen=True, slots=True)
 class Target:
     transport: Transport
     game_dir: str  # as the target's shell expands it (`~` allowed)
     exclude: tuple[str, ...]  # rsync exclude patterns: never written, never reported
-    first_time: tuple[str, ...]  # sent only when the target has none
     process: str  # the game's process name; a deploy refuses while it runs
+    managed: tuple[ManagedIni, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -123,9 +161,42 @@ class Deployer:
             raise DeployError(f"rsync failed:\n{r.stderr}")
         return [line for line in r.stdout.splitlines() if line and not line.startswith(".d")]
 
+    def _managed_drift(self, tree: Path, folder: str) -> list[str]:
+        lines: list[str] = []
+        for m in self.target.managed:
+            have = self.target.transport.read(f"{folder}/{m.path}")
+            if have is None:
+                lines.append(f"*missing {m.path}")
+                continue
+            want = (tree / m.path).read_bytes()
+            for section, key in m.keys:
+                value = ini.get(want, section, key)
+                if value is not None and ini.get(have, section, key) != value:
+                    lines.append(
+                        f"~setting {m.path} [{section}] {key}={ini.get(have, section, key)} (build: {value})"
+                    )
+        return lines
+
+    def _set_managed(self, tree: Path, folder: str) -> None:
+        for m in self.target.managed:
+            path = f"{folder}/{m.path}"
+            have = self.target.transport.read(path)
+            want = (tree / m.path).read_bytes()
+            if have is None:
+                self.target.transport.write(path, want)
+                continue
+            new = have
+            for section, key in m.keys:
+                value = ini.get(want, section, key)
+                if value is not None:
+                    new = ini.put(new, section, key, value)
+            if new != have:
+                self.target.transport.write(path, new)
+
     def drift(self, tree: Path) -> Drift:
-        """What differs between the tree and the live folder, by path; the exclusions aside."""
-        return Drift(tuple(self._rsync(tree, self.live_dir(), dry=True)))
+        """What differs between the tree and the live folder, by path, and the managed keys that differ."""
+        live = self.live_dir()
+        return Drift(tuple(self._rsync(tree, live, dry=True) + self._managed_drift(tree, live)))
 
     def deploy(self, tree: Path) -> DeployResult:
         if self.game_running():
@@ -137,16 +208,8 @@ class Deployer:
         nxt = f"{live}.next"
         self.target.transport.snapshot(live, nxt)
         self._rsync(tree, nxt, dry=False)
-        for name in self.target.first_time:
-            if (
-                self.target.transport.run(f"test -e {shlex.quote(f'{live}/{name}')}", check=False).returncode
-                != 0
-            ):
-                subprocess.run(
-                    ["rsync", str(tree / name), self.target.transport.rsync_dest(f"{nxt}/{name}")],
-                    check=True,
-                )
-        left = self._rsync(tree, nxt, dry=True)
+        self._set_managed(tree, nxt)
+        left = self._rsync(tree, nxt, dry=True) + self._managed_drift(tree, nxt)
         if left:
             raise DeployError(
                 f"{len(left)} paths still differ after the sync; {nxt} is left for inspection, the live folder untouched:\n"
