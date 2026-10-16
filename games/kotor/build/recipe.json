@@ -1,0 +1,3539 @@
+[
+ {
+  "inputs": [],
+  "mod": "aliases",
+  "steps": [
+   {
+    "do": "symlink",
+    "link": "Modules",
+    "target": "modules"
+   },
+   {
+    "do": "symlink",
+    "link": "override",
+    "target": "Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "001-kotor-dialogue-fixes"
+  ],
+  "mod": "001-kotor-dialogue-fixes",
+  "steps": [
+   {
+    "do": "tlk",
+    "src": "*/PC Response Moderation version/dialog.tlk"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "002-character-startup-changes"
+  ],
+  "mod": "002-character-startup-changes",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/Character_Startup_Changes_Patch.zip"
+  ],
+  "mod": "mega:character-startup-patch",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Character_Startup_Changes_Patch/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "003-thematic-kotor-companions"
+  ],
+  "mod": "003-thematic-kotor-companions",
+  "steps": [],
+  "skip": "crashes with KMRP (its issue #15)"
+ },
+ {
+  "inputs": [
+   "004-jc-s-minor-fixes"
+  ],
+  "mod": "004-jc-s-minor-fixes",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Straight Fixes"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Resolution Fixes"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Aesthetic Improvements"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [
+     "N_AdmrlSaulKar.*",
+     "N_SithCom*"
+    ],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Things What Bother Me Fixes"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/Ajunta Pall Unique Appearance.zip"
+  ],
+  "mod": "mega:ajunta-pall-patch",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "Ajunta Pall Unique Appearance/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "005-ajunta-pall-appearance"
+  ],
+  "mod": "005-ajunta-pall-appearance",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*.tga",
+    "recursive": false,
+    "src": "*/Non-Transparent Skins"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "006-kotor-community-patch",
+   "./fixes/k1cp-sithtroop"
+  ],
+  "mod": "006-kotor-community-patch",
+  "steps": [
+   {
+    "allow_errors": 1,
+    "do": "holopatcher",
+    "option": null,
+    "src": "K1_Community_Patch*/tslpatchdata"
+   },
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "k1cp-sithtroop/tslpatchdata"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "K1CP_v1.10.1*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/K1CP Patch.rar"
+  ],
+  "mod": "mega:k1cp-patch",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "K1CP Patch/K1CP Patch"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "007-droid-claw-fix"
+  ],
+  "mod": "007-droid-claw-fix",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "008-ported-vo-replacements"
+  ],
+  "mod": "008-ported-vo-replacements",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   },
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "009-ultimate-korriban"
+  ],
+  "mod": "009-ultimate-korriban",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "010-ultimate-kashyyyk"
+  ],
+  "mod": "010-ultimate-kashyyyk",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "011-ultimate-tatooine"
+  ],
+  "mod": "011-ultimate-tatooine",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "012-ultimate-dantooine"
+  ],
+  "mod": "012-ultimate-dantooine",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "013-ultimate-endar-spire"
+  ],
+  "mod": "013-ultimate-endar-spire",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "014-ultimate-manaan"
+  ],
+  "mod": "014-ultimate-manaan",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/Korriban Patch.7z"
+  ],
+  "mod": "mega:korriban-patch",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Korriban Patch"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "015-ultimate-taris"
+  ],
+  "mod": "015-ultimate-taris",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "LSI_win01.tpc",
+     "LSI_box01.tpc"
+    ],
+    "src": "*/*/Override"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "016-ultimate-character-overhaul"
+  ],
+  "mod": "016-ultimate-character-overhaul",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Ultimate Character Overhaul*/*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "017-ultimate-unknown-world"
+  ],
+  "mod": "017-ultimate-unknown-world",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "LUN_blst01.tpc",
+     "LUN_blst02.tpc"
+    ],
+    "src": "*/*/Override"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "018-korriban-sith-art"
+  ],
+  "mod": "018-korriban-sith-art",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Door Mural*/Override"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Sith Art*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/Duncan on Manaan.7z"
+  ],
+  "mod": "mega:duncan-on-manaan",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [
+     "*.kmm"
+    ],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Duncan on Manaan"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "020-consistent-conditioning"
+  ],
+  "mod": "020-consistent-conditioning",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "021-hd-pazaak-cards"
+  ],
+  "mod": "021-hd-pazaak-cards",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "022-hd-pc-portraits"
+  ],
+  "mod": "022-hd-pc-portraits",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "023-pmha05-hd"
+  ],
+  "mod": "023-pmha05-hd",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "024-pmha02-hd"
+  ],
+  "mod": "024-pmha02-hd",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "025-pmha01-hd"
+  ],
+  "mod": "025-pmha01-hd",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "026-pfhc05-hd"
+  ],
+  "mod": "026-pfhc05-hd",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "027-pfhb02-eye-fix"
+  ],
+  "mod": "027-pfhb02-eye-fix",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/UPSCALED/FOR OVERRIDE"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "028-high-poly-grenades"
+  ],
+  "mod": "028-high-poly-grenades",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "029-hd-gizka"
+  ],
+  "mod": "029-hd-gizka",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Creatures"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "030-gammorean-reskin-pack"
+  ],
+  "mod": "030-gammorean-reskin-pack",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Quanon_Gammoreans"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "031-war-droids-hd"
+  ],
+  "mod": "031-war-droids-hd",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "032-hd-cleaning-droids"
+  ],
+  "mod": "032-hd-cleaning-droids",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "033-hd-jawas"
+  ],
+  "mod": "033-hd-jawas",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "034-hd-sand-people"
+  ],
+  "mod": "034-hd-sand-people",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/HD Realistic Sand People Patch.zip"
+  ],
+  "mod": "mega:sand-people-patch",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "HD Realistic Sand People Patch"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "035-better-twi-lek-heads"
+  ],
+  "mod": "035-better-twi-lek-heads",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "036-hd-twi-lek-females"
+  ],
+  "mod": "036-hd-twi-lek-females",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "037-thigh-high-boots-for-twi-lek"
+  ],
+  "mod": "037-thigh-high-boots-for-twi-lek",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/NPC Replacement"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "038-shaleena-lashowe-mouth-fix"
+  ],
+  "mod": "038-shaleena-lashowe-mouth-fix",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/Calo Nord Recolor.zip"
+  ],
+  "mod": "mega:calo-nord",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Calo Nord Recolor/CN_Recolor/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "040-hd-darth-malak"
+  ],
+  "mod": "040-hd-darth-malak",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Malak (Red Eyes)"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "041-cinemalak"
+  ],
+  "mod": "041-cinemalak",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*.tga",
+    "recursive": false,
+    "src": "."
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "042-detran-s-darth-revan"
+  ],
+  "mod": "042-detran-s-darth-revan",
+  "steps": [
+   {
+    "do": "stage_copy_as",
+    "new": "PMBJ01.tga",
+    "src": "*/N_DarthRevan01.tga"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "043-darth-bandon-hd"
+  ],
+  "mod": "043-darth-bandon-hd",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "044-hd-vrook"
+  ],
+  "mod": "044-hd-vrook",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "045-hd-ui-elements"
+  ],
+  "mod": "045-hd-ui-elements",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Party Selection"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Planet Icons"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "046-hd-npc-portraits"
+  ],
+  "mod": "046-hd-npc-portraits",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "047-male-npc-clothing"
+  ],
+  "mod": "047-male-npc-clothing",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "n_commm07.tga",
+     "N_CommMD01.tga",
+     "N_CommM08.tga"
+    ],
+    "src": "NPC clothing M"
+   },
+   {
+    "do": "stage_copy_as",
+    "new": "N_CommM08.tga",
+    "src": "NPC clothing M/N_CommM0801.tga"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "NPC clothing M"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "048-juhani-appearance-overhaul"
+  ],
+  "mod": "048-juhani-appearance-overhaul",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/JAO_Saber_Replacement.7z"
+  ],
+  "mod": "mega:jao-saber-patch",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "JAO_Saber_Replacement/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "049-juhani-cathar-head"
+  ],
+  "mod": "049-juhani-cathar-head",
+  "steps": [],
+  "skip": "crashes with KMRP (its issue #15)"
+ },
+ {
+  "inputs": [
+   "050-korriban-back-in-black"
+  ],
+  "mod": "050-korriban-back-in-black",
+  "steps": [
+   {
+    "allow_errors": 1,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "051-cloaked-jedi-robes"
+  ],
+  "mod": "051-cloaked-jedi-robes",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 4,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "052-jc-s-jedi-tailor"
+  ],
+  "mod": "052-jc-s-jedi-tailor",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "053-cloaks-with-shadows"
+  ],
+  "mod": "053-cloaks-with-shadows",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Jedi Robes Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "054-qel-droma-reskin"
+  ],
+  "mod": "054-qel-droma-reskin",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "055-quanon-s-hk-47"
+  ],
+  "mod": "055-quanon-s-hk-47",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "PO_phk47.tga"
+    ],
+    "src": "*/Quanons_HK47_Reskin"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Quanons_HK47_Reskin"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "056-hd-sign-placeable"
+  ],
+  "mod": "056-hd-sign-placeable",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "057-hd-kiosk"
+  ],
+  "mod": "057-hd-kiosk",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Kiosk HD*"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Kiosk Model Fix*/*/K1"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "058-hd-desk"
+  ],
+  "mod": "058-hd-desk",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "059-hd-escape-pod"
+  ],
+  "mod": "059-hd-escape-pod",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "060-hd-weapon-placeables"
+  ],
+  "mod": "060-hd-weapon-placeables",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "061-k2-swoops-to-k1"
+  ],
+  "mod": "061-k2-swoops-to-k1",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "062-hd-stun-batons"
+  ],
+  "mod": "062-hd-stun-batons",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "063-unique-sith-governor"
+  ],
+  "mod": "063-unique-sith-governor",
+  "steps": [],
+  "skip": "build warns it crashes on Linux"
+ },
+ {
+  "inputs": [
+   "064-hd-ithorians"
+  ],
+  "mod": "064-hd-ithorians",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "065-hd-duros"
+  ],
+  "mod": "065-hd-duros",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "066-hd-quarren"
+  ],
+  "mod": "066-hd-quarren",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "067-hd-davik"
+  ],
+  "mod": "067-hd-davik",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "068-hd-doctors"
+  ],
+  "mod": "068-hd-doctors",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "069-kebla-yurt-hd"
+  ],
+  "mod": "069-kebla-yurt-hd",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "N_CommF02.tga",
+     "N_CommF02.txi"
+    ],
+    "src": "*"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "070-hd-deadeye-duncan"
+  ],
+  "mod": "070-hd-deadeye-duncan",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "071-n-oldamh01-hd"
+  ],
+  "mod": "071-n-oldamh01-hd",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "072-hd-astromech-droids"
+  ],
+  "mod": "072-hd-astromech-droids",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "po_pt3m33.tga"
+    ],
+    "src": "*"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "073-hd-protocol-droids"
+  ],
+  "mod": "073-hd-protocol-droids",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "074-davik-s-trophies"
+  ],
+  "mod": "074-davik-s-trophies",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "075-hd-carth-onasi"
+  ],
+  "mod": "075-hd-carth-onasi",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "PO_pcarth3.tga"
+    ],
+    "src": "*"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "076-hd-canderous-ordo"
+  ],
+  "mod": "076-hd-canderous-ordo",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/Canderous Patch.rar"
+  ],
+  "mod": "mega:canderous-patch",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Canderous Patch"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "077-quanon-s-canderous"
+  ],
+  "mod": "077-quanon-s-canderous",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy_files",
+    "if_absent": false,
+    "names": [
+     "P_CandH01.tga"
+    ],
+    "src": "*/Quanon_CandOrdo_Reskin"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "078-jolee-hd"
+  ],
+  "mod": "078-jolee-hd",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "079-fen-s-jolee"
+  ],
+  "mod": "079-fen-s-jolee",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy_files",
+    "if_absent": false,
+    "names": [
+     "P_joleeh01.tga",
+     "P_joleeh01.txi"
+    ],
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "080-zaalbar-hd"
+  ],
+  "mod": "080-zaalbar-hd",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "po_pzaalbar3.tga"
+    ],
+    "src": "*"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "081-sith-uniform-reformation-revised"
+  ],
+  "mod": "081-sith-uniform-reformation-revised",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "082-stylized-portraits"
+  ],
+  "mod": "082-stylized-portraits",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/NPCs"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "083-star-map-revamp"
+  ],
+  "mod": "083-star-map-revamp",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Star-Map*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "084-background-improvements"
+  ],
+  "mod": "084-background-improvements",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "085-kebla-yurt-renovation"
+  ],
+  "mod": "085-kebla-yurt-renovation",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "086-hi-res-ebon-hawk"
+  ],
+  "mod": "086-hi-res-ebon-hawk",
+  "steps": [],
+  "skip": "GameFront refuses the download"
+ },
+ {
+  "inputs": [
+   "087-ebon-hawk-repairs"
+  ],
+  "mod": "087-ebon-hawk-repairs",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/To Override"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Animated Monitors"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "088-hq-cockpit-skyboxes"
+  ],
+  "mod": "088-hq-cockpit-skyboxes",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "089-yavin-station-hangar"
+  ],
+  "mod": "089-yavin-station-hangar",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   },
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/tslpatchdata"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/HQ Cockpit Skybox Textures/1024x1024 (M)"
+   },
+   {
+    "do": "delete",
+    "names": [
+     "ebo_yab.tga",
+     "ebo_yaf.tga",
+     "ebo_yal.tga",
+     "ebo_yar.tga",
+     "ebo_yat.tga"
+    ]
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "090-ebon-hawk-cockpit-upgrade-i"
+  ],
+  "mod": "090-ebon-hawk-cockpit-upgrade-i",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*.tpc",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "091-ebon-hawk-cockpit-upgrade-ii"
+  ],
+  "mod": "091-ebon-hawk-cockpit-upgrade-ii",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/No Overlays"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "092-taris-reskin"
+  ],
+  "mod": "092-taris-reskin",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "LTS_Bsky01.tga",
+     "LTS_Bsky02.tga",
+     "LTS_sky0001.tga",
+     "LTS_sky0002.tga",
+     "LTS_sky0003.tga",
+     "LTS_sky0004.tga",
+     "LTS_sky0005.tga"
+    ],
+    "src": "*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part1"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part1"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Taris_Reskin/Taris_TexturePack/Taris_Tex_Part2"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/Taris Reskin Patch.7z"
+  ],
+  "mod": "mega:taris-reskin-patch",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Taris Reskin Patch/Taris Reskin Patch"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "093-high-quality-starfields"
+  ],
+  "mod": "093-high-quality-starfields",
+  "steps": [],
+  "skip": "crashes with KMRP (its issue #15)"
+ },
+ {
+  "inputs": [
+   "094-hq-skyboxes-ii"
+  ],
+  "mod": "094-hq-skyboxes-ii",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "m36aa_01_lm0.tga",
+     "m36aa_01_lm1.tga",
+     "m36aa_01_lm2.tga"
+    ],
+    "src": "HQSkyboxesII_K1/Override"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "HQSkyboxesII_K1/Override"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "High quality skyboxes model fixes/*/override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "095-ebon-hawk-transparent-cockpit-windows"
+  ],
+  "mod": "095-ebon-hawk-transparent-cockpit-windows",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Main Installation/Override"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Compatibility Patches/Leviathan - K1CP Forcefield"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Compatibility Patches/High Quality Skyboxes by Kexikus"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Compatibility Patches/Yavin Station Hangar by WildKarrde"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "096-hires-beam-effects"
+  ],
+  "mod": "096-hires-beam-effects",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "097-hd-fire-ice"
+  ],
+  "mod": "097-hd-fire-ice",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "098-animated-energy-shields"
+  ],
+  "mod": "098-animated-energy-shields",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "099-animated-cantina-sign"
+  ],
+  "mod": "099-animated-cantina-sign",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "100-revamped-fx"
+  ],
+  "mod": "100-revamped-fx",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/To Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "101-terminal-texture"
+  ],
+  "mod": "101-terminal-texture",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "102-hd-workbench"
+  ],
+  "mod": "102-hd-workbench",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "103-animated-swoop-monitors"
+  ],
+  "mod": "103-animated-swoop-monitors",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*/to_Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "104-loadscreens-in-color"
+  ],
+  "mod": "104-loadscreens-in-color",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "105-reflective-lightsaber-blades"
+  ],
+  "mod": "105-reflective-lightsaber-blades",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "106-darth-malak-s-lightsaber"
+  ],
+  "mod": "106-darth-malak-s-lightsaber",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "107-blaster-visual-effects"
+  ],
+  "mod": "107-blaster-visual-effects",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "108-wookiee-warblade-fix"
+  ],
+  "mod": "108-wookiee-warblade-fix",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "109-kill-the-czerka-guard"
+  ],
+  "mod": "109-kill-the-czerka-guard",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "110-korriban-workbench"
+  ],
+  "mod": "110-korriban-workbench",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "111-senni-vek-mod"
+  ],
+  "mod": "111-senni-vek-mod",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "112-male-twi-lek-diversity"
+  ],
+  "mod": "112-male-twi-lek-diversity",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/*/tslpatchdata"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": true,
+    "src": "*/*/Optional - Upscaled Textures"
+   },
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 2,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "113-ixgil-the-bith"
+  ],
+  "mod": "113-ixgil-the-bith",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "114-hidden-bek-control-room"
+  ],
+  "mod": "114-hidden-bek-control-room",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": true,
+    "src": "*/*/For Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "115-swoop-bike-upgrades"
+  ],
+  "mod": "115-swoop-bike-upgrades",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/TSLPatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "116-jedi-choice-dialogue-enhancement"
+  ],
+  "mod": "116-jedi-choice-dialogue-enhancement",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy_files",
+    "if_absent": false,
+    "names": [
+     "dan13_dorak.dlg"
+    ],
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "117-juhani-restoration"
+  ],
+  "mod": "117-juhani-restoration",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": true,
+    "src": "*/*/Installation"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "118-vision-enhancement"
+  ],
+  "mod": "118-vision-enhancement",
+  "steps": [],
+  "skip": "build marks it Steam Deck-incompatible"
+ },
+ {
+  "inputs": [
+   "119-new-leviathan-dialogue"
+  ],
+  "mod": "119-new-leviathan-dialogue",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "120-balanced-pazaak"
+  ],
+  "mod": "120-balanced-pazaak",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "121-camera-replacement"
+  ],
+  "mod": "121-camera-replacement",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "122-rebalanced-grenades"
+  ],
+  "mod": "122-rebalanced-grenades",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "123-hd-grenades-mines"
+  ],
+  "mod": "123-hd-grenades-mines",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "ii_trapkit_001.tga",
+     "ii_trapkit_002.tga",
+     "ii_trapkit_003.tga",
+     "ii_trapkit_004.tga"
+    ],
+    "src": "*"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "124-turret-minigame-remover"
+  ],
+  "mod": "124-turret-minigame-remover",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "125-tutorial-remover"
+  ],
+  "mod": "125-tutorial-remover",
+  "steps": [],
+  "skip": "crashes with KMRP (its issue #15)"
+ },
+ {
+  "inputs": [
+   "126-leviathan-prison-break"
+  ],
+  "mod": "126-leviathan-prison-break",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "127-ain-t-no-air-in-space"
+  ],
+  "mod": "127-ain-t-no-air-in-space",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "128-party-conversations-on-the-ebon-hawk"
+  ],
+  "mod": "128-party-conversations-on-the-ebon-hawk",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "129-dark-sacrifice"
+  ],
+  "mod": "129-dark-sacrifice",
+  "steps": [],
+  "skip": "crashes with KMRP (its issue #15)"
+ },
+ {
+  "inputs": [
+   "130-saber-throw-knockdown"
+  ],
+  "mod": "130-saber-throw-knockdown",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "131-sunry-enhancement"
+  ],
+  "mod": "131-sunry-enhancement",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "132-davik-slave-change"
+  ],
+  "mod": "132-davik-slave-change",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "133-taris-rapid-transit"
+  ],
+  "mod": "133-taris-rapid-transit",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/Tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "134-manaan-rapid-transit"
+  ],
+  "mod": "134-manaan-rapid-transit",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/English/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "135-recruit-t3-m4-early"
+  ],
+  "mod": "135-recruit-t3-m4-early",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "136-security-spikes-for-k1"
+  ],
+  "mod": "136-security-spikes-for-k1",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "137-hq-blasters"
+  ],
+  "mod": "137-hq-blasters",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "keblastore.utm"
+    ],
+    "src": "*/*/tslpatchdata"
+   },
+   {
+    "allow_errors": 2,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   },
+   {
+    "do": "rename",
+    "new": "w_ionrfl_004.mdl",
+    "old": "w_ionrfl_04.mdl"
+   },
+   {
+    "do": "rename",
+    "new": "w_ionrfl_004.mdx",
+    "old": "w_ionrfl_04.mdx"
+   },
+   {
+    "do": "delete",
+    "names": [
+     "w_rptnblstr_004.mdl",
+     "w_rptnblstr_004.mdx",
+     "w_blstrpstl_006.mdl",
+     "w_blstrpstl_006.mdx",
+     "g1_w_rptnblstr01.uti"
+    ]
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "138-crashed-republic-cruiser"
+  ],
+  "mod": "138-crashed-republic-cruiser",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/*/tslpatchdata"
+   },
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/*/tslpatchdata"
+   },
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 2,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "139-trandoshans-rescaled"
+  ],
+  "mod": "139-trandoshans-rescaled",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "140-custom-selkath-animation"
+  ],
+  "mod": "140-custom-selkath-animation",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "141-bastila-has-tsl-battle-meditation"
+  ],
+  "mod": "141-bastila-has-tsl-battle-meditation",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "142-sneak-attack-restoration"
+  ],
+  "mod": "142-sneak-attack-restoration",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "143-sentinel-sneak-attack"
+  ],
+  "mod": "143-sentinel-sneak-attack",
+  "steps": [],
+  "skip": "crashes with KMRP (its issue #15)"
+ },
+ {
+  "inputs": [
+   "144-thematic-the-one"
+  ],
+  "mod": "144-thematic-the-one",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "145-sherruk-with-lightsabers"
+  ],
+  "mod": "145-sherruk-with-lightsabers",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/SAWL Patch.rar"
+  ],
+  "mod": "mega:sherruk-patch",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "SAWL Patch/*/Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "146-improved-cantina-sitters"
+  ],
+  "mod": "146-improved-cantina-sitters",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "147-helena-shan-improvement"
+  ],
+  "mod": "147-helena-shan-improvement",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "148-bastila-s-dark-bodysuit"
+  ],
+  "mod": "148-bastila-s-dark-bodysuit",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "149-dueling-arena-adjustment"
+  ],
+  "mod": "149-dueling-arena-adjustment",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "150-bendak-non-darkside-option"
+  ],
+  "mod": "150-bendak-non-darkside-option",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*.dlg",
+    "recursive": false,
+    "src": "."
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "151-kashyyyk-forcefield-rework"
+  ],
+  "mod": "151-kashyyyk-forcefield-rework",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "152-swoop-platform-repair"
+  ],
+  "mod": "152-swoop-platform-repair",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "153-engine-lab-bench"
+  ],
+  "mod": "153-engine-lab-bench",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "154-missing-lamps-fix"
+  ],
+  "mod": "154-missing-lamps-fix",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "155-czerka-business-attire"
+  ],
+  "mod": "155-czerka-business-attire",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "mega/Czerka Business Attire - Dark Hope Ithorian Compatch.7z"
+  ],
+  "mod": "mega:czerka-ithorian-patch",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Czerka Business Attire*"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "156-sith-texture-restoration"
+  ],
+  "mod": "156-sith-texture-restoration",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "157-diversified-republic-soldiers"
+  ],
+  "mod": "157-diversified-republic-soldiers",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "158-diversified-jedi-captives"
+  ],
+  "mod": "158-diversified-jedi-captives",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "159-juhani-romance-enhancement"
+  ],
+  "mod": "159-juhani-romance-enhancement",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "160-dodonna-s-transmission"
+  ],
+  "mod": "160-dodonna-s-transmission",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "161-endgame-hologram-fix"
+  ],
+  "mod": "161-endgame-hologram-fix",
+  "steps": [],
+  "skip": "build warns it crashes on Linux"
+ },
+ {
+  "inputs": [
+   "162-twisted-rancor-trio-fix"
+  ],
+  "mod": "162-twisted-rancor-trio-fix",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "163-rakatan-hologram-fix"
+  ],
+  "mod": "163-rakatan-hologram-fix",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "164-ending-enhancement"
+  ],
+  "mod": "164-ending-enhancement",
+  "steps": [],
+  "skip": "crashes with KMRP (its issue #15)"
+ },
+ {
+  "inputs": [
+   "165-elder-droid-unique-vo"
+  ],
+  "mod": "165-elder-droid-unique-vo",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "166-ajunta-pall-s-swords"
+  ],
+  "mod": "166-ajunta-pall-s-swords",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "167-ajunta-pall-s-blade"
+  ],
+  "mod": "167-ajunta-pall-s-blade",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 2,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "168-jc-s-mandalorian-armor"
+  ],
+  "mod": "168-jc-s-mandalorian-armor",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "169-multifire-autofire"
+  ],
+  "mod": "169-multifire-autofire",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 2,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "170-blaster-adjustment"
+  ],
+  "mod": "170-blaster-adjustment",
+  "steps": [
+   {
+    "args": [
+     {
+      "kind": "stage",
+      "spec": null
+     }
+    ],
+    "do": "script",
+    "path": "./repairs/09-blaster-adjustment-orphan-rows/make.py",
+    "reads": [
+     "./repairs/09-blaster-adjustment-orphan-rows"
+    ]
+   },
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "171-hq-gaffi-stick"
+  ],
+  "mod": "171-hq-gaffi-stick",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "172-hd-quarterstaffs"
+  ],
+  "mod": "172-hd-quarterstaffs",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": true,
+    "src": "*/*/For Override"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "173-training-lightsabers"
+  ],
+  "mod": "173-training-lightsabers",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "174-logical-datapads"
+  ],
+  "mod": "174-logical-datapads",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "175-realistic-visual-effects"
+  ],
+  "mod": "175-realistic-visual-effects",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "176-minor-music-tweaks"
+  ],
+  "mod": "176-minor-music-tweaks",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "177-npc-alignment-fix"
+  ],
+  "mod": "177-npc-alignment-fix",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "178-repair-affects-stun-droid"
+  ],
+  "mod": "178-repair-affects-stun-droid",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": null,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "179-alignment-affects-force-powers"
+  ],
+  "mod": "179-alignment-affects-force-powers",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 1,
+    "src": "*/*/Main Install/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "180-galaxy-map-fix"
+  ],
+  "mod": "180-galaxy-map-fix",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 0,
+    "src": "*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "181-remove-duplicate-tga-tpc"
+  ],
+  "mod": "181-remove-duplicate-tga-tpc",
+  "steps": [
+   {
+    "do": "dedupe_tpc"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "182-ultimate-character-overhaul-patches"
+  ],
+  "mod": "182-ultimate-character-overhaul-patches",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "N_CommM02.tga",
+     "N_CommM03.tga",
+     "N_CommM04.tga",
+     "N_CommM05.tga",
+     "N_CommM06.tga",
+     "N_CommM08.tga"
+    ],
+    "src": "JC's Minor Fixes*/*/Aesthetic Improvements"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "JC's Minor Fixes*/*/Aesthetic Improvements"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "JC's Minor Fixes*/*/Resolution Fixes"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "JC's Minor Fixes*/*/Straight Fixes"
+   },
+   {
+    "do": "stage_delete",
+    "names": [
+     "PLC_SSldCrps.tpc",
+     "N_CommM01.tpc",
+     "N_CommM02.tpc",
+     "N_CommM03.tpc",
+     "N_CommM04.tpc",
+     "N_CommM05.tpc",
+     "N_CommM06.tpc",
+     "N_CommM08.tpc"
+    ],
+    "src": "KOTOR 1 Community Patch*/*"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "KOTOR 1 Community Patch*/*"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Miscellaneous*/*/Sherruk with Lightsabers - Patch"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Miscellaneous*/*/Thigh-High Boots for Twi'lek - Patch/NPC Replacement"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "Miscellaneous*/*/Thigh-High Boots for Twi'lek - Patch/NPC Replacement/Optional"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "183-republic-soldier-fix"
+  ],
+  "mod": "183-republic-soldier-fix",
+  "steps": [
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Override"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "pfbbl*",
+    "recursive": false,
+    "src": "*/Player Clothing"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "pmbbl*",
+    "recursive": false,
+    "src": "*/Player Clothing"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "184-republic-soldier-s-new-shade"
+  ],
+  "mod": "184-republic-soldier-s-new-shade",
+  "steps": [
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 3,
+    "src": "*/*/tslpatchdata"
+   },
+   {
+    "allow_errors": 0,
+    "do": "holopatcher",
+    "option": 5,
+    "src": "*/*/tslpatchdata"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "185-character-textures-model-fixes"
+  ],
+  "mod": "185-character-textures-model-fixes",
+  "steps": [
+   {
+    "do": "stage_delete",
+    "names": [
+     "P_BastilaH04.tpc",
+     "C_DrdAstro01.tpc",
+     "C_DrdAstro03.tpc",
+     "P_T3M3_01.tpc",
+     "C_DrdProt01.tpc",
+     "C_DrdProt02.tpc",
+     "C_DrdProt03.tpc",
+     "C_DrdProt04.tpc",
+     "C_DrdWar01.tpc",
+     "C_DrdWar02.tpc",
+     "C_DrdWar03.tpc",
+     "C_DrdWar04.tpc",
+     "C_DrdWar05.tpc",
+     "C_Gammorean_Low.tpc",
+     "C_Gammorean01.tpc",
+     "C_Gammorean02.tpc",
+     "C_Gammorean03.tpc",
+     "C_Gammorean04.tpc",
+     "C_Ithorian01.tpc",
+     "C_Ithorian02.tpc",
+     "C_Ithorian03.tpc",
+     "L_Alien02.mdl",
+     "L_Alien02.mdx",
+     "L_Alien05.mdl",
+     "L_Alien05.mdx",
+     "N_astromech01.tpc",
+     "N_astromech02.tpc",
+     "N_CommM01.tpc",
+     "N_CommM02.tpc",
+     "N_CommM03.tpc",
+     "N_CommM04.tpc",
+     "N_CommM05.tpc",
+     "N_CommM06.tpc",
+     "N_CommM08.tpc",
+     "N_DarthMalak01.tpc",
+     "N_DarthMalakH01.tpc",
+     "N_JediMalekH02.tpc",
+     "N_DarthRevan01.tpc",
+     "PMBJ01.tpc",
+     "N_Duros01.tpc",
+     "N_Duros02.tpc",
+     "N_Duros03.tpc",
+     "N_Repsold.mdl",
+     "N_Repsold.mdx",
+     "N_RepSold_F.mdl",
+     "N_RepSold_F.mdx",
+     "N_RepSold_F01.tpc",
+     "N_RepSold01.tpc",
+     "N_Selkath.mdl",
+     "N_Selkath.mdx",
+     "N_SithSoldier.mdl",
+     "N_SithSoldier.mdx",
+     "N_Tusken_F.tpc",
+     "N_Tusken_F2.tpc",
+     "N_Tusken02.tpc",
+     "N_Tusken03.tpc",
+     "N_Tusken04.tpc",
+     "N_Tusken05.tpc",
+     "N_TwilekF.mdl",
+     "N_TwilekF.mdx",
+     "N_TwilekFB01.tpc",
+     "N_TwilekFC01.tpc",
+     "P_BastilaBB02.mdl",
+     "P_BastilaBB02.mdx",
+     "P_CandBA01.tpc",
+     "P_CandBB01.tpc",
+     "P_CandH01.tpc",
+     "P_CarthBB01.tpc",
+     "P_HK47_01.tpc",
+     "P_JoleeBA01.tpc",
+     "P_JoleeBB01.tpc",
+     "P_JoleeH01.tpc",
+     "P_JuhaniBB.mdl",
+     "P_JuhaniBB.mdx",
+     "P_JuhaniBB01.tpc",
+     "P_Zaalbar02.tpc",
+     "PFBBL.mdl",
+     "PFBBL.mdx",
+     "PFBBL01.tpc",
+     "PMBBL.mdl",
+     "PMBBL.mdx",
+     "PMBBL01.tpc",
+     "PFBE07.tpc",
+     "PMBE07.tpc",
+     "PFBH04.tpc",
+     "PFBH07.tpc",
+     "PMBH04.tpc",
+     "PMBH07.tpc",
+     "PFBI01.tpc",
+     "PFBI02.tpc",
+     "PFBI03.tpc",
+     "PFBI04.tpc",
+     "PFBIL.mdl",
+     "PFBIL.mdx",
+     "PFBIM.mdl",
+     "PFBIM.mdx",
+     "PFBIS.mdl",
+     "PFBIS.mdx",
+     "PMBI01.tpc",
+     "PMBI02.tpc",
+     "PMBI03.tpc",
+     "PMBI04.tpc",
+     "PMBIL.mdl",
+     "PMBIL.mdx",
+     "PMBIM.mdl",
+     "PMBIM.mdx",
+     "PMBIS.mdl",
+     "PMBIS.mdx",
+     "Twilek_F01.tpc",
+     "Twilek_F02.tpc",
+     "Twilek_F03.tpc",
+     "Twilek_F04.tpc"
+    ],
+    "src": "*/Copy contents to KotOR's Override folder"
+   },
+   {
+    "dest": null,
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*",
+    "recursive": false,
+    "src": "*/Copy contents to KotOR's Override folder"
+   },
+   {
+    "do": "dedupe_tpc"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "186-4gb-patcher"
+  ],
+  "mod": "186-4gb-patcher",
+  "steps": [],
+  "skip": "replaced by KMRP"
+ },
+ {
+  "inputs": [],
+  "mod": "repair:08-wounded-republic-detonate-controller",
+  "steps": [
+   {
+    "args": [
+     {
+      "kind": "override",
+      "spec": null
+     },
+     {
+      "kind": "archive",
+      "rel": "157-diversified-republic-soldiers/[K1]_Diversified_Wounded_Republic_Soldiers_On_Taris_v1.4.7z"
+     }
+    ],
+    "do": "script",
+    "path": "./repairs/08-wounded-republic-detonate-controller/make.py",
+    "reads": [
+     "./repairs/08-wounded-republic-detonate-controller"
+    ]
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "cutscenes"
+  ],
+  "mod": "cutscenes",
+  "steps": [
+   {
+    "dest": "movies",
+    "do": "copy",
+    "exclude": [],
+    "pattern": "*.bik",
+    "recursive": false,
+    "src": "*/1920x1080"
+   }
+  ]
+ },
+ {
+  "inputs": [
+   "original-steam-files/swkotor.ini"
+  ],
+  "mod": "ini",
+  "steps": [
+   {
+    "dest": ".",
+    "do": "copy_files",
+    "if_absent": true,
+    "names": [
+     "swkotor.ini"
+    ],
+    "src": "."
+   }
+  ]
+ },
+ {
+  "inputs": [],
+  "mod": "kmrp",
+  "steps": [
+   {
+    "do": "kmrp",
+    "image": "modshop-wine",
+    "installer": "KMRP-Windows-1.5.1.exe",
+    "settings": {
+     "controllerSupport": true,
+     "driverCompatibility": true,
+     "highFpsFix": true,
+     "markerFixes": true
+    }
+   }
+  ]
+ },
+ {
+  "inputs": [],
+  "mod": "kmrp-controller",
+  "steps": [
+   {
+    "args": [
+     {
+      "kind": "game",
+      "spec": null
+     },
+     {
+      "kind": "data",
+      "rel": "kmrp-build/kmrp-controller.dll"
+     },
+     {
+      "kind": "data",
+      "rel": "kmrp-build/kmrp-controller.hooks.toml"
+     }
+    ],
+    "do": "script",
+    "path": "./kmrp-build/install-controller.py",
+    "reads": []
+   }
+  ]
+ }
+]

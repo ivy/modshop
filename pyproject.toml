@@ -42,6 +42,7 @@ extend-exclude = ["games", "tools", "docs"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF", "PTH"]
+ignore = ["E501"]  # the formatter governs line length; only `fmt: skip` lines exceed it
 
 [tool.pyright]
 include = ["src", "tests"]

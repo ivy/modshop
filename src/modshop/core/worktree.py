@@ -13,9 +13,12 @@ import shutil
 import time
 from dataclasses import dataclass
 from pathlib import Path
+from typing import TYPE_CHECKING, cast
 
 from modshop.core.clone import Cloner
-from modshop.core.key import Key
+
+if TYPE_CHECKING:
+    from modshop.core.key import Key
 
 
 @dataclass(frozen=True, slots=True)
@@ -28,7 +31,7 @@ class WorkTree:
         if not (self.record.exists() and self.path.exists()):
             return None
         d = json.loads(self.record.read_text())
-        return None if d.get("dirty") else Key(d["key"])
+        return None if d.get("dirty") else cast("Key", d["key"])
 
     def set_key(self, key: Key) -> None:
         self.record.write_text(json.dumps({"key": key}))

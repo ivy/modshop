@@ -79,7 +79,7 @@ class Store:
     def manifest(self, key: Key) -> Manifest:
         return Manifest.read(self.manifest_path(key))
 
-    def keys(self) -> list[Key]:
+    def stored_keys(self) -> list[Key]:
         if not self.ckpt.exists():
             return []
         return sorted(Key(d.name) for d in self.ckpt.iterdir() if d.is_dir() and (d / "meta.json").exists())

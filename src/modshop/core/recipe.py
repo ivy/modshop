@@ -40,3 +40,17 @@ class Entry:
 
 
 type Runner = Callable[[Entry, WorkTree, Stage], None]
+
+
+@dataclass(frozen=True, slots=True)
+class Recipe:
+    entries: tuple[Entry, ...]
+
+    def active(self) -> tuple[Entry, ...]:
+        return tuple(e for e in self.entries if not e.skip)
+
+    def get(self, name: str) -> Entry:
+        for e in self.entries:
+            if e.name == name:
+                return e
+        raise KeyError(name)

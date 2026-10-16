@@ -50,7 +50,7 @@ def test_commit_hardlinks_unchanged_and_clones_changed(tmp_path: Path) -> None:
     ).read_text() == "~ Override/a.tga\n- Override/gone.tga\n+ Override/new.tpc\n+ override\n"
     assert work.key() == Key("k1")
     assert [x.key for x in store.lineage(Key("k1"))] == [VANILLA, Key("k1")]
-    assert store.keys() == [Key("k1")]
+    assert store.stored_keys() == [Key("k1")]
 
 
 def test_dirty_record_forces_restore(tmp_path: Path) -> None:
