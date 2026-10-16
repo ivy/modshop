@@ -1,0 +1,127 @@
+From 058fb0f6f10c3505f3c73ee6a0bdaa14c002c2fb Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Fri, 16 Oct 2026 12:37:37 -0700
+Subject: [PATCH 7/7] ncs compiler: push engine-call arguments last to first
+
+EngineCallExpression compiled an engine function's arguments first to
+last, so the last argument ended on top of the stack. The engine pops an
+action's first parameter off the top, as BioWare's compiler and
+nwnnsscomp emit them, so every multi-argument engine call in a script
+this compiler built read its arguments from the wrong slots. Cure in
+Alignment Affects Force Powers compiled to
+
+    CONSTI 0; <effect>; <object>; CONSTF 0.0; ACTION ApplyEffectToObject
+
+and in game healed nobody and applied an unrelated effect instead; the
+same script from nwnnsscomp pushes CONSTF 0.0 first and CONSTI 0 last.
+
+The interpreter reversed the popped arguments to match the compiler, so
+the tests agreed with the wrong order. It now takes the first parameter
+off the top as well.
+
+Measured against the game's own scripts: of the 794 vanilla K1 scripts
+that ship their source, have no #include and compile, 6 recompiled to
+BioWare's exact bytes before this change and 262 after. The 532 that
+still differ do so in stack cleanup around return (one MOVSP -8 against
+two MOVSP -4, a JMP before or after them), not in argument order.
+---
+ .../resource/formats/ncs/compiler/classes.py  | 15 ++++---------
+ .../formats/ncs/compiler/interpreter.py       | 21 ++-----------------
+ .../tests/resource/formats/test_ncs.py        | 15 +++++++++++++
+ 3 files changed, 21 insertions(+), 30 deletions(-)
+
+diff --git a/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/classes.py b/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/classes.py
+index a335ae384..3fcac2d12 100644
+--- a/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/classes.py
++++ b/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/classes.py
+@@ -1303,18 +1303,11 @@ class EngineCallExpression(Expression):
+         this_stack = 0
+         # DEBUG: Log arguments before compilation
+ 
+-        # Compile arguments in FORWARD order (left to right, first argument first)
+-        # NCS bytecode pushes arguments left-to-right, so when the interpreter
+-        # pops them (last-in-first-out), args_snap has them in reverse order.
+-        # The interpreter then reverses args_snap to match function.params order.
+-        # - Compile in forward: push fFloat (first param, bottom), push nWidth, push nDecimals (last param, top)
+-        # - Stack: [fFloat, nWidth, nDecimals] (nDecimals on top)
+-        # - Interpreter pops: nDecimals -> args_snap[0], nWidth -> args_snap[1], fFloat -> args_snap[2]
+-        # - Before reverse: args_snap = [nDecimals, nWidth, fFloat]
+-        # - After reverse: args_snap = [fFloat, nWidth, nDecimals] - CORRECT!
+-        for i in range(len(self._args)):  # Iterate in forward order
++        # Push arguments last to first, as BioWare's compiler does: the engine
++        # pops an action's first parameter off the top of the stack.
++        for i in reversed(range(len(self._args))):
+             arg = self._args[i]
+-            param_index = i  # Parameter index in forward order
++            param_index = i
+             param_type = DynamicDataType(self._function.params[param_index].datatype)
+             if param_type == DataType.ACTION:
+                 after_command = NCSInstruction()
+diff --git a/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/interpreter.py b/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/interpreter.py
+index 5cc5b1b9c..dc74ae6e7 100644
+--- a/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/interpreter.py
++++ b/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/interpreter.py
+@@ -427,9 +427,8 @@ class Interpreter(ComparableMixin):
+ 
+         args_snap = []
+ 
+-        # Pop arguments from stack in reverse order (last param popped first)
+-        for i in range(args):
+-            param_index = args - 1 - i  # Reverse order
++        # The first parameter is on top of the stack.
++        for param_index in range(args):
+             if param_index >= len(function.params):
+                 msg = f"Action '{function.name}' parameter index {param_index} out of range"
+                 raise ValueError(msg)
+@@ -456,22 +455,6 @@ class Interpreter(ComparableMixin):
+                     msg = f"Stack underflow while popping argument for '{function.name}'"
+                     raise RuntimeError(msg) from e
+ 
+-        # DEBUG: Log args_snap before reverse
+-        print(
+-            f"DEBUG: args_snap before reverse: {[f'{obj.data_type.name}={obj.value}' for obj in args_snap]}"
+-        )
+-
+-        # We compiled arguments in reverse order (last first), so when we pop them (last-in-first-out),
+-        # args_snap[0] is the last parameter and args_snap[-1] is the first parameter.
+-        # We need to reverse to match function.params order (first parameter at index 0).
+-        args_snap.reverse()
+-
+-        # DEBUG: Log args_snap after reverse and function params
+-        print(
+-            f"DEBUG: args_snap after reverse: {[f'{obj.data_type.name}={obj.value}' for obj in args_snap]}"
+-        )
+-        print(f"DEBUG: function.params: {[(p.name, p.datatype.name) for p in function.params]}")
+-
+         # Validate argument types
+         for i in range(args):
+             if function.params[i].datatype != args_snap[i].data_type:
+diff --git a/Libraries/PyKotor/tests/resource/formats/test_ncs.py b/Libraries/PyKotor/tests/resource/formats/test_ncs.py
+index e8c4ed368..abe63597c 100644
+--- a/Libraries/PyKotor/tests/resource/formats/test_ncs.py
++++ b/Libraries/PyKotor/tests/resource/formats/test_ncs.py
+@@ -222,6 +222,21 @@ class TestNCSCompiler(CompilerTestBase):
+         assert interpreter.action_snapshots[0].function_name == "GetObjectByTag"
+         assert interpreter.action_snapshots[0].arg_values == ["something", 15]
+ 
++    def test_enginecall_pushes_last_param_first(self):
++        """Engine-call arguments go on the stack last to first, as BioWare's compiler emits them."""
++        ncs = self.compile(
++            """
++            void main()
++            {
++                object oSomething = GetNearestObjectByTag("tag", OBJECT_SELF, 2);
++            }
++        """
++        )
++
++        action = next(i for i, ins in enumerate(ncs.instructions) if ins.ins_type == NCSInstructionType.ACTION)
++        pushes = [ins.ins_type for ins in ncs.instructions[action - 3 : action]]
++        assert pushes == [NCSInstructionType.CONSTI, NCSInstructionType.CONSTO, NCSInstructionType.CONSTS]
++
+     def test_enginecall_with_default_params(self):
+         """Test engine function call with default parameters."""
+         ncs = self.compile(
+-- 
+2.56.0
+

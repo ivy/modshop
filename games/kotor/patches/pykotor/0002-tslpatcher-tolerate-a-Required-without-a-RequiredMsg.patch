@@ -1,7 +1,7 @@
 From 94b56a1be61f7c3ecd328184a030bf438c325f76 Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Thu, 15 Oct 2026 00:42:33 -0700
-Subject: [PATCH 2/3] tslpatcher: tolerate a Required without a RequiredMsg,
+Subject: [PATCH 2/7] tslpatcher: tolerate a Required without a RequiredMsg,
  and the reverse
 
 The [Settings] reader raised "Required files definitions must match required
