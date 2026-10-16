@@ -3,9 +3,8 @@
 The procedure and its reasons are games/kotor/kmrp-build/README.md. This runs it: the clone's
 Linux build script, the checks that README names, KMRP's own packager, and the hand-over into
 `data/kmrp-build/`, where the outputs of the build before are kept under `previous-<commit>/`
-and `COMMIT` names the clone's commit. The build's Python packages come in as a uv overlay on
-the project's environment, pinned here, so uv.lock (and with it every checkpoint key) is not
-touched by them.
+and `COMMIT` names the clone's commit. The build's Python packages are the project's `kmrp-build`
+dependency group, locked in uv.lock like the rest.
 """
 
 from __future__ import annotations
@@ -22,7 +21,6 @@ from modshop.core.errors import ModshopError, Preflight
 
 UPSTREAM = "origin/master"
 CONTAINER = "docker.io/mstorsjo/llvm-mingw:latest"
-OVERLAY = ("pillow==12.3.0", "numpy==2.5.4", "fonttools==4.67.0", "capstone==5.0.7")
 # The module links the CRT statically (/MT); anything else imported is a build that went wrong.
 IMPORTS = frozenset({"KERNEL32.dll", "USER32.dll", "GDI32.dll", "bcrypt.dll"})
 PACKAGE = "KOTOR 1 Native Controller Mod + Xbox HUD.kpatch"
@@ -95,7 +93,7 @@ def build(clone: Path, out: Path, repo: Path, xwin: Path) -> Built:
         raise Preflight("uv is not on PATH")
     commit = git(clone, "rev-parse", "HEAD")
     tag = label(clone)
-    overlay = [uv, "run", "--project", str(repo), *(f"--with={p}" for p in OVERLAY), "--"]
+    overlay = [uv, "run", "--project", str(repo), "--group", "kmrp-build", "--"]
     env = {**os.environ, "XWIN": str(xwin), "PYTHON": "python"}
 
     def run(*cmd: str) -> str:

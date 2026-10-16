@@ -21,6 +21,8 @@ modshop = "modshop.cli:app"
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.14", "pyright>=1.1.400"]
+# KMRP's controller build (`modshop kotor kmrp build`); not in the patcher's closure, so no checkpoint key sees them.
+kmrp-build = ["pillow>=12", "numpy>=2.5", "fonttools>=4.67", "capstone>=5.0"]
 
 [tool.uv.sources]
 # The patcher's library, with the fixes in games/kotor/patches/pykotor/ applied: that series'
