@@ -383,3 +383,51 @@ def deploy(
         print("nothing to deploy")
     else:
         print(f"{result.updated} paths updated; previous folder kept as {result.previous}")
+
+
+archives_app = typer.Typer(no_args_is_help=True, help="The mod archives.")
+app.add_typer(archives_app, name="archives")
+
+
+@base.command("fetch")
+@exits_cleanly
+def base_fetch(
+    account: Annotated[str, typer.Argument(help="Your Steam account name.")], data: DataOpt = None
+) -> None:
+    """Download the vanilla game by depot manifest id into the vanilla tree (interactive the first time)."""
+    paths = paths_for("kotor", data)
+    b = base_mod.Base.load(paths.game_dir / "build" / "base.json")
+    n = base_mod.fetch(b, paths.vanilla, account)
+    print(f"vanilla tree at {paths.vanilla / 'tree'} ({n} files); now: modshop kotor base index")
+
+
+@archives_app.command("fetch")
+@exits_cleanly
+def archives_fetch(
+    nexus_key_file: Annotated[Path, typer.Argument(help="A file holding your Nexus API key.")],
+    data: DataOpt = None,
+) -> None:
+    """Fetch every mod of the Full Build into the archives, in the build's order."""
+    from modshop.kotor.archives import fetch_build
+
+    console_logging()
+    paths = paths_for("kotor", data)
+    fetch_build(paths.game_dir / "build" / "k1full.json", paths.archives, nexus_key_file.read_text().strip())
+
+
+@archives_app.command("mega")
+@exits_cleanly
+def archives_mega(
+    urls: Annotated[list[str], typer.Argument(help="Public mega.nz file links.")], data: DataOpt = None
+) -> None:
+    """Fetch public mega.nz links into the archives' mega/ folder."""
+    from modshop.kotor.archives import fetch_mega
+
+    console_logging()
+    dest = paths_for("kotor", data).archives / "mega"
+    dest.mkdir(parents=True, exist_ok=True)
+    for u in urls:
+        try:
+            fetch_mega(u, dest)
+        except Exception as e:
+            log.error("FAILED %s %r", u, e)

@@ -1,7 +1,17 @@
-"""The vanilla game as a definition: Steam ids and the tree hash they must produce."""
+"""The vanilla game as a definition: Steam ids and the tree hash they must produce.
+
+`base fetch` downloads exactly that depot manifest with DepotDownloader (SteamRE's open-source
+Steam client, installed by mise from the repository's mise.toml) into the vanilla tree. The
+first run asks for the account's password and a Steam Guard code on the terminal; with
+`-remember-password` the login state is kept under ~/.config/DepotDownloader, outside the
+repository and the data root.
+"""
 
 from __future__ import annotations
 
+import json
+import shutil
+import subprocess
 from pathlib import Path
 
 from pydantic import BaseModel, ConfigDict
@@ -29,6 +39,33 @@ class Base(BaseModel):
 
     def dump(self) -> str:
         return self.model_dump_json(indent=1) + "\n"
+
+
+def fetch(base: Base, vanilla: Path, account: str, downloader: str = "DepotDownloader") -> int:
+    """Download the base's depot manifest into `<vanilla>/tree`, replacing any tree there.
+    Returns the number of files. Interactive: Steam may ask for a password and a Guard code."""
+    if shutil.which(downloader) is None:
+        raise Preflight(f"{downloader} is not installed; run `mise install`")
+    partial = vanilla / "tree.partial"
+    if partial.exists():
+        shutil.rmtree(partial)
+    partial.mkdir(parents=True)
+    cmd = [
+        downloader, "-app", str(base.app), "-depot", str(base.depot), "-manifest", base.manifest,
+        "-os", "windows", "-osarch", "32", "-username", account, "-remember-password",
+        "-dir", str(partial), "-validate",
+    ]  # fmt: skip
+    subprocess.run(cmd, check=True)
+    # DepotDownloader keeps its own bookkeeping beside the files; the tree is the game alone
+    shutil.rmtree(partial / ".DepotDownloader", ignore_errors=True)
+    tree = vanilla / "tree"
+    if tree.exists():
+        shutil.rmtree(tree)
+    partial.rename(tree)
+    (vanilla / "source.json").write_text(
+        json.dumps({"app": base.app, "depot": base.depot, "manifest": base.manifest}) + "\n"
+    )
+    return sum(1 for p in tree.rglob("*") if p.is_file())
 
 
 def index(store: Store, base_json: Path, *, update: bool = False) -> Checkpoint:
