@@ -1,14 +1,14 @@
 # Proposal: modshop as a Python application
 
-Status: draft for review. Nothing here is built. [`kotor-build-pipeline.md`](kotor-build-pipeline.md) is the pipeline this document restructures; its goals and determinism rules stand unchanged.
+Status: accepted on 2026-10-15, all five decisions as recommended; implementation in progress. The fork for decision 1 is [ivy/PyKotor](https://github.com/ivy/PyKotor), branch `modshop-patches`. [`kotor-build-pipeline.md`](kotor-build-pipeline.md) is the pipeline this document restructures; its goals and determinism rules stand unchanged.
 
 ## Summary
 
 The KotOR pipeline under `games/kotor/build/` becomes one installable Python package, `modshop`, with the command `modshop kotor <command>`, a typed domain model, a test suite, and one environment managed by uv. Scope is the scripts that exist today: nothing new is built, and what the port adds is structure, tests, one environment, and a key that is harder to get wrong. The port is accepted when the rebuilt chain reaches the same tree hash at every entry as the chain built today, and when a real deploy of it leaves a clean drift check.
 
-Decisions wanted before phase 1 starts, each with a recommendation argued below:
+The decisions the plan rests on, each argued below:
 
-1. **pykotor from a public fork commit** pinned in the lockfile, rather than patched after install ([The patcher's library](#the-patchers-library)). Needs a fork under your account; the push is outward-facing and is yours to make.
+1. **pykotor from a public fork commit** pinned in the lockfile, rather than patched after install ([The patcher's library](#the-patchers-library)). The fork exists.
 2. **Code at `src/modshop/`** at the repository root; `games/kotor/` keeps documentation, data and evidence ([Package layout](#package-layout)).
 3. **The recipe stays Python**, with its canonical JSON committed beside it as a generated, checked file ([Recipe](#the-recipe)).
 4. **typer and pydantic** as the application's own dependencies, plus what the scripts already need ([Libraries](#libraries)).

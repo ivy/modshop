@@ -2,7 +2,7 @@
 
 Fixes to two other projects, kept as `git format-patch` series over the upstream commit each was written against, per [`../../../docs/conventions.md`](../../../docs/conventions.md). Each patch carries the project's own license. `git am *.patch` applies a series to a fresh clone of the project.
 
-## `pykotor/`: OpenKotOR/PyKotor, base `ca61ce8d5` (master), branch `tslpatcher-and-2da-fixes`
+## `pykotor/`: OpenKotOR/PyKotor, base `ca61ce8d5` (master), branch `modshop-patches` on the fork [ivy/PyKotor](https://github.com/ivy/PyKotor)
 
 The library behind HoloPatcher, the Linux TSLPatcher. Six defects the Full Build hits, all still on upstream master at the base commit:
 
@@ -13,7 +13,7 @@ The library behind HoloPatcher, the Linux TSLPatcher. Six defects the Full Build
 5. `resource/formats/ncs/compiler/lexer.py`: the operator tables typed a mixed int-and-float `+ - * /` as the left operand's type, where the engine's mixed instructions yield a float; `FloatToInt(nInt * fFloat)` was refused as a type mismatch and three of Alignment Affects Force Powers' scripts did not compile.
 6. `extract/capsule.py`, `Capsule.add`: the new resource was set first and every existing resource copied over it afterwards, so a `Replace#=` into a `.mod` or `.rim` that already held the resource wrote the old bytes back while the log said it was replacing the file. Hundreds of module fixes per build (most of the Community Patch's) had silently done nothing; the Twisted Rancor Trio holograms, whose use scripts the Movie-Style Holograms mod replaces, were the symptom that exposed it.
 
-`build/setup-venv.sh` applies the series to the installed pykotor 2.3.12 with `patch --strip 4` (the paths are `Libraries/PyKotor/src/pykotor/...`).
+The fork's branch is the series applied: its head is the base plus these six commits, and the series is regenerated from it with `git format-patch ca61ce8d5` when the branch moves. `build/setup-venv.sh` applies the series to the installed pykotor 2.3.12 with `patch --strip 4` (the paths are `Libraries/PyKotor/src/pykotor/...`).
 
 ## `kmrp/`: RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch, base `6d93283` (master), branch `linux-build`
 
