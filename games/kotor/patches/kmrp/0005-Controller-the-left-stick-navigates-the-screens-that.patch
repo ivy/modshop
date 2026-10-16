@@ -1,0 +1,137 @@
+From b029554e34cb6338c96d6e1c9d2e6ab1a78d61e6 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Fri, 16 Oct 2026 01:06:24 -0700
+Subject: [PATCH 5/5] Controller: the left stick navigates the screens that
+ navigate themselves
+
+In character generation the D-pad moved the selection and the left
+stick did nothing. On a screen the engine navigates itself, the D-pad
+sends the retained direction codes and the focus layer stands down
+("the engine routes it itself"); the stick only ever reached the focus
+layer, so its press was dropped there.
+
+Extend the dialogue fold to the GUI class, all four directions: the
+stick's latched direction is folded into the button word before the
+D-pad loop, so it takes the D-pad's path exactly, the engine's codes
+where the engine owns the axis and the focus layer where KMRP does,
+with the same press, release and hold-repeat. A folded direction is not
+the D-pad to the gameplay HUD: character generation has no HUD to
+consume the request, which would otherwise wait and move the action bar
+on the first gameplay frame.
+---
+ CHANGELOG.md                               | 14 ++++++++
+ docs/controller-behaviour-matrix.md        |  2 +-
+ src/controller-native/K1NativeJoystick.cpp | 41 ++++++++++++++--------
+ 3 files changed, 42 insertions(+), 15 deletions(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 6cb4d8c..216100e 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -117,6 +117,20 @@ proxy, and it applies the executable changes above as well.
+ 
+ ## [Unreleased]
+ 
++- **Controller: the left stick navigates the screens that navigate themselves** (2026-10-16;
++  `src/controller-native/K1NativeJoystick.cpp`, `FillNativeJoystickBufferK1`;
++  `docs/controller-behaviour-matrix.md`, the left stick's row). Reported from play on a
++  pad-only device: in character generation the D-pad moved the selection and the stick did
++  nothing. On a screen the engine navigates itself the D-pad sends the retained direction
++  codes and the focus layer stands down ("the engine routes it itself"); the stick only ever
++  reached the focus layer, so it was dropped there. The dialogue fold now covers the GUI
++  class too, all four directions: the stick's latched direction becomes the D-pad's, with its
++  per-axis choice between the engine's codes and the focus layer, its press, release and
++  hold-repeat. A folded direction is not the D-pad to the gameplay HUD, so a stick push in
++  character generation, where no HUD consumes the request, cannot move the action bar on the
++  first gameplay frame. **Built on Linux and played: the stick moves through every character
++  generation screen as the D-pad does, and the other menus and conversations are as before.**
++
+ - **Controller: the swoop race and the Ebon Hawk's turret take the pad** (2026-10-15;
+   `src/controller-native/K1NativeJoystick.cpp`, `NativeMiniGameInputK1`;
+   `src/controller-native/kotor1.hooks.toml`, `0x00670FB0`; `docs/controller-native-path.md`,
+diff --git a/docs/controller-behaviour-matrix.md b/docs/controller-behaviour-matrix.md
+index 6997b16..372055b 100644
+--- a/docs/controller-behaviour-matrix.md
++++ b/docs/controller-behaviour-matrix.md
+@@ -308,7 +308,7 @@ What holds everywhere, which is what a prompt can safely claim:
+ | **LT / RT** | **previous / next tab**, in the in-game menu only | no effect anywhere else, including the main menu and gameplay |
+ | **LB / RB** | **scroll the focused list** | only meaningful on the 17–19 panels with a list; silent elsewhere |
+ | **D-pad** | **move focus** | on the six native-direction screens the engine moves its own selection instead |
+-| **Left stick** | **move** in gameplay, **move focus** in a GUI, **the D-pad's Up/Down in a conversation** | never more than one: gated on input class. In the dialogue class the stick's latched direction is folded into the button word before the D-pad loop, so it sends the same direction codes with the same press, release and hold-repeat; `CSWGuiDialog` keeps the reply index itself and the focus layer has nothing to move there. Played on a ROG Ally X under Proton, 2026-10-15. |
++| **Left stick** | **move** in gameplay, **the D-pad** in a GUI and **the D-pad's Up/Down in a conversation** | never more than one: gated on input class. In the GUI and dialogue classes the stick's latched direction is folded into the button word before the D-pad loop, so it takes the D-pad's path exactly: the same direction codes where the engine navigates the screen itself (`CSWGuiDialog`'s replies, the character generation panels, a list that owns its direction keys), where the focus layer stands down, and the same focus moves where KMRP navigates. Played on a ROG Ally X under Proton: conversations 2026-10-15, character generation 2026-10-16. |
+ | **Start** | **open the in-game menu**, from gameplay only | does **not** close it — B does |
+ | **Back** | nothing | `JOURNAL` alone implements it |
+ | **X** | **per-screen**, no consistent meaning | Inventory filter, Journal sort, Map transit, Character sheet, Save/Load delete |
+diff --git a/src/controller-native/K1NativeJoystick.cpp b/src/controller-native/K1NativeJoystick.cpp
+index 2c29cf5..0bce33b 100644
+--- a/src/controller-native/K1NativeJoystick.cpp
++++ b/src/controller-native/K1NativeJoystick.cpp
+@@ -1469,21 +1469,32 @@ void FillNativeJoystickBufferK1(int deviceIndex, void* outBuffer)
+     const bool kmrpVertical = KmrpOwnsDirectionsK1(true);
+     const bool kmrpHorizontal = KmrpOwnsDirectionsK1(false);
+ 
+-    // In a conversation the left stick is the D-pad. CSWGuiDialog keeps the
+-    // reply index itself and answers only its own previous/next events (0x31,
+-    // 0x32), which reach it as the direction codes below, so the focus layer the
+-    // stick otherwise drives has nothing to move there. The stick's latched
+-    // direction (hysteresis and all) is folded into the button word before the
+-    // D-pad loop, so it gets the same press, release and hold-repeat as the pad,
+-    // and lastButtons remembers it the same way. The real D-pad wins while held.
++    // In a conversation and in the menus the left stick is the D-pad. A screen
++    // the engine navigates itself -- CSWGuiDialog's replies, the character
++    // generation panels, any list that owns its direction keys -- answers only
++    // the direction codes below, and the focus layer the stick otherwise drives
++    // stands down there by design (NavigateFocusK1: "the engine routes it
++    // itself"), so the stick did nothing while the D-pad worked. The stick's
++    // latched direction (hysteresis and all) is folded into the button word
++    // before the D-pad loop, so it gets the same press, release and hold-repeat
++    // as the pad, the same per-axis choice between the engine's codes and the
++    // focus layer (KmrpOwnsDirectionsK1), and lastButtons remembers it the same
++    // way. The real D-pad wins while held. A conversation answers up and down
++    // only.
+     const std::uint16_t padButtons = buttons;
+-    if (InputClassK1() == K1_CLASS_DIALOG &&
+-        (buttons & (K1_DPAD[0].xinputMask | K1_DPAD[1].xinputMask)) == 0) {
++    const std::uint16_t dpadMask = K1_DPAD[0].xinputMask | K1_DPAD[1].xinputMask |
++                                   K1_DPAD[2].xinputMask | K1_DPAD[3].xinputMask;
++    const int foldClass = InputClassK1();
++    if ((foldClass == K1_CLASS_DIALOG || foldClass == K1_CLASS_PCGUI) && (buttons & dpadMask) == 0) {
+         UpdateStickNavigationK1(nx, ny);
+         if (g_stick.stickNavY < 0) {
+-            buttons |= K1_DPAD[0].xinputMask;      // Up: previous reply
++            buttons |= K1_DPAD[0].xinputMask;      // Up
+         } else if (g_stick.stickNavY > 0) {
+-            buttons |= K1_DPAD[1].xinputMask;      // Down: next reply
++            buttons |= K1_DPAD[1].xinputMask;      // Down
++        } else if (foldClass == K1_CLASS_PCGUI && g_stick.stickNavX < 0) {
++            buttons |= K1_DPAD[2].xinputMask;      // Left
++        } else if (foldClass == K1_CLASS_PCGUI && g_stick.stickNavX > 0) {
++            buttons |= K1_DPAD[3].xinputMask;      // Right
+         }
+     }
+ 
+@@ -1571,7 +1582,10 @@ void FillNativeJoystickBufferK1(int deviceIndex, void* outBuffer)
+             if ((buttons & mask) != 0) {
+                 dx = dirs[d][0];
+                 dy = dirs[d][1];
+-                fromDpad = true;
++                // A folded stick direction is not the D-pad to the gameplay HUD:
++                // character generation has no HUD to consume the request, so it
++                // would wait and move the action bar on the first gameplay frame.
++                fromDpad = (padButtons & mask) != 0;
+                 if ((g_stick.lastButtons & mask) == 0) {
+                     edge = true;
+                 }
+@@ -1588,8 +1602,7 @@ void FillNativeJoystickBufferK1(int deviceIndex, void* outBuffer)
+                     edge = true;
+                 }
+             }
+-        } else if ((padButtons & (K1_DPAD[0].xinputMask | K1_DPAD[1].xinputMask |
+-                                  K1_DPAD[2].xinputMask | K1_DPAD[3].xinputMask)) != 0) {
++        } else if ((padButtons & dpadMask) != 0) {
+             g_stick.stickNavX = 0;             // the real D-pad asked; not the fold above
+             g_stick.stickNavY = 0;
+         }
+-- 
+2.56.0
+
