@@ -1,0 +1,405 @@
+From 1769fd956bf5bf0d6d3bc44b95a175945bf31871 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 23:48:22 -0700
+Subject: [PATCH 4/4] Controller: drive the swoop race and the turret from the
+ pad
+
+The swoop and the Ebon Hawk's turret did not respond to the pad at all.
+ProcessInput (0x00623F48) builds their control vector from the keyboard's
+class-1 axis events alone, (0x11E + 0x11B, 0, 0) for the swoop and
+(0x11E + 0x11B, 0, 0x11D + 0x11A) for the turret, and passes it to
+CSWMiniGame's input step at 0x00670FB0; fire is events 0xD9 (Space) and
+0x19 (the left mouse button), which the action router sends to the
+player's fire at 0x0066DC50. Every one of those ids already holds a
+keyboard or mouse description, one per id, so none can be bound to the
+pad, and the module's own axes, though added to class 1, are polled by
+nothing there.
+
+Hook the input step instead. The left stick fills an axis the keyboard
+leaves at zero, and fire follows the Xbox manual: A in the swoop (the
+thrusters, then each gear shift), either trigger on the turret, edge-
+triggered as a key press is and behind the router's own guard. The
+keyboard and the mouse are unchanged.
+
+Read from the executable decrypted in memory. Played in a swoop race:
+the stick steers the way it is pushed and A starts and shifts. The
+turret has not been played.
+---
+ CHANGELOG.md                               |  15 +++
+ docs/controller-behaviour-matrix.md        |  34 +++---
+ docs/controller-native-path.md             |  26 +++-
+ docs/controller-playtest-checklist.md      |   4 +-
+ docs/controller-standalone.md              |   1 +
+ src/controller-native/K1NativeJoystick.cpp | 135 ++++++++++++++++++++-
+ src/controller-native/exports.def          |   1 +
+ src/controller-native/kotor1.hooks.toml    |  23 ++++
+ 8 files changed, 218 insertions(+), 21 deletions(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index eddc58e..6cb4d8c 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -117,6 +117,21 @@ proxy, and it applies the executable changes above as well.
+ 
+ ## [Unreleased]
+ 
++- **Controller: the swoop race and the Ebon Hawk's turret take the pad** (2026-10-15;
++  `src/controller-native/K1NativeJoystick.cpp`, `NativeMiniGameInputK1`;
++  `src/controller-native/kotor1.hooks.toml`, `0x00670FB0`; `docs/controller-native-path.md`,
++  "Input classes"). Reported from play on a pad-only device: swoop racing did not respond to
++  the pad at all. `ProcessInput` builds the minigames' control vector from the keyboard's
++  class-1 axis events alone (`0x11A`, `0x11B`, `0x11D`, `0x11E`), and fire is `0xD9` (Space)
++  and `0x19` (the left mouse button); every one of those ids holds another device's
++  description, so none can be bound, and the module's own axes reach class 1 with nothing
++  there to poll them. A hook on `CSWMiniGame`'s input step now gives the left stick to an
++  axis the keyboard leaves at zero, and fires as the Xbox manual has it: A in the swoop (the
++  thrusters, then each gear shift), either trigger on the turret. The keyboard and the mouse
++  are unchanged. **Built on Linux and played in a swoop race: the stick steers the way it is
++  pushed, and A starts the thrusters and shifts.** The turret, and the keyboard steering while
++  the pad is connected, have not been played yet.
++
+ - **Controller: the left stick walks a conversation's replies** (2026-10-15;
+   `src/controller-native/K1NativeJoystick.cpp`, `FillNativeJoystickBufferK1`;
+   `docs/controller-behaviour-matrix.md`, the Dialogue row and the left stick's). Reported from
+diff --git a/docs/controller-behaviour-matrix.md b/docs/controller-behaviour-matrix.md
+index d015752..6997b16 100644
+--- a/docs/controller-behaviour-matrix.md
++++ b/docs/controller-behaviour-matrix.md
+@@ -115,7 +115,7 @@ what the current build does.
+ | 2026-09-25 | **X disengages and Y removes the last queued action, in combat.** They press the HUD's own `BTN_CLEARALL` and `BTN_CLEARONE` through the engine's click handlers, only while that button is on screen, and a badge beside each shows only then. Outside combat the two gameplay cells are still "—". Their GUI events still go out. **Untested in game** | `PressHudButtonK1`, `NativeActionBarK1`; see `reverse-engineering/custom-gui-controls.md` |
+ | 2026-09-25 | **The status summary ignores the D-pad.** Focusing its OK made A recurse between the box and OK until the stack overflowed (`0xC00000FD`); A closes the box without focus. See [`../reverse-engineering/custom-gui-controls.md`](../reverse-engineering/custom-gui-controls.md) | `K1_NO_PAD_FOCUS_PANELS` |
+ | 2026-09-26 | **The Character screen ignores the D-pad; A levels up and Y auto-levels.** With Level Up focused, one A opened the level-up screen twice and froze the game: the screen answers A and Y itself and then passes them to the focused button, whose click raises them again. Every action there has its own button, so the pad moves no focus. The granted-feats notice is covered the same way. **Seen in game** 2026-09-26: A opened one level-up; four level-ups on the pad followed on 2026-09-28 | `K1_NO_PAD_FOCUS_PANELS` |
+-| -- | **Minigames and movies.** Class 1 (Pazaak, swoop, turret) has B, Y, LT and RT, the four events its dispatchers implement; none observed in a minigame. A movie the game allows to be skipped is skipped with A or Start, from inside the movie loop. Sections 7 and 8 below still say classes 1 and 5 are unbound | `miniGameEvents`, `K1_MOVIE_SKIP_MASK`, `NativeMovieFrameK1`; [`controller-native-path.md`](controller-native-path.md), "Input classes" and "Movies" |
++| -- | **Minigames and movies.** Class 1 (Pazaak, swoop, turret) has B, Y, LT and RT, the four events Pazaak's dispatchers implement; none observed in a minigame. The swoop and the turret take no event and are driven by `NativeMiniGameInputK1`: left stick, A in the swoop, the triggers on the turret. A movie the game allows to be skipped is skipped with A or Start, from inside the movie loop. Sections 7 and 8 below still say classes 1 and 5 are unbound | `miniGameEvents`, `K1_MOVIE_SKIP_MASK`, `NativeMovieFrameK1`; [`controller-native-path.md`](controller-native-path.md), "Input classes" and "Movies" |
+ | 2026-09-28 | **A with a button focused presses that button once, on every screen.** 62 buttons on 39 panels do nothing but press A, B, X or Y on their own panel; with one focused, A made the panel act and then the button press again (a loop, or A plus Cancel). Now A presses the focused button alone, as a click does, and a panel never hands an event to a control that would press it back. **Seen in game** 2026-09-28 on Gameplay, in-game Options and level-up Skills; see [`../reverse-engineering/retained-xbox-gui-events.md`](../reverse-engineering/retained-xbox-gui-events.md) | `PressFocusedRaiseButtonK1`, `GuardPanelEchoK1` (hook `0x00409E60`) |
+ | 2026-10-05 | **The Xbox-style HUD, an option, off by default until 2026-10-08 and on since.** While it is on and the pad is in use, the HUD's row is six places with the first standing for "no slot": A there does the default action, the D-pad walks the row as drawn, B returns to the first place and from there disengages, as X does. With the mouse or keyboard the game's own HUD is back | `K1XboxHud.cpp`, `MoveFocus`; [`controller-xbox-hud.md`](controller-xbox-hud.md) |
+ | 2026-10-05 | **All of this is the controller patch's behaviour**, `KOTOR 1 Native Controller Mod + Xbox HUD.kpatch`, on the game's own interface, a widescreen patch's or KMRP's. KMRP's own patch installs no controller hook since that day | `tools/build_controller_kpatch.py`; [`controller-standalone.md`](controller-standalone.md) |
+@@ -467,14 +467,16 @@ D-pad binding calls `addEvent(..., K1_CLASS_PCGUI)` and
+ | Class | Name | Where | Buttons work? |
+ | --- | --- | --- | --- |
+ | 0 | `ICPC` | gameplay | **yes** |
+-| 1 | `ICMiniGame` | Pazaak, swoop | **no** — untested, predicted |
++| 1 | `ICMiniGame` | Pazaak, swoop, turret | Pazaak untested; the swoop and the turret by hook, not by event |
+ | 2 | `ICPCGUI` | menus | **yes** |
+ | 3 | `ICDialog` | conversations | **yes, for five events** — see section 8 |
+ | 4 | `ICFreeLook` | free look | **no — measured**, except Start and R3's own exit event `0x06`, registered in class 4 on purpose |
+ | 5 | `ICMovie` | cutscenes | **no** — untested, predicted |
+ 
+-Classes 1 and 5 are marked predicted, not measured. They follow from the same
+-registration and should be confirmed before being relied on.
++Classes 1 and 5 are marked predicted, not measured, and should be confirmed
++before being relied on. In class 1 only Pazaak follows from registration; the
++swoop and the turret are driven by `NativeMiniGameInputK1` (section "Classes 1
++and 5").
+ 
+ ## Dialogue — superseded
+ 
+@@ -703,17 +705,19 @@ facing away, so a targetless state could not be produced. **Needs human QA.**
+ default click. It remains a mapping decision — the bridge is one call and moving
+ it is one edit.
+ 
+-## Classes 1 and 5 — audited, deliberately not bound
+-
+-**ICMiniGame (1).** `CSWMiniPlayer::Fire` is reached from the handler for events
+-`0x0C`/`0x19`, and **`0x0C` already carries the game's own joystick
+-description** — type 3, device 2, slot `0x71` = `DIJOFS_SLIDER(0)`. The same
+-shape as Start: a control code the module would only have to emit. Steering does
+-not come from an input event at all; `CSWMiniPlayer::Control` is called from
+-`CSWMiniGame::Control`, and the movement axes are already registered in all six
+-classes. **Not bound**: a minigame was not reachable from this save, and the
+-description is an analog type whose value semantics for a fire action are
+-unverified. **S**
++## Classes 1 and 5 — audited
++
++**ICMiniGame (1).** The minigame player's fire (`0x0066DC50`) is reached from
++the action router (`0x00621210`) for events `0x19` and `0xD9` only; `0x0C`
++falls to its default case. `0x19` is the left mouse button (device 1, slot 0)
++and `0xD9` is `keymap.2da`'s `MGshoot` (Space), both registered in class 1
++alone. Steering is the keyboard's class-1 axis events `0x11A`, `0x11B`, `0x11D`
++and `0x11E`, polled by `ProcessInput` and handed to `CSWMiniGame`'s input step
++(`0x00670FB0`); the module's own axes reach class 1 but nothing there polls
++them. Every one of those ids holds another device's description, so the swoop
++and the turret are driven by a hook on that input step,
++`NativeMiniGameInputK1`, rather than by registration. See
++[`controller-native-path.md`](controller-native-path.md), "Input classes". **S**
+ 
+ **ICMovie (5).** `CClientExoApp::CancelMovie` has exactly one caller,
+ `0x00402CF4`, inside the movie player's own loop — **no retained input event
+diff --git a/docs/controller-native-path.md b/docs/controller-native-path.md
+index ae2d742..9763a15 100644
+--- a/docs/controller-native-path.md
++++ b/docs/controller-native-path.md
+@@ -42,6 +42,7 @@ The first four:
+ | `NativeJoystickBufferK1` | `0x005E30F6` | replaces `GetJoystickBuffer`, emits records from XInput |
+ | `NativeJoystickMovementK1` | `0x00679940` | gameplay heartbeat only; writes nothing |
+ | `NativeJoystickSkipNormalizeK1` | `0x00679B71` | always reproduces vanilla; exists because the stolen bytes are a relative call |
++| `NativeMiniGameInputK1` | `0x00670FB0` | the swoop's and the turret's control vector and fire, which no event reaches -- see "Input classes" |
+ 
+ ## The mapping
+ 
+@@ -688,15 +689,32 @@ class was measured to implement it.
+ | class | what it is | bound |
+ | --- | --- | --- |
+ | 0 ICPC | gameplay | both sticks, all face buttons, D-pad, Start; the bumpers, Back and the triggers carry the gameplay verbs (`K1_GAMEPLAY_ACTIONS`) rather than their GUI events; A also bridges to the world action `0xEF` |
+-| 1 ICMiniGame | Pazaak, swoop, turret | both sticks, plus B / Y / LT / RT -- the four events the minigame dispatchers implement |
++| 1 ICMiniGame | Pazaak, swoop, turret | B / Y / LT / RT, the four events Pazaak's dispatchers implement; the swoop and the turret through `NativeMiniGameInputK1` |
+ | 2 ICPCGUI | menus | both sticks, all face buttons, bumpers, triggers, D-pad, Start |
+ | 3 ICDialog | conversation | A, D-pad up/down, LB, RB -- the five events the dialogue dispatchers implement |
+ | 4 ICFreeLook | free look | the right stick, and LB to leave (`0x06` on its slot); R3's press here is bridged to the same exit |
+ | 5 ICMovie | pre-rendered movies | **nothing, and nothing can be** -- see below |
+ 
+-The axes are registered in all six classes; only the buttons are selective.
+-
+-**ICMiniGame is registration on evidence, not on a pressed button.** From the
++The module's own axes (`0x3B`/`0x3C`) are registered in all six classes; only
++the buttons are selective. Registration is not delivery, though: no class-1
++code polls those axes.
++
++**The swoop and the turret take nothing from an event.** `ProcessInput`
++(`0x00623F48`) builds their control vector from the keyboard's class-1 axis
++events alone -- `(0x11E + 0x11B, 0, 0)` for the swoop, `(0x11E + 0x11B, 0,
++0x11D + 0x11A)` for the turret, each clamped to +/-1 -- and passes it to
++`CSWMiniGame`'s input step at `0x00670FB0`. Fire is events `0xD9` (Space) and
++`0x19` (the left mouse button), routed to `CSWMiniPlayer`'s fire at
++`0x0066DC50`. All six ids hold keyboard or mouse descriptions, a description is
++one per event id, and the engine's own joystick axes (`0x07`/`0x08`) are added
++to classes 0 and 4 only, so none of this can be bound. `NativeMiniGameInputK1`
++hooks the input step instead: the left stick fills an axis the keyboard leaves
++at zero, A fires in the swoop (thrusters, then each gear shift) and either
++trigger fires on the turret, as the Xbox manual gives them. Read from the
++executable decrypted in memory. Played in a swoop race, steering and A; the
++turret's aim and fire have not been played.
++
++**Pazaak's buttons are registration on evidence, not on a pressed button.** From the
+ retained inventory, `PAZAAK_SETUP` (`0x006816F0`) implements `0x28`/`0x2E`,
+ `0x2A`, `0x35` and `0x36`, and `PAZAAK_GAME` (`0x0067E8F0`) implements
+ `0x28`/`0x2E`. Neither implements `0x27`, so A is deliberately left out rather
+diff --git a/docs/controller-playtest-checklist.md b/docs/controller-playtest-checklist.md
+index 0bc3862..e489530 100644
+--- a/docs/controller-playtest-checklist.md
++++ b/docs/controller-playtest-checklist.md
+@@ -166,7 +166,9 @@ Do not spend time diagnosing these; they are measured and understood.
+ | [ ] | Dialogue | B, X, Y, Back, LT, RT, Start | **nothing** — no handler in the dialogue dispatcher |
+ | [ ] | Dialogue | right stick | camera still moves |
+ | [ ] | Free look | A, B, D-pad | nothing; only Start works (the game's own event), R3 or LB exits |
+-| [ ] | Pazaak / swoop | buttons | only B, Y, LT and RT are registered in class 1, the four events the minigame dispatchers implement; A is not. **Never observed**, please note what responds |
++| [ ] | Pazaak | buttons | only B, Y, LT and RT are registered in class 1, the four events Pazaak's dispatchers implement; A is not. **Never observed**, please note what responds |
++| [ ] | Swoop race | left stick, A | the stick steers the way it is pushed, proportionally; A starts the thrusters, and again shifts each time the speed indicator tops out; A/D and the arrows still steer |
++| [ ] | Ebon Hawk turret | left stick, LT, RT | the stick moves the reticle the way it is pushed; either trigger fires one shot per pull; the mouse still aims and fires |
+ | [ ] | Cutscenes | buttons | A or Start skips a movie the game allows to be skipped; nothing else does anything (class 5 has no retained event) |
+ 
+ ---
+diff --git a/docs/controller-standalone.md b/docs/controller-standalone.md
+index 2db663e..4aec09b 100644
+--- a/docs/controller-standalone.md
++++ b/docs/controller-standalone.md
+@@ -161,6 +161,7 @@ executables: equal at every site.
+ | `0x0063C4F0` | `51 8B 49 68 85 C9` | `NativeParryK1` |
+ | `0x00646BA0` | `A1 FC 39 7A 00 56` | `NativeSaberPowerK1` |
+ | `0x00679940` | `D9 05 64 D7 73 00` | `NativeJoystickMovementK1` |
++| `0x00670FB0` | `8B 81 80 00 00 00` | `NativeMiniGameInputK1` |
+ | `0x00679B71` | `E8 BA 15 E3 FF` | `NativeJoystickSkipNormalizeK1` |
+ | `0x00686BA0` | `53 56 57 8B F1` | `NativeActionBarK1` |
+ | `0x0068B170` | `6A FF 68 B0 F7 72 00` | `ClearActionBarControlsK1` |
+diff --git a/src/controller-native/K1NativeJoystick.cpp b/src/controller-native/K1NativeJoystick.cpp
+index 020bcee..2c29cf5 100644
+--- a/src/controller-native/K1NativeJoystick.cpp
++++ b/src/controller-native/K1NativeJoystick.cpp
+@@ -1222,7 +1222,9 @@ void EnsureNativeJoystickK1(void* exoInputInternal)
+     //
+     // so B, Y and the two bumpers have somewhere to go and A does not: neither
+     // minigame dispatcher implements 0x27, and adding it would send a press into
+-    // a default case. The analog axes are already registered in all six classes.
++    // a default case. These are Pazaak's. The swoop and the turret take no
++    // event the pad can reach -- not even the axes above, which no class-1 code
++    // polls -- and are driven from NativeMiniGameInputK1 instead.
+     //
+     // NOT VERIFIED IN PLAY. Pazaak, swoop and the turret cannot be reached from
+     // the save the harness loads, so this is registration on measured evidence
+@@ -6055,6 +6057,137 @@ extern "C" int __cdecl NativeJoystickSkipNormalizeK1(void* vector)
+     return 1;
+ }
+ 
++// ------------------------------------------------------------- the minigames
++//
++// The swoop race and the Ebon Hawk's turret take nothing from an input event the
++// pad can reach. ProcessInput (0x00623F48) reads the minigame at
++// module+0x264 and, per frame, builds its control vector from the keyboard's
++// class-1 axis events alone:
++//
++//   swoop  (type 1)  ( clamp(0x11E + 0x11B), 0, 0 )                 0x00624404
++//   turret (type 2)  ( clamp(0x11E + 0x11B), 0, clamp(0x11D + 0x11A) ) 0x006241DD
++//
++// and hands it to CSWMiniGame's input step at 0x00670FB0. Those four ids hold
++// keyboard descriptions, and a description is one per event id, so the stick
++// cannot be bound to them; and the engine's own joystick axes (0x07/0x08) are
++// added to classes 0 and 4 only. Fire -- the swoop's thrusters and gear shift,
++// the turret's cannons -- is events 0xD9 (Space) and 0x19 (the left mouse
++// button), which reach CSWMiniPlayer's fire at 0x0066DC50 through the action
++// router (0x00621CCE); both ids are likewise taken by their own devices.
++//
++// So the pad is given to the minigame here, at the one call both paths share,
++// with the Xbox controls from the console manual: in the swoop the left stick
++// steers and A starts the thrusters and shifts; on the turret the left stick
++// aims and either trigger fires. The keyboard keeps precedence on an axis it
++// is driving, and the mouse's own path (0x17/0x18 after this call) is
++// untouched.
++constexpr int K1_MINIGAME_SWOOP  = 1;
++constexpr int K1_MINIGAME_TURRET = 2;
++constexpr std::size_t K1_MINIGAME_TYPE   = 0x80;
++constexpr std::size_t K1_MINIGAME_PLAYER = 0x24;
++constexpr std::uintptr_t K1_MINI_PLAYER_FIRE = 0x0066DC50;   // __thiscall, the player
++// The guard the action router applies before firing (0x00621CA0).
++constexpr std::uintptr_t K1_FIRE_BLOCKED = 0x005F2DF0;
++
++// The stick's sign against the keyboard pair's, which keymap.2da's axis rows
++// decide rather than anything in the code. The steering sign was confirmed in a
++// swoop race; the turret's pitch sign has not been played, and the debug log
++// prints the keyboard's value beside the stick's to settle it.
++constexpr float K1_MINIGAME_STEER_SIGN = 1.0f;
++constexpr float K1_MINIGAME_PITCH_SIGN = 1.0f;
++
++using MiniPlayerFireFn  = void(__thiscall*)(void*);
++using FireBlockedFn     = int(__cdecl*)();
++
++// The left stick through the movement deadzone, rescaled so the first motion
++// past it starts from zero. Read from the raw XInput position the buffer
++// filler stored this frame, because the engine-side poll ReadNativeStickK1
++// uses is a class-0 read and the minigames run in class 1.
++void MiniGameStickK1(float& x, float& y)
++{
++    x = 0.0f;
++    y = 0.0f;
++    const float nx = static_cast<float>(g_stick.lastRawX) / K1_AXIS_FULL_SCALE;
++    const float ny = static_cast<float>(g_stick.lastRawY) / K1_AXIS_FULL_SCALE;
++    const float magnitude = std::sqrt(nx * nx + ny * ny);
++    if (magnitude <= K1_STICK_DEADZONE) {
++        return;
++    }
++    float scaled = (magnitude - K1_STICK_DEADZONE) / (1.0f - K1_STICK_DEADZONE);
++    if (scaled > 1.0f) {
++        scaled = 1.0f;
++    }
++    x = nx / magnitude * scaled;
++    y = ny / magnitude * scaled;
++}
++
++// CSWMiniGame's input step entry, ecx = the minigame; vectorArg is the stack
++// slot [esp+4], which holds the address of its control vector. Runs the
++// original afterwards.
++extern "C" void __cdecl NativeMiniGameInputK1(void* miniGame, float** vectorArg)
++{
++    static bool fireWas = false;
++    if (!miniGame || !IsReadableK1(vectorArg, sizeof(float*)) || !g_stick.registered) {
++        return;
++    }
++    float* const vector = *vectorArg;
++    if (!IsReadableK1(vector, 3 * sizeof(float)) ||
++        !IsReadableK1(FieldAt<int>(miniGame, K1_MINIGAME_TYPE), sizeof(int))) {
++        return;
++    }
++    const int type = *FieldAt<int>(miniGame, K1_MINIGAME_TYPE);
++    if (type != K1_MINIGAME_SWOOP && type != K1_MINIGAME_TURRET) {
++        return;
++    }
++
++    float stickX = 0.0f;
++    float stickY = 0.0f;
++    MiniGameStickK1(stickX, stickY);
++    const float keyboardX = vector[0];
++    const float keyboardZ = vector[2];
++    if (keyboardX == 0.0f) {
++        vector[0] = stickX * K1_MINIGAME_STEER_SIGN;
++    }
++    if (type == K1_MINIGAME_TURRET && keyboardZ == 0.0f) {
++        vector[2] = stickY * K1_MINIGAME_PITCH_SIGN;
++    }
++
++    // Edge-triggered, as a key press is: one shift per press of A, one shot
++    // per pull of a trigger.
++    const bool fireNow = type == K1_MINIGAME_SWOOP
++        ? (g_stick.lastButtons & 0x1000) != 0          // XINPUT_GAMEPAD_A
++        : (g_stick.lastTriggers & 0x3) != 0;           // LT or RT past threshold
++    const bool pressed = fireNow && !fireWas;
++    fireWas = fireNow;
++    bool fired = false;
++    if (pressed && EngineFn<FireBlockedFn>(K1_FIRE_BLOCKED)() == 0) {
++        void* const player = *FieldAt<void*>(miniGame, K1_MINIGAME_PLAYER);
++        if (LooksLikePointerK1(player)) {
++            EngineFn<MiniPlayerFireFn>(K1_MINI_PLAYER_FIRE)(player);
++            fired = true;
++        }
++    }
++
++    if (KmrpDebugLevel() >= 2) {
++        static int lastKx = 0, lastKz = 0, lastSx = 0, lastSy = 0;
++        const int kx = static_cast<int>(keyboardX * 1000.0f);
++        const int kz = static_cast<int>(keyboardZ * 1000.0f);
++        const int sx = static_cast<int>(stickX * 1000.0f);
++        const int sy = static_cast<int>(stickY * 1000.0f);
++        if (pressed || kx != lastKx || kz != lastKz ||
++            sx - lastSx > 50 || lastSx - sx > 50 || sy - lastSy > 50 || lastSy - sy > 50) {
++            lastKx = kx;
++            lastKz = kz;
++            lastSx = sx;
++            lastSy = sy;
++            char line[128];
++            wsprintfA(line, "minigame type %d key x=%d z=%d stick x=%d y=%d%s", type, kx, kz, sx, sy,
++                      pressed ? (fired ? " fire" : " fire-blocked") : "");
++            ControllerLogK1(line);
++        }
++    }
++}
++
+ // Diagnostic dump. Written from the movement hook a few times a second, so a
+ // run can be inspected afterwards without holding the game in a debugger while
+ // trying to reproduce a feel problem.
+diff --git a/src/controller-native/exports.def b/src/controller-native/exports.def
+index 4f35af6..eb9eb59 100644
+--- a/src/controller-native/exports.def
++++ b/src/controller-native/exports.def
+@@ -27,6 +27,7 @@ EXPORTS
+     NativeJoystickBufferK1
+     NativeJoystickMovementK1
+     NativeJoystickSkipNormalizeK1
++    NativeMiniGameInputK1
+     NativeGuiFrameK1
+     NativeCameraFrameK1
+     NativeMovieFrameK1
+diff --git a/src/controller-native/kotor1.hooks.toml b/src/controller-native/kotor1.hooks.toml
+index 2ba90b0..78026eb 100644
+--- a/src/controller-native/kotor1.hooks.toml
++++ b/src/controller-native/kotor1.hooks.toml
+@@ -567,6 +567,29 @@ exclude_from_restore = ["eax"]
+ source = "ecx"
+ type = "pointer"
+ 
++# CSWMiniGame's per-frame input step, called by ProcessInput for the swoop
++# (0x00624404) and the turret (0x006241DD) with the vector it built from the
++# keyboard's class-1 axes. The handler adds the left stick where the keyboard is
++# idle and performs the fire the pad cannot reach as an event: A in the swoop,
++# either trigger on the turret, as on Xbox. The original runs afterwards.
++#
++# The stolen bytes are mov eax, [ecx+0x80] -- six bytes, position-independent.
++[[hooks]]
++address = 0x00670FB0
++type = "detour"
++function = "NativeMiniGameInputK1"
++original_bytes = [0x8B, 0x81, 0x80, 0x00, 0x00, 0x00]
++skip_original_bytes = false
++exclude_from_restore = []
++
++[[hooks.parameters]]
++source = "ecx"
++type = "pointer"
++
++[[hooks.parameters]]
++source = "esp+4"
++type = "pointer"
++
+ # The GUI's own per-frame update, where KMRP's focus navigation performs its
+ # moves. It has to be here rather than in the input hook: CSWGuiPanel::
+ # SetActiveControl changes focus, plays a sound and lets controls redraw, and
+-- 
+2.56.0
+

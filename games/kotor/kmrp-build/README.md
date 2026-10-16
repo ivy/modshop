@@ -1,10 +1,10 @@
 # Building KMRP's controller module on Linux
 
-KMRP is built with MSVC on Windows by its maintainer, and its docs name nothing else. Its standalone controller module, `patches/kmrp-controller.dll` in the game folder, builds on Linux with the three commits in [`../patches/kmrp/`](../patches/kmrp/README.md). This page is the procedure, the parts that are not upstream, and what goes wrong if a step is skipped.
+KMRP is built with MSVC on Windows by its maintainer, and its docs name nothing else. Its standalone controller module, `patches/kmrp-controller.dll` in the game folder, builds on Linux with the first three commits in [`../patches/kmrp/`](../patches/kmrp/README.md). This page is the procedure, the parts that are not upstream, and what goes wrong if a step is skipped.
 
 ## What is needed
 
-- **The clone**: `git clone https://github.com/RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch` under `~/src/github.com/RayesDiyab/`, then `git am ../patches/kmrp/*.patch` on a branch over master `6d93283`. The project's own `AGENTS.md` forbids committing or pushing there without the maintainer's permission; local branches are fine, nothing is pushed.
+- **The clone**: `git clone https://github.com/RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch` under `~/src/github.com/RayesDiyab/`, then `git am ../patches/kmrp/*.patch` on a branch over master `3adb77c`. The project's own `AGENTS.md` forbids committing or pushing there without the maintainer's permission; local branches are fine, nothing is pushed.
 - **The compiler**: the container image `docker.io/mstorsjo/llvm-mingw:latest` (clang, lld, llvm-rc). It has no `clang-cl` link; the script runs `clang --driver-mode=cl`.
 - **Microsoft's CRT and Windows SDK for x86**: laid out by [xwin](https://github.com/Jake-Shadle/xwin) with `xwin --accept-license --arch x86 --cache-dir ~/.cache/xwin/cache splat --output ~/.cache/xwin/sdk` (about 800 MB; the `--include-debug-libs` flag takes no value).
 - **SDL3's headers**: the script fetches `SDL3-devel-3.4.16-VC.zip` into `build/deps/` in the clone when absent. The module loads SDL at run time (`kmrp-sdl3.dll`, a renamed `SDL3.dll` the installer already placed on the handheld), so nothing links against it.

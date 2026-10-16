@@ -15,12 +15,11 @@ The library behind HoloPatcher, the Linux TSLPatcher. Six defects the Full Build
 
 The fork's branch is the series applied: its head is the base plus these six commits, and the series is regenerated from it with `git format-patch ca61ce8d5` when the branch moves. `build/setup-venv.sh` applies the series to the installed pykotor 2.3.12 with `patch --strip 4` (the paths are `Libraries/PyKotor/src/pykotor/...`).
 
-## `kmrp/`: RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch, base `6d93283` (master), branch `linux-build`
+## `kmrp/`: RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch, base `3adb77c` (master), branch `linux-build`
 
 1. `tools/xpress_huff.py`: an XPRESS-with-Huffman encoder in the form the module's decoder reads, so the asset bank can be built where the Windows Compression API is not.
 2. `tools/build_native_assets.py`: fall back to that encoder when `ctypes.WinDLL` does not exist.
 3. `src/controller-native/build_controller_standalone_linux.sh`: the standalone controller module built with clang in MSVC mode (llvm-mingw image), Microsoft's CRT and SDK from xwin, SDL3's headers. [`../kmrp-build/README.md`](../kmrp-build/README.md) is the procedure.
-4. The stick's movement vector kept inside the unit circle: a thumbstick's corners are up to sqrt(2) long and the module skips the engine's normalize for the analog path, so a flick ran 41% faster and was reported to head the wrong way. Upstream as pull request 59.
-5. The left stick walks a conversation's replies as the D-pad does. Upstream as pull request 60.
+4. The swoop race and the Ebon Hawk's turret driven from the pad, with the Xbox controls: the left stick steers or aims, A starts the swoop's thrusters and shifts, either trigger fires the turret. The minigames read only keyboard and mouse events whose ids already hold those devices' descriptions, so the pad cannot be bound to them; a hook on the minigame's input step (`0x00670FB0`) feeds it instead. Played in a swoop race; the turret not yet. Upstream as pull request 62.
 
-The first three are what make the Linux build possible and are not intended for upstream as they stand; the last two are.
+The first three are what make the Linux build possible and are not intended for upstream as they stand; the last is. The series is regenerated from the branch with `git format-patch 3adb77c` when the branch moves.

@@ -1,7 +1,7 @@
-From 5a6f87e3153ad573b73472eccefb60e0702d54c4 Mon Sep 17 00:00:00 2001
+From 5f6a1a884bf13754553d0fa7053b39c92239022a Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Thu, 15 Oct 2026 00:40:54 -0700
-Subject: [PATCH 2/5] Tools: build the banks with the Python encoder where
+Subject: [PATCH 2/4] Tools: build the banks with the Python encoder where
  cabinet.dll is not there
 
 Compressor took the Windows Compression API for granted and so the bank tools
