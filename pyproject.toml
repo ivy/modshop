@@ -1,0 +1,55 @@
+[project]
+name = "modshop"
+version = "0.1.0"
+description = "Build modded games on Linux reproducibly: a chain of keyed checkpoints from a pristine game and the mod archives, deployed by content."
+readme = "README.md"
+license = "ISC"
+requires-python = ">=3.14"
+dependencies = [
+  "typer>=0.27,<1",
+  "pydantic>=2.12,<3",
+  "holopatcher==1.5.3",
+  "pykotor",
+  "pycryptodome>=3.20",
+]
+
+[project.optional-dependencies]
+repairs = ["pillow>=11"]
+
+[project.scripts]
+modshop = "modshop.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.14", "pyright>=1.1.400"]
+
+[tool.uv.sources]
+# The patcher's library, with the fixes in games/kotor/patches/pykotor/ applied: that series'
+# README names the base commit; this is its head.
+pykotor = { url = "https://github.com/ivy/PyKotor/archive/0847fc03847934b73055a0a2a3140981db754251.tar.gz", subdirectory = "Libraries/PyKotor" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/modshop"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py314"
+src = ["src", "tests"]
+extend-exclude = ["games", "tools", "docs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF", "PTH"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.14"
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "strict"
+reportMissingTypeStubs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

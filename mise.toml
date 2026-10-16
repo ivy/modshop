@@ -1,2 +1,10 @@
 [tools]
 "ubi:SteamRE/DepotDownloader" = { version = "DepotDownloader_3.4.0", exe = "DepotDownloader", matching = "linux-x64" }
+uv = "0.13.1"
+
+[tasks.check]
+description = "lint, format check, type check, tests"
+run = ["uv run ruff check .", "uv run ruff format --check .", "uv run pyright", "uv run pytest -q"]
+
+[tasks.test]
+run = "uv run pytest"
