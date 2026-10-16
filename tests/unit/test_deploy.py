@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from modshop.core.deploy import Deployer, DeployError, LocalTransport, Target
+from modshop.kotor.target import EXCLUDE, FIRST_TIME
 
 
 def make(tmp_path: Path) -> tuple[Path, Path, Deployer]:
@@ -18,13 +19,7 @@ def make(tmp_path: Path) -> tuple[Path, Path, Deployer]:
     (live / "Saves").mkdir()
     (live / "Saves" / "game1.sav").write_bytes(b"save")
     (live / "kmrp-kpm.log").write_bytes(b"log")
-    target = Target(
-        LocalTransport(),
-        str(live),
-        ("/Saves/", "/saves/", "*.log", "/swkotor.ini"),
-        ("swkotor.ini",),
-        "no-such-process",
-    )
+    target = Target(LocalTransport(), str(live), EXCLUDE, FIRST_TIME, "no-such-process")
     return tree, live, Deployer(target)
 
 
@@ -56,3 +51,17 @@ def test_deploy_refuses_while_game_runs(tmp_path: Path) -> None:
     d.target = Target(LocalTransport(), str(live), (), (), "sh")  # a shell is always running somewhere
     with pytest.raises(DeployError, match="running"):
         d.deploy(tree)
+
+
+def test_timestamp_only_differences_are_not_drift(tmp_path: Path) -> None:
+    import os
+
+    tree, live, d = make(tmp_path)
+    (tree / "Modules").symlink_to("modules")
+    d.deploy(tree)
+    os.utime(live / "Override" / "a.tga", ns=(1, 1))  # same bytes, another mtime
+    os.utime(live / "Modules", ns=(2, 2), follow_symlinks=False)
+    (tree / "Override" / "a.tga").touch()
+    (live / "K1DriverCompat.ini").write_bytes(b"# written by KMRP at launch")
+    assert not d.drift(tree)
+    assert d.deploy(tree).updated == 0

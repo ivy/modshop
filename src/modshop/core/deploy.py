@@ -1,7 +1,8 @@
 """Putting a tree on the target by content, into a copy that is swapped in by rename.
 
 The target's live folder is snapshotted to `<game_dir>.next`; rsync writes into that copy
-comparing checksums, not timestamps, so a rebuilt file with identical content moves nothing;
+comparing checksums and never timestamps, so a rebuilt file with identical content moves nothing
+and a file the game rewrote with the same bytes is not drift;
 then a dry run must find nothing left to do, the old folder becomes `<game_dir>.prev` (the
 rollback) and the copy becomes live. The target's exclusions are the one list of paths the
 deploy never touches and the drift check never reports.
@@ -101,12 +102,13 @@ class Deployer:
         )
 
     def _rsync(self, src: Path, dest: str, *, dry: bool) -> list[str]:
+        # content only: --checksum decides what moves, and without --times a file or symlink that
+        # differs only in its timestamp is neither drift nor something to send
         cmd = [
             "rsync",
             "--recursive",
             "--links",
             "--perms",
-            "--times",
             "--checksum",
             "--delete",
             "--itemize-changes",
@@ -141,7 +143,7 @@ class Deployer:
                 != 0
             ):
                 subprocess.run(
-                    ["rsync", "--times", str(tree / name), self.target.transport.rsync_dest(f"{nxt}/{name}")],
+                    ["rsync", str(tree / name), self.target.transport.rsync_dest(f"{nxt}/{name}")],
                     check=True,
                 )
         left = self._rsync(tree, nxt, dry=True)
