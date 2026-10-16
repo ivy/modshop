@@ -115,6 +115,8 @@ Measured on the build host on 2026-10-15, from the last build's logs and its tre
 | Removing it | 0.2 s |
 | Hashing every file with SHA-256, 8 threads, warm cache | 7 s |
 
+A later surprise: with XFS `rmapbt`, a whole-tree reflink clone per checkpoint adds an ownership record per file to the allocation group's reserved metadata pool, and 313 such clones hit `ENOSPC` with 900 GB free (this filesystem has 994 small allocation groups from repeated growing). Checkpoints therefore hardlink the parent's unchanged files and reflink only the changed ones; the working tree stays a reflink copy, so the hardlinks are never written through.
+
 So the hours of the first build were download, extraction and debugging, not the patcher, and the earlier worry about checkpoint cost was misplaced: a checkpoint after every entry costs about a second, and a clean rebuild of the whole chain is on the order of half an hour. The driver checkpoints every entry, and hashes incrementally by ctime (the kernel sets it on every write and no user can set it back; a full rehash is `verify`).
 
 ## Open questions

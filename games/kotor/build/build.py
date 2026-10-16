@@ -285,8 +285,15 @@ def restore_work(key):
 
 
 def commit_checkpoint(key, parent_key, entry, since_ns):
-    """WORK, finished, becomes checkpoint `key`: mtimes normalised, manifest written, tree reflinked
-    into ckpt/<key>.tmp and renamed; WORK stays equal to the new checkpoint."""
+    """WORK, finished, becomes checkpoint `key`: mtimes normalised, manifest written, the tree built in
+    ckpt/<key>.tmp and renamed; WORK stays equal to the new checkpoint.
+
+    A checkpoint's tree hardlinks the parent checkpoint's files and holds reflink clones of only the
+    files the entry changed. Nothing ever writes inside a checkpoint (WORK is a reflink copy, so its
+    writes land on new inodes), which makes the hardlinks safe, and it keeps the filesystem's
+    extent-ownership metadata small: a reflink clone of a whole tree per checkpoint adds a record for
+    every file to XFS's per-allocation-group reserved pool, and a few hundred such clones exhaust it
+    with ENOSPC while `df` still shows terabytes free."""
     t = time.time()
     normalise_mtimes(WORK)
     prev = read_manifest(manifest_path(parent_key))
@@ -297,7 +304,17 @@ def commit_checkpoint(key, parent_key, entry, since_ns):
     tmp.mkdir(parents=True)
     tree_hash = write_manifest(tmp / 'manifest.txt', m)
     (tmp / 'changed.txt').write_text(''.join(f'{"-" if r not in m else "+" if r not in prev else "~"} {r}\n' for r in changed))
-    reflink_copy(WORK, tmp / 'tree')
+    subprocess.run(['cp', '-al', str(tree_of(parent_key)), str(tmp / 'tree')], check=True)
+    for r in changed:
+        dst = tmp / 'tree' / r
+        if dst.is_symlink() or dst.exists(): dst.unlink()
+        if r in m:
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            src = WORK / r
+            if src.is_symlink(): os.symlink(os.readlink(src), dst)
+            else: subprocess.run(['cp', '-a', '--reflink=always', str(src), str(dst)], check=True)
+    for d in sorted((d for d in tmp.joinpath('tree').rglob('*') if d.is_dir() and not d.is_symlink()), key=lambda d: -len(str(d))):
+        if not any(d.iterdir()) and not (WORK / d.relative_to(tmp / 'tree')).exists(): d.rmdir()
     json.dump({'key': key, 'parent': parent_key, 'mod': entry['mod'], 'tree': tree_hash, 'files': len(m),
                'changed': len(changed), 'built_at': time.strftime('%Y-%m-%dT%H:%M:%S%z'), 'seconds': round(time.time() - t, 1)},
               open(tmp / 'meta.json', 'w'), indent=1)
