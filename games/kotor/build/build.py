@@ -144,8 +144,20 @@ def reflink_copy(src, dst):
 
 # ---- the key ------------------------------------------------------------------
 
+# Functions whose code cannot change what an entry writes into the tree: the orchestration around
+# the verbs (keys, checkpoints, manifests, commands). Everything else in this file, the verbs and the
+# lookup and staging helpers they call, is part of every key, so a change to it rebuilds the chain.
+ORCHESTRATION = {'log', 'sha256_file', 'sha256_str', 'walk', 'read_manifest', 'write_manifest', 'tree_manifest',
+                 'normalise_mtimes', 'reflink_copy', 'code_hash', 'env_hash', 'hashcache', 'save_hashcache',
+                 'inputs_hash', 'key_of', 'meta_of', 'tree_of', 'manifest_path', 'work_key', 'set_work_key',
+                 'discard_work', 'restore_work', 'commit_checkpoint', 'use_work', 'load_manifest', 'chain',
+                 'preflight', 'lock', 'main'}
+
+
 def code_hash():
-    return sha256_str(ast.dump(ast.parse((HERE / 'build.py').read_text())))
+    tree = ast.parse((HERE / 'build.py').read_text())
+    body = [n for n in tree.body if not (isinstance(n, ast.FunctionDef) and (n.name in ORCHESTRATION or n.name.startswith('cmd_')))]
+    return sha256_str(ast.dump(ast.Module(body=body, type_ignores=[])))
 
 
 _env_hash = None
@@ -557,6 +569,20 @@ def drop_aliases(created):
             link.replace(real); log('   alias', link.name, 'became the file; moved to', real.name)
 
 
+def collapse_case(d):
+    """Keep one file per case-insensitive name in d, the most recently written. The game runs under
+    Wine, where two names differing only in case are one file; HoloPatcher writes a file by the exact
+    name its ini spells, beside an existing one of another spelling, where Windows would overwrite."""
+    groups = {}
+    for p in d.iterdir():
+        if p.is_file(): groups.setdefault(p.name.lower(), []).append(p)
+    for low, ps in groups.items():
+        if len(ps) > 1:
+            ps.sort(key=lambda p: p.stat().st_ctime_ns, reverse=True)
+            for p in ps[1:]: p.unlink()
+            log(f'   case collapse: kept {ps[0].name}, removed {", ".join(p.name for p in ps[1:])}')
+
+
 def s_holopatcher(st, src='.', option=None, allow_errors=0):
     """Run HoloPatcher on a staged tslpatchdata (or its parent). option = namespace index."""
     td = ci_path(st, src)
@@ -575,6 +601,7 @@ def s_holopatcher(st, src='.', option=None, allow_errors=0):
     m = [re.search(r'Install completed: (\d+) errors', l) for l in tail]; m = [x for x in m if x]
     if not m or int(m[-1].group(1)) > allow_errors:
         raise RuntimeError(f'holopatcher failed on {td} (exit {r.returncode})')
+    collapse_case(OVR)
 
 
 def s_dedupe_tpc(st):
@@ -662,7 +689,8 @@ def cmd_build(until):
     for entry, key, exists in chain(build=True, until=until):
         last = key; built += 0 if exists else 1
     link = GAMES / 'build'
-    if link.is_symlink() or link.exists(): link.unlink()
+    if link.is_symlink(): link.unlink()
+    elif link.exists(): sys.exit(f'{link} is a directory, not the symlink the build writes; move it aside')
     link.symlink_to(tree_of(last))
     log(f'ALL DONE: {built} rebuilt; build -> ckpt/{last}/tree (tree {meta_of(last)["tree"][:12]})')
 
