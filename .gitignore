@@ -4,6 +4,7 @@ games/*/data/
 games/*/data-next/
 # Device identity lives in local.toml, never in git.
 local.toml
+AGENTS.local.md
 # Built binaries of our own tools are rebuilt from source.
 tools/restore-window/restore.exe
 *.pyc
