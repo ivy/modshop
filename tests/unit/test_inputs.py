@@ -1,3 +1,4 @@
+import shutil
 from pathlib import Path
 
 import pytest
@@ -77,3 +78,12 @@ def test_optional_local_value_is_null_when_absent(tmp_path: Path) -> None:
     p.local_toml.write_text(p.local_toml.read_text() + "[kmrp]\ndebug_logs = 2\n")
     present = InputResolver(p).resolve("local?:kmrp.debug_logs", "e")
     assert isinstance(present, ValueInput) and present.value == "2"
+
+
+@pytest.mark.skipif(shutil.which("podman") is None, reason="needs podman")
+def test_a_missing_podman_image_is_a_preflight_failure() -> None:
+    from modshop.core.errors import Preflight
+    from modshop.core.inputs import image_id
+
+    with pytest.raises(Preflight, match="not built"):
+        image_id("modshop-test-no-such-image")

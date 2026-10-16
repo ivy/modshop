@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Protocol
 
 from modshop.core.config import Local, Paths
-from modshop.core.errors import InputMissing
+from modshop.core.errors import InputMissing, Preflight
 from modshop.core.hashing import sha256_file, sha256_text
 from modshop.core.tree import walk
 
@@ -124,7 +124,10 @@ def image_id(name: str) -> str:
         ["podman", "image", "inspect", "--format", "{{.Id}}", name], capture_output=True, text=True
     )
     if r.returncode != 0:
-        raise FileNotFoundError(f"podman image {name} is not built")
+        raise Preflight(
+            f"podman image {name} is not built (`podman system prune --all` removes it); "
+            "the Containerfile among the inputs of the step that uses it has the build command"
+        )
     return r.stdout.strip()
 
 
