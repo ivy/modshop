@@ -11,7 +11,7 @@ Before a mod enters the manifest, a report of what it would do to the current ch
 
 ## The problem
 
-Seven of the twelve entries skipped in [`manifest.json`](../../build/manifest.json) are skipped because the mod crashes with KMRP, which is known only because KMRP's author lists them. Nothing in the build says why they conflict, so a new mod that conflicts the same way is found by playing.
+Seven of the twelve entries skipped in [`recipe.json`](../../build/recipe.json) are skipped because the mod crashes with KMRP, which is known only because KMRP's author lists them. Nothing in the build says why they conflict, so a new mod that conflicts the same way is found by playing.
 
 ## The idea
 

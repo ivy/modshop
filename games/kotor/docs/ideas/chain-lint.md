@@ -16,7 +16,7 @@ Several faults in this build were visible in the files without running the game:
 - [repair 09](../../repairs/09-blaster-adjustment-orphan-rows/README.md): an ini lists rows whose sections do not exist;
 - [repair 07](../../repairs/07-kmrp-pot-gui-textures/README.md): GUI textures that are not a power of two in size;
 - [repair 08](../../repairs/08-wounded-republic-detonate-controller/README.md): emitters carrying a controller none of the game's own emitters use;
-- the `dedupe_tpc` step in [`build.py`](../../build/build.py): a `.tpc` beside a same-named `.tga` or `.dds`, which crashes the game.
+- the `dedupe_tpc` step in the `modshop` package ([`../../../../src/modshop/`](../../../../src/modshop/)): a `.tpc` beside a same-named `.tga` or `.dds`, which crashes the game.
 
 Each was found by a crash or a patcher error.
 
@@ -29,7 +29,7 @@ A lint step after each entry, checking only what that entry changed (`changed.tx
 - model features outside what the game's own models use, from the [asset index](asset-index.md)'s facts over vanilla;
 - case-variant duplicates and `.tpc` shadows in Override.
 
-Findings go into the checkpoint beside `changed.txt`, so `build.py status` can show which entries introduced warnings. A rule that has caused a crash fails the build; the rest warn.
+Findings go into the checkpoint beside `changed.txt`, so `modshop kotor status` can show which entries introduced warnings. A rule that has caused a crash fails the build; the rest warn.
 
 ## Unknowns
 

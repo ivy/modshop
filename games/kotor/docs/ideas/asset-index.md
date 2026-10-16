@@ -16,7 +16,7 @@ The questions asked while diagnosing have been structural, not textual:
 - Repair 08's cause was found by comparing a mod's seven bubble emitters with the game's own 54: emitter flags 266 against 2, and a `detonate` controller none of the game's emitters has ([its README](../../repairs/08-wounded-republic-detonate-controller/README.md)). That is a query over every model's nodes and controllers.
 - Repair 07 turned on which GUI textures are not a power of two in size ([its README](../../repairs/07-kmrp-pot-gui-textures/README.md)), a query over every texture's header.
 - Repair 09 and the [k1cp fix](../../build/fixes/k1cp-sithtroop/README.md) were a reference to something that does not exist and an edit that did not land: questions about references.
-- Seven of the twelve entries skipped in [`manifest.json`](../../build/manifest.json) are skipped because they crash with KMRP, which is a question of what two mods both touch.
+- Seven of the twelve entries skipped in [`recipe.json`](../../build/recipe.json) are skipped because they crash with KMRP, which is a question of what two mods both touch.
 
 Each was answered by writing a one-off script against PyKotor.
 

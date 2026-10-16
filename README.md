@@ -8,13 +8,14 @@ Scripts, patches and notes for building modded games on Linux, written so that s
 
 | Path | What |
 | --- | --- |
+| [`src/modshop/`](src/modshop/) | the `modshop` command: a chain of keyed checkpoints built from a pristine game and the mod archives, deployed to the handheld by content; `core/` is game-agnostic, one subpackage per game beside it |
 | [`games/kotor/`](games/kotor/) | Knights of the Old Republic (Steam, Proton): the community Full Build installed by script, the KMRP interface and controller patch built on Linux, repairs for things that break under Proton, and the diagnosis notes behind them |
 | [`tools/restore-window/`](tools/restore-window/) | un-minimize a wine game that lost its window under gamescope, where there is no taskbar to get it back |
 | [`docs/conventions.md`](docs/conventions.md) | the rules every game directory follows: what goes in git, where data lives, how fixes to other projects are kept |
 
 ## Quick start
 
-1. Clone, then read the game's README: `games/kotor/README.md` is the whole procedure for that game.
+1. Clone, `mise install` (uv and the Steam downloader), `uv sync` (the tool and the patcher), then read the game's README: `games/kotor/README.md` is the whole procedure for that game.
 2. Copy `local.example.toml` to `local.toml` and fill in your machine names and paths. The docs say "the handheld" and "the build host"; that file says which is which for you.
 3. Each game keeps its archives, game copies, logs and build outputs under `games/<game>/data/`, which git ignores. The scripts find it by default; `KOTOR_DATA` (for KotOR) points them elsewhere.
 

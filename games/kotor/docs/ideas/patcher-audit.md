@@ -17,7 +17,7 @@ The patcher's log is a list of claims. Nothing reads it back against the tree.
 
 ## The idea
 
-A check that runs as part of the `holopatcher` verb in [`build.py`](../../build/build.py), after the run and before the checkpoint, over the step's own log:
+A check that runs as part of the `HoloPatcher` step in the `modshop` package ([`../../../../src/modshop/`](../../../../src/modshop/)), after the run and before the checkpoint, over the step's own log:
 
 - **InstallList**: for "copying X and saving to the F folder" and "replacing existing file in the A archive", the file in the folder, or the resource in the archive, hashes equal to the mod's source file.
 - **2DAList**: for every `ChangeRow`/`AddRow`/`AddColumn`, re-read the table and confirm each named cell holds the value the ini gave (memory tokens resolved from the log's own `2DAMEMORY` notes).

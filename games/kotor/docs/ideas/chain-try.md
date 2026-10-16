@@ -7,11 +7,11 @@ depends_on: []
 
 # Try an entry without committing
 
-`build.py try ENTRY [--from KEY]`: restore the parent checkpoint into a scratch tree, run one entry's steps, print its changed paths, keep nothing.
+`modshop kotor try ENTRY [--from KEY]`: restore the parent checkpoint into a scratch tree, run one entry's steps, print its changed paths, keep nothing.
 
 ## The problem
 
-Every change to a verb in [`build.py`](../../build/build.py) or to the PyKotor patch series invalidates every key, by design, and a full chain is about 25 minutes. Fixing the five problems the first chain build exposed (a namespaces mod, orphan rows, three scripts, case-variant files, the module replacement) took five full rebuilds, about two hours of waiting, most of it to confirm a change that touched one entry. The synthetic harnesses built by hand to avoid that (a tiny vanilla tree, a manifest of two entries) were written twice and thrown away.
+Every change to a step in the `modshop` package ([`../../../../src/modshop/`](../../../../src/modshop/)) or to the PyKotor patch series invalidates every key, by design, and a full chain is about 25 minutes. Fixing the five problems the first chain build exposed (a namespaces mod, orphan rows, three scripts, case-variant files, the module replacement) took five full rebuilds, about two hours of waiting, most of it to confirm a change that touched one entry. The synthetic harnesses built by hand to avoid that (a tiny vanilla tree, a manifest of two entries) were written twice and thrown away.
 
 ## The idea
 

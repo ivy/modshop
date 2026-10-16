@@ -15,7 +15,7 @@ When the holograms failed, the question "is this puzzle disabled by the save's s
 
 ## The idea
 
-`build/fetch.py` (or `deploy.py --fetch`): copy the newest saves, Proton's log, KMRP's logs and the drift report into `data/logs/device/<timestamp>/`, and print a summary: which checkpoint is deployed and whether it drifted, which save is newest and where the player is, and the save's globals and visited modules decoded with PyKotor (`pykotor.extract.savedata`), so a question like "has `Tar_HoloActive` been set" is one grep. [Crash capture](crash-capture.md) is the automatic, per-run version of the same folder; this is the on-demand one, and the decoding is shared.
+`modshop kotor fetch`: copy the newest saves, Proton's log, KMRP's logs and the drift report into `data/logs/device/<timestamp>/`, and print a summary: which checkpoint is deployed and whether it drifted, which save is newest and where the player is, and the save's globals and visited modules decoded with PyKotor (`pykotor.extract.savedata`), so a question like "has `Tar_HoloActive` been set" is one grep. [Crash capture](crash-capture.md) is the automatic, per-run version of the same folder; this is the on-demand one, and the decoding is shared.
 
 ## Unknowns
 

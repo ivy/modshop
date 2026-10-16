@@ -1,6 +1,6 @@
 # Proposal: modshop as a Python application
 
-Status: accepted on 2026-10-15, all five decisions as recommended; implementation in progress. The fork for decision 1 is [ivy/PyKotor](https://github.com/ivy/PyKotor), branch `modshop-patches`. [`kotor-build-pipeline.md`](kotor-build-pipeline.md) is the pipeline this document restructures; its goals and determinism rules stand unchanged.
+Status: implemented and cut over on 2026-10-15; the old scripts are gone and `modshop kotor <command>` is the pipeline. The fork for decision 1 is [ivy/PyKotor](https://github.com/ivy/PyKotor), branch `modshop-patches`. The acceptance run is recorded under [Acceptance, as run](#acceptance-as-run). [`kotor-build-pipeline.md`](kotor-build-pipeline.md) is the pipeline this document restructures; its goals and determinism rules stand unchanged.
 
 ## Summary
 
@@ -423,6 +423,15 @@ One build at a time, by a file lock on the data directory. The work tree's recor
 **Acceptance**, at the cutover, recorded in this document: `compare` against the legacy store; the mutation run; a real deploy of the checkpoint before the chain end followed by the chain end, which exercises the write path and the swap twice; a clean `deploy --check`. The rollback itself is a rename of `.prev` by hand and is documented, not tested.
 
 Coverage is not a target. The determinism properties, every path rule and the interruption cases are, because those are where the defects have been.
+
+## Acceptance, as run
+
+- The chain built on the sibling root from the reflinked vanilla: 183 entries rebuilt (190 active entries; the first run stopped at the sixth on a moved folder and the second resumed), ending at tree `c8cc8034ef82`, which is the tree the legacy `known-good` tag names.
+- `compare` against the legacy store's `known-good` lineage: all 191 positions (vanilla and 190 entries) identical by name and tree hash.
+- The no-op rebuild: 0 rebuilt in 0.4 s.
+- The mutation run: `display` in `local.toml` changed, `status` reports the `kmrp` entry missing and one more after it, nothing else; reverted, `status` reports up to date.
+- The deploys: the checkpoint before the chain end deployed for real (37 paths, the live folder swapped, `.prev` kept); the chain end's deploy refused because the game had been started on the handheld in between, and ran once the game exited.
+- Test suite at cutover: 51 tests, pyright strict and ruff clean.
 
 ## Room left for later
 

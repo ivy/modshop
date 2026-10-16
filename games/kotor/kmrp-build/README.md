@@ -8,7 +8,7 @@ KMRP is built with MSVC on Windows by its maintainer, and its docs name nothing 
 - **The compiler**: the container image `docker.io/mstorsjo/llvm-mingw:latest` (clang, lld, llvm-rc). It has no `clang-cl` link; the script runs `clang --driver-mode=cl`.
 - **Microsoft's CRT and Windows SDK for x86**: laid out by [xwin](https://github.com/Jake-Shadle/xwin) with `xwin --accept-license --arch x86 --cache-dir ~/.cache/xwin/cache splat --output ~/.cache/xwin/sdk` (about 800 MB; the `--include-debug-libs` flag takes no value).
 - **SDL3's headers**: the script fetches `SDL3-devel-3.4.16-VC.zip` into `build/deps/` in the clone when absent. The module loads SDL at run time (`kmrp-sdl3.dll`, a renamed `SDL3.dll` the installer already placed on the handheld), so nothing links against it.
-- **Python**: the patcher venv from `build/setup-venv.sh` plus `pip install Pillow numpy fonttools capstone`.
+- **Python**: the repository's environment (`uv sync`) plus `uv pip install Pillow numpy fonttools capstone`.
 - **Game inputs**, never committed anywhere: `build-inputs/swpc_tex_gui.erf` in the clone (copied from the game's `TexturePacks`) and `build-inputs/vanilla-gui/*.gui`, written once by `python tools/build_controller_assets.py --extract <game folder>` from the game's BIFs. The pristine game copy serves for both.
 
 ## The build
