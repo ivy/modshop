@@ -1,6 +1,6 @@
 ---
 title: Mod intake report
-priority: 3
+priority: p4
 status: idea
 depends_on: [asset-index, chain-lint]
 ---

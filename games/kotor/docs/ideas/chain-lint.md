@@ -1,6 +1,6 @@
 ---
 title: Chain lint
-priority: 2
+priority: p2
 status: idea
 depends_on: [inspect-cli]
 ---

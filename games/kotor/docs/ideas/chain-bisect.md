@@ -1,6 +1,6 @@
 ---
 title: Chain bisection
-priority: 2
+priority: p2
 status: idea
 depends_on: [device-fixtures]
 ---
@@ -15,7 +15,7 @@ When a crash is caused by a mod, finding which one means trying builds that incl
 
 ## The idea
 
-The pieces exist already. Every checkpoint is the game after a prefix of the chain, `modshop kotor checkout KEY DIR` produces any of them without a rebuild, and `deploy.py KEY` puts one on the handheld moving only what differs. A bisection over checkpoints is a binary search over prefixes: deploy the middle one, run the fixture, recurse into the half that contains the change from pass to fail. A chain of about 200 entries takes about eight runs, and the answer is an entry of the manifest together with its `changed.txt`, the paths it touched.
+The pieces exist already. Every checkpoint is the game after a prefix of the chain, `modshop kotor checkout KEY DIR` produces any of them without a rebuild, and `modshop kotor deploy KEY` puts one on the handheld moving only what differs. A bisection over checkpoints is a binary search over prefixes: deploy the middle one, run the fixture, recurse into the half that contains the change from pass to fail. A chain of about 200 entries takes about eight runs, and the answer is an entry of the manifest together with its `changed.txt`, the paths it touched.
 
 A second mode answers a different question: whether a failure needs a particular earlier mod as well. Removing one entry from the middle of the chain means rebuilding the entries after it; the checkpoints before it are reused, and rebuilt entries become checkpoints too, so a second removal of the same entry costs nothing.
 

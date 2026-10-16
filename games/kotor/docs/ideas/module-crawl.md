@@ -1,6 +1,6 @@
 ---
 title: Module crawl
-priority: 3
+priority: p4
 status: idea
 depends_on: [device-fixtures]
 ---

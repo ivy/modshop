@@ -1,6 +1,6 @@
 ---
 title: Asset index
-priority: 3
+priority: p3
 status: idea
 depends_on: [inspect-cli]
 ---
@@ -15,8 +15,9 @@ The questions asked while diagnosing have been structural, not textual:
 
 - Repair 08's cause was found by comparing a mod's seven bubble emitters with the game's own 54: emitter flags 266 against 2, and a `detonate` controller none of the game's emitters has ([its README](../../repairs/08-wounded-republic-detonate-controller/README.md)). That is a query over every model's nodes and controllers.
 - Repair 07 turned on which GUI textures are not a power of two in size ([its README](../../repairs/07-kmrp-pot-gui-textures/README.md)), a query over every texture's header.
-- Repair 09 and the [k1cp fix](../../build/fixes/k1cp-sithtroop/README.md) were a reference to something that does not exist and an edit that did not land: questions about references.
+- Repair 09 and the [k1cp fix](../../fixes/k1cp-sithtroop/README.md) were a reference to something that does not exist and an edit that did not land: questions about references.
 - Seven of the twelve entries skipped in [`recipe.json`](../../build/recipe.json) are skipped because they crash with KMRP, which is a question of what two mods both touch.
+- Why an area transition refuses to start while a companion lags behind was five hops of "what refers to this" across a strref, a conversation, a placeable blueprint, a script and the engine ([inspect](inspect-cli.md) has the chain); each hop was a full scan of the build's 43,000 resources.
 
 Each was answered by writing a one-off script against PyKotor.
 
@@ -42,6 +43,7 @@ For archives (`.mod`, `.rim`, `.erf`, the BIFs behind `chitin.key`), the unit is
 
 - The index's size across every checkpoint, and how long the first full parse takes.
 - How much of the reference graph PyKotor already computes (`pykotor.tools.references` and `reference_finder` are candidates to read first).
+- Whether the graph should include the engine's own references (a script or resource the executable names, such as `k_trg_transfail` at `0x007499C4`); they come from the [engine symbols](engine-symbols.md) work, not from parsing resources, and they are where a chain of references ends.
 
 ## First step
 

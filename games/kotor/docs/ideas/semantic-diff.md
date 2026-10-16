@@ -1,6 +1,6 @@
 ---
 title: Semantic diff
-priority: 3
+priority: p3
 status: idea
 depends_on: [inspect-cli]
 ---

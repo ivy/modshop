@@ -1,6 +1,6 @@
 ---
 title: Patcher parity
-priority: 2
+priority: p2
 status: idea
 depends_on: [inspect-cli]
 ---
@@ -15,7 +15,7 @@ The build installs mods with HoloPatcher, a reimplementation of TSLPatcher, and 
 
 - the series in [`../../patches/pykotor/`](../../patches/pykotor/) fixes a compile list that raised a TypeError, `Required` lists that raised, a `namespaces.ini` that crashed, scripts the compiler refused, and 2DA tables read as empty and written back empty, which blanked every feat name ([`../../README.md`](../../README.md));
 - [repair 09](../../repairs/09-blaster-adjustment-orphan-rows/README.md) exists because TSLPatcher skips a row whose section is missing and HoloPatcher raises;
-- the [k1cp fix](../../build/fixes/k1cp-sithtroop/README.md) applies an edit HoloPatcher fails on.
+- the [k1cp fix](../../fixes/k1cp-sithtroop/README.md) applies an edit HoloPatcher fails on.
 
 Each was found one at a time, by a failure.
 

@@ -1,6 +1,6 @@
 ---
 title: Driver ergonomics
-priority: 3
+priority: p2
 status: idea
 depends_on: []
 ---
@@ -11,7 +11,9 @@ Small additions to the `modshop` package ([`../../../../src/modshop/`](../../../
 
 ## The problem
 
-A chain build is 25 minutes with nothing to do but watch it. Today that was three overlapping log watchers that replayed old logs after a restart, a `pkill` by pattern that killed the shell issuing it, and no way to ask before an edit how much of the chain it would invalidate.
+A chain build is 25 minutes with nothing to do but watch it. On the pipeline's first week that meant three overlapping log watchers that replayed old logs after a restart, a `pkill` by pattern that killed the shell issuing it, and no way to ask before an edit how much of the chain it would invalidate.
+
+The last of those is still paid. On 2026-10-16 a change to `modshop.core.inputs` rebuilt all 190 entries (about 28 minutes) where a moment's warning would have shown it was in the runner's code closure; a change to the `kmrp-controller` entry's arguments rebuilt one entry. The two edits looked alike from the outside. `impact` is that warning.
 
 ## The idea
 

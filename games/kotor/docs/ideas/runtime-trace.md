@@ -1,6 +1,6 @@
 ---
 title: Runtime trace
-priority: 3
+priority: p4
 status: idea
 depends_on: [crash-capture]
 ---

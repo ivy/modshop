@@ -1,6 +1,6 @@
 ---
 title: Round-trip tests
-priority: 2
+priority: p2
 status: idea
 depends_on: []
 ---

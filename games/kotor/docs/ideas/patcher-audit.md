@@ -1,6 +1,6 @@
 ---
 title: Patcher audit
-priority: 1
+priority: p1
 status: idea
 depends_on: []
 ---
@@ -11,7 +11,7 @@ After every HoloPatcher step, check that what its log claims happened is what th
 
 ## The problem
 
-Six of the six PyKotor defects in [`../../patches/pykotor/`](../../patches/pykotor/README.md) were silent or nearly so, and the worst two were found by playing. Patch 3's tables were written back empty with no error. Patch 6 is the clearest case: for every `Replace#=` into a module archive the log said "replacing existing file in the 'modules\tar_m03ad.mod' archive" and the archive kept the old bytes, in both the hand build and the chain, across hundreds of replacements per build and most of the Community Patch's module fixes. It was found because one puzzle's holograms stopped responding and the module's script hashed to vanilla's ([patches README](../../patches/pykotor/README.md), item 6). The [k1cp fix](../../build/fixes/k1cp-sithtroop/README.md) is another edit the patcher failed to make.
+Six of the six PyKotor defects in [`../../patches/pykotor/`](../../patches/README.md) were silent or nearly so, and the worst two were found by playing. Patch 3's tables were written back empty with no error. Patch 6 is the clearest case: for every `Replace#=` into a module archive the log said "replacing existing file in the 'modules\tar_m03ad.mod' archive" and the archive kept the old bytes, in both the hand build and the chain, across hundreds of replacements per build and most of the Community Patch's module fixes. It was found because one puzzle's holograms stopped responding and the module's script hashed to vanilla's ([patches README](../../patches/README.md), item 6). The [k1cp fix](../../fixes/k1cp-sithtroop/README.md) is another edit the patcher failed to make.
 
 The patcher's log is a list of claims. Nothing reads it back against the tree.
 
