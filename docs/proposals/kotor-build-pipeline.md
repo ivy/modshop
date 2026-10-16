@@ -1,6 +1,6 @@
 # Proposal: a reproducible, incremental build and deploy pipeline for KotOR
 
-Status: accepted plan, not yet built. The KotOR procedure in [`../../games/kotor/README.md`](../../games/kotor/README.md) works today but is resumable rather than incremental, has no pristine base, and ends in hand steps on the handheld. This document is the next shape of that pipeline and the reasons for it. The README stays the how-to; this is the why and the what.
+Status: accepted plan; phases 0 and 2 built (`games/kotor/build/build.py`, `deploy.py`), phase 1 in progress. The KotOR procedure in [`../../games/kotor/README.md`](../../games/kotor/README.md) works today but is resumable rather than incremental, has no pristine base, and ends in hand steps on the handheld. This document is the next shape of that pipeline and the reasons for it. The README stays the how-to; this is the why and the what.
 
 ## The goal
 
@@ -104,9 +104,21 @@ The risk being guarded against: a crash is chased for an evening, files are move
 
 These are rules for people and agents, and the drift check is what makes them checkable rather than aspirational. The existing items that violate them today (the controller module installed by hand, three textures parked aside, the repaired model placed directly in `Override`) are regularised by the first build on the new pipeline, which rebuilds them all as steps.
 
+## Phase 0's numbers
+
+Measured on the build host on 2026-10-15, from the last build's logs and its tree (21,975 files, 15 GB):
+
+| Measurement | Result |
+| --- | --- |
+| Wall-clock across the 76 patcher runs of one build | 16 minutes; median gap between runs 0.4 s; the slowest run 2.9 minutes |
+| One reflink copy of the tree | 0.7 s |
+| Removing it | 0.2 s |
+| Hashing every file with SHA-256, 8 threads, warm cache | 7 s |
+
+So the hours of the first build were download, extraction and debugging, not the patcher, and the earlier worry about checkpoint cost was misplaced: a checkpoint after every entry costs about a second, and a clean rebuild of the whole chain is on the order of half an hour. The driver checkpoints every entry, and hashes incrementally by ctime (the kernel sets it on every write and no user can set it back; a full rehash is `verify`).
+
 ## Open questions
 
-- Phase 0's numbers: patcher time breakdown; checkpoint cost per mod.
 - Does KMRP's installer run under Wine in a sandbox on the build host, and is it idempotent?
 - Does `steamcmd` serve the Windows depot from Linux to an owning account?
 - Is HoloPatcher deterministic?
