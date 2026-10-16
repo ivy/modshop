@@ -9,3 +9,7 @@ tools/restore-window/restore.exe
 __pycache__/
 .venv/
 venv/
+
+# pykotor writes these in whatever directory it runs from
+logs/
+**/logs/*pykotor*.log*

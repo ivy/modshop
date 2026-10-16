@@ -3,7 +3,7 @@
 # Build: podman build -t modshop-wine kmrp-build/wine
 # Run:   podman run --rm --network none -v <game tree>:/game -v <installer dir>:/in:ro modshop-wine \
 #          xvfb-run -a wine /in/KMRP-Windows-1.5.1.exe --in-place 'Z:\game\swkotor.exe'
-FROM registry.fedoraproject.org/fedora:44
+FROM docker.io/library/fedora:44
 RUN dnf install -y --setopt=install_weak_deps=False wine xorg-x11-server-Xvfb xdotool && dnf clean all
 ENV WINEDEBUG=-all WINEPREFIX=/wine HOME=/wine
 RUN mkdir -p /wine /game && xvfb-run -a wineboot --init && wineserver --wait
