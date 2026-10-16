@@ -92,6 +92,8 @@ Two tests, both scripts that print differing paths and exit non-zero:
 - **Determinism.** Build clean from vanilla into a separate checkpoint namespace and compare the final manifest with the cached chain's; on a mismatch, walk the per-checkpoint manifests to the first mod that diverged. If the patcher is the cause, the fix belongs in the pykotor patch series. Both builds run on the same host, so this says nothing about host dependence; that is accepted.
 - **Key completeness.** Change one input mid-chain (a byte in an archive file, a verb, a patch), rebuild incrementally, build clean in a fresh namespace, compare. Run it whenever the key function changes. This is the test that catches a missing key input; the determinism test cannot, since unchanged inputs agree whether or not the key sees them.
 
+Both ran on 2026-10-15 against the real chain after the last change to the key function. Determinism: `prove` matched all 190 entries. Key completeness: the handheld's panel size in `local.toml` (a keyed input of the KMRP entry) was changed, the incremental build rebuilt exactly the two entries after it with the new size in their output, a clean build in a fresh namespace reached the same tree hash at every entry, and restoring the input restored the original chain from its kept checkpoints without rebuilding.
+
 ## How debugging stays out of the build
 
 The risk being guarded against: a crash is chased for an evening, files are moved aside, a DLL is swapped, a texture is resampled, something works, and a month later nobody can say which of those is why the game runs. The rules that prevent it:
