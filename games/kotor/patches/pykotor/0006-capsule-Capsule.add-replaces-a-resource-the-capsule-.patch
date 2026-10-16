@@ -1,0 +1,34 @@
+From 0847fc03847934b73055a0a2a3140981db754251 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 20:21:29 -0700
+Subject: [PATCH] capsule: Capsule.add replaces a resource the capsule already
+ holds
+
+_add_to set the new resource and then copied every existing resource over
+it, so adding a resource under an existing name wrote the old bytes back.
+TSLPatcher's InstallList with Replace#= into a .mod or .rim therefore
+never changed anything, while the log said it was replacing the file.
+---
+ Libraries/PyKotor/src/pykotor/extract/capsule.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/Libraries/PyKotor/src/pykotor/extract/capsule.py b/Libraries/PyKotor/src/pykotor/extract/capsule.py
+index 0dbc5cbcf..3d5c4f6f0 100644
+--- a/Libraries/PyKotor/src/pykotor/extract/capsule.py
++++ b/Libraries/PyKotor/src/pykotor/extract/capsule.py
+@@ -261,9 +261,11 @@ class LazyCapsule(FileResource):
+         """
+ 
+         def _add_to(container: RIM | ERF):
+-            container.set_data(resname, restype, resdata)
++            # the existing resources first, then the new one, so that a resource already in the
++            # capsule is replaced by the new data rather than the other way round
+             for resource in self.resources():
+                 container.set_data(resource.resname(), resource.restype(), resource.data())
++            container.set_data(resname, restype, resdata)
+ 
+         if is_rim_file(self._filepath.name):
+             container = RIM()
+-- 
+2.56.0
+

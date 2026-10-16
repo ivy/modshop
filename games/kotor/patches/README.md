@@ -4,13 +4,14 @@ Fixes to two other projects, kept as `git format-patch` series over the upstream
 
 ## `pykotor/`: OpenKotOR/PyKotor, base `ca61ce8d5` (master), branch `tslpatcher-and-2da-fixes`
 
-The library behind HoloPatcher, the Linux TSLPatcher. Five defects the Full Build hits, all still on upstream master at the base commit:
+The library behind HoloPatcher, the Linux TSLPatcher. Six defects the Full Build hits, all still on upstream master at the base commit:
 
 1. `tslpatcher/reader.py`, `load_compile_list`: `ModificationsNSS(file, replace)` is a TypeError; the argument is keyword-only.
 2. `tslpatcher/reader.py`, the `Required`/`RequiredMsg` count check: raises on a lone `RequiredMsg=0` or a lone `Required=`; the shorter list is padded instead.
 3. `resource/formats/twoda/io_twoda.py`: a 2DA whose header says 0 for its cell-data size (an editor quirk the game ignores; five of the build's mods ship such files) was read as a table of empty cells and written back empty. Cells are read by offset, as the game does.
 4. `tslpatcher/reader.py`, `NamespaceReader.load`: a namespace section without `IniName` or `InfoName` raised `KeyError`; TSLPatcher defaults them to `changes.ini` and `info.rtf` (JC's Mandalorian Armor ships such a `namespaces.ini`).
 5. `resource/formats/ncs/compiler/lexer.py`: the operator tables typed a mixed int-and-float `+ - * /` as the left operand's type, where the engine's mixed instructions yield a float; `FloatToInt(nInt * fFloat)` was refused as a type mismatch and three of Alignment Affects Force Powers' scripts did not compile.
+6. `extract/capsule.py`, `Capsule.add`: the new resource was set first and every existing resource copied over it afterwards, so a `Replace#=` into a `.mod` or `.rim` that already held the resource wrote the old bytes back while the log said it was replacing the file. Hundreds of module fixes per build (most of the Community Patch's) had silently done nothing; the Twisted Rancor Trio holograms, whose use scripts the Movie-Style Holograms mod replaces, were the symptom that exposed it.
 
 `build/setup-venv.sh` applies the series to the installed pykotor 2.3.12 with `patch --strip 4` (the paths are `Libraries/PyKotor/src/pykotor/...`).
 
