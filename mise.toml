@@ -1,4 +1,8 @@
 [tools]
+"github:NationalSecurityAgency/ghidra" = "Ghidra_12.1.4_build"
+"github:rizinorg/rizin" = { version = "0.9.1", matching = "static-x86_64" }
+java = "temurin-21.0.12+8.0.LTS"
+"npm:rea-agents" = "6.5.0"
 "ubi:SteamRE/DepotDownloader" = { version = "DepotDownloader_3.4.0", exe = "DepotDownloader", matching = "linux-x64" }
 uv = "0.13.1"
 
@@ -8,3 +12,12 @@ run = ["uv run ruff check .", "uv run ruff format --check .", "uv run pyright", 
 
 [tasks.test]
 run = "uv run pytest"
+
+[tasks."rea:skill"]
+description = "copy the REA skill from the pinned rea-agents package into .claude/skills; rerun after bumping it"
+run = '''
+src="$(mise where npm:rea-agents)/node_modules/rea-agents/skills/reverse-engineer-anything"
+rm -rf .claude/skills/reverse-engineer-anything
+mkdir -p .claude/skills
+cp -R "$src" .claude/skills/
+'''

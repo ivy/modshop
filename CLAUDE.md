@@ -18,6 +18,7 @@ Kept kernel-maintainer style: one commit per fix with the reason in the message,
 
 ## Working here
 
+- Reverse engineering: `mise install` provides [REA](https://github.com/morluto/rea), Ghidra 12.1 with JDK 21, and Rizin. `.mcp.json` registers `rea mcp` for this repository, and `.claude/skills/reverse-engineer-anything` is REA's skill, copied from the pinned package by `mise run rea:skill`; rerun it after bumping `rea-agents`. Don't run `rea setup` or `rea update`: they write user-level agent configuration outside this repository. Analysis of game binaries is derived from game bytes, so anything it writes into the tree goes under `games/<game>/data/`.
 - Game-specific procedure: `games/<game>/README.md`. It is the complete how-to; keep it that way when something changes.
 - Diagnosis notes live beside the thing they explain (a repair's README, a tool's README), not in a separate log.
 - Documents state current facts, not their history; revision narration belongs in commit messages.

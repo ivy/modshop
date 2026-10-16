@@ -2,6 +2,113 @@
 
 lockfile_version = 3
 
+[[tools."github:NationalSecurityAgency/ghidra"]]
+version = "Ghidra_12.1.4_build"
+backend = "github:NationalSecurityAgency/ghidra"
+specifiers = ["Ghidra_12.1.4_build"]
+
+[tools."github:NationalSecurityAgency/ghidra"."platforms.linux-arm64"]
+checksum = "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db"
+url = "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip"
+url_api = "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/579530646"
+
+[tools."github:NationalSecurityAgency/ghidra"."platforms.linux-arm64-musl"]
+checksum = "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db"
+url = "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip"
+url_api = "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/579530646"
+
+[tools."github:NationalSecurityAgency/ghidra"."platforms.linux-x64"]
+checksum = "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db"
+url = "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip"
+url_api = "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/579530646"
+
+[tools."github:NationalSecurityAgency/ghidra"."platforms.linux-x64-musl"]
+checksum = "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db"
+url = "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip"
+url_api = "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/579530646"
+
+[tools."github:NationalSecurityAgency/ghidra"."platforms.macos-arm64"]
+checksum = "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db"
+url = "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip"
+url_api = "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/579530646"
+
+[tools."github:NationalSecurityAgency/ghidra"."platforms.macos-x64"]
+checksum = "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db"
+url = "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip"
+url_api = "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/579530646"
+
+[tools."github:NationalSecurityAgency/ghidra"."platforms.windows-x64"]
+checksum = "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d4db"
+url = "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip"
+url_api = "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/579530646"
+
+[[tools."github:rizinorg/rizin"]]
+version = "0.9.1"
+backend = "github:rizinorg/rizin"
+specifiers = ["0.9.1"]
+
+[tools."github:rizinorg/rizin".options]
+matching = "static-x86_64"
+
+[tools."github:rizinorg/rizin"."platforms.linux-x64"]
+checksum = "sha256:9102249a9f0b6319c5334a2e5cf8d9cc3f2035e1d3def027c41f6a90f647e8cf"
+url = "https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1-static-x86_64.tar.xz"
+url_api = "https://api.github.com/repos/rizinorg/rizin/releases/assets/460538308"
+
+[tools."github:rizinorg/rizin"."platforms.linux-x64-musl"]
+checksum = "sha256:9102249a9f0b6319c5334a2e5cf8d9cc3f2035e1d3def027c41f6a90f647e8cf"
+url = "https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1-static-x86_64.tar.xz"
+url_api = "https://api.github.com/repos/rizinorg/rizin/releases/assets/460538308"
+
+[tools."github:rizinorg/rizin"."platforms.macos-x64"]
+checksum = "sha256:9102249a9f0b6319c5334a2e5cf8d9cc3f2035e1d3def027c41f6a90f647e8cf"
+url = "https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1-static-x86_64.tar.xz"
+url_api = "https://api.github.com/repos/rizinorg/rizin/releases/assets/460538308"
+
+[tools."github:rizinorg/rizin"."platforms.windows-x64"]
+checksum = "sha256:9102249a9f0b6319c5334a2e5cf8d9cc3f2035e1d3def027c41f6a90f647e8cf"
+url = "https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1-static-x86_64.tar.xz"
+url_api = "https://api.github.com/repos/rizinorg/rizin/releases/assets/460538308"
+
+[[tools.java]]
+version = "temurin-21.0.12+8.0.LTS"
+backend = "core:java"
+specifiers = ["temurin-21.0.12+8.0.LTS"]
+
+[tools.java."platforms.linux-arm64"]
+checksum = "sha256:eba38e871b02d407897bfe017ea35352dfc1420ef6d2112425b0c67325ca509d"
+url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.12_8.tar.gz"
+
+[tools.java."platforms.linux-arm64-musl"]
+checksum = "sha256:a32f7655011640ed8fb4347fffa2588cb7538de2f2e82027845816740560e2b1"
+url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_aarch64_alpine-linux_hotspot_21.0.12_8.tar.gz"
+
+[tools.java."platforms.linux-x64"]
+checksum = "sha256:e4446ff06a276155697597cc0f1b15da004ff083f4964a35271ecee567177370"
+url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12_8.tar.gz"
+
+[tools.java."platforms.linux-x64-musl"]
+checksum = "sha256:073a48cb87f788a0cb283d81cc6d96cbc9d671d6a60a3ba6de62e66f0ea9dd47"
+url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_x64_alpine-linux_hotspot_21.0.12_8.tar.gz"
+
+[tools.java."platforms.macos-arm64"]
+checksum = "sha256:021d629349ebc12a409faa517b837ec80ceee8f58a5ac85c788ecad07ca6881c"
+url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.12_8.tar.gz"
+
+[tools.java."platforms.macos-x64"]
+checksum = "sha256:6b85c260eea574a995eacd0b3ee23c8042aa93b23a08e6478edafca0a0333d7f"
+url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_x64_mac_hotspot_21.0.12_8.tar.gz"
+
+[tools.java."platforms.windows-x64"]
+checksum = "sha256:9ba963ee2371874a74185d18bc7bb2ab9407df7683300855ed7606e0662321d0"
+url = "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_x64_windows_hotspot_21.0.12_8.zip"
+
+[[tools."npm:rea-agents"]]
+version = "6.5.0"
+aube = { path = ".mise/locks/npm-rea-agents/6.5.0", digest = "sha256:2b57e5577f3b42566df8e7c789ca9b1c163e32d77ed76106704f10be9390e073" }
+backend = "npm:rea-agents"
+specifiers = ["6.5.0"]
+
 [[tools."ubi:SteamRE/DepotDownloader"]]
 version = "DepotDownloader_3.4.0"
 backend = "ubi:SteamRE/DepotDownloader"
