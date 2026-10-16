@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import zipfile
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -26,19 +27,31 @@ class FakePatcher:
 
     writes: dict[str, bytes] = field(default_factory=lambda: {"Override/patched.2da": b"patched"})
     errors: int = 0
+    compiled: tuple[str, ...] = ()
+    builtin: tuple[str, ...] = ()
     calls: list[tuple[Path, Path, int | None]] = field(default_factory=list[tuple[Path, Path, int | None]])
+    launchers: list[Sequence[str] | None] = field(default_factory=list[Sequence[str] | None])
 
     def install(
-        self, game: Path, tslpatchdata: Path, *, option: int | None, log_to: Path, timeout: int
+        self,
+        game: Path,
+        tslpatchdata: Path,
+        *,
+        option: int | None,
+        log_to: Path,
+        timeout: int,
+        launcher: Sequence[str] | None = None,
     ) -> PatchReport:
         self.calls.append((game, tslpatchdata, option))
+        self.launchers.append(launcher)
         for rel, data in self.writes.items():
             p = game / rel
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_bytes(data)
         log_to.parent.mkdir(parents=True, exist_ok=True)
         log_to.write_text(f"fake run on {tslpatchdata}\nInstall completed: {self.errors} errors\n")
-        return PatchReport(self.errors, log_to, (f"Install completed: {self.errors} errors",))
+        tail = (f"Install completed: {self.errors} errors",)
+        return PatchReport(self.errors, log_to, tail, self.compiled, self.builtin)
 
 
 @dataclass

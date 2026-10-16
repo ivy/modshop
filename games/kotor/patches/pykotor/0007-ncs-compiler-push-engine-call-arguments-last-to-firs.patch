@@ -1,7 +1,7 @@
 From 058fb0f6f10c3505f3c73ee6a0bdaa14c002c2fb Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Fri, 16 Oct 2026 12:37:37 -0700
-Subject: [PATCH 7/7] ncs compiler: push engine-call arguments last to first
+Subject: [PATCH 7/8] ncs compiler: push engine-call arguments last to first
 
 EngineCallExpression compiled an engine function's arguments first to
 last, so the last argument ended on top of the stack. The engine pops an

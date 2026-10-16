@@ -35,7 +35,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -116,7 +118,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "Ajunta Pall Unique Appearance/tslpatchdata"
    }
@@ -147,13 +151,17 @@
   "steps": [
    {
     "allow_errors": 1,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "K1_Community_Patch*/tslpatchdata"
    },
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "k1cp-sithtroop/tslpatchdata"
    },
@@ -191,7 +199,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -205,13 +215,17 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    },
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/tslpatchdata"
    }
@@ -699,7 +713,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    }
@@ -932,7 +948,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    }
@@ -946,7 +964,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "JAO_Saber_Replacement/*/tslpatchdata"
    }
@@ -968,7 +988,9 @@
   "steps": [
    {
     "allow_errors": 1,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/tslpatchdata"
    }
@@ -982,7 +1004,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 4,
     "src": "*/tslpatchdata"
    }
@@ -996,7 +1020,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    }
@@ -1153,7 +1179,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/*/tslpatchdata"
    }
@@ -1511,7 +1539,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/tslpatchdata"
    }
@@ -1573,7 +1603,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -1635,13 +1667,17 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    },
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/tslpatchdata"
    },
@@ -1983,7 +2019,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/*/tslpatchdata"
    }
@@ -1997,7 +2035,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -2043,7 +2083,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": true,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -2073,7 +2115,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/*/tslpatchdata"
    }
@@ -2087,7 +2131,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/*/tslpatchdata"
    },
@@ -2101,7 +2147,9 @@
    },
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 2,
     "src": "*/*/tslpatchdata"
    }
@@ -2115,7 +2163,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2145,7 +2195,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/TSLPatchdata"
    }
@@ -2248,7 +2300,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2312,7 +2366,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2326,7 +2382,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -2340,7 +2398,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/tslpatchdata"
    }
@@ -2362,7 +2422,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -2376,7 +2438,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2390,7 +2454,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/*/tslpatchdata"
    }
@@ -2404,7 +2470,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/Tslpatchdata"
    }
@@ -2418,7 +2486,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/English/tslpatchdata"
    }
@@ -2448,7 +2518,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    }
@@ -2469,7 +2541,9 @@
    },
    {
     "allow_errors": 2,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    },
@@ -2503,19 +2577,25 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/*/tslpatchdata"
    },
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/*/tslpatchdata"
    },
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 2,
     "src": "*/*/tslpatchdata"
    }
@@ -2529,7 +2609,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2543,7 +2625,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2557,7 +2641,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": true,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2571,7 +2657,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2593,7 +2681,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2607,7 +2697,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -2637,7 +2729,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2651,7 +2745,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -2665,7 +2761,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/*/tslpatchdata"
    }
@@ -2679,7 +2777,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2709,7 +2809,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2723,7 +2825,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/*/tslpatchdata"
    }
@@ -2737,7 +2841,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2751,7 +2857,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/*/tslpatchdata"
    }
@@ -2765,7 +2873,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -2795,7 +2905,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    }
@@ -2809,7 +2921,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2823,7 +2937,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/*/tslpatchdata"
    }
@@ -2837,7 +2953,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -2851,7 +2969,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/*/tslpatchdata"
    }
@@ -2873,7 +2993,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2887,7 +3009,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -2909,7 +3033,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/*/tslpatchdata"
    }
@@ -2923,7 +3049,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    }
@@ -2937,7 +3065,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 2,
     "src": "*/*/tslpatchdata"
    }
@@ -2951,7 +3081,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    }
@@ -2965,7 +3097,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": true,
     "do": "holopatcher",
+    "nwnnsscomp": "109-kill-the-czerka-guard/KillCzerkaJerk.zip",
     "option": 2,
     "src": "*/tslpatchdata"
    }
@@ -2992,7 +3126,9 @@
    },
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/tslpatchdata"
    }
@@ -3006,7 +3142,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -3036,7 +3174,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -3050,7 +3190,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -3064,7 +3206,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -3078,7 +3222,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -3092,7 +3238,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/tslpatchdata"
    }
@@ -3106,7 +3254,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": null,
     "src": "*/*/tslpatchdata"
    }
@@ -3120,7 +3270,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": true,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 1,
     "src": "*/*/Main Install/tslpatchdata"
    }
@@ -3134,7 +3286,9 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 0,
     "src": "*/tslpatchdata"
    }
@@ -3281,13 +3435,17 @@
   "steps": [
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 3,
     "src": "*/*/tslpatchdata"
    },
    {
     "allow_errors": 0,
+    "compile": false,
     "do": "holopatcher",
+    "nwnnsscomp": null,
     "option": 5,
     "src": "*/*/tslpatchdata"
    }

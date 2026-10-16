@@ -54,8 +54,17 @@ def cpf(src: str, names: list[str], **kw: object) -> CopyFiles:
     return CopyFiles(src=src, names=tuple(names), **kw)  # pyright: ignore[reportArgumentType]
 
 
-def hp(src: str = "*/tslpatchdata", option: int | None = None, allow_errors: int = 0) -> HoloPatcher:
-    return HoloPatcher(src=src, option=option, allow_errors=allow_errors)
+def hp(
+    src: str = "*/tslpatchdata",
+    option: int | None = None,
+    allow_errors: int = 0,
+    *,
+    compile: bool = False,
+    nwnnsscomp: str | None = None,
+) -> HoloPatcher:
+    return HoloPatcher(
+        src=src, option=option, allow_errors=allow_errors, compile=compile, nwnnsscomp=nwnnsscomp
+    )
 
 
 def sdel(src: str, names: list[str]) -> StageDelete:
@@ -209,7 +218,7 @@ def recipe(game_dir: Path) -> Recipe:
     mod(106, hp())
     mod(107, cp("*/Override"))
     mod(108, cp("*"))
-    mod(109, hp())
+    mod(109, hp(compile=True))
     mod(110, cp("*"))
     mod(111, hp("*/*/tslpatchdata", option=1))
     mod(112, hp("*/*/tslpatchdata", option=0), cp("*/*/Optional - Upscaled Textures", recursive=True),
@@ -253,7 +262,7 @@ def recipe(game_dir: Path) -> Recipe:
         hp("*/*/tslpatchdata", option=2),
     )
     for n in (139, 140, 141, 142):
-        mod(n, hp("*/*/tslpatchdata"))
+        mod(n, hp("*/*/tslpatchdata", compile=n == 141))
     mod(143, skip=KMRP)
     mod(144, hp("*/*/tslpatchdata"))
     mod(145, hp())
@@ -286,7 +295,8 @@ def recipe(game_dir: Path) -> Recipe:
     mod(166, hp(option=0))
     mod(167, hp("*/*/tslpatchdata", option=2))
     mod(168, hp("*/tslpatchdata", option=0))
-    mod(169, hp(option=2))
+    # ships no nwnnsscomp.exe (its installer is HoloPatcher); TSLPatcher's, from mod 109
+    mod(169, hp(option=2, compile=True, nwnnsscomp=f"{dirs[109]}/KillCzerkaJerk.zip"))
     mod(170, repair("09-blaster-adjustment-orphan-rows", StageDir()), hp(option=1))
     mod(171, hp("*/*/tslpatchdata"))
     mod(172, cp("*/*/For Override", recursive=True))
@@ -296,7 +306,7 @@ def recipe(game_dir: Path) -> Recipe:
     mod(176, hp("*/*/tslpatchdata"))
     mod(177, hp())
     mod(178, hp("*/*/tslpatchdata"))
-    mod(179, hp("*/*/Main Install/tslpatchdata", option=1))
+    mod(179, hp("*/*/Main Install/tslpatchdata", option=1, compile=True))
     mod(180, hp(option=0))
     mod(181, DedupeTpc())
     mod(182, sdel("JC's Minor Fixes*/*/Aesthetic Improvements",

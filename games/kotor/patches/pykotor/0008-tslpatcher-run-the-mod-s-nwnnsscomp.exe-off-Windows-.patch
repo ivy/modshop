@@ -1,0 +1,134 @@
+From 7232805547915dcbca2409588a89092417251b6e Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Fri, 16 Oct 2026 12:53:41 -0700
+Subject: [PATCH 8/8] tslpatcher: run the mod's nwnnsscomp.exe off Windows
+ through a launcher
+
+HoloPatcher compiles a [CompileList] with the nwnnsscomp.exe the mod
+ships only on Windows; anywhere else it uses the built-in compiler, so
+the same mod installs different bytecode depending on the platform, and
+the built-in compiler's defects reach the game (engine-call arguments
+were pushed in reverse from December 2025 until the previous commit).
+
+PYKOTOR_NWNNSSCOMP_LAUNCHER names a command line nwnnsscomp's is
+appended to (for instance "wine", or a script that runs Wine in a
+container); with it set, the mod's compiler runs on any platform, with
+the same TSLPatcher-version check and the same fallback as on Windows.
+PYKOTOR_NWNNSSCOMP_TIMEOUT overrides the five seconds a compile may
+take, which a Wine start alone can use up.
+
+Measured: Alignment Affects Force Powers' k_fp_heal1ti.nss, compiled by
+its own nwnnsscomp.exe under Wine through this path, is byte-identical
+to the same compiler's output on the game's own machine.
+---
+ .../pykotor/resource/formats/ncs/compilers.py | 10 ++++++---
+ .../src/pykotor/tslpatcher/mods/nss.py        | 21 ++++++++++++++-----
+ 2 files changed, 23 insertions(+), 8 deletions(-)
+
+diff --git a/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compilers.py b/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compilers.py
+index d9fd75d8c..327b61f00 100644
+--- a/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compilers.py
++++ b/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compilers.py
+@@ -20,6 +20,8 @@ from utility.misc import generate_hash  # pyright: ignore[reportMissingImports]
+ if TYPE_CHECKING:
+     import os
+ 
++    from collections.abc import Sequence
++
+     from subprocess import CompletedProcess
+ 
+     from pykotor.resource.formats.ncs.ncs_data import NCS, NCSOptimizer
+@@ -237,7 +239,9 @@ class NwnnsscompConfig(ComparableMixin):
+ 
+ 
+ class ExternalNCSCompiler(NCSCompiler):
+-    def __init__(self, nwnnsscomp_path: os.PathLike | str):
++    def __init__(self, nwnnsscomp_path: os.PathLike | str, launcher: Sequence[str] = ()):
++        """`launcher` is a command line nwnnsscomp's own is appended to, such as ``["wine"]`` off Windows."""
++        self.launcher: list[str] = list(launcher)
+         self.change_nwnnsscomp_path(nwnnsscomp_path)
+ 
+     def get_info(self) -> KnownExternalCompilers:
+@@ -331,7 +335,7 @@ class ExternalNCSCompiler(NCSCompiler):
+ 
+         try:
+             result: CompletedProcess[str] = subprocess.run(
+-                args=config.get_compile_args(str(self.nwnnsscomp_path)),
++                args=[*self.launcher, *config.get_compile_args(str(self.nwnnsscomp_path))],
+                 capture_output=True,  # Capture stdout and stderr
+                 text=True,
+                 timeout=timeout,
+@@ -410,7 +414,7 @@ class ExternalNCSCompiler(NCSCompiler):
+ 
+         try:
+             result: CompletedProcess[str] = subprocess.run(
+-                args=config.get_decompile_args(str(self.nwnnsscomp_path)),
++                args=[*self.launcher, *config.get_decompile_args(str(self.nwnnsscomp_path))],
+                 capture_output=True,  # Capture stdout and stderr
+                 text=True,
+                 timeout=timeout,
+diff --git a/Libraries/PyKotor/src/pykotor/tslpatcher/mods/nss.py b/Libraries/PyKotor/src/pykotor/tslpatcher/mods/nss.py
+index cabbfe0c4..94fb3849a 100644
+--- a/Libraries/PyKotor/src/pykotor/tslpatcher/mods/nss.py
++++ b/Libraries/PyKotor/src/pykotor/tslpatcher/mods/nss.py
+@@ -4,6 +4,7 @@ from __future__ import annotations
+ 
+ import os
+ import re
++import shlex
+ 
+ from pathlib import Path, PurePath, PureWindowsPath
+ from tempfile import TemporaryDirectory
+@@ -17,6 +18,9 @@ from pykotor.tools.encoding import decode_bytes_with_fallbacks
+ from pykotor.tools.path import CaseAwarePath
+ from pykotor.tslpatcher.mods.template import PatcherModifications
+ 
++LAUNCHER_ENV = "PYKOTOR_NWNNSSCOMP_LAUNCHER"
++TIMEOUT_ENV = "PYKOTOR_NWNNSSCOMP_TIMEOUT"
++
+ if TYPE_CHECKING:
+     from typing_extensions import Literal  # pyright: ignore[reportMissingModuleSource]
+ 
+@@ -92,11 +96,15 @@ class ModificationsNSS(PatcherModifications):
+             temp_script_file, mutable_source.value.encode(encoding="windows-1252", errors="ignore")
+         )
+ 
+-        # Compile with external on windows, fall back to built-in if mac/linux or if external fails.
++        # Compile with the mod's nwnnsscomp.exe on Windows, or elsewhere through the launcher
++        # PYKOTOR_NWNNSSCOMP_LAUNCHER names (e.g. "wine"); fall back to the built-in compiler
++        # when there is neither, no nwnnsscomp.exe, or it fails.
+         is_windows = os.name == "nt"
++        launcher = shlex.split(os.environ.get(LAUNCHER_ENV, ""))
++        can_run_external = is_windows or bool(launcher)
+         nwnnsscomp_exists = bool(self.nwnnsscomp_path and self.nwnnsscomp_path.is_file())
+-        if is_windows and self.nwnnsscomp_path and nwnnsscomp_exists:
+-            nwnnsscompiler = ExternalNCSCompiler(self.nwnnsscomp_path)
++        if can_run_external and self.nwnnsscomp_path and nwnnsscomp_exists:
++            nwnnsscompiler = ExternalNCSCompiler(self.nwnnsscomp_path, launcher)
+             try:
+                 detected_nwnnsscomp: str = nwnnsscompiler.get_info().name
+             except ValueError:
+@@ -112,7 +120,7 @@ class ModificationsNSS(PatcherModifications):
+             except Exception as e:  # pylint: disable=W0718  # noqa: BLE001
+                 logger.add_error(str((e.__class__.__name__, str(e))))
+ 
+-        if is_windows:
++        if can_run_external:
+             if not self.nwnnsscomp_path or not nwnnsscomp_exists:
+                 logger.add_note(
+                     "nwnnsscomp.exe was not found in the 'tslpatchdata' folder, using the built-in compilers..."
+@@ -212,7 +220,10 @@ class ModificationsNSS(PatcherModifications):
+         with TemporaryDirectory() as tempdir:
+             tempcompiled_filepath: Path = Path(tempdir, "temp_script.ncs")
+             stdout, stderr = nwnnsscompiler.compile_script(
+-                temp_script_file, tempcompiled_filepath, game
++                temp_script_file,
++                tempcompiled_filepath,
++                game,
++                timeout=int(os.environ.get(TIMEOUT_ENV, "5")),
+             )
+             result: bool | bytes = "File is an include file, ignored" in stdout
+             if not result:
+-- 
+2.56.0
+

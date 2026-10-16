@@ -16,9 +16,11 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict
 
 from modshop.core.errors import Preflight, StepFailed
-from modshop.kotor import kmrp
+from modshop.kotor import kmrp, nwnnsscomp
 from modshop.kotor.context import StepContext
 from modshop.kotor.paths import ci_find, ci_path, collapse_case, files_in, put, subdirs
+
+WINE_IMAGE = "modshop-wine"  # kmrp-build/wine/Containerfile: KMRP's installer and nwnnsscomp run in it
 
 
 class StepModel(BaseModel):
@@ -289,7 +291,7 @@ class Kmrp(StepModel):
     do: Literal["kmrp"] = "kmrp"
     installer: str
     settings: dict[str, bool]
-    image: str = "modshop-wine"
+    image: str = WINE_IMAGE
 
     def inputs(self) -> tuple[str, ...]:
         return (
@@ -317,21 +319,55 @@ class Kmrp(StepModel):
 
 
 class HoloPatcher(StepModel):
-    """HoloPatcher on a staged tslpatchdata (or its parent); `option` is the namespace index."""
+    """HoloPatcher on a staged tslpatchdata (or its parent); `option` is the namespace index.
+
+    `compile` declares that the mod has a [CompileList]: its scripts are then compiled by
+    TSLPatcher's nwnnsscomp.exe under Wine, the compiler its author's installer runs, and the
+    step fails if pykotor's own compiler builds any of them, or if an undeclared step compiles.
+    `nwnnsscomp` names another mod's archive to take that compiler from, for a mod that
+    ships none.
+    """
 
     do: Literal["holopatcher"] = "holopatcher"
     src: str = "*/tslpatchdata"
     option: int | None = None
     allow_errors: int = 0
+    compile: bool = False
+    nwnnsscomp: str | None = None
+
+    def inputs(self) -> tuple[str, ...]:
+        if not self.compile:
+            return ()
+        return (
+            f"image:{WINE_IMAGE}",
+            "./kmrp-build/wine/Containerfile",
+            *((self.nwnnsscomp,) if self.nwnnsscomp else ()),
+        )
 
     def apply(self, ctx: StepContext) -> None:
         td = ci_path(ctx.stage.path, self.src)
+        if self.nwnnsscomp and nwnnsscomp.supply(td, ctx.paths.archives / self.nwnnsscomp):
+            ctx.log.info("   nwnnsscomp.exe and nwscript.nss from %s", self.nwnnsscomp)
         log_to = ctx.paths.logs / "holopatcher" / f"{ctx.label}.log"
         report = ctx.patcher.install(
-            ctx.game.root, td, option=self.option, log_to=log_to, timeout=ctx.timeout
+            ctx.game.root,
+            td,
+            option=self.option,
+            log_to=log_to,
+            timeout=ctx.timeout,
+            launcher=nwnnsscomp.launcher(WINE_IMAGE) if self.compile else None,
         )
         for line in report.tail:
             ctx.log.info("   %s", line[:200])
+        if report.compiled and not self.compile:
+            names = ", ".join(report.compiled)
+            raise StepFailed(ctx.entry, ctx.index, self.do, f"compiled {names} without compile=True", log_to)
+        if report.builtin:
+            raise StepFailed(
+                ctx.entry, ctx.index, self.do, f"pykotor's compiler built: {report.builtin[0]}", log_to
+            )
+        if report.compiled:
+            ctx.log.info("   nwnnsscomp compiled %s", ", ".join(report.compiled))
         if report.errors is None or report.errors > self.allow_errors:
             raise StepFailed(ctx.entry, ctx.index, self.do, f"{report.errors} errors on {td}", log_to)
         for kept, gone in collapse_case(ctx.game.override):

@@ -1,7 +1,7 @@
 From ad6b22bfa7a9d8efecaa41c0ae249ecb0bd44aa6 Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Thu, 15 Oct 2026 00:42:33 -0700
-Subject: [PATCH 1/7] tslpatcher: pass ModificationsNSS its replace flag by
+Subject: [PATCH 1/8] tslpatcher: pass ModificationsNSS its replace flag by
  keyword
 
 ModificationsNSS.__init__ takes `replace` keyword-only, so load_compile_list's

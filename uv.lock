@@ -225,7 +225,7 @@ requires-dist = [
     { name = "pillow", marker = "extra == 'repairs'", specifier = ">=11" },
     { name = "pycryptodome", specifier = ">=3.20" },
     { name = "pydantic", specifier = ">=2.12,<3" },
-    { name = "pykotor", url = "https://github.com/ivy/PyKotor/archive/058fb0f6f10c3505f3c73ee6a0bdaa14c002c2fb.tar.gz", subdirectory = "Libraries/PyKotor" },
+    { name = "pykotor", url = "https://github.com/ivy/PyKotor/archive/7232805547915dcbca2409588a89092417251b6e.tar.gz", subdirectory = "Libraries/PyKotor" },
     { name = "typer", specifier = ">=0.27,<1" },
 ]
 provides-extras = ["repairs"]
@@ -505,14 +505,14 @@ wheels = [
 [[package]]
 name = "pykotor"
 version = "2.3.12"
-source = { url = "https://github.com/ivy/PyKotor/archive/058fb0f6f10c3505f3c73ee6a0bdaa14c002c2fb.tar.gz", subdirectory = "Libraries/PyKotor" }
+source = { url = "https://github.com/ivy/PyKotor/archive/7232805547915dcbca2409588a89092417251b6e.tar.gz", subdirectory = "Libraries/PyKotor" }
 dependencies = [
     { name = "bioware-kaitai-formats" },
     { name = "defusedxml" },
     { name = "kaitaistruct" },
     { name = "ply" },
 ]
-sdist = { hash = "sha256:2d2c2b592c7c86f73cf2c94db86c7e07259974d4610f9173e3f25d9911685556" }
+sdist = { hash = "sha256:f53dad960ad7f67d9e65c6663a81d6f6ea35e090b05b7746ddbf2287d3eda014" }
 
 [package.metadata]
 requires-dist = [

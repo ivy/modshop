@@ -1,7 +1,7 @@
 From a12fd9f8edcb6e136f728f3c5c058a86a90739bd Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Thu, 15 Oct 2026 18:41:19 -0700
-Subject: [PATCH 4/7] tslpatcher: a namespace without IniName or InfoName gets
+Subject: [PATCH 4/8] tslpatcher: a namespace without IniName or InfoName gets
  TSLPatcher's defaults
 
 TSLPatcher reads changes.ini and info.rtf from a namespace's DataPath when

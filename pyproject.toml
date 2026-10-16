@@ -27,7 +27,7 @@ kmrp-build = ["pillow>=12", "numpy>=2.5", "fonttools>=4.67", "capstone>=5.0"]
 [tool.uv.sources]
 # The patcher's library, with the fixes in games/kotor/patches/pykotor/ applied: that series'
 # README names the base commit; this is its head.
-pykotor = { url = "https://github.com/ivy/PyKotor/archive/058fb0f6f10c3505f3c73ee6a0bdaa14c002c2fb.tar.gz", subdirectory = "Libraries/PyKotor" }
+pykotor = { url = "https://github.com/ivy/PyKotor/archive/7232805547915dcbca2409588a89092417251b6e.tar.gz", subdirectory = "Libraries/PyKotor" }
 
 [build-system]
 requires = ["hatchling"]

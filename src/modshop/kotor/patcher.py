@@ -3,12 +3,16 @@
 from __future__ import annotations
 
 import logging
+import os
 import re
+import shlex
 import subprocess
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
 
+from modshop.kotor.nwnnsscomp import LAUNCHER_ENV, TIMEOUT, TIMEOUT_ENV
 from modshop.kotor.paths import ci_find
 
 log = logging.getLogger("modshop")
@@ -19,11 +23,20 @@ class PatchReport:
     errors: int | None  # None when the run never reported completing
     log: Path
     tail: tuple[str, ...]  # the lines worth showing: errors, warnings, the completion line
+    compiled: tuple[str, ...] = ()  # the [CompileList] scripts it compiled
+    builtin: tuple[str, ...] = ()  # its lines saying pykotor's own compiler did one of them
 
 
 class Patcher(Protocol):
     def install(
-        self, game: Path, tslpatchdata: Path, *, option: int | None, log_to: Path, timeout: int
+        self,
+        game: Path,
+        tslpatchdata: Path,
+        *,
+        option: int | None,
+        log_to: Path,
+        timeout: int,
+        launcher: Sequence[str] | None = None,
     ) -> PatchReport: ...
 
 
@@ -58,8 +71,21 @@ class HoloPatcherCli:
     executable: Path
 
     def install(
-        self, game: Path, tslpatchdata: Path, *, option: int | None, log_to: Path, timeout: int
+        self,
+        game: Path,
+        tslpatchdata: Path,
+        *,
+        option: int | None,
+        log_to: Path,
+        timeout: int,
+        launcher: Sequence[str] | None = None,
     ) -> PatchReport:
+        """`launcher` runs the mod's nwnnsscomp.exe for its [CompileList]; without one, HoloPatcher
+        off Windows compiles with pykotor's own compiler."""
+        env = dict(os.environ)
+        env.pop(LAUNCHER_ENV, None)
+        if launcher:
+            env |= {LAUNCHER_ENV: shlex.join(launcher), TIMEOUT_ENV: str(TIMEOUT)}
         cmd = [
             str(self.executable),
             "--game-dir",
@@ -73,7 +99,7 @@ class HoloPatcherCli:
             cmd += ["--namespace-option-index", str(option)]
         aliases = case_aliases(tslpatchdata, game / "modules")
         try:
-            r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+            r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, env=env)
         finally:
             drop_aliases(aliases)
         log_to.parent.mkdir(parents=True, exist_ok=True)
@@ -85,4 +111,6 @@ class HoloPatcherCli:
         ]
         done = [m for m in (re.search(r"Install completed: (\d+) errors", line) for line in tail) if m]
         errors = int(done[-1].group(1)) if done else None
-        return PatchReport(errors, log_to, tuple(tail[-6:]))
+        compiled = tuple(re.findall(r"Compiling '([^']+)'", r.stdout))
+        builtin = tuple(line for line in r.stdout.splitlines() if "the built-in compilers" in line)
+        return PatchReport(errors, log_to, tuple(tail[-6:]), compiled, builtin)

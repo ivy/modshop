@@ -34,6 +34,7 @@ def test_code_closure_is_the_pinned_list() -> None:
         "modshop.kotor",
         "modshop.kotor.context",
         "modshop.kotor.kmrp",
+        "modshop.kotor.nwnnsscomp",
         "modshop.kotor.patcher",
         "modshop.kotor.paths",
         "modshop.kotor.runner",

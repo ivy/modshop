@@ -1,7 +1,7 @@
 From 0847fc03847934b73055a0a2a3140981db754251 Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Thu, 15 Oct 2026 20:21:29 -0700
-Subject: [PATCH 6/7] capsule: Capsule.add replaces a resource the capsule
+Subject: [PATCH 6/8] capsule: Capsule.add replaces a resource the capsule
  already holds
 
 _add_to set the new resource and then copied every existing resource over

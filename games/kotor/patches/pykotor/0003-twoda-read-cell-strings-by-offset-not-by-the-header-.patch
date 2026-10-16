@@ -1,7 +1,7 @@
 From 14619fd772e5d253fe160d847f1d07d51b3b6fb7 Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Thu, 15 Oct 2026 00:42:34 -0700
-Subject: [PATCH 3/7] twoda: read cell strings by offset, not by the header's
+Subject: [PATCH 3/8] twoda: read cell strings by offset, not by the header's
  cell-data size
 
 Some 2DA editors write 0 in the V2.b header's cell-data size field. The game

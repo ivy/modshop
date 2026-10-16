@@ -1,4 +1,5 @@
 import logging
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -6,9 +7,11 @@ import pytest
 from modshop.core.config import Paths
 from modshop.core.errors import StepFailed
 from modshop.core.stage import Stage
+from modshop.kotor import nwnnsscomp
 from modshop.kotor.context import StepContext
 from modshop.kotor.paths import GameTree
 from modshop.kotor.steps import (
+    WINE_IMAGE,
     ArchivePath,
     Copy,
     CopyFiles,
@@ -119,6 +122,40 @@ def test_holopatcher_step_collapses_case_and_checks_errors(tmp_path: Path) -> No
     with pytest.raises(StepFailed, match="2 errors"):
         HoloPatcher(src="Mod/tslpatchdata").apply(ctx)
     HoloPatcher(src="Mod/tslpatchdata", allow_errors=2).apply(ctx)
+
+
+def test_holopatcher_compile_runs_nwnnsscomp_and_fails_on_pykotors_compiler(tmp_path: Path) -> None:
+    patcher = FakePatcher(compiled=("a.nss",))
+    ctx = ctx_for(tmp_path, patcher)
+    with pytest.raises(StepFailed, match=r"compiled a\.nss without compile=True"):
+        HoloPatcher(src="Mod/tslpatchdata").apply(ctx)
+    assert patcher.launchers == [None]
+    step = HoloPatcher(src="Mod/tslpatchdata", compile=True)
+    step.apply(ctx)
+    launcher = patcher.launchers[-1]
+    assert launcher is not None and launcher[-1] == WINE_IMAGE
+    assert f"image:{WINE_IMAGE}" in step.inputs()
+    patcher.builtin = (
+        "[Note] Patching from a unix operating system, compiling 'a.nss' using the built-in compilers...",
+    )
+    with pytest.raises(StepFailed, match="pykotor's compiler built"):
+        step.apply(ctx)
+
+
+def test_nwnnsscomp_supply_takes_tslpatchers_compiler_from_another_archive(tmp_path: Path) -> None:
+    td = tmp_path / "tslpatchdata"
+    td.mkdir()
+    archive = tmp_path / "other.zip"
+    with zipfile.ZipFile(archive, "w") as z:
+        z.writestr("tslpatchdata/nwnnsscomp.exe", b"not tslpatcher's")
+        z.writestr("tslpatchdata/nwscript.nss", b"// nwscript")
+    with pytest.raises(ValueError, match="is not TSLPatcher's"):
+        nwnnsscomp.supply(td, archive)
+    assert not nwnnsscomp.supply(td, archive)  # it has one now: nothing to supply
+
+
+def test_nwnnsscomp_launcher_hands_wine_z_paths() -> None:
+    assert nwnnsscomp.windows("/data/stage/x.nss") == "Z:\\data\\stage\\x.nss"
 
 
 def test_script_args_render_and_declare_inputs(tmp_path: Path) -> None:
