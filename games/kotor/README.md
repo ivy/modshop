@@ -22,11 +22,12 @@ Two machines are involved, named in `local.toml`:
 ### 1. The game, pristine
 
 ```bash
-build/base.sh <steam account>    # steamcmd in a container; asks for the password and a Steam Guard code the first time
+mise install                     # DepotDownloader, from the repository's mise.toml
+build/base.sh <steam account>    # asks for the password and a Steam Guard code the first time
 build/build.py base              # normalises timestamps, writes data/game/vanilla/manifest.txt
 ```
 
-`base.json` names the app, its Windows depot and the exact depot manifest id, so the base is a definition rather than a copy of some install: `steamcmd` downloads that manifest with the platform forced to Windows and `base.sh` moves the result to `data/game/vanilla/tree`. The handheld's own Steam install is not an input to anything; a fresh install there is not a way back either, since Steam's "verify integrity" rewrites changed files but never deletes added ones. `steamcmd`'s login state stays in a podman volume, outside the repository and `data/`.
+`base.json` names the app, its Windows depot and the exact depot manifest id, so the base is a definition rather than a copy of some install: DepotDownloader (SteamRE's open-source Steam client) fetches that manifest for Windows into `data/game/vanilla/tree`. The handheld's own Steam install is not an input to anything; a fresh install there is not a way back either, since Steam's "verify integrity" rewrites changed files but never deletes added ones. The login state stays under `~/.config/DepotDownloader`, outside the repository and `data/`. (`steamcmd` was tried first: with the platform forced to Windows it writes the depot under a path with literal backslashes, and the container image keeps it outside any mountable volume.)
 
 The build host's `data/game` must be on a filesystem with reflinks (XFS with `reflink=1`, btrfs); `build.py` checks and refuses otherwise. Every checkpoint is a reflink copy, so the chain costs only the bytes each mod rewrites.
 

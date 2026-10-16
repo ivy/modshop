@@ -1,0 +1,2 @@
+[tools]
+"ubi:SteamRE/DepotDownloader" = { version = "DepotDownloader_3.4.0", exe = "DepotDownloader", matching = "linux-x64" }
