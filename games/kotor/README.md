@@ -69,6 +69,7 @@ Each folder in `repairs/` is one scripted fix with its README, taking its input 
 - `08-wounded-republic-detonate-controller`: a mod's room model carries a `detonate` controller on its bubble emitters that ends the game under Proton the first time the room is in view. In the recipe.
 - `07-kmrp-pot-gui-textures`: KMRP's three 768x768 interface textures at a power-of-two size. Unproven, not in the recipe; see its README. It needs Pillow: `uv sync --extra repairs`.
 - `09-blaster-adjustment-orphan-rows`: one option of JC's Blaster Adjustment lists two 2DA rows whose sections only its full option has; the rows are dropped from the staged change file before the patcher runs. In the recipe.
+- `10-no-minimize-under-proton`: the game minimises itself when the logo movie hands it focus, and under gamescope its next frame then waits forever: a black screen on about one start in three. A KPM byte patch in `patch_config.toml` removes the minimise until a KMRP release carries its own fix (`patches/kmrp/`, patch 6). In the recipe, after KMRP.
 
 ### 6. KMRP
 
@@ -111,4 +112,4 @@ What has been needed to diagnose crashes under Proton, in the order it helped:
 - **The engine's code**: `.text` of the executable on disk is SteamStub-encrypted, so `modshop kotor re dump`, with the game running, reads the image from the Wine process over ssh and writes `data/re/swkotor.unpacked.exe`: a PE a disassembler opens as it is (REA and Ghidra, from `mise install`), with every section but `.text` from the file on disk and KPM's hook sites in `.text` put back to the bytes `patch_config.toml` records. `data/re/dump.json` lists what it restored and the call and jump sites that point into small anonymous allocations or the game folder's DLLs: candidates for redirects KMRP's modules make without a `patch_config.toml` entry, left as they are because nothing records what they replaced, and to be confirmed in the disassembler before an address near one is trusted.
 - **Do not** set `glibc.malloc.mmap_threshold=0` through Proton's environment to catch a heap overrun: the prefix's `explorer.exe` never finishes starting with it.
 
-Specific stories, each beside its fix: the detonate controller (`repairs/08-…`), the upgrade-screen heap corruption (`repairs/07-…`), the stick's over-long movement vector and the stick in conversations (`patches/kmrp/`, patches 4 and 5), the minimized game after a movie skip (`../../tools/restore-window/`).
+Specific stories, each beside its fix: the detonate controller (`repairs/08-…`), the upgrade-screen heap corruption (`repairs/07-…`), the stick's over-long movement vector and the stick in conversations (`patches/kmrp/`, patches 4 and 5), the black screen after the logo movies (`repairs/10-…`).

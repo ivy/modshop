@@ -3540,5 +3540,24 @@
     "reads": []
    }
   ]
+ },
+ {
+  "inputs": [],
+  "mod": "repair:10-no-minimize-under-proton",
+  "steps": [
+   {
+    "args": [
+     {
+      "kind": "game",
+      "spec": null
+     }
+    ],
+    "do": "script",
+    "path": "./repairs/10-no-minimize-under-proton/make.py",
+    "reads": [
+     "./repairs/10-no-minimize-under-proton"
+    ]
+   }
+  ]
  }
 ]

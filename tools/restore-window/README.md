@@ -2,6 +2,8 @@
 
 KotOR minimizes its own window when it loses focus in fullscreen. In Game Mode there is no taskbar, so that is a black panel with the game still running behind it (seen 2026-10-15 after skipping the startup logo movie: KMRP's movie window closed, gamescope logged `xwm: waylandres but no win`, the game's window went iconic with `WS_MINIMIZE` set).
 
+The build no longer lets the game minimise itself ([`../../games/kotor/repairs/10-no-minimize-under-proton/`](../../games/kotor/repairs/10-no-minimize-under-proton/README.md)). That README also says why a restore cannot help once the game has drawn a frame while minimised: the frame's `SwapBuffers` waits forever on the thread that would handle the restore.
+
 `restore.exe` runs inside the game's wine prefix, finds the window titled "Star Wars: Knights of the Old Republic", and calls `ShowWindow(SW_RESTORE)` on it. Built with the llvm-mingw image:
 
 ```bash
