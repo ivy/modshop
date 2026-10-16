@@ -1,0 +1,25 @@
+From 24e93ab0fccff4cf1ab033b6a1c9dc20ad14b7bb Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Fri, 16 Oct 2026 16:06:10 -0700
+Subject: [PATCH 1/2] build: require CMake 3.5, the oldest CMake 4 accepts
+
+CMake 4 removed compatibility with projects declaring a minimum below
+3.5, so configuring fails at the first line. Nothing in the build uses a
+feature newer than 3.5.
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 257598f..cdffe8d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 2.8.12)
++cmake_minimum_required(VERSION 3.5)
+ project(nwn-tools)
+ 
+ #find_program(bison bison)
+-- 
+2.56.0
+

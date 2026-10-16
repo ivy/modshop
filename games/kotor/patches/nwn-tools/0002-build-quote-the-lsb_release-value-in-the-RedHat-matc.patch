@@ -1,0 +1,28 @@
+From 7bebb697a298e62cf4a5d77f9064867a87e101b5 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Fri, 16 Oct 2026 16:06:10 -0700
+Subject: [PATCH 2/2] build: quote the lsb_release value in the RedHat match
+
+Where lsb_release is absent the variable is empty, the unquoted
+expansion disappears, and string(REGEX MATCH) fails with too few
+arguments. Quoting it with a prefix keeps the argument present.
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cdffe8d..b3cab94 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -17,7 +17,7 @@ execute_process(COMMAND ${LSB_RELEASE_EXEC} -is
+ )
+ 
+ message("-- LSB_RELEASE_ID_SHORT : ${LSB_RELEASE_ID_SHORT}")
+-string (REGEX MATCH "RedHat" is_redhat ${LSB_RELEASE_ID_SHORT})
++string (REGEX MATCH "RedHat" is_redhat "x${LSB_RELEASE_ID_SHORT}")
+ message("-- is_redhat : ${is_redhat}")
+ 
+ find_package(BISON)
+-- 
+2.56.0
+

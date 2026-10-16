@@ -1,6 +1,6 @@
 # Patch series
 
-Fixes to two other projects, kept as `git format-patch` series over the upstream commit each was written against, per [`../../../docs/conventions.md`](../../../docs/conventions.md). Each patch carries the project's own license. `git am *.patch` applies a series to a fresh clone of the project.
+Fixes to three other projects, kept as `git format-patch` series over the upstream commit each was written against, per [`../../../docs/conventions.md`](../../../docs/conventions.md). Each patch carries the project's own license. `git am *.patch` applies a series to a fresh clone of the project.
 
 ## `pykotor/`: OpenKotOR/PyKotor, base `ca61ce8d5` (master), branch `modshop-patches` on the fork [ivy/PyKotor](https://github.com/ivy/PyKotor)
 
@@ -27,3 +27,12 @@ The fork's branch is the series applied: its head is the base plus these eight c
 6. Under Wine, the game does not minimise itself when it loses activation. Its `WM_ACTIVATEAPP` case minimises the window in fullscreen (`ShowWindow` at `0x004029DB`); under gamescope nothing restores it, Wine shrinks the OpenGL child to 160x31, and `SwapBuffers` waits forever in Mesa's DRI3 back-buffer wait: the black screen after the logos on about one start in three. A core hook (`0x004029D2`) skips the call when ntdll exports `wine_get_version`. It belongs to KMRP's main module, which is not built here, so the controller build compiles it but does not install it; the same change was played as a `NOP` in the running game's memory. Not yet sent upstream.
 
 The first three are what make the Linux build possible and are not intended for upstream as they stand; the last three are. The series is regenerated from the branch with `git format-patch 3adb77c` when the branch moves.
+
+## `nwn-tools/`: meaglyn/nwn-tools, base `ed2c227` (master), branch `modshop-build`
+
+Edward T. Smith's `nwnnsscomp`, built natively on Linux as a black-box oracle for the nwscript toolchain's conformance suite (`docs/research/nwnnsscomp-conformance.md` in that project). The compiler itself is unchanged; both patches are to the build.
+
+1. `CMakeLists.txt`: require CMake 3.5. CMake 4 refuses projects declaring a minimum below 3.5, and this one declares 2.8.12.
+2. `CMakeLists.txt`: quote the `lsb_release` value in the RedHat match. Without `lsb_release` the variable is empty, the unquoted expansion vanishes, and `string(REGEX MATCH)` fails with too few arguments.
+
+`mise run nwnnsscomp:build` clones the base, applies the series, builds in-source (bison looks for `NscParser.ypp` beside the generated files) and installs the binary to `games/kotor/data/tools/nwnnsscomp`. It needs a C++ compiler, `make`, `bison` and `flex` from the system; CMake comes from mise. The series is regenerated from the branch with `git format-patch ed2c227` when the branch moves.

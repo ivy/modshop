@@ -21,3 +21,20 @@ rm -rf .claude/skills/reverse-engineer-anything
 mkdir -p .claude/skills
 cp -R "$src" .claude/skills/
 '''
+
+[tasks."nwnnsscomp:build"]
+description = "build nwnnsscomp natively from meaglyn/nwn-tools plus patches/nwn-tools into games/kotor/data/tools/"
+run = '''
+set -eu
+root="$PWD"
+work="$root/games/kotor/data/build/nwn-tools"
+rm -rf "$work"
+git clone -q https://github.com/meaglyn/nwn-tools.git "$work"
+cd "$work"
+git -c advice.detachedHead=false checkout -q ed2c227
+git -c user.name=modshop -c user.email=modshop@localhost am -q "$root"/games/kotor/patches/nwn-tools/*.patch
+mise x cmake@4 -- cmake . > cmake.log
+mise x cmake@4 -- make -j"$(nproc)" nwnnsscomp > make.log
+install -D -m 0755 nwnnsscomp/nwnnsscomp "$root/games/kotor/data/tools/nwnnsscomp"
+echo "installed $root/games/kotor/data/tools/nwnnsscomp"
+'''
