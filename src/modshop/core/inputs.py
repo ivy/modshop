@@ -88,8 +88,8 @@ class PathInput:
         files = walk(self.path) if self.path.is_dir() else [self.path]
         out: list[InputRow] = []
         for p in files:
-            if p.is_symlink():
-                continue
+            if p.is_symlink() or "__pycache__" in p.parts:
+                continue  # bytecode caches appear when a script is imported; they are not the script
             rel = p.relative_to(self.path).as_posix() if self.path.is_dir() else p.name
             out.append(InputRow(self.spec, rel, cache.digest(p, full=full)))
         return out

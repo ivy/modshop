@@ -52,3 +52,13 @@ def test_hash_cache_is_relative_and_reports_lies(tmp_path: Path) -> None:
     cache2._rows = {k: "0" * 64 for k in cache2._rows}  # pyright: ignore[reportPrivateUsage]
     cache2.digest(f, full=True)
     assert cache2.lies == [f] or cache2.lies == []  # a lie is reported only for a key still present
+
+
+def test_repo_input_ignores_bytecode_caches(tmp_path: Path) -> None:
+    p = paths(tmp_path)
+    (p.game_dir / "repairs" / "r" / "__pycache__").mkdir(parents=True)
+    (p.game_dir / "repairs" / "r" / "make.py").write_text("x")
+    (p.game_dir / "repairs" / "r" / "__pycache__" / "make.cpython-314.pyc").write_bytes(b"\x00")
+    cache = HashCache(p.hashcache, p.archives)
+    rows = InputResolver(p).resolve("./repairs/r", "e").rows(cache)
+    assert [r.rel for r in rows] == ["make.py"]
