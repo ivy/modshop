@@ -67,7 +67,7 @@ class Session:
 
     def builder(self, store: Store | None = None, work: WorkTree | None = None) -> Builder:
         local = self.local()
-        run = runner(self.paths, self.toolchain.patcher, local.handheld if local else None)
+        run = runner(self.paths, self.toolchain.patcher, local)
         stages = stage_factory(self.paths.stage, self.resolver, self.toolchain.extractor)
         return Builder(
             self.recipe, store or self.store, work or self.work(), self.keyer, stages, run, self.cloner
@@ -165,7 +165,8 @@ def status(data: DataOpt = None) -> None:
     links = s.links()
     s.cache.save()
     for link in links:
-        print(f"{'ok  ' if link.checkpoint else 'MISS'} {link.key} {link.entry.name}")
+        tree = link.checkpoint.tree[:12] if link.checkpoint else " " * 12
+        print(f"{'ok  ' if link.checkpoint else 'MISS'} {link.key} {tree} {link.entry.name}")
     if links and links[-1].checkpoint is None:
         print(f"  (and {len(s.recipe.active()) - len(links)} more after it)")
     elif len(links) == len(s.recipe.active()):
@@ -431,3 +432,49 @@ def archives_mega(
             fetch_mega(u, dest)
         except Exception as e:
             log.error("FAILED %s %r", u, e)
+
+
+kmrp_app = typer.Typer(no_args_is_help=True, help="KMRP's controller module, built from source.")
+app.add_typer(kmrp_app, name="kmrp")
+re_app = typer.Typer(no_args_is_help=True, help="Reverse engineering the running game.")
+app.add_typer(re_app, name="re")
+
+KMRP_CLONE = Path.home() / "src" / "github.com" / "RayesDiyab" / "KMRP-KOTOR-Modern-Restoration-Patch"
+XWIN_SDK = Path.home() / ".cache" / "xwin" / "sdk"
+
+
+@kmrp_app.command("build")
+@exits_cleanly
+def kmrp_build(
+    clone: Annotated[
+        Path, typer.Option("--clone", help="The KMRP clone, at the commit to build.")
+    ] = KMRP_CLONE,
+    xwin: Annotated[
+        Path, typer.Option("--xwin", help="Microsoft's CRT and SDK, as xwin splat laid them out.")
+    ] = XWIN_SDK,
+    data: DataOpt = None,
+) -> None:
+    """Build, check and package the controller module into data/kmrp-build/ for the kmrp-controller entry."""
+    from modshop.kotor.kmrp_build import build as build_module
+
+    paths = paths_for("kotor", data)
+    print(f"building {clone} ...")
+    b = build_module(clone.resolve(), paths.data / "kmrp-build", paths.repo, xwin)
+    print(f"{b.label} ({b.commit[:12]}): {b.hooks} hooks -> {paths.data / 'kmrp-build'}")
+    if b.previous:
+        print(f"the outputs it replaced are in {b.previous}")
+    print("next: modshop kotor build, then deploy")
+
+
+@re_app.command("dump")
+@exits_cleanly
+def re_dump(data: DataOpt = None) -> None:
+    """The running game's decrypted image, with KPM's hooks undone, as a PE under data/re/."""
+    from modshop.kotor.re import dump
+
+    s_paths = paths_for("kotor", data)
+    local = Local.load(s_paths.local_toml)
+    d = dump(local.handheld, s_paths.data / "re")
+    print(f"{d.exe}: {d.hooks.restored} hook sites restored, {d.missing_pages} unreadable pages")
+    if d.redirects:
+        print(f"{len(d.redirects)} redirect candidates left in .text, listed in {d.record}")
