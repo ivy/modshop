@@ -3,5 +3,7 @@
  "depot": 32371,
  "manifest": "4122010938027300909",
  "buildid": 4143502,
- "note": "STAR WARS Knights of the Old Republic, Windows depot; the manifest id is the one a Steam client had installed on 2026-10-15 (buildid from its appmanifest)"
+ "note": "STAR WARS Knights of the Old Republic, Windows depot; the manifest id is the one a Steam client had installed on 2026-10-15 (buildid from its appmanifest). tree: the sha256 of the sorted manifest build.py base writes for that download, timestamps normalised; files: how many it holds.",
+ "tree": "d1e74494b568d4ba97e192441585a9b15d50e77a1c2ed9c9bc7e6b5a7ad7f6d8",
+ "files": 15379
 }
