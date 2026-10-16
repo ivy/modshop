@@ -5,6 +5,7 @@ Spec forms:
   `./<path>`         a file or folder in the game's directory in the repository
   `data/<path>`      a file or folder under the data root
   `local:<dotted>`   a value from local.toml; key material only, nothing staged
+  `local?:<dotted>`  the same for a value local.toml may leave out (its absence is key material too)
   `image:<name>`     a podman image's id; key material only
 """
 
@@ -142,6 +143,9 @@ class InputResolver:
     def resolve(self, spec: str, entry: str) -> Input:
         if spec.startswith("local:"):
             return ValueInput(spec, json.dumps(self.local().value(spec[6:])))
+        if spec.startswith("local?:"):
+            present = self._local is not None or self.paths.local_toml.exists()
+            return ValueInput(spec, json.dumps(self.local().get(spec[7:]) if present else None))
         if spec.startswith("image:"):
             return ValueInput(spec, image_id(spec[6:]))
         if spec.startswith("./"):

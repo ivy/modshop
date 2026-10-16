@@ -21,6 +21,7 @@ from modshop.kotor.steps import (
     OverrideDir,
     Rename,
     Script,
+    Setting,
     StageCopyAs,
     StageDelete,
     StageDir,
@@ -172,3 +173,19 @@ def test_kmrp_declares_its_inputs_and_needs_local() -> None:
         "local:handheld.game_dir",
         "local:handheld.display",
     )
+
+
+def test_setting_renders_local_value_or_default(tmp_path: Path) -> None:
+    from dataclasses import replace
+
+    from modshop.core.config import Local
+
+    ctx = ctx_for(tmp_path)
+    arg = Setting(key="kmrp.debug_logs", default="0")
+    assert arg.spec == "local?:kmrp.debug_logs"
+    assert arg.render(ctx) == "0"
+    handheld = {"ssh": "h", "home": "/h", "game_dir": "~/g", "display": "1x1"}
+    without = Local.model_validate({"handheld": handheld})
+    assert arg.render(replace(ctx, local=without)) == "0"
+    with_level = Local.model_validate({"handheld": handheld, "kmrp": {"debug_logs": 2}})
+    assert arg.render(replace(ctx, local=with_level)) == "2"

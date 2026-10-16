@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 
-from modshop.core.config import Handheld, Paths
+from modshop.core.config import Local, Paths
 from modshop.core.errors import ModshopError, RecipeError, StepFailed
 from modshop.core.recipe import Entry, Runner
 from modshop.core.stage import Stage
@@ -17,7 +17,7 @@ from modshop.kotor.steps import StepModel
 log = logging.getLogger("modshop")
 
 
-def runner(paths: Paths, patcher: Patcher, handheld: Handheld | None, timeout: int = 1800) -> Runner:
+def runner(paths: Paths, patcher: Patcher, local: Local | None, timeout: int = 1800) -> Runner:
     def run(entry: Entry, work: WorkTree, stage: Stage) -> None:
         for index, step in enumerate(entry.steps):
             if not isinstance(step, StepModel):
@@ -26,12 +26,13 @@ def runner(paths: Paths, patcher: Patcher, handheld: Handheld | None, timeout: i
                 game=GameTree(work.path),
                 stage=stage,
                 paths=paths,
-                handheld=handheld,
+                handheld=local.handheld if local else None,
                 patcher=patcher,
                 log=log,
                 entry=entry.name,
                 index=index,
                 timeout=timeout,
+                local=local,
             )
             log.info("   %s %s", step.do, step.model_dump(mode="json", exclude={"do"}))
             try:

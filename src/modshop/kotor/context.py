@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass
 
-from modshop.core.config import Handheld, Paths
+from modshop.core.config import Handheld, Local, Paths
 from modshop.core.stage import Stage
 from modshop.kotor.patcher import Patcher
 from modshop.kotor.paths import GameTree
@@ -22,6 +22,10 @@ class StepContext:
     entry: str
     index: int
     timeout: int = 1800
+    local: Local | None = None  # the whole of local.toml, for the settings a script is given
+
+    def setting(self, dotted: str) -> object:
+        return self.local.get(dotted) if self.local else None
 
     @property
     def label(self) -> str:

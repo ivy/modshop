@@ -11,3 +11,9 @@ display = "1920x1080"                # the panel, as the KMRP installer takes it
 proton_dir = "~/.local/share/Steam/steamapps/common/Proton 11.0"
 steam_userdata = "~/.local/share/Steam/userdata/<id>"   # background recordings live under gamerecordings/
 
+
+# Optional. The level the kmrp-controller entry writes to the controller's configs/kmrp-controller.ini:
+# 2 logs the pad, the engine's input fields and the minigames' input to kmrp-controller-events.log.
+# Changing it rebuilds that entry alone.
+# [kmrp]
+# debug_logs = 2

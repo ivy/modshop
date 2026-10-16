@@ -27,6 +27,7 @@ from modshop.kotor.steps import (
     OverrideDir,
     Rename,
     Script,
+    Setting,
     StageCopyAs,
     StageDelete,
     StageDir,
@@ -343,5 +344,6 @@ def recipe(game_dir: Path) -> Recipe:
                      settings={"driverCompatibility": True, "markerFixes": True, "controllerSupport": True, "highFpsFix": True}))  # fmt: skip
     mod("kmrp-controller", Script(path="./kmrp-build/install-controller.py",
                                   args=(GameDir(), DataPath(rel="kmrp-build/kmrp-controller.dll"),
-                                        DataPath(rel="kmrp-build/kmrp-controller.hooks.toml"))))  # fmt: skip
+                                        DataPath(rel="kmrp-build/kmrp-controller.hooks.toml"),
+                                        Setting(key="kmrp.debug_logs", default="0"))))  # fmt: skip
     return Recipe(tuple(entries))

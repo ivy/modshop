@@ -62,3 +62,18 @@ def test_repo_input_ignores_bytecode_caches(tmp_path: Path) -> None:
     cache = HashCache(p.hashcache, p.archives)
     rows = InputResolver(p).resolve("./repairs/r", "e").rows(cache)
     assert [r.rel for r in rows] == ["make.py"]
+
+
+def test_optional_local_value_is_null_when_absent(tmp_path: Path) -> None:
+    p = paths(tmp_path)
+    r = InputResolver(p)
+    absent_file = r.resolve("local?:kmrp.debug_logs", "e")
+    assert isinstance(absent_file, ValueInput) and absent_file.value == "null"
+    p.repo.mkdir(parents=True, exist_ok=True)
+    p.local_toml.write_text('[handheld]\nssh="h"\nhome="/h"\ngame_dir="~/g"\ndisplay="1x1"\n')
+    r = InputResolver(p)
+    absent_key = r.resolve("local?:kmrp.debug_logs", "e")
+    assert isinstance(absent_key, ValueInput) and absent_key.value == "null"
+    p.local_toml.write_text(p.local_toml.read_text() + "[kmrp]\ndebug_logs = 2\n")
+    present = InputResolver(p).resolve("local?:kmrp.debug_logs", "e")
+    assert isinstance(present, ValueInput) and present.value == "2"

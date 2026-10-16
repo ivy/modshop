@@ -96,7 +96,24 @@ class Word(BaseModel, frozen=True):
         return self.text
 
 
-ScriptArg = GameDir | OverrideDir | StageDir | ArchivePath | DataPath | Word
+class Setting(BaseModel, frozen=True):
+    """A value from local.toml by dotted key, `default` where the file leaves it out. The value
+    is key material, so changing it rebuilds the entry."""
+
+    kind: Literal["setting"] = "setting"
+    key: str
+    default: str
+
+    @property
+    def spec(self) -> str:
+        return f"local?:{self.key}"
+
+    def render(self, ctx: StepContext) -> str:
+        value = ctx.setting(self.key)
+        return self.default if value is None else str(value)
+
+
+ScriptArg = GameDir | OverrideDir | StageDir | ArchivePath | DataPath | Word | Setting
 
 
 def input_path(ctx: StepContext, spec: str) -> Path:

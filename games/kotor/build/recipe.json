@@ -3528,6 +3528,11 @@
      {
       "kind": "data",
       "rel": "kmrp-build/kmrp-controller.hooks.toml"
+     },
+     {
+      "default": "0",
+      "key": "kmrp.debug_logs",
+      "kind": "setting"
      }
     ],
     "do": "script",

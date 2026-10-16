@@ -119,3 +119,10 @@ class Local(BaseModel):
                 raise KeyError(dotted)
             node = cast(dict[str, object], node)[part]
         return node
+
+    def get(self, dotted: str) -> object:
+        """`value`, or None where local.toml leaves the key out."""
+        try:
+            return self.value(dotted)
+        except KeyError:
+            return None

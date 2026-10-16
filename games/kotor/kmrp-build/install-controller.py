@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Install a built kmrp-controller.dll into a KPM-edition KMRP game folder.
 
-    install-controller.py <game dir> <kmrp-controller.dll> <kmrp-controller.hooks.toml>
+    install-controller.py <game dir> <kmrp-controller.dll> <kmrp-controller.hooks.toml> [<debug-logs>]
 
 Replaces patches/kmrp-controller.dll, the hooks of the `kmrp-controller` block in
 patch_config.toml (the block's own `id` and `dll` lines stay), and the SHA-256 in
 KMRP_KPM.manifest's row for the DLL, so KMRP's Restore Original still knows the
 file. The previous DLL, config and manifest are kept beside the live ones with a
-`.prev` suffix. The game must not be running. Runs on the device with its own
-python3 (tomllib only).
+`.prev` suffix. With a fourth argument, sets the module's `debug-logs` level in
+configs/kmrp-controller.ini (2 logs the pad and the engine's input fields). The
+game must not be running. Runs on the device with its own python3 (tomllib only).
 """
 import hashlib
 import pathlib
@@ -19,6 +20,7 @@ import tomllib
 
 def main() -> None:
     game, dll, hooks = (pathlib.Path(a) for a in sys.argv[1:4])
+    debug_logs = sys.argv[4] if len(sys.argv) > 4 else None
     target = game / "patches" / "kmrp-controller.dll"
     config = game / "patch_config.toml"
     manifest = game / "KMRP_KPM.manifest"
@@ -67,7 +69,20 @@ def main() -> None:
     shutil.copy2(dll, target)
     config.write_text(new_text)
     manifest.write_text("".join(rows))
+    if debug_logs is not None:
+        set_debug_logs(game / "configs" / "kmrp-controller.ini", int(debug_logs))
     print("installed")
+
+
+def set_debug_logs(ini: pathlib.Path, level: int) -> None:
+    """The `debug-logs` line of the [Patch Options] section KMRP's installer writes, CRLF kept."""
+    lines = ini.read_bytes().decode().splitlines() if ini.exists() else ["[Patch Options]"]
+    lines = [ln for ln in lines if not ln.startswith("debug-logs=")]
+    at = lines.index("[Patch Options]") + 1 if "[Patch Options]" in lines else len(lines)
+    lines.insert(at, f"debug-logs={level}")
+    ini.parent.mkdir(exist_ok=True)
+    ini.write_bytes(("\r\n".join(lines) + "\r\n").encode())
+    print(f"configs/kmrp-controller.ini: debug-logs={level}")
 
 
 if __name__ == "__main__":
