@@ -343,3 +343,43 @@ def recipe_show(entry: Annotated[str | None, typer.Argument()] = None, data: Dat
 def recipe_json(r: Recipe) -> str:
     rows = [{**json.loads(canonical_entry(e)), **({"skip": e.skip} if e.skip else {})} for e in r.entries]
     return json.dumps(rows, indent=1) + "\n"
+
+
+@app.command()
+@exits_cleanly
+def deploy(
+    key: Annotated[
+        str | None, typer.Argument(help="A checkpoint key (default: the chain end of the last build).")
+    ] = None,
+    check: Annotated[bool, typer.Option("--check", help="Only report what differs on the handheld.")] = False,
+    data: DataOpt = None,
+) -> None:
+    """Put a checkpoint on the handheld by content, into a copy swapped in by rename."""
+    from modshop.core.deploy import Deployer
+    from modshop.kotor.target import handheld_target
+
+    s = Session(paths_for("kotor", data))
+    local = s.local()
+    if local is None:
+        raise Preflight(f"{s.paths.local_toml} is missing; copy local.example.toml beside it and fill it in")
+    k = Key(key) if key else s.default_key()
+    c = s.store.get(k)
+    if c is None:
+        raise Preflight(f"no checkpoint {k}")
+    target = handheld_target(local.handheld)
+    d = Deployer(target)
+    print(
+        f"{'checking' if check else 'deploying'} {k} ({c.mod}, tree {c.tree[:12]}) against {local.handheld.ssh}:{target.game_dir}"
+    )
+    print("outside the comparison:", " ".join(target.exclude))
+    if check:
+        drift = d.drift(s.store.tree(k))
+        for line in drift.lines:
+            print(line)
+        print(f"{len(drift.lines)} paths differ" if drift else "no drift")
+        raise typer.Exit(1 if drift else 0)
+    result = d.deploy(s.store.tree(k))
+    if result.updated == 0:
+        print("nothing to deploy")
+    else:
+        print(f"{result.updated} paths updated; previous folder kept as {result.previous}")
