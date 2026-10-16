@@ -23,7 +23,7 @@ LOCAL = HERE.parent.parent.parent / 'local.toml'
 # The player's saves; the logs the game and KMRP write; and swkotor.ini, which the build
 # produces but the game rewrites as it is played ([Movies Shown], settings), so it is sent
 # only when the handheld has none.
-EXCLUDE = ['/Saves/', '*.log', '/swkotor.ini']
+EXCLUDE = ['/Saves/', '/saves/', '*.log', '/swkotor.ini']   # vanilla ships an empty lower-case saves/; the game's is Saves/
 FIRST_TIME = ['swkotor.ini']
 
 
