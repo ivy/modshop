@@ -63,6 +63,7 @@ Each folder in `repairs/` is one scripted fix with its README, taking its input 
 
 - `08-wounded-republic-detonate-controller`: a mod's room model carries a `detonate` controller on its bubble emitters that ends the game under Proton the first time the room is in view. In the manifest.
 - `07-kmrp-pot-gui-textures`: KMRP's three 768x768 interface textures at a power-of-two size. Unproven, not in the manifest; see its README.
+- `09-blaster-adjustment-orphan-rows`: one option of JC's Blaster Adjustment lists two 2DA rows whose sections only its full option has; the rows are dropped from the staged change file before the patcher runs. In the manifest.
 
 ### 6. KMRP
 

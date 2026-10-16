@@ -106,7 +106,7 @@ mod('mega:czerka-ithorian-patch', cp('Czerka Business Attire*'), inputs=['mega/C
 mod(156, hp(option=0)); mod(157, hp('*/*/tslpatchdata')); mod(158, hp('*/*/tslpatchdata', option=0)); mod(159, hp())
 mod(160, hp('*/*/tslpatchdata', option=1)); mod(161, skip=LINUX); mod(162, hp('*/*/tslpatchdata')); mod(163, hp('*/*/tslpatchdata'))
 mod(164, skip=KMRP); mod(165, hp('*/*/tslpatchdata', option=0)); mod(166, hp(option=0)); mod(167, hp('*/*/tslpatchdata', option=2))
-mod(168, hp('*/tslpatchdata', option=0)); mod(169, hp(option=2)); mod(170, hp(option=1)); mod(171, hp('*/*/tslpatchdata')); mod(172, cp('*/*/For Override', recursive=True))
+mod(168, hp('*/tslpatchdata', option=0)); mod(169, hp(option=2)); mod(170, {'do':'script','path':'./../repairs/09-blaster-adjustment-orphan-rows/make.py','args':['stage']}, hp(option=1), inputs=[dirs[170],'./../repairs/09-blaster-adjustment-orphan-rows']); mod(171, hp('*/*/tslpatchdata')); mod(172, cp('*/*/For Override', recursive=True))
 mod(173, hp()); mod(174, hp('*/*/tslpatchdata')); mod(175, hp()); mod(176, hp('*/*/tslpatchdata')); mod(177, hp()); mod(178, hp('*/*/tslpatchdata'))
 mod(179, hp('*/*/Main Install/tslpatchdata', option=1)); mod(180, hp(option=0))
 mod(181, {'do':'dedupe_tpc'})

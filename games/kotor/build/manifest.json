@@ -1907,7 +1907,18 @@
  },
  {
   "mod": "170-blaster-adjustment",
+  "inputs": [
+   "170-blaster-adjustment",
+   "./../repairs/09-blaster-adjustment-orphan-rows"
+  ],
   "steps": [
+   {
+    "do": "script",
+    "path": "./../repairs/09-blaster-adjustment-orphan-rows/make.py",
+    "args": [
+     "stage"
+    ]
+   },
    {
     "do": "holopatcher",
     "src": "*/tslpatchdata",
