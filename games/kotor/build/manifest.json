@@ -2273,5 +2273,47 @@
     "dest": "movies"
    }
   ]
+ },
+ {
+  "mod": "kmrp",
+  "inputs": [
+   "KMRP-Windows-1.5.1.exe",
+   "./../kmrp-build/wine/Containerfile",
+   "image:modshop-wine",
+   "local:handheld.home",
+   "local:handheld.game_dir",
+   "local:handheld.display"
+  ],
+  "steps": [
+   {
+    "do": "kmrp",
+    "installer": "KMRP-Windows-1.5.1.exe",
+    "settings": {
+     "driverCompatibility": true,
+     "markerFixes": true,
+     "controllerSupport": true,
+     "highFpsFix": true
+    }
+   }
+  ]
+ },
+ {
+  "mod": "kmrp-controller",
+  "inputs": [
+   "./../kmrp-build/install-controller.py",
+   "data/kmrp-build/kmrp-controller.dll",
+   "data/kmrp-build/kmrp-controller.hooks.toml"
+  ],
+  "steps": [
+   {
+    "do": "script",
+    "path": "./../kmrp-build/install-controller.py",
+    "args": [
+     "game",
+     "data/kmrp-build/kmrp-controller.dll",
+     "data/kmrp-build/kmrp-controller.hooks.toml"
+    ]
+   }
+  ]
  }
 ]

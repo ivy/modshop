@@ -4,7 +4,11 @@
 # Run:   podman run --rm --network none -v <game tree>:/game -v <installer dir>:/in:ro modshop-wine \
 #          xvfb-run -a wine /in/KMRP-Windows-1.5.1.exe --in-place 'Z:\game\swkotor.exe'
 FROM docker.io/library/fedora:44
-RUN dnf install -y --setopt=install_weak_deps=False wine xorg-x11-server-Xvfb xdotool && dnf clean all
+RUN dnf install -y --setopt=install_weak_deps=False wine wine-mono mingw64-win-iconv mingw32-win-iconv xorg-x11-server-Xvfb && dnf clean all
 ENV WINEDEBUG=-all WINEPREFIX=/wine HOME=/wine
 RUN mkdir -p /wine /game && xvfb-run -a wineboot --init && wineserver --wait
 WORKDIR /game
+# Fedora's wine-mono needs an iconv.dll that no package puts where Wine looks; without it a
+# .NET program dies with "Could not load Mono into this process"
+RUN cp /usr/x86_64-w64-mingw32/sys-root/mingw/bin/iconv.dll /wine/drive_c/windows/system32/ \
+ && cp /usr/i686-w64-mingw32/sys-root/mingw/bin/iconv.dll /wine/drive_c/windows/syswow64/

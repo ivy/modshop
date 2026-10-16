@@ -1,10 +1,13 @@
 # Copy to local.toml (gitignored). Names of machines and paths that the docs
-# refer to as "the handheld" and "the build host". Nothing here is read by the
-# scripts yet; it is the one place for an agent or a person to look them up.
+# refer to as "the handheld" and "the build host". build.py reads the handheld's
+# home, game_dir and display for the KMRP step (they are part of that step's key);
+# deploy.py reads ssh and game_dir.
 
 [handheld]
 ssh = "handheld"                      # ssh host alias of the device that runs the game
+home = "/home/<user>"                 # the handheld user's home, absolute; the KMRP installer records the game's path
 game_dir = "~/.local/share/Steam/steamapps/common/swkotor"
+display = "1920x1080"                # the panel, as the KMRP installer takes it
 proton_dir = "~/.local/share/Steam/steamapps/common/Proton 11.0"
 steam_userdata = "~/.local/share/Steam/userdata/<id>"   # background recordings live under gamerecordings/
 

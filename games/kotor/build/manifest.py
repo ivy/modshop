@@ -128,5 +128,12 @@ a157=next(archives.joinpath(dirs[157]).glob('*.7z')).name
 mod('repair:08-wounded-republic-detonate-controller', {'do':'repair','name':'08-wounded-republic-detonate-controller','args':['Override',f'archives/{dirs[157]}/{a157}']},
     inputs=[dirs[157],'./../repairs/08-wounded-republic-detonate-controller'])
 mod('cutscenes', cp('*/1920x1080', pattern='*.bik', dest='movies'), inputs=['cutscenes'])
+# KMRP's installer, in a Wine container, with what its Advanced Settings would hold; then the
+# controller module built from source (../kmrp-build/README.md), replacing the one it shipped
+mod('kmrp', {'do':'kmrp','installer':'KMRP-Windows-1.5.1.exe',
+             'settings':{'driverCompatibility':True,'markerFixes':True,'controllerSupport':True,'highFpsFix':True}},
+    inputs=['KMRP-Windows-1.5.1.exe','./../kmrp-build/wine/Containerfile','image:modshop-wine','local:handheld.home','local:handheld.game_dir','local:handheld.display'])
+mod('kmrp-controller', {'do':'script','path':'./../kmrp-build/install-controller.py','args':['game','data/kmrp-build/kmrp-controller.dll','data/kmrp-build/kmrp-controller.hooks.toml']},
+    inputs=['./../kmrp-build/install-controller.py','data/kmrp-build/kmrp-controller.dll','data/kmrp-build/kmrp-controller.hooks.toml'])
 json.dump(M, open(here/'manifest.json','w'), indent=1)
 print(len(M),'entries;',sum(1 for e in M if e.get('skip')),'skipped')

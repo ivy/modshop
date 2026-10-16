@@ -1,6 +1,6 @@
 # Proposal: a reproducible, incremental build and deploy pipeline for KotOR
 
-Status: accepted plan; phases 0 and 2 built (`games/kotor/build/build.py`, `deploy.py`), phase 1 in progress. The KotOR procedure in [`../../games/kotor/README.md`](../../games/kotor/README.md) works today but is resumable rather than incremental, has no pristine base, and ends in hand steps on the handheld. This document is the next shape of that pipeline and the reasons for it. The README stays the how-to; this is the why and the what.
+Status: accepted plan; built in `games/kotor/build/` (`build.py`, `base.sh`, `deploy.py`), awaiting the first vanilla download. The Wine experiment succeeded: KMRP's installer runs in a container on the build host and is a step of the chain, so the handheld is a pure deploy target. The KotOR procedure in [`../../games/kotor/README.md`](../../games/kotor/README.md) works today but is resumable rather than incremental, has no pristine base, and ends in hand steps on the handheld. This document is the next shape of that pipeline and the reasons for it. The README stays the how-to; this is the why and the what.
 
 ## The goal
 
@@ -119,6 +119,6 @@ So the hours of the first build were download, extraction and debugging, not the
 
 ## Open questions
 
-- Does KMRP's installer run under Wine in a sandbox on the build host, and is it idempotent?
+- Answered: KMRP's installer runs under Wine in a Fedora container (wine-mono needs an `iconv.dll` placed by hand), takes the resolution as an argument and its Advanced Settings from a file, and two runs differ only by two timestamps in its state file, which the step fixes.
 - Does `steamcmd` serve the Windows depot from Linux to an owning account?
 - Is HoloPatcher deterministic?

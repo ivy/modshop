@@ -65,15 +65,11 @@ Each folder in `repairs/` is one scripted fix with its README, taking its input 
 
 ### 6. KMRP
 
-KMRP ([RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch](https://github.com/RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch)) gives the game a resolution-aware interface and native controller support, applied in memory at every start through a `binkw32.dll` proxy; the executable is untouched. Its installer is a Windows program and runs inside the game's Proton prefix on the handheld, without a window:
+KMRP ([RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch](https://github.com/RayesDiyab/KMRP-KOTOR-Modern-Restoration-Patch)) gives the game a resolution-aware interface and native controller support, applied in memory at every start through a `binkw32.dll` proxy; the executable is untouched. Its installer is a Windows .NET program; the `kmrp` entry of the manifest runs it on the build host under Wine in a container (`podman build -t modshop-wine kmrp-build/wine` once; no network, nothing mounted but the tree and the installer), in place on the working tree, with the handheld's panel size as its argument and the choices its Advanced Settings would hold (driver compatibility, marker fixes, controller support, the High FPS fix) written to its settings file first. The tree is mounted at the path it will have on the handheld, because the installer's state file records the executable's path for its Restore; that path and the panel come from `local.toml` and are part of the step's key. The step then fixes the two timestamps in the state file and recomputes KMRP's manifest row for it, which makes the result a function of its inputs alone: two runs give the same tree.
 
-```bash
-DISPLAY=:0 protontricks-launch --appid 32370 <KMRP installer.exe> --in-place 'Z:\<game folder as a Windows path>\swkotor.exe'
-```
+The next entry, `kmrp-controller`, replaces the installer's controller module with the one built from source ([`kmrp-build/README.md`](kmrp-build/README.md)), which is how an unreleased fix (or ours) gets in. Both entries run on an unlaunched tree, so the handheld needs nothing done by hand.
 
-(`--restore` in place of `--in-place` undoes it; the Flatpak protontricks needs access to the Steam directory.) Headless, it guesses the display, so set `Width` and `Height` in `swkotor.ini` (CRLF) to the panel first. A Steam file verification puts Steam's `binkw32.dll` back and silently disables KMRP: patch again. The game must use Steam Input's **Gamepad** template or KMRP sees no pad; Steam keeps that selection in memory, so editing the controller config files while Steam runs does nothing. `kmrp-kpm.log` in the game folder proves it loaded; it reports how many of its interface files it left out because `Override` has its own, which is the intended precedence.
-
-Building the controller module from source, which is how an unreleased fix (or ours) gets onto the handheld, is [`kmrp-build/README.md`](kmrp-build/README.md).
+On the handheld: a Steam file verification puts Steam's `binkw32.dll` back and silently disables KMRP (the drift check shows it; deploy again). The game must use Steam Input's **Gamepad** template or KMRP sees no pad; Steam keeps that selection in memory, so editing the controller config files while Steam runs does nothing. `kmrp-kpm.log` in the game folder proves it loaded; it reports how many of its interface files it left out because `Override` has its own, which is the intended precedence.
 
 ### 7. Deploy to the handheld
 
@@ -82,7 +78,9 @@ build/deploy.py            # the chain's end, by content
 build/deploy.py --check    # only report what differs on the handheld
 ```
 
-`deploy.py` reads the handheld's address and game folder from `local.toml`, refuses while the game runs, and syncs the checkpoint into a reflink copy of the handheld's live folder with `rsync --checksum --delete`, so a rebuilt file with identical content moves nothing and a second run reports nothing to do. When a dry run afterwards finds nothing left, the copy becomes the live folder by rename and the previous one stays beside it as `.prev`, the rollback. One explicit list of paths is outside the comparison and printed on every run: the saves, the logs, and, until KMRP's installer runs on the build host, everything that installer writes. `--check` is the drift check: anything in the handheld's folder that the build did not put there is listed by path. The build assumes a new game: areas a save has already visited keep their old state.
+`deploy.py` reads the handheld's address and game folder from `local.toml`, refuses while the game runs, and syncs the checkpoint into a reflink copy of the handheld's live folder with `rsync --checksum --delete`, so a rebuilt file with identical content moves nothing and a second run reports nothing to do. When a dry run afterwards finds nothing left, the copy becomes the live folder by rename and the previous one stays beside it as `.prev`, the rollback. One explicit list of paths is outside the comparison and printed on every run: the saves, the logs, and `swkotor.ini`, which the build produces but the game rewrites as it is played, so it is sent only to a handheld that has none. `--check` is the drift check: anything in the handheld's folder that the build did not put there is listed by path. The build assumes a new game: areas a save has already visited keep their old state.
+
+`build/build.py prove` is the reproducibility test: the whole chain built again from vanilla with no checkpoint reused, compared entry by entry with the cached chain, naming the first entry whose tree differs.
 
 ## When it breaks
 

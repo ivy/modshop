@@ -20,12 +20,11 @@ HERE = pathlib.Path(__file__).resolve().parent
 DATA = pathlib.Path(os.environ.get('KOTOR_DATA', str(HERE.parent / 'data'))).resolve()
 LOCAL = HERE.parent.parent.parent / 'local.toml'
 
-# Until KMRP's installer runs on the build host, everything it writes on the handheld lives
-# outside the build, as do the player's saves and the logs the game and KMRP write.
-EXCLUDE = ['/Saves/', '/swkotor.ini', '/swkotor.ini.*', '/binkw32.dll', '/binkw32Hooked.dll',
-           '/configs/', '/patches/', '/dinput8.dll', '/K1DriverCompat.ini', '/k1-modern-driver-compatibility.asi',
-           '/KMRP_*', '/KotorPatcher.dll', '/kpm_install_state.json', '/patch_config.toml*',
-           '/kmrp-*', '*.log']
+# The player's saves; the logs the game and KMRP write; and swkotor.ini, which the build
+# produces but the game rewrites as it is played ([Movies Shown], settings), so it is sent
+# only when the handheld has none.
+EXCLUDE = ['/Saves/', '*.log', '/swkotor.ini']
+FIRST_TIME = ['swkotor.ini']
 
 
 def sh(host, cmd, check=True, capture=False):
@@ -68,6 +67,9 @@ def main(argv):
     nxt = f'{live}.next'
     sh(host, f'rm -rf "{nxt}" && cp -a --reflink=always "{live}" "{nxt}"')
     rsync(src, f'{host}:{nxt}', dry=False)
+    for name in FIRST_TIME:
+        if sh(host, f'test -e "{live}/{name}"', check=False).returncode != 0:
+            subprocess.run(['rsync', '--times', str(src / name), f'{host}:{nxt}/{name}'], check=True); print(f'{name}: sent (the handheld had none)')
     left = rsync(src, f'{host}:{nxt}', dry=True)
     if left:
         for l in left: print(l)

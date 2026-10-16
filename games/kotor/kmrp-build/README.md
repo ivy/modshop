@@ -24,12 +24,12 @@ The script runs the two Python steps on the host (the asset bank, about 40 s; th
 
 Check the result the way the first one was checked: `llvm-readobj --coff-imports` shows only `KERNEL32.dll`, `USER32.dll`, `GDI32.dll` and `bcrypt.dll` (the CRT is static, `/MT`), `--coff-exports` lists every function `controller-exports.def` names, and the size is near 12 MB. Keep the outputs under `../data/kmrp-build/` with the clone's commit beside them.
 
-## Installing it on the handheld
+## Installing it
 
-The game must not be running. Copy the DLL, the hook list and `install-controller.py` to the handheld and run, in the game folder:
+The `kmrp-controller` entry of the build manifest runs `install-controller.py` on the working tree right after KMRP's own installer, taking the DLL and hook list from `../data/kmrp-build/`, so the module reaches the handheld with the next deploy. By hand, on any game folder:
 
 ```bash
-python3 -I install-controller.py . kmrp-controller.dll kmrp-controller.hooks.toml
+python3 -I install-controller.py <game folder> kmrp-controller.dll kmrp-controller.hooks.toml
 ```
 
 It replaces `patches/kmrp-controller.dll`, swaps the hooks of the `kmrp-controller` block in `patch_config.toml` for the generated list (the block's own `id` and `dll` lines stay), and sets the SHA-256 in `KMRP_KPM.manifest`'s row for the DLL, so KMRP's Restore Original still recognises the file. The previous three files are kept beside the live ones with a `.prev` suffix. Proof it loaded, after a launch: `kmrp-kpm.log` in the game folder reports KMRP's own runs as before, the Proton log's `loaddll` lines show `patches\kmrp-controller.dll` and the SDL copy, and `kmrp-controller-events.log` grows with `debug-logs=2` in `configs/kmrp-controller.ini`.

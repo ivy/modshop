@@ -22,10 +22,11 @@ Commands:
   build.py checkout KEY DIR reflink-copy a checkpoint's tree to DIR, for a bisect
   build.py tag NAME [KEY]   name a checkpoint (default: the chain's end); gc keeps it
   build.py gc [--keep N]    remove checkpoints not in the chain, not tagged, beyond the newest N
+  build.py prove            build the whole chain again, uncached, and compare it with the cached chain
 
 Environment: KOTOR_DATA (default ../data), HOLOPATCHER (default the venv's), KOTOR_MANIFEST (default manifest.json here).
 """
-import ast, fcntl, fnmatch, hashlib, json, os, pathlib, re, shutil, subprocess, sys, time
+import ast, fcntl, fnmatch, hashlib, json, os, pathlib, re, shutil, subprocess, sys, tempfile, time, tomllib
 
 HERE = pathlib.Path(__file__).resolve().parent
 DATA = pathlib.Path(os.environ.get('KOTOR_DATA', str(HERE.parent / 'data'))).resolve()
@@ -37,6 +38,7 @@ CKPT = GAMES / 'ckpt'
 WORK = GAMES / 'work'                # the tree being built; work.json says which checkpoint it equals
 STAGE = DATA / 'stage'
 TAGS = GAMES / 'tags'
+LOCAL = HERE.parent.parent.parent / 'local.toml'   # the handheld's name, paths and panel; gitignored
 HP = os.environ.get('HOLOPATCHER', str(DATA / 'venv' / 'bin' / 'holopatcher'))
 MTIME_NS = 946684801 * 10**9        # 2000-01-01T00:00:01Z: every file in a checkpoint carries this mtime
 PATCHER_TIMEOUT = 1800
@@ -44,6 +46,11 @@ KEY_LEN = 16
 
 GAME = WORK                          # the verbs below work on these two
 OVR = WORK / 'Override'
+
+
+def use_work(path):
+    global WORK, GAME, OVR
+    WORK = GAME = path; OVR = path / 'Override'
 LOG = None
 
 
@@ -169,9 +176,34 @@ def save_hashcache():
         json.dump(_hashcache, open(tmp, 'w')); tmp.replace(ARCHIVES / '.hashcache.json')
 
 
+_local = None
+def local(dotted):
+    """A value from local.toml by dotted key, e.g. handheld.display."""
+    global _local
+    if _local is None:
+        if not LOCAL.exists(): sys.exit(f'{LOCAL} is missing; copy local.example.toml and fill it in')
+        _local = tomllib.load(open(LOCAL, 'rb'))
+    v = _local
+    for k in dotted.split('.'): v = v[k]
+    return v
+
+
 def input_path(spec):
-    """An input is a path under data/archives, or, with a leading './', under this directory."""
-    return (HERE / spec[2:]).resolve() if spec.startswith('./') else (ARCHIVES / spec)
+    """An input is a path under data/archives; with a leading './' one under this directory; with
+    'data/' one under data/. 'local:<key>' names a value from local.toml and 'image:<name>' a podman
+    image; both are key material only."""
+    if spec.startswith('./'): return (HERE / spec[2:]).resolve()
+    if spec.startswith('data/'): return DATA / spec[5:]
+    return ARCHIVES / spec
+
+
+def value_input(spec):
+    if spec.startswith('local:'): return json.dumps(local(spec[6:]))
+    if spec.startswith('image:'):
+        r = subprocess.run(['podman', 'image', 'inspect', '--format', '{{.Id}}', spec[6:]], capture_output=True, text=True)
+        if r.returncode != 0: raise FileNotFoundError(f'podman image {spec[6:]} is not built')
+        return r.stdout.strip()
+    return None
 
 
 def inputs_of(entry):
@@ -181,6 +213,9 @@ def inputs_of(entry):
 def inputs_hash(entry, full=False):
     rows = []
     for spec in inputs_of(entry):
+        v = value_input(spec)
+        if v is not None:
+            rows.append([spec, '', sha256_str(v)]); continue
         root = input_path(spec)
         if not root.exists(): raise FileNotFoundError(f'{entry["mod"]}: input {spec} ({root})')
         files = walk(root) if root.is_dir() else [root]
@@ -281,6 +316,7 @@ def extract(entry):
     if out.exists(): shutil.rmtree(out)
     out.mkdir(parents=True)
     for spec in inputs_of(entry):
+        if value_input(spec) is not None: continue
         src = input_path(spec)
         items = sorted(src.iterdir()) if src.is_dir() and not spec.startswith('./') else [src]
         for a in items:
@@ -416,19 +452,64 @@ def s_symlink(st, link, target):
     p.symlink_to(target); log('   ', link, '->', target)
 
 
-def s_repair(st, name, args=()):
-    """Run repairs/<name>/make.py on the working tree. Arguments: `Override` for the game's Override,
-    `stage` for this entry's stage, `archives/...` for a path under data/archives, anything else as given."""
-    script = HERE.parent / 'repairs' / name / 'make.py'
+def s_script(st, path, args=()):
+    """Run one of our scripts on the working tree. Arguments: `game` for the tree, `Override` for its
+    Override, `stage` for this entry's stage, `archives/...` and `data/...` for paths there, anything
+    else as given."""
+    script = input_path(path)
     def arg(a):
+        if a == 'game': return str(GAME)
         if a == 'Override': return str(OVR)
         if a == 'stage': return str(st)
         if a.startswith('archives/'): return str(ARCHIVES / a[9:])
+        if a.startswith('data/'): return str(DATA / a[5:])
         return a
     argv = [sys.executable, '-I', str(script)] + [arg(a) for a in args]
     r = subprocess.run(argv, capture_output=True, text=True, timeout=PATCHER_TIMEOUT)
     for l in (r.stdout + r.stderr).splitlines()[-6:]: log('    ', l[:200])
-    if r.returncode != 0: raise RuntimeError(f'repair {name} failed (exit {r.returncode})')
+    if r.returncode != 0: raise RuntimeError(f'{script.name} failed (exit {r.returncode})')
+
+
+def s_repair(st, name, args=()):
+    s_script(st, f'./../repairs/{name}/make.py', args)
+
+
+KMRP_STAMP = '2000-01-01T00:00:01'
+
+
+def s_kmrp(st, installer, settings, image='modshop-wine'):
+    """KMRP's Windows installer, in-place on the working tree, under Wine in a container with no
+    network and nothing mounted but the tree and the installer. The tree is mounted at the path it
+    will have on the handheld, since the installer records the executable's path for its Restore;
+    the resolution is the handheld's panel; `settings` is what its Advanced Settings would hold
+    (driverCompatibility, markerFixes, controllerSupport, highFpsFix, hdIcons). Afterwards the two
+    timestamps its state file carries are fixed and the manifest row for that file recomputed, so
+    the step's output depends on nothing but its inputs."""
+    home, game_dir, display = local('handheld.home'), local('handheld.game_dir'), local('handheld.display')
+    target = game_dir.replace('~', home, 1) if game_dir.startswith('~') else game_dir
+    exe_win = 'Z:' + target.replace('/', '\\') + '\\swkotor.exe'
+    with tempfile.TemporaryDirectory(dir=STAGE) as cfg:
+        body = '{\r\n' + ',\r\n'.join(f'  "{k}": {"true" if v else "false"}' for k, v in settings.items()) + '\r\n}\r\n'
+        (pathlib.Path(cfg) / 'settings.json').write_bytes(body.encode())
+        cmd = ['podman', 'run', '--rm', '--network', 'none', '--security-opt', 'label=disable',
+               '-v', f'{GAME}:{target}', '-v', f'{ARCHIVES / installer}:/in/{installer}:ro',
+               '-v', f'{cfg}:/wine/drive_c/users/root/AppData/Local/KMRP',
+               '-e', 'WINEDEBUG=-all', image, 'bash', '-c',
+               f'xvfb-run -a wine "/in/{installer}" --in-place "{exe_win}" {display}; rc=$?; wineserver --wait; exit $rc']
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=PATCHER_TIMEOUT)
+    for l in [x for x in (r.stdout + r.stderr).splitlines() if 'X connection' not in x][-6:]: log('    ', l[:200])
+    if r.returncode != 0: raise RuntimeError(f'KMRP installer failed (exit {r.returncode})')
+    state = GAME / 'kpm_install_state.json'
+    text = re.sub(r'"(CreatedAt|UpdatedAt)": "[^"]*"', rf'"\1": "{KMRP_STAMP}"', state.read_text())
+    state.write_text(text)
+    digest = sha256_file(state).upper()
+    man = GAME / 'KMRP_KPM.manifest'
+    lines = man.read_bytes().split(b'\n')
+    for i, l in enumerate(lines):
+        if l.startswith(b'file\tkpm_install_state.json\t'):
+            lines[i] = b'file\tkpm_install_state.json\t' + digest.encode() + (b'\r' if l.endswith(b'\r') else b'')
+    man.write_bytes(b'\n'.join(lines))
+    log(f'    KMRP installed at {display} for {target}')
 
 
 def case_aliases(td):
@@ -484,7 +565,7 @@ def s_dedupe_tpc(st):
 
 VERBS = {'dedupe_tpc': s_dedupe_tpc, 'copy': s_copy, 'copy_files': s_copy_files, 'delete': s_delete,
          'rename': s_rename_in_override, 'stage_delete': s_stage_delete, 'stage_copy_as': s_stage_copy_as,
-         'tlk': s_tlk, 'holopatcher': s_holopatcher, 'symlink': s_symlink, 'repair': s_repair}
+         'tlk': s_tlk, 'holopatcher': s_holopatcher, 'symlink': s_symlink, 'repair': s_repair, 'script': s_script, 'kmrp': s_kmrp}
 
 
 # ---- the chain -------------------------------------------------------------------------
@@ -607,6 +688,32 @@ def cmd_tag(name, key=None):
     (TAGS / name).write_text(key + '\n'); print(f'{name} = {key}')
 
 
+def cmd_prove():
+    """Determinism: the chain built again from vanilla into its own checkpoint directory, with no
+    cached checkpoint reused, must reach the same tree hash at every entry. The first entry whose
+    hash differs is named, with the paths that differ."""
+    global CKPT
+    preflight(); _l = lock()
+    cached = {k: meta_of(k) for _, k, ok in chain() if ok}
+    if len(cached) != len(load_manifest()): sys.exit('the cached chain is incomplete; run a build first')
+    CKPT = GAMES / 'ckpt-prove'; use_work(GAMES / 'work-prove')
+    CKPT.mkdir(exist_ok=True)
+    for t in list(CKPT.iterdir()): shutil.rmtree(t)
+    discard_work()
+    global LOG; LOG = open(LOGS / 'build.log', 'a')
+    log(f'--- prove {time.strftime("%Y-%m-%dT%H:%M:%S%z")}')
+    for entry, key, _ in chain(build=True):
+        a, b = cached[key]['tree'], meta_of(key)['tree']
+        if a != b:
+            ma, mb = read_manifest(GAMES / 'ckpt' / key / 'manifest.txt'), read_manifest(CKPT / key / 'manifest.txt')
+            diff = sorted(set(r for r in mb if mb[r] != ma.get(r)) | set(r for r in ma if r not in mb))
+            for r in diff[:50]: log('   ', r)
+            log(f'NOT REPRODUCIBLE: {entry["mod"]} ({key}) gives tree {b[:12]}, the cached chain had {a[:12]}; {len(diff)} paths differ')
+            sys.exit(1)
+    discard_work()
+    log(f'REPRODUCIBLE: {len(cached)} entries rebuilt to the same tree hashes; ckpt-prove/ can be removed')
+
+
 def cmd_gc(keep=5):
     preflight()
     live = {k for _, k, ok in chain() if ok}
@@ -627,6 +734,7 @@ def main(argv):
     if c == 'checkout': return cmd_checkout(*a)
     if c == 'tag': return cmd_tag(*a)
     if c == 'gc': return cmd_gc(int(a[1]) if a[:1] == ['--keep'] else 5)
+    if c == 'prove': return cmd_prove()
     return cmd_build(tuple(argv))
 
 
