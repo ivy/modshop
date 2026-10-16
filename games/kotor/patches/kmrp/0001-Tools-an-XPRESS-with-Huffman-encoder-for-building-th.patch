@@ -1,7 +1,7 @@
 From 7c1d12997c4c1cddcf0954d7762a562f1872e18d Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Thu, 15 Oct 2026 00:40:54 -0700
-Subject: [PATCH 1/5] Tools: an XPRESS-with-Huffman encoder, for building the
+Subject: [PATCH 1/6] Tools: an XPRESS-with-Huffman encoder, for building the
  banks off Windows
 
 tools/build_native_assets.py compresses the embedded banks through the Windows

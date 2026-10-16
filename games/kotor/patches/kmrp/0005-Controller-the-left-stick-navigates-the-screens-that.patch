@@ -1,7 +1,7 @@
 From b029554e34cb6338c96d6e1c9d2e6ab1a78d61e6 Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Fri, 16 Oct 2026 01:06:24 -0700
-Subject: [PATCH 5/5] Controller: the left stick navigates the screens that
+Subject: [PATCH 5/6] Controller: the left stick navigates the screens that
  navigate themselves
 
 In character generation the D-pad moved the selection and the left

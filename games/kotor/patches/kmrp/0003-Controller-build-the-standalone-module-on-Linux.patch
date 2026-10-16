@@ -1,7 +1,7 @@
 From a06e2cb73d4fc5aa6d684437f4424d7e4ed48357 Mon Sep 17 00:00:00 2001
 From: Ivy Evans <ivy@users.noreply.github.com>
 Date: Thu, 15 Oct 2026 00:40:54 -0700
-Subject: [PATCH 3/5] Controller: build the standalone module on Linux
+Subject: [PATCH 3/6] Controller: build the standalone module on Linux
 
 The same sources, defines and link inputs as build_controller_standalone.cmd,
 compiled by clang in cl mode for i686-pc-windows-msvc with Microsoft's CRT and

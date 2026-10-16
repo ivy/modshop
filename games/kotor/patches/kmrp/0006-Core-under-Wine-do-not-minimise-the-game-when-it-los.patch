@@ -1,0 +1,175 @@
+From cf952cb99d0e3947e2b263a312e310c0e8a722a7 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Fri, 16 Oct 2026 12:31:26 -0700
+Subject: [PATCH 6/6] Core: under Wine, do not minimise the game when it loses
+ activation
+
+About one start in three under Proton in Steam's Game Mode (Bazzite,
+gamescope) stopped on a black screen after the logo movies and never
+reached the main menu. Read from the hung process: the main thread was in
+SwapBuffers (0x004048C1), inside Mesa's DRI3 back-buffer wait
+(loader_dri3_get_buffers -> dri3_find_back -> dri3_wait_for_event_locked
+-> xcb_wait_for_special_event), and every other thread was idle. The game
+window's Win32 style was 0xB6000000, against 0x96000000 on a good start;
+the difference is WS_MINIMIZE. Wine had sized its OpenGL child window to
+the minimised client rectangle, 160x31, instead of 1920x1080, and the
+X server never released a back buffer for it.
+
+The game minimises itself. Its window procedure (0x00402800) handles
+WM_ACTIVATEAPP at 0x00402951; on a deactivation in fullscreen (the render
+window's +0xAC, vtable slot 1) it calls ShowWindow(hwnd, SW_MINIMIZE) at
+0x004029DB, then restores the gamma ramp and the desktop's mode (slot 6).
+On Windows that is how Alt-Tab leaves an exclusive-fullscreen game. In a
+compositor with no taskbar nothing restores the window, and the restore
+would run on the thread that is waiting in the swap. The logo movie's
+window handing over to the game window is what deactivated it; the Steam
+and quick-access overlays do not.
+
+Hook the hwnd load before the call (mov ecx, [0x007A39D8], absolute,
+nothing to relocate). Under Wine (ntdll exports wine_get_version) the
+handler returns 1 and the consumed exit at 0x004029E1 skips the push,
+push and call; the gamma and mode restore still run. On Windows it
+returns 0 and the original minimise runs. A core hook: it is not the
+controller's.
+
+The handler compiles in the Linux build of the standalone module; the
+main module that installs it has not been built. The same change, the
+call replaced with NOPs in the running game's memory, was played under
+Proton: no black screen in the starts since, and the window never showed
+WS_MINIMIZE. Issue #6 reported the game minimising during a movie skip.
+---
+ CHANGELOG.md                               | 21 +++++++++++++++++
+ docs/controller-support.md                 |  2 +-
+ src/controller-native/K1NativeJoystick.cpp | 27 ++++++++++++++++++++++
+ src/controller-native/exports.def          |  1 +
+ src/controller-native/kotor1.hooks.toml    | 19 +++++++++++++++
+ 5 files changed, 69 insertions(+), 1 deletion(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 216100e..2ce6ef9 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -117,6 +117,27 @@ proxy, and it applies the executable changes above as well.
+ 
+ ## [Unreleased]
+ 
++- **Under Wine the game no longer minimises itself when it loses activation** (2026-10-16;
++  `src/controller-native/K1NativeJoystick.cpp`, `KeepWindowOnDeactivateK1`, hooked at
++  `0x004029D2`, a core hook; issue #6). Reported from play on a ROG Ally X (Bazzite, Proton 11,
++  Steam's Game Mode): about one start in three stopped on a black screen after the logo
++  movies, and the game never reached the main menu. Read from the hung process: the main
++  thread was in `SwapBuffers`, inside Mesa's DRI3 back-buffer wait
++  (`loader_dri3_get_buffers` → `dri3_find_back` → `xcb_wait_for_special_event`), and the game
++  window's Win32 style was `0xB6000000` against `0x96000000` on a good start -- the difference
++  is `WS_MINIMIZE` -- with Wine's OpenGL child window at the minimised size, 160x31, instead of
++  1920x1080. The window procedure (`0x00402800`) handles `WM_ACTIVATEAPP` at `0x00402951`: on
++  a deactivation in fullscreen it calls `ShowWindow(hwnd, SW_MINIMIZE)` at `0x004029DB`, which
++  on Windows is how Alt-Tab leaves an exclusive-fullscreen game. In a compositor with no
++  taskbar nothing restores the window, and the restore would have run on the thread waiting in
++  the swap. The logo movie's window handing over to the game window is what deactivated it.
++  Under Wine (ntdll's `wine_get_version`) the handler skips the push, push and call; the gamma
++  and mode restore after it still run. On Windows nothing changes. **The handler compiles in
++  the Linux build of the standalone module; the main module carrying it has not been built.
++  The same change, the call replaced with `NOP`s in the running game's memory under Proton,
++  was played: no black screen in the starts since, and the window's style never showed
++  `WS_MINIMIZE`.** The Steam and quick-access overlays did not deactivate the game.
++
+ - **Controller: the left stick navigates the screens that navigate themselves** (2026-10-16;
+   `src/controller-native/K1NativeJoystick.cpp`, `FillNativeJoystickBufferK1`;
+   `docs/controller-behaviour-matrix.md`, the left stick's row). Reported from play on a
+diff --git a/docs/controller-support.md b/docs/controller-support.md
+index db98b65..451ae9f 100644
+--- a/docs/controller-support.md
++++ b/docs/controller-support.md
+@@ -157,7 +157,7 @@ it. Which hook goes where is the `install` key in
+ 
+ | Set | Hooks | Installed |
+ | --- | --- | --- |
+-| core (`always`) | the movie window's two, four memory-safety byte patches, `NativeFreeSaveBufferK1`, three popup hooks, and three keyboard hooks (`KeyboardNavigateK1`, `KeyboardListBoundaryK1`, `KeyboardKeepFocusK1`) | 13, always |
++| core (`always`) | the movie window's two, four memory-safety byte patches, `NativeFreeSaveBufferK1`, `KeepWindowOnDeactivateK1` (no self-minimise under Wine), three popup hooks, and three keyboard hooks (`KeyboardNavigateK1`, `KeyboardListBoundaryK1`, `KeyboardKeepFocusK1`) | 14, always |
+ | controller | the other 30 detours, including `NativeGuiFrameK1` and `NativeMovieFrameK1` | with the option on: 43 hooks in all (40 before the 2026-10-03 keyboard source port) |
+ | core stand-ins (`no-controller`) | `CoreGuiFrameK1` at `0x0040CE70` (mouse confinement, the status summary's layout) and `CoreMovieFrameK1` at `0x00404D96` (the movie bars) | with the option off: 15 hooks in all (12 before the keyboard source port) |
+ 
+diff --git a/src/controller-native/K1NativeJoystick.cpp b/src/controller-native/K1NativeJoystick.cpp
+index 0bce33b..924dcf7 100644
+--- a/src/controller-native/K1NativeJoystick.cpp
++++ b/src/controller-native/K1NativeJoystick.cpp
+@@ -2673,6 +2673,33 @@ extern "C" void __cdecl NativeFreeSaveBufferK1(void* buffer)
+     ++g_stick.saveBuffersFreed;
+ }
+ 
++// Under Wine, the game does not minimise itself when it loses activation.
++//
++// The game window's procedure (0x00402800) handles WM_ACTIVATEAPP at 0x00402951.
++// On a deactivation in fullscreen (the render window's +0xAC, vtable slot 1) it
++// calls ShowWindow(hwnd, SW_MINIMIZE) at 0x004029DB, then restores the gamma ramp
++// and the desktop's mode (vtable slot 6). On Windows that is how Alt-Tab leaves
++// an exclusive-fullscreen game. Under Wine in a compositor with no taskbar
++// (Proton in Steam's Game Mode, gamescope) nothing restores the window, and Wine
++// shrinks its OpenGL child window to the minimised client rectangle, 160x31: the
++// next SwapBuffers then waited in Mesa's DRI3 back-buffer wait for a buffer the
++// X server never released, on the thread that would have handled the restore.
++// The handoff from the logo movie's window deactivated the game on about one
++// start in three (Bazzite, Proton 11, gamescope).
++//
++// Returning 1 leaves through the consumed exit at 0x004029E1, past the push,
++// push and call, and the gamma and mode restore after it still run. On Windows
++// it returns 0 and the original minimise runs.
++extern "C" int __cdecl KeepWindowOnDeactivateK1()
++{
++    static int underWine = -1;
++    if (underWine < 0) {
++        HMODULE const ntdll = GetModuleHandleA("ntdll.dll");
++        underWine = ntdll && GetProcAddress(ntdll, "wine_get_version") ? 1 : 0;
++    }
++    return underWine;
++}
++
+ // CSWGuiPanel::ReleaseGff, with ecx holding the panel. Every one of the 68 panel
+ // constructors calls this as its last act, and it is the last instant at which a
+ // control can be added: it deletes the parsed .gui the binder resolves tags
+diff --git a/src/controller-native/exports.def b/src/controller-native/exports.def
+index eb9eb59..f5f35c9 100644
+--- a/src/controller-native/exports.def
++++ b/src/controller-native/exports.def
+@@ -45,6 +45,7 @@ EXPORTS
+     NativeActionBarK1
+     NativePanelReleaseGffK1
+     NativeFreeSaveBufferK1
++    KeepWindowOnDeactivateK1
+     CoreGuiFrameK1
+     CoreMovieFrameK1
+     KmrpActionBarApplyK1
+diff --git a/src/controller-native/kotor1.hooks.toml b/src/controller-native/kotor1.hooks.toml
+index 78026eb..7bea493 100644
+--- a/src/controller-native/kotor1.hooks.toml
++++ b/src/controller-native/kotor1.hooks.toml
+@@ -1149,6 +1149,25 @@ exclude_from_restore = []
+ source = "esi"
+ type = "pointer"
+ 
++# --- No self-minimise under Wine --------------------------------------------
++#
++# The game window's WM_ACTIVATEAPP case (0x00402951) minimises the window on a
++# deactivation in fullscreen: `mov ecx, [0x007A39D8]; push 6; push ecx; call
++# [ShowWindow]` at 0x004029D2. Under Wine with no taskbar nothing restores it, and
++# the next SwapBuffers can wait forever (K1NativeJoystick.cpp,
++# KeepWindowOnDeactivateK1). The stolen bytes are the hwnd load, an absolute
++# address, nothing to relocate; the consumed exit is the instruction after the
++# call, and EAX is free there (the next use loads it).
++[[hooks]]
++address = 0x004029D2
++type = "detour"
++install = "always"
++function = "KeepWindowOnDeactivateK1"
++original_bytes = [0x8B, 0x0D, 0xD8, 0x39, 0x7A, 0x00]
++skip_original_bytes = false
++consumed_exit_address = 0x004029E1
++exclude_from_restore = ["eax"]
++
+ # --- The message popup, fitted to its contents ------------------------------
+ #
+ # CSWGuiMessageBox::FixMessageLabel (0x006253A0) keeps confirm.gui's panel, sized for
+-- 
+2.56.0
+
