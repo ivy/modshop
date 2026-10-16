@@ -41,7 +41,7 @@ The build host's `data/game` must be on a filesystem with reflinks (XFS with `re
 build/setup-venv.sh            # data/venv: HoloPatcher 1.5.3 with the pykotor series applied
 ```
 
-Without the four pykotor fixes in `patches/pykotor/` the build is wrong: a TypeError on one mod's compile list, an exception on two mods' `Required`/`RequiredMsg` lists, a crash on one mod's `namespaces.ini`, and, worst, five mods ship 2DA tables with a zero cell-data size in the header that unpatched pykotor reads as empty tables and writes back empty, which blanks every feat name and crashes character creation.
+Without the five pykotor fixes in `patches/pykotor/` the build is wrong: a TypeError on one mod's compile list, an exception on two mods' `Required`/`RequiredMsg` lists, a crash on one mod's `namespaces.ini`, three scripts of one mod refused by the compiler, and, worst, five mods ship 2DA tables with a zero cell-data size in the header that unpatched pykotor reads as empty tables and writes back empty, which blanks every feat name and crashes character creation.
 
 ### 4. The build
 

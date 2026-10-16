@@ -1,0 +1,57 @@
+From d920c9505a008c71deefcf09c94fc03887ad7834 Mon Sep 17 00:00:00 2001
+From: Ivy Evans <ivy@users.noreply.github.com>
+Date: Thu, 15 Oct 2026 18:59:32 -0700
+Subject: [PATCH] ncs compiler: a mixed int and float arithmetic operation
+ yields a float
+
+The operator tables gave ADDIF, SUBIF, MULIF, DIVIF and their FI twins the
+left operand's type as the result, so 'nHeal * fGoodModifier' with nHeal an
+int was typed int and FloatToInt() then refused it with a type mismatch.
+The engine's mixed instructions produce a float, as nwnnsscomp types them.
+---
+ .../src/pykotor/resource/formats/ncs/compiler/lexer.py    | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/lexer.py b/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/lexer.py
+index 78c77b6f4..6138469b2 100644
+--- a/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/lexer.py
++++ b/Libraries/PyKotor/src/pykotor/resource/formats/ncs/compiler/lexer.py
+@@ -447,7 +447,7 @@ class NssLexer(ComparableMixin):
+                     NCSInstructionType.ADDII, DataType.INT, DataType.INT, DataType.INT
+                 ),
+                 BinaryOperatorMapping(
+-                    NCSInstructionType.ADDIF, DataType.INT, DataType.INT, DataType.FLOAT
++                    NCSInstructionType.ADDIF, DataType.FLOAT, DataType.INT, DataType.FLOAT
+                 ),
+                 BinaryOperatorMapping(
+                     NCSInstructionType.ADDFI, DataType.FLOAT, DataType.FLOAT, DataType.INT
+@@ -477,7 +477,7 @@ class NssLexer(ComparableMixin):
+                     NCSInstructionType.SUBII, DataType.INT, DataType.INT, DataType.INT
+                 ),
+                 BinaryOperatorMapping(
+-                    NCSInstructionType.SUBIF, DataType.INT, DataType.INT, DataType.FLOAT
++                    NCSInstructionType.SUBIF, DataType.FLOAT, DataType.INT, DataType.FLOAT
+                 ),
+                 BinaryOperatorMapping(
+                     NCSInstructionType.SUBFI, DataType.FLOAT, DataType.FLOAT, DataType.INT
+@@ -501,7 +501,7 @@ class NssLexer(ComparableMixin):
+                     NCSInstructionType.MULII, DataType.INT, DataType.INT, DataType.INT
+                 ),
+                 BinaryOperatorMapping(
+-                    NCSInstructionType.MULIF, DataType.INT, DataType.INT, DataType.FLOAT
++                    NCSInstructionType.MULIF, DataType.FLOAT, DataType.INT, DataType.FLOAT
+                 ),
+                 BinaryOperatorMapping(
+                     NCSInstructionType.MULFI, DataType.FLOAT, DataType.FLOAT, DataType.INT
+@@ -528,7 +528,7 @@ class NssLexer(ComparableMixin):
+                     NCSInstructionType.DIVII, DataType.INT, DataType.INT, DataType.INT
+                 ),
+                 BinaryOperatorMapping(
+-                    NCSInstructionType.DIVIF, DataType.INT, DataType.INT, DataType.FLOAT
++                    NCSInstructionType.DIVIF, DataType.FLOAT, DataType.INT, DataType.FLOAT
+                 ),
+                 BinaryOperatorMapping(
+                     NCSInstructionType.DIVFI, DataType.FLOAT, DataType.FLOAT, DataType.INT
+-- 
+2.56.0
+
