@@ -430,7 +430,7 @@ Coverage is not a target. The determinism properties, every path rule and the in
 - `compare` against the legacy store's `known-good` lineage: all 191 positions (vanilla and 190 entries) identical by name and tree hash.
 - The no-op rebuild: 0 rebuilt in 0.4 s.
 - The mutation run: `display` in `local.toml` changed, `status` reports the `kmrp` entry missing and one more after it, nothing else; reverted, `status` reports up to date.
-- The deploys: the checkpoint before the chain end deployed for real (37 paths, the live folder swapped, `.prev` kept); the chain end's deploy refused because the game had been started on the handheld in between, and ran once the game exited.
+- The deploys: the checkpoint before the chain end deployed for real (37 paths, the live folder swapped, `.prev` kept); the chain end's deploy was refused because the game had been started on the handheld in between, and is run once the game exits, after which the drift check must come back clean.
 - Test suite at cutover: 51 tests, pyright strict and ruff clean.
 
 ## Room left for later
