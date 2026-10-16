@@ -1,6 +1,7 @@
 # Game and mod bytes never enter this repository: archives, game copies, build
 # outputs, logs and venvs live under each game's data/ directory.
 games/*/data/
+games/*/data-next/
 # Device identity lives in local.toml, never in git.
 local.toml
 # Built binaries of our own tools are rebuilt from source.

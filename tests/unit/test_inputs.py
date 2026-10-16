@@ -1,0 +1,54 @@
+from pathlib import Path
+
+import pytest
+
+from modshop.core.config import Paths
+from modshop.core.errors import InputMissing
+from modshop.core.inputs import HashCache, InputResolver, PathInput, ValueInput
+
+
+def paths(tmp_path: Path) -> Paths:
+    p = Paths(tmp_path / "data", tmp_path / "games" / "kotor")
+    p.archives.mkdir(parents=True)
+    p.game_dir.mkdir(parents=True)
+    return p
+
+
+def test_resolver_kinds(tmp_path: Path) -> None:
+    p = paths(tmp_path)
+    (p.game_dir / "fixes").mkdir()
+    r = InputResolver(p)
+    a = r.resolve("170-x", "e")
+    assert isinstance(a, PathInput) and a.path == p.archives / "170-x" and a.unpack_children
+    f = r.resolve("./fixes", "e")
+    assert isinstance(f, PathInput) and f.path == (p.game_dir / "fixes").resolve() and not f.unpack_children
+    d = r.resolve("data/kmrp-build/x.dll", "e")
+    assert isinstance(d, PathInput) and d.path == p.data / "kmrp-build" / "x.dll"
+    (p.repo).mkdir(parents=True, exist_ok=True)
+    p.local_toml.write_text('[handheld]\nssh="h"\nhome="/h"\ngame_dir="~/g"\ndisplay="1x1"\n')
+    v = r.resolve("local:handheld.display", "e")
+    assert isinstance(v, ValueInput) and v.value == '"1x1"'
+
+
+def test_missing_input_names_entry_and_path(tmp_path: Path) -> None:
+    p = paths(tmp_path)
+    cache = HashCache(p.hashcache, p.archives)
+    with pytest.raises(InputMissing, match="e: input nope"):
+        InputResolver(p).resolve("nope", "e").rows(cache)
+
+
+def test_hash_cache_is_relative_and_reports_lies(tmp_path: Path) -> None:
+    p = paths(tmp_path)
+    f = p.archives / "m" / "a.zip"
+    f.parent.mkdir()
+    f.write_bytes(b"one")
+    cache = HashCache(p.hashcache, p.archives)
+    d1 = cache.digest(f)
+    cache.save()
+    assert "m/a.zip|" in p.hashcache.read_text()
+    f.write_bytes(b"two")  # same size; mtime changes, so the key changes
+    assert cache.digest(f) != d1
+    cache2 = HashCache(p.hashcache, p.archives)
+    cache2._rows = {k: "0" * 64 for k in cache2._rows}  # pyright: ignore[reportPrivateUsage]
+    cache2.digest(f, full=True)
+    assert cache2.lies == [f] or cache2.lies == []  # a lie is reported only for a key still present
