@@ -4,6 +4,7 @@
 java = "temurin-21.0.12+8.0.LTS"
 "npm:rea-agents" = "6.5.0"
 "ubi:SteamRE/DepotDownloader" = { version = "DepotDownloader_3.4.0", exe = "DepotDownloader", matching = "linux-x64" }
+rust = "1.99.0"
 uv = "0.13.1"
 
 [tasks.check]
@@ -50,7 +51,7 @@ rm -rf "$work"
 git clone -q "${NWSCRIPT_REPO:-https://github.com/ivy/nwscript.git}" "$work"
 cd "$work"
 git -c advice.detachedHead=false checkout -q "$NWSCRIPT_REV"
-mise x rust@1.99.0 -- cargo build -q --release --locked -p nws -p nwnnsscomp
+cargo build -q --release --locked -p nws -p nwnnsscomp
 install -D -m 0755 target/release/nws "$root/games/kotor/data/tools/nws/nws"
 install -D -m 0755 target/release/nwnnsscomp "$root/games/kotor/data/tools/nws/nwnnsscomp"
 echo "installed nws and nwnnsscomp at $NWSCRIPT_REV in $root/games/kotor/data/tools/nws/"

@@ -15,7 +15,7 @@ Scripts, patches and notes for building modded games on Linux, written so that s
 
 ## Quick start
 
-1. Clone, `mise install` (uv and the Steam downloader), `uv sync` (the tool and the patcher), then read the game's README: `games/kotor/README.md` is the whole procedure for that game.
+1. Clone, `mise install` (uv, Rust and the Steam downloader), `mise run nws:build` (the NWScript compiler), `uv sync` (the tool and the patcher), then read the game's README: `games/kotor/README.md` is the whole procedure for that game.
 2. Copy `local.example.toml` to `local.toml` and fill in your machine names and paths. The docs say "the handheld" and "the build host"; that file says which is which for you.
 3. Each game keeps its archives, game copies, logs and build outputs under `games/<game>/data/`, which git ignores. The scripts find it by default; `KOTOR_DATA` (for KotOR) points them elsewhere.
 

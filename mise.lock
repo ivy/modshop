@@ -109,6 +109,11 @@ aube = { path = ".mise/locks/npm-rea-agents/6.5.0", digest = "sha256:2b57e5577f3
 backend = "npm:rea-agents"
 specifiers = ["6.5.0"]
 
+[[tools.rust]]
+version = "1.99.0"
+backend = "core:rust"
+specifiers = ["1.99.0"]
+
 [[tools."ubi:SteamRE/DepotDownloader"]]
 version = "DepotDownloader_3.4.0"
 backend = "ubi:SteamRE/DepotDownloader"

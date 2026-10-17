@@ -25,12 +25,14 @@ The code is the `modshop` package at the repository root (`src/modshop/`): `core
 ### 1. The tool
 
 ```bash
-mise install    # uv and DepotDownloader, from the repository's mise.toml
-uv sync         # the tool, the patcher (HoloPatcher 1.5.3) and the patched pykotor, in .venv
+mise install         # uv, Rust and DepotDownloader, from the repository's mise.toml
 mise run nws:build   # the NWScript compiler mods' scripts are compiled with, into data/tools/nws/
+uv sync              # the tool, the patcher (HoloPatcher 1.5.3) and the patched pykotor, in .venv
 ```
 
 `uv.lock` pins pykotor to the head of our series branch on a fork (see [`patches/README.md`](patches/README.md)), as the commit's source archive: without those eight fixes the build is wrong (a TypeError on one mod's compile list, an exception on two mods' `Required`/`RequiredMsg` lists, a crash on one mod's `namespaces.ini`, three scripts of one mod refused by the compiler, every replacement of a resource inside a module archive silently dropped, five mods' 2DA tables read as empty and written back empty, which blanks every feat name and crashes character creation, and every compiled script calling the engine with its arguments in reverse, with no way to run the mod's own compiler instead). The patcher's resolved packages are part of every key, so a change to the lockfile rebuilds the chain. To build with a patcher from another environment (a fix in progress), set `MODSHOP_PATCHER` to its `holopatcher` executable; that environment's package sources are then keyed instead.
+
+`nws:build` comes first because the lockfile names its clone, `data/build/nwscript/`, as the source of the optional `nwscript` group: `uv sync --group nwscript` adds nwscript's Python module (`import nwscript`: compile, check, disassemble and run scripts from Python) at the same pinned commit.
 
 The Python uv uses must have tkinter (the patcher imports it even on the console); mise's does, and SteamOS-like distributions' does not, which is one reason the build runs on a separate host.
 

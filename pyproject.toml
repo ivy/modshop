@@ -23,11 +23,14 @@ modshop = "modshop.cli:app"
 dev = ["pytest>=8", "ruff>=0.14", "pyright>=1.1.400"]
 # KMRP's controller build (`modshop kotor kmrp build`); not in the patcher's closure, so no checkpoint key sees them.
 kmrp-build = ["pillow>=12", "numpy>=2.5", "fonttools>=4.67", "capstone>=5.0"]
+# nwscript's Python module (`import nwscript`), built from the clone `mise run nws:build` makes at its pinned commit.
+nwscript = ["nwscript"]
 
 [tool.uv.sources]
 # The patcher's library, with the fixes in games/kotor/patches/pykotor/ applied: that series'
 # README names the base commit; this is its head.
 pykotor = { url = "https://github.com/ivy/PyKotor/archive/7232805547915dcbca2409588a89092417251b6e.tar.gz", subdirectory = "Libraries/PyKotor" }
+nwscript = { path = "games/kotor/data/build/nwscript/crates/nwscript-py" }
 
 [build-system]
 requires = ["hatchling"]
