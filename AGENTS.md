@@ -14,6 +14,14 @@ A public repository of scripts, patches and notes for building modded games on L
 2. **No device identity in git.** Hostnames, usernames, home paths, account ids, tailnet names. They go in `local.toml` or `AGENTS.local.md`; the docs use the role names.
 3. **Reproducible and idempotent.** The modded install is built by script from a pristine copy of the game and the archives, every fix is a replayable step, and a problem is fixed in the tool or the mod rather than worked around by hand in the game folder. Nothing is edited in the game folder without a script that reproduces it.
 
+## Finding the cause
+
+- **Fix the cause, not the symptom.** When something does not work, find out why before changing course. A workaround that changes what was asked for (a different trigger, a dropped animation, a skipped step) is the owner's decision: offer it with the cause it hides, never make it silently.
+- **Read the program before guessing at it.** When a game does something its files do not explain, the answer is in its code: decompile it (REA, below; a game's README says how to get a readable executable) and follow the call that decides. A decompile takes minutes; a guess that a play session disproves costs a session of the owner's time.
+- **Find the precedent.** Before inventing a mechanism, find where the game already does the same thing and copy it: its scripts, its dialogues, its data.
+- **Take the cheapest evidence first.** The game's files, its code, and the state it saved answer most questions without anyone playing. Ask for a play session only to see what nothing else shows, and say exactly what to do and look at.
+- **Prove an instrument before relying on it.** A debug channel, a breakpoint, a search: try it on a case with a known answer first. A diagnostic that shows nothing, or a search that finds nothing, proves nothing until it has been seen to work.
+
 ## Fixes to other projects
 
 Kept kernel-maintainer style: one commit per fix with the reason in the message, on a local branch over the upstream commit it was written against, in a clone under `~/src/<host>/<owner>/<repo>`, exported with `git format-patch` into `games/<game>/patches/<project>/`. The series' README names the base commit. `git am` applies it to a fresh clone; a `patch -p<N>` applies it to an installed package. When upstream takes a patch, it leaves the series on the next rebase. Commit messages for upstream carry no AI attribution.
