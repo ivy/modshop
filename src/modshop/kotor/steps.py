@@ -16,6 +16,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict
 
 from modshop.core.errors import Preflight, StepFailed
+from modshop.core.inputs import mise_exe
 from modshop.kotor import kmrp, nwnnsscomp
 from modshop.kotor.context import StepContext
 from modshop.kotor.paths import ci_find, ci_path, collapse_case, files_in, put, subdirs
@@ -115,7 +116,22 @@ class Setting(BaseModel, frozen=True):
         return self.default if value is None else str(value)
 
 
-ScriptArg = GameDir | OverrideDir | StageDir | ArchivePath | DataPath | Word | Setting
+class Tool(BaseModel, frozen=True):
+    """An executable from the repository's mise tools, as its path; the tool and its version are
+    key material, so bumping it in mise.toml rebuilds the entry."""
+
+    kind: Literal["tool"] = "tool"
+    exe: str
+
+    @property
+    def spec(self) -> str:
+        return f"tool:{self.exe}"
+
+    def render(self, ctx: StepContext) -> str:
+        return str(mise_exe(self.exe, ctx.paths.repo))
+
+
+ScriptArg = GameDir | OverrideDir | StageDir | ArchivePath | DataPath | Word | Setting | Tool
 
 
 def input_path(ctx: StepContext, spec: str) -> Path:

@@ -87,3 +87,34 @@ def test_a_missing_podman_image_is_a_preflight_failure() -> None:
 
     with pytest.raises(Preflight, match="not built"):
         image_id("modshop-test-no-such-image")
+
+
+def fake_mise(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, active: bool = True) -> None:
+    """A `mise` on the PATH that answers `which` for one tool, ffmpeg from conda at 8.0.1."""
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    exe = bin_dir / "mise"
+    answers = {"--plugin": "conda:ffmpeg", "--version": "8.0.1"}
+    lines = [f'[ "$2" = "{flag}" ] && {{ echo {value}; exit 0; }}' for flag, value in answers.items()]
+    body = "\n".join(lines) + f"\necho {bin_dir}/ffmpeg" if active else "exit 1"
+    exe.write_text(f"#!/bin/sh\n{body}\n")
+    exe.chmod(0o755)
+    monkeypatch.setenv("PATH", f"{bin_dir}:/usr/bin:/bin")
+
+
+def test_tool_spec_is_the_mise_tool_and_version(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    fake_mise(tmp_path, monkeypatch)
+    p = paths(tmp_path)
+    v = InputResolver(p).resolve("tool:ffmpeg", "e")
+    assert isinstance(v, ValueInput) and v.value == "conda:ffmpeg@8.0.1"
+    assert v.staged() == []
+
+
+def test_a_tool_mise_does_not_provide_is_a_preflight_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from modshop.core.errors import Preflight
+
+    fake_mise(tmp_path, monkeypatch, active=False)
+    with pytest.raises(Preflight, match="mise install"):
+        InputResolver(paths(tmp_path)).resolve("tool:ffmpeg", "e")

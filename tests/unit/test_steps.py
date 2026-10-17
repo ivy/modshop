@@ -29,6 +29,7 @@ from modshop.kotor.steps import (
     StageDir,
     Symlink,
     Tlk,
+    Tool,
     Word,
 )
 from tests.conftest import FakePatcher
@@ -190,7 +191,7 @@ def test_script_args_render_and_declare_inputs(tmp_path: Path) -> None:
 def test_script_arg_kinds_never_dump_alike() -> None:
     dumps = {
         type(a).__name__: a.model_dump(mode="json")
-        for a in (GameDir(), OverrideDir(), StageDir(), Word(text="x"))
+        for a in (GameDir(), OverrideDir(), StageDir(), Word(text="x"), Tool(exe="x"))
     }
     assert len({str(d) for d in dumps.values()}) == len(dumps)
 
@@ -221,3 +222,14 @@ def test_setting_renders_local_value_or_default(tmp_path: Path) -> None:
     assert arg.render(replace(ctx, local=without)) == "0"
     with_level = Local.model_validate({"handheld": handheld, "kmrp": {"debug_logs": 2}})
     assert arg.render(replace(ctx, local=with_level)) == "2"
+
+
+def test_tool_renders_the_executable_mise_resolves(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from tests.unit.test_inputs import fake_mise
+
+    (tmp_path / "mise").mkdir()
+    fake_mise(tmp_path / "mise", monkeypatch)
+    ctx = ctx_for(tmp_path)
+    arg = Tool(exe="ffmpeg")
+    assert arg.spec == "tool:ffmpeg"
+    assert arg.render(ctx) == str(tmp_path / "mise" / "bin" / "ffmpeg")

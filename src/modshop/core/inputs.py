@@ -7,6 +7,8 @@ Spec forms:
   `local:<dotted>`   a value from local.toml; key material only, nothing staged
   `local?:<dotted>`  the same for a value local.toml may leave out (its absence is key material too)
   `image:<name>`     a podman image's id; key material only
+  `tool:<exe>`       the mise tool that provides an executable, as `<backend>@<version>` from the
+                     repository's mise.toml; key material only
 """
 
 from __future__ import annotations
@@ -131,6 +133,24 @@ def image_id(name: str) -> str:
     return r.stdout.strip()
 
 
+def _mise_which(exe: str, repo: Path, *flags: str) -> str:
+    r = subprocess.run(["mise", "which", *flags, exe], cwd=repo, capture_output=True, text=True)
+    if r.returncode != 0:
+        raise Preflight(
+            f"mise has no active tool providing {exe} here; `mise install` installs mise.toml's tools"
+        )
+    return r.stdout.strip()
+
+
+def mise_tool(exe: str, repo: Path) -> str:
+    """The tool providing `exe` in the repository's mise configuration, as `<backend>@<version>`."""
+    return f"{_mise_which(exe, repo, '--plugin')}@{_mise_which(exe, repo, '--version')}"
+
+
+def mise_exe(exe: str, repo: Path) -> Path:
+    return Path(_mise_which(exe, repo))
+
+
 class InputResolver:
     """Turns spec strings into Inputs. local.toml is read on the first `local:` spec."""
 
@@ -151,6 +171,8 @@ class InputResolver:
             return ValueInput(spec, json.dumps(self.local().get(spec[7:]) if present else None))
         if spec.startswith("image:"):
             return ValueInput(spec, image_id(spec[6:]))
+        if spec.startswith("tool:"):
+            return ValueInput(spec, mise_tool(spec[5:], self.paths.repo))
         if spec.startswith("./"):
             return PathInput(spec, (self.paths.game_dir / spec[2:]).resolve(), entry, unpack_children=False)
         if spec.startswith("data/"):
