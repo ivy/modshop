@@ -1,0 +1,172 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Yeah, well, I'm glad somebody's enjoying themselves right now."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Yeah"
+          }
+        ],
+        "start_time": "0.34",
+        "end_time": "0.699"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.993",
+            "content": "well"
+          }
+        ],
+        "start_time": "0.899",
+        "end_time": "0.98"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I'm"
+          }
+        ],
+        "start_time": "1.019",
+        "end_time": "1.22"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "glad"
+          }
+        ],
+        "start_time": "1.22",
+        "end_time": "1.5"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.992",
+            "content": "somebody's"
+          }
+        ],
+        "start_time": "1.5",
+        "end_time": "2.019"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "enjoying"
+          }
+        ],
+        "start_time": "2.019",
+        "end_time": "2.46"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "themselves"
+          }
+        ],
+        "start_time": "2.46",
+        "end_time": "2.7"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "right"
+          }
+        ],
+        "start_time": "2.7",
+        "end_time": "2.9"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "now"
+          }
+        ],
+        "start_time": "2.9",
+        "end_time": "3.24"
+      },
+      {
+        "id": 11,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Yeah, well, I'm glad somebody's enjoying themselves right now.",
+        "start_time": "0.25",
+        "end_time": "3.349",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

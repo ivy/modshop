@@ -1,0 +1,61 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Meow meow Carth"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.995",
+            "content": "Meow"
+          }
+        ],
+        "start_time": "0.56",
+        "end_time": "0.87"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.995",
+            "content": "meow"
+          }
+        ],
+        "start_time": "0.87",
+        "end_time": "1.23"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.41",
+            "content": "Carth"
+          }
+        ],
+        "start_time": "1.23",
+        "end_time": "1.48"
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Meow meow carve",
+        "start_time": "0.419",
+        "end_time": "1.99",
+        "items": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

@@ -1,0 +1,185 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Well, I wasn't exactly in control of myself, was I?"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "Well"
+          }
+        ],
+        "start_time": "0.449",
+        "end_time": "0.569"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "0.649",
+        "end_time": "0.759"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "wasn't"
+          }
+        ],
+        "start_time": "0.759",
+        "end_time": "1.21"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "exactly"
+          }
+        ],
+        "start_time": "1.21",
+        "end_time": "1.529"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "in"
+          }
+        ],
+        "start_time": "1.529",
+        "end_time": "1.879"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "control"
+          }
+        ],
+        "start_time": "1.879",
+        "end_time": "2.009"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "of"
+          }
+        ],
+        "start_time": "2.009",
+        "end_time": "2.4"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "myself"
+          }
+        ],
+        "start_time": "2.4",
+        "end_time": "2.68"
+      },
+      {
+        "id": 9,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "was"
+          }
+        ],
+        "start_time": "2.849",
+        "end_time": "3.089"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "3.089",
+        "end_time": "3.41"
+      },
+      {
+        "id": 12,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Well, I wasn't exactly in control of myself, was I?",
+        "start_time": "0.319",
+        "end_time": "3.519",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

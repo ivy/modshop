@@ -1,0 +1,70 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "No, nothing."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "No"
+          }
+        ],
+        "start_time": "0.289",
+        "end_time": "0.92"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.983",
+            "content": "nothing"
+          }
+        ],
+        "start_time": "1.25",
+        "end_time": "1.69"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "No, nothing.",
+        "start_time": "0.0",
+        "end_time": "1.809",
+        "items": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

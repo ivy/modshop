@@ -1,0 +1,11 @@
+1
+00:00:00,670 --> 00:00:03,059
+You are just a Padawan.
+
+2
+00:00:03,859 --> 00:00:05,510
+I will show you
+
+3
+00:00:05,739 --> 00:00:07,619
+the true meaning of power.

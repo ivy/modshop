@@ -1,0 +1,219 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "You stand there mocking me, judging me. You think yourself so powerful."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "You"
+          }
+        ],
+        "start_time": "0.31",
+        "end_time": "0.75"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "stand"
+          }
+        ],
+        "start_time": "0.75",
+        "end_time": "1.389"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "there"
+          }
+        ],
+        "start_time": "1.389",
+        "end_time": "2.049"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "mocking"
+          }
+        ],
+        "start_time": "2.47",
+        "end_time": "3.069"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "me"
+          }
+        ],
+        "start_time": "3.069",
+        "end_time": "3.609"
+      },
+      {
+        "id": 5,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "judging"
+          }
+        ],
+        "start_time": "4.15",
+        "end_time": "4.909"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "me"
+          }
+        ],
+        "start_time": "4.909",
+        "end_time": "5.349"
+      },
+      {
+        "id": 8,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "You"
+          }
+        ],
+        "start_time": "6.219",
+        "end_time": "6.61"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "think"
+          }
+        ],
+        "start_time": "6.61",
+        "end_time": "7.199"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "yourself"
+          }
+        ],
+        "start_time": "7.199",
+        "end_time": "7.579"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "so"
+          }
+        ],
+        "start_time": "7.579",
+        "end_time": "7.94"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "powerful"
+          }
+        ],
+        "start_time": "7.94",
+        "end_time": "8.72"
+      },
+      {
+        "id": 14,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "You stand there mocking me, judging me.",
+        "start_time": "0.18",
+        "end_time": "5.429",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "You think yourself so powerful.",
+        "start_time": "6.05",
+        "end_time": "8.81",
+        "items": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

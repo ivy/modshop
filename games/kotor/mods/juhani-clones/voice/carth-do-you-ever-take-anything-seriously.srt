@@ -1,0 +1,3 @@
+1
+00:00:01,799 --> 00:00:03,740
+Do you ever take anything seriously?

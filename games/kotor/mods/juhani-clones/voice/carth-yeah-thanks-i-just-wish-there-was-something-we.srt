@@ -1,0 +1,11 @@
+1
+00:00:00,319 --> 00:00:01,100
+Yeah,
+
+2
+00:00:01,679 --> 00:00:02,160
+thanks.
+
+3
+00:00:03,509 --> 00:00:06,769
+I just wish there was something we could do to keep it from happening again.

@@ -1,0 +1,124 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Does this mean you're part Cathar now?"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Does"
+          }
+        ],
+        "start_time": "0.72",
+        "end_time": "0.879"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "this"
+          }
+        ],
+        "start_time": "0.879",
+        "end_time": "1.08"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "mean"
+          }
+        ],
+        "start_time": "1.08",
+        "end_time": "1.279"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.989",
+            "content": "you're"
+          }
+        ],
+        "start_time": "1.279",
+        "end_time": "1.48"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "part"
+          }
+        ],
+        "start_time": "1.48",
+        "end_time": "1.759"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.886",
+            "content": "Cathar"
+          }
+        ],
+        "start_time": "1.759",
+        "end_time": "2.22"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "now"
+          }
+        ],
+        "start_time": "2.22",
+        "end_time": "2.619"
+      },
+      {
+        "id": 7,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Does this mean you're part Cathar now?",
+        "start_time": "0.189",
+        "end_time": "2.759",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

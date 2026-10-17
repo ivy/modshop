@@ -1,0 +1,256 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "I'll be OK, trust me. But Carth, maybe you should go check on him."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I'll"
+          }
+        ],
+        "start_time": "0.5",
+        "end_time": "0.699"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "be"
+          }
+        ],
+        "start_time": "0.699",
+        "end_time": "0.86"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "OK"
+          }
+        ],
+        "start_time": "0.86",
+        "end_time": "1.429"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.934",
+            "content": "trust"
+          }
+        ],
+        "start_time": "1.71",
+        "end_time": "1.99"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "me"
+          }
+        ],
+        "start_time": "1.99",
+        "end_time": "2.43"
+      },
+      {
+        "id": 6,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "But"
+          }
+        ],
+        "start_time": "3.069",
+        "end_time": "3.309"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.985",
+            "content": "Carth"
+          }
+        ],
+        "start_time": "3.309",
+        "end_time": "4.05"
+      },
+      {
+        "id": 9,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "maybe"
+          }
+        ],
+        "start_time": "5.07",
+        "end_time": "5.309"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "5.309",
+        "end_time": "5.51"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "should"
+          }
+        ],
+        "start_time": "5.51",
+        "end_time": "5.67"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "go"
+          }
+        ],
+        "start_time": "5.67",
+        "end_time": "5.869"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "check"
+          }
+        ],
+        "start_time": "5.869",
+        "end_time": "6.059"
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "on"
+          }
+        ],
+        "start_time": "6.059",
+        "end_time": "6.23"
+      },
+      {
+        "id": 16,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "him"
+          }
+        ],
+        "start_time": "6.23",
+        "end_time": "6.489"
+      },
+      {
+        "id": 17,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "I'll be OK, trust me.",
+        "start_time": "0.259",
+        "end_time": "2.509",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "But Cararth, maybe you should go check on him.",
+        "start_time": "3.019",
+        "end_time": "6.59",
+        "items": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

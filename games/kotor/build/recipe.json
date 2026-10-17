@@ -3717,5 +3717,36 @@
     ]
    }
   ]
+ },
+ {
+  "inputs": [],
+  "mod": "mod:juhani-clones",
+  "steps": [
+   {
+    "args": [
+     {
+      "kind": "game",
+      "spec": null
+     },
+     {
+      "kind": "data",
+      "rel": "tools/nws/nws"
+     },
+     {
+      "exe": "ffmpeg",
+      "kind": "tool"
+     },
+     {
+      "exe": "rhubarb",
+      "kind": "tool"
+     }
+    ],
+    "do": "script",
+    "path": "./mods/juhani-clones/make.py",
+    "reads": [
+     "./mods/juhani-clones"
+    ]
+   }
+  ]
  }
 ]

@@ -1,0 +1,166 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Then Perhaps Perhaps there is still hope for me."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "Then"
+          }
+        ],
+        "start_time": "0.779",
+        "end_time": "1.34"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.991",
+            "content": "Perhaps"
+          }
+        ],
+        "start_time": "2.069",
+        "end_time": "3.009"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Perhaps"
+          }
+        ],
+        "start_time": "3.97",
+        "end_time": "4.539"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "there"
+          }
+        ],
+        "start_time": "4.539",
+        "end_time": "4.699"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "is"
+          }
+        ],
+        "start_time": "4.699",
+        "end_time": "4.94"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "still"
+          }
+        ],
+        "start_time": "4.94",
+        "end_time": "5.21"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "hope"
+          }
+        ],
+        "start_time": "5.21",
+        "end_time": "5.46"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "for"
+          }
+        ],
+        "start_time": "5.46",
+        "end_time": "5.67"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "me"
+          }
+        ],
+        "start_time": "5.67",
+        "end_time": "5.94"
+      },
+      {
+        "id": 9,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Then",
+        "start_time": "0.49",
+        "end_time": "1.37",
+        "items": [
+          0
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "Perhaps",
+        "start_time": "1.94",
+        "end_time": "3.14",
+        "items": [
+          1
+        ]
+      },
+      {
+        "id": 2,
+        "transcript": "Perhaps there is still hope for me.",
+        "start_time": "3.769",
+        "end_time": "6.059",
+        "items": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

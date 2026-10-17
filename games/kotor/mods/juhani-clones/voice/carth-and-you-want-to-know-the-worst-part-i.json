@@ -1,0 +1,433 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "And you want to know the worst part? I could see everything. I knew exactly what was happening, but I couldn't do a damn thing about it."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "And"
+          }
+        ],
+        "start_time": "0.4",
+        "end_time": "0.56"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "0.56",
+        "end_time": "0.68"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.627",
+            "content": "want"
+          }
+        ],
+        "start_time": "0.68",
+        "end_time": "0.759"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.601",
+            "content": "to"
+          }
+        ],
+        "start_time": "0.759",
+        "end_time": "0.879"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "know"
+          }
+        ],
+        "start_time": "0.879",
+        "end_time": "0.959"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "the"
+          }
+        ],
+        "start_time": "0.959",
+        "end_time": "1.07"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "worst"
+          }
+        ],
+        "start_time": "1.07",
+        "end_time": "1.35"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "part"
+          }
+        ],
+        "start_time": "1.35",
+        "end_time": "1.86"
+      },
+      {
+        "id": 8,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "2.319",
+        "end_time": "2.48"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "could"
+          }
+        ],
+        "start_time": "2.48",
+        "end_time": "2.72"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "see"
+          }
+        ],
+        "start_time": "2.72",
+        "end_time": "3.2"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "everything"
+          }
+        ],
+        "start_time": "3.2",
+        "end_time": "3.46"
+      },
+      {
+        "id": 13,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "I"
+          }
+        ],
+        "start_time": "4.329",
+        "end_time": "4.489"
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "knew"
+          }
+        ],
+        "start_time": "4.489",
+        "end_time": "4.769"
+      },
+      {
+        "id": 16,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "exactly"
+          }
+        ],
+        "start_time": "4.769",
+        "end_time": "5.09"
+      },
+      {
+        "id": 17,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "what"
+          }
+        ],
+        "start_time": "5.09",
+        "end_time": "5.21"
+      },
+      {
+        "id": 18,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "was"
+          }
+        ],
+        "start_time": "5.21",
+        "end_time": "5.369"
+      },
+      {
+        "id": 19,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "happening"
+          }
+        ],
+        "start_time": "5.369",
+        "end_time": "5.809"
+      },
+      {
+        "id": 20,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "but"
+          }
+        ],
+        "start_time": "6.01",
+        "end_time": "6.369"
+      },
+      {
+        "id": 22,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "I"
+          }
+        ],
+        "start_time": "7.32",
+        "end_time": "7.519"
+      },
+      {
+        "id": 23,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "couldn't"
+          }
+        ],
+        "start_time": "7.519",
+        "end_time": "7.71"
+      },
+      {
+        "id": 24,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "do"
+          }
+        ],
+        "start_time": "7.71",
+        "end_time": "7.8"
+      },
+      {
+        "id": 25,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "a"
+          }
+        ],
+        "start_time": "7.8",
+        "end_time": "7.829"
+      },
+      {
+        "id": 26,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "damn"
+          }
+        ],
+        "start_time": "7.829",
+        "end_time": "8.159"
+      },
+      {
+        "id": 27,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "thing"
+          }
+        ],
+        "start_time": "8.159",
+        "end_time": "8.359"
+      },
+      {
+        "id": 28,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "about"
+          }
+        ],
+        "start_time": "8.359",
+        "end_time": "8.529"
+      },
+      {
+        "id": 29,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "it"
+          }
+        ],
+        "start_time": "8.529",
+        "end_time": "8.92"
+      },
+      {
+        "id": 30,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "And you want to know the worst part? I could see everything.",
+        "start_time": "0.389",
+        "end_time": "3.579",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "I knew exactly what was happening, but",
+        "start_time": "4.32",
+        "end_time": "6.4",
+        "items": [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ]
+      },
+      {
+        "id": 2,
+        "transcript": "I couldn't do a damn thing about it.",
+        "start_time": "7.23",
+        "end_time": "9.01",
+        "items": [
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

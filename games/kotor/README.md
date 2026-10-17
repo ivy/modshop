@@ -14,6 +14,7 @@ Two machines are involved, named in `local.toml`:
 | `build/` | the recipe's data: `base.json` (the vanilla game's Steam ids and tree hash), `k1full.json`, `dsfiles.json` and `nexusfiles.json` (the parsed build page and file listings), `cleanlist_k1.txt`, and `recipe.json`, the recipe's canonical form |
 | `fixes/` | our own TSLPatcher change files, applied as steps of the recipe |
 | `repairs/` | scripts that patch what the build installs where it is broken under Proton; each has a README with the evidence |
+| `mods/` | our own mods, each a `make.py` and its sources, with a README |
 | `patches/` | our fixes to two other projects as `git format-patch` series: pykotor (the patcher's library) and KMRP |
 | `kmrp-build/` | building KMRP's controller module on Linux and installing it into the game folder |
 | `data/` | gitignored: `archives/` (one folder per mod, the KMRP installer, the Community Patch, the cutscenes), `game/` (`vanilla/`, the checkpoints in `ckpt/`, the working tree, `build` pointing at the chain's end), `stage/`, `logs/`, `hashcache.json`, build outputs |
@@ -75,6 +76,10 @@ Each folder in `repairs/` is one scripted fix with its README, taking its input 
 - `07-kmrp-pot-gui-textures`: KMRP's three 768x768 interface textures at a power-of-two size. Unproven, not in the recipe; see its README. It needs Pillow: `uv sync --extra repairs`.
 - `09-blaster-adjustment-orphan-rows`: one option of JC's Blaster Adjustment lists two 2DA rows whose sections only its full option has; the rows are dropped from the staged change file before the patcher runs. In the recipe.
 - `10-no-minimize-under-proton`: the game minimises itself when the logo movie hands it focus, and under gamescope its next frame then waits forever: a black screen on about one start in three. A KPM byte patch in `patch_config.toml` removes the minimise until a KMRP release carries its own fix (`patches/kmrp/`, patch 6). In the recipe, after KMRP.
+
+Our own mods are folders in `mods/` in the same form, a `make.py` with its README, and are the recipe's last entries, so changing one rebuilds nothing else. Today:
+
+- `juhani-clones`: *Oops! All Juhani*, a voiced, branching rework of the duel with Juhani in Dantooine's grove: insulted twice, she turns Carth and Mission into copies of herself, and the player fights three Juhanis, then talks her and each companion round. New dialog nodes in the game's dialogs, our scripts and her own user-defined script decompiled, compiled with the build's `nws`; the voice lines are cut, encoded and lip-synced at build time from the recordings in its `voice/` (Git LFS), with ffmpeg and Rhubarb from `mise.toml`.
 
 ### 6. KMRP
 

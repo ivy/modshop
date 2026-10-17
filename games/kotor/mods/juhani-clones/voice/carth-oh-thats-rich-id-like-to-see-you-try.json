@@ -1,0 +1,289 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Oh, that's rich. I'd like to see you try resisting when somebody takes control of your entire body."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "Oh"
+          }
+        ],
+        "start_time": "0.189",
+        "end_time": "0.55"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "that's"
+          }
+        ],
+        "start_time": "0.709",
+        "end_time": "0.98"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "rich"
+          }
+        ],
+        "start_time": "0.98",
+        "end_time": "1.549"
+      },
+      {
+        "id": 4,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I'd"
+          }
+        ],
+        "start_time": "1.87",
+        "end_time": "2.029"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "like"
+          }
+        ],
+        "start_time": "2.029",
+        "end_time": "2.15"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "to"
+          }
+        ],
+        "start_time": "2.15",
+        "end_time": "2.299"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "see"
+          }
+        ],
+        "start_time": "2.299",
+        "end_time": "2.47"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "2.47",
+        "end_time": "2.71"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "try"
+          }
+        ],
+        "start_time": "2.71",
+        "end_time": "2.829"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "resisting"
+          }
+        ],
+        "start_time": "2.829",
+        "end_time": "3.349"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "when"
+          }
+        ],
+        "start_time": "3.349",
+        "end_time": "3.509"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "somebody"
+          }
+        ],
+        "start_time": "3.509",
+        "end_time": "3.789"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "takes"
+          }
+        ],
+        "start_time": "3.789",
+        "end_time": "4.15"
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "control"
+          }
+        ],
+        "start_time": "4.15",
+        "end_time": "4.269"
+      },
+      {
+        "id": 16,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "of"
+          }
+        ],
+        "start_time": "4.269",
+        "end_time": "4.36"
+      },
+      {
+        "id": 17,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "your"
+          }
+        ],
+        "start_time": "4.36",
+        "end_time": "4.59"
+      },
+      {
+        "id": 18,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "entire"
+          }
+        ],
+        "start_time": "4.59",
+        "end_time": "4.869"
+      },
+      {
+        "id": 19,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "body"
+          }
+        ],
+        "start_time": "4.869",
+        "end_time": "5.269"
+      },
+      {
+        "id": 20,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Oh, that's rich. I'd like to see you try resisting when somebody takes control of your entire body.",
+        "start_time": "0.1",
+        "end_time": "5.369",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

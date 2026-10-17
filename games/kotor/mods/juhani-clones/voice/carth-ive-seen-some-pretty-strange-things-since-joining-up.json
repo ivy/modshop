@@ -1,0 +1,399 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "I've seen some pretty strange things since joining up with you, but this. I don't know. Something about having your own mind turned against you."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I've"
+          }
+        ],
+        "start_time": "0.779",
+        "end_time": "1.019"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "seen"
+          }
+        ],
+        "start_time": "1.019",
+        "end_time": "1.23"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "some"
+          }
+        ],
+        "start_time": "1.23",
+        "end_time": "1.419"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "pretty"
+          }
+        ],
+        "start_time": "1.419",
+        "end_time": "1.759"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "strange"
+          }
+        ],
+        "start_time": "1.759",
+        "end_time": "2.109"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "things"
+          }
+        ],
+        "start_time": "2.109",
+        "end_time": "2.47"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "since"
+          }
+        ],
+        "start_time": "2.47",
+        "end_time": "2.71"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "joining"
+          }
+        ],
+        "start_time": "2.71",
+        "end_time": "2.95"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "up"
+          }
+        ],
+        "start_time": "2.95",
+        "end_time": "3.17"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "with"
+          }
+        ],
+        "start_time": "3.17",
+        "end_time": "3.309"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "3.309",
+        "end_time": "3.67"
+      },
+      {
+        "id": 11,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "but"
+          }
+        ],
+        "start_time": "3.869",
+        "end_time": "4.03"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "this"
+          }
+        ],
+        "start_time": "4.03",
+        "end_time": "4.55"
+      },
+      {
+        "id": 14,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "5.36",
+        "end_time": "5.679"
+      },
+      {
+        "id": 16,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "don't"
+          }
+        ],
+        "start_time": "5.679",
+        "end_time": "5.88"
+      },
+      {
+        "id": 17,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "know"
+          }
+        ],
+        "start_time": "5.88",
+        "end_time": "6.42"
+      },
+      {
+        "id": 18,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.769",
+            "content": "Something"
+          }
+        ],
+        "start_time": "6.84",
+        "end_time": "7.119"
+      },
+      {
+        "id": 20,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "about"
+          }
+        ],
+        "start_time": "7.119",
+        "end_time": "7.519"
+      },
+      {
+        "id": 21,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "having"
+          }
+        ],
+        "start_time": "7.519",
+        "end_time": "7.76"
+      },
+      {
+        "id": 22,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "your"
+          }
+        ],
+        "start_time": "7.76",
+        "end_time": "7.88"
+      },
+      {
+        "id": 23,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "own"
+          }
+        ],
+        "start_time": "7.88",
+        "end_time": "8.079"
+      },
+      {
+        "id": 24,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "mind"
+          }
+        ],
+        "start_time": "8.079",
+        "end_time": "8.439"
+      },
+      {
+        "id": 25,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "turned"
+          }
+        ],
+        "start_time": "8.439",
+        "end_time": "8.72"
+      },
+      {
+        "id": 26,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "against"
+          }
+        ],
+        "start_time": "8.72",
+        "end_time": "8.96"
+      },
+      {
+        "id": 27,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "8.96",
+        "end_time": "9.239"
+      },
+      {
+        "id": 28,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "I've seen some pretty strange things since joining up with you, but this.",
+        "start_time": "0.699",
+        "end_time": "4.63",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "I don't know. Something about having your own mind turned against you.",
+        "start_time": "5.23",
+        "end_time": "9.359",
+        "items": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

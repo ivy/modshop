@@ -1,0 +1,15 @@
+1
+00:00:01,330 --> 00:00:01,340
+Look,
+
+2
+00:00:02,640 --> 00:00:04,659
+I appreciate you checking up on me,
+
+3
+00:00:05,159 --> 00:00:07,000
+but I've had enough of this for one day.
+
+4
+00:00:08,579 --> 00:00:10,340
+I don't wanna talk about it.

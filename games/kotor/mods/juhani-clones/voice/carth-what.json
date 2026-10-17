@@ -1,0 +1,35 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "What"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "What"
+          }
+        ],
+        "start_time": "0.25",
+        "end_time": "0.81"
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "What",
+        "start_time": "0.0",
+        "end_time": "0.839",
+        "items": [
+          0
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

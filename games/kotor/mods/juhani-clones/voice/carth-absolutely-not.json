@@ -1,0 +1,59 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Absolutely not."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Absolutely"
+          }
+        ],
+        "start_time": "0.449",
+        "end_time": "1.289"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "not"
+          }
+        ],
+        "start_time": "1.289",
+        "end_time": "1.769"
+      },
+      {
+        "id": 2,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Absolutely not.",
+        "start_time": "0.239",
+        "end_time": "1.889",
+        "items": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

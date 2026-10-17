@@ -1,0 +1,159 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Look, all joking aside, I don't like this."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Look"
+          }
+        ],
+        "start_time": "0.49",
+        "end_time": "0.81"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "all"
+          }
+        ],
+        "start_time": "0.97",
+        "end_time": "1.09"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "joking"
+          }
+        ],
+        "start_time": "1.09",
+        "end_time": "1.49"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "aside"
+          }
+        ],
+        "start_time": "1.49",
+        "end_time": "2.029"
+      },
+      {
+        "id": 5,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "2.49",
+        "end_time": "2.609"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "don't"
+          }
+        ],
+        "start_time": "2.609",
+        "end_time": "2.849"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "like"
+          }
+        ],
+        "start_time": "2.849",
+        "end_time": "3.089"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "this"
+          }
+        ],
+        "start_time": "3.089",
+        "end_time": "3.49"
+      },
+      {
+        "id": 10,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Look, all joking aside, I don't like this.",
+        "start_time": "0.28",
+        "end_time": "3.609",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

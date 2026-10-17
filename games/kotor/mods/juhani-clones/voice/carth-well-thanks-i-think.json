@@ -1,0 +1,107 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Well, thanks, I think."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "Well"
+          }
+        ],
+        "start_time": "0.34",
+        "end_time": "0.639"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "thanks"
+          }
+        ],
+        "start_time": "0.899",
+        "end_time": "1.539"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "1.659",
+        "end_time": "1.86"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "think"
+          }
+        ],
+        "start_time": "1.86",
+        "end_time": "2.319"
+      },
+      {
+        "id": 6,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Well, thanks, I think.",
+        "start_time": "0.209",
+        "end_time": "2.46",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

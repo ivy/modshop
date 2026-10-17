@@ -1,0 +1,202 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "No, nothing. Look, I appreciate the concern, really, but"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "No"
+          }
+        ],
+        "start_time": "0.879",
+        "end_time": "1.62"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "nothing"
+          }
+        ],
+        "start_time": "1.919",
+        "end_time": "2.42"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "Look"
+          }
+        ],
+        "start_time": "3.609",
+        "end_time": "3.89"
+      },
+      {
+        "id": 5,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "3.97",
+        "end_time": "4.46"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "appreciate"
+          }
+        ],
+        "start_time": "4.46",
+        "end_time": "4.65"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "the"
+          }
+        ],
+        "start_time": "4.65",
+        "end_time": "5.05"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "concern"
+          }
+        ],
+        "start_time": "5.05",
+        "end_time": "5.269"
+      },
+      {
+        "id": 10,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "really"
+          }
+        ],
+        "start_time": "5.65",
+        "end_time": "6.21"
+      },
+      {
+        "id": 12,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "but"
+          }
+        ],
+        "start_time": "6.489",
+        "end_time": "6.86"
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "No, nothing.",
+        "start_time": "0.709",
+        "end_time": "2.539",
+        "items": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "Look, I appreciate the concern, really, but",
+        "start_time": "3.359",
+        "end_time": "6.889",
+        "items": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

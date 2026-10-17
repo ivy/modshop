@@ -1,0 +1,245 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Yeah. That's what worries me. How exactly do you prepare for something like that?"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "Yeah"
+          }
+        ],
+        "start_time": "0.349",
+        "end_time": "0.819"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "That's"
+          }
+        ],
+        "start_time": "1.529",
+        "end_time": "1.73"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "what"
+          }
+        ],
+        "start_time": "1.73",
+        "end_time": "1.879"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "worries"
+          }
+        ],
+        "start_time": "1.879",
+        "end_time": "2.329"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "me"
+          }
+        ],
+        "start_time": "2.329",
+        "end_time": "2.75"
+      },
+      {
+        "id": 6,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "How"
+          }
+        ],
+        "start_time": "3.089",
+        "end_time": "3.369"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "exactly"
+          }
+        ],
+        "start_time": "3.369",
+        "end_time": "3.69"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "do"
+          }
+        ],
+        "start_time": "3.69",
+        "end_time": "3.73"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "3.73",
+        "end_time": "4.05"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "prepare"
+          }
+        ],
+        "start_time": "4.05",
+        "end_time": "4.289"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "for"
+          }
+        ],
+        "start_time": "4.289",
+        "end_time": "4.449"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "something"
+          }
+        ],
+        "start_time": "4.449",
+        "end_time": "4.76"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "like"
+          }
+        ],
+        "start_time": "4.76",
+        "end_time": "4.94"
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "that"
+          }
+        ],
+        "start_time": "4.94",
+        "end_time": "5.389"
+      },
+      {
+        "id": 16,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Yeah.",
+        "start_time": "0.289",
+        "end_time": "0.939",
+        "items": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "That's what worries me. How exactly do you prepare for something like that?",
+        "start_time": "1.48",
+        "end_time": "5.539",
+        "items": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

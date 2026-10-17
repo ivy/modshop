@@ -1,0 +1,111 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Do you ever take anything seriously?"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "Do"
+          }
+        ],
+        "start_time": "1.799",
+        "end_time": "1.919"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "1.919",
+        "end_time": "2.0"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "ever"
+          }
+        ],
+        "start_time": "2.0",
+        "end_time": "2.279"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "take"
+          }
+        ],
+        "start_time": "2.279",
+        "end_time": "2.799"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "anything"
+          }
+        ],
+        "start_time": "2.799",
+        "end_time": "3.079"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "seriously"
+          }
+        ],
+        "start_time": "3.079",
+        "end_time": "3.74"
+      },
+      {
+        "id": 6,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Do you ever take anything seriously?",
+        "start_time": "1.71",
+        "end_time": "3.859",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

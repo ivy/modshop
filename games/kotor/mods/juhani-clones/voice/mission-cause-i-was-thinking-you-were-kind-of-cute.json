@@ -1,0 +1,189 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Cause I was thinking you were kind of cute with those little."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.838",
+            "content": "Cause"
+          }
+        ],
+        "start_time": "0.379",
+        "end_time": "0.62"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "0.62",
+        "end_time": "0.699"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "was"
+          }
+        ],
+        "start_time": "0.699",
+        "end_time": "0.899"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "thinking"
+          }
+        ],
+        "start_time": "0.899",
+        "end_time": "1.559"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "you"
+          }
+        ],
+        "start_time": "1.779",
+        "end_time": "1.899"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "were"
+          }
+        ],
+        "start_time": "1.899",
+        "end_time": "2.059"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.974",
+            "content": "kind"
+          }
+        ],
+        "start_time": "2.059",
+        "end_time": "2.14"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.97",
+            "content": "of"
+          }
+        ],
+        "start_time": "2.14",
+        "end_time": "2.339"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "cute"
+          }
+        ],
+        "start_time": "2.339",
+        "end_time": "2.579"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "with"
+          }
+        ],
+        "start_time": "2.579",
+        "end_time": "2.73"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "those"
+          }
+        ],
+        "start_time": "2.73",
+        "end_time": "2.94"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "little"
+          }
+        ],
+        "start_time": "2.94",
+        "end_time": "3.44"
+      },
+      {
+        "id": 12,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Cause I was thinking you were kind of cute with those little.",
+        "start_time": "0.25",
+        "end_time": "3.66",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

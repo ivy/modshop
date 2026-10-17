@@ -1,0 +1,135 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Maybe, but that doesn't change what happened."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Maybe"
+          }
+        ],
+        "start_time": "0.75",
+        "end_time": "1.49"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "but"
+          }
+        ],
+        "start_time": "1.99",
+        "end_time": "2.099"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "that"
+          }
+        ],
+        "start_time": "2.099",
+        "end_time": "2.22"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "doesn't"
+          }
+        ],
+        "start_time": "2.22",
+        "end_time": "2.509"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "change"
+          }
+        ],
+        "start_time": "2.509",
+        "end_time": "2.789"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "what"
+          }
+        ],
+        "start_time": "2.789",
+        "end_time": "2.95"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "happened"
+          }
+        ],
+        "start_time": "2.95",
+        "end_time": "3.47"
+      },
+      {
+        "id": 8,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Maybe, but that doesn't change what happened.",
+        "start_time": "0.579",
+        "end_time": "3.579",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

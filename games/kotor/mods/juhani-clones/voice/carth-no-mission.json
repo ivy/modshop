@@ -1,0 +1,48 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "No Mission"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "No"
+          }
+        ],
+        "start_time": "0.259",
+        "end_time": "0.62"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.992",
+            "content": "Mission"
+          }
+        ],
+        "start_time": "0.62",
+        "end_time": "0.639"
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "No Mission",
+        "start_time": "0.1",
+        "end_time": "1.179",
+        "items": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

@@ -1,0 +1,164 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "My master. She I warned you to leave."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "My"
+          }
+        ],
+        "start_time": "0.949",
+        "end_time": "1.269"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "master"
+          }
+        ],
+        "start_time": "1.269",
+        "end_time": "2.069"
+      },
+      {
+        "id": 2,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "She"
+          }
+        ],
+        "start_time": "3.22",
+        "end_time": "3.859"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "5.21",
+        "end_time": "5.659"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "warned"
+          }
+        ],
+        "start_time": "5.659",
+        "end_time": "6.019"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "6.019",
+        "end_time": "6.219"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "to"
+          }
+        ],
+        "start_time": "6.219",
+        "end_time": "6.429"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "leave"
+          }
+        ],
+        "start_time": "6.429",
+        "end_time": "7.039"
+      },
+      {
+        "id": 9,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "My master.",
+        "start_time": "0.699",
+        "end_time": "2.13",
+        "items": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "She",
+        "start_time": "2.93",
+        "end_time": "3.89",
+        "items": [
+          3
+        ]
+      },
+      {
+        "id": 2,
+        "transcript": "I warned you to leave.",
+        "start_time": "4.969",
+        "end_time": "7.15",
+        "items": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

@@ -1,0 +1,59 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Hey Carth!"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "Hey"
+          }
+        ],
+        "start_time": "0.33",
+        "end_time": "0.689"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.992",
+            "content": "Carth"
+          }
+        ],
+        "start_time": "0.689",
+        "end_time": "1.21"
+      },
+      {
+        "id": 2,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "!"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Hey Carth!",
+        "start_time": "0.0",
+        "end_time": "1.399",
+        "items": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

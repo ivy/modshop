@@ -1,0 +1,111 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Can we please just get going?"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Can"
+          }
+        ],
+        "start_time": "0.649",
+        "end_time": "0.85"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "we"
+          }
+        ],
+        "start_time": "0.85",
+        "end_time": "1.169"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "please"
+          }
+        ],
+        "start_time": "1.169",
+        "end_time": "1.769"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "just"
+          }
+        ],
+        "start_time": "1.769",
+        "end_time": "1.97"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "get"
+          }
+        ],
+        "start_time": "1.97",
+        "end_time": "2.21"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "going"
+          }
+        ],
+        "start_time": "2.21",
+        "end_time": "2.769"
+      },
+      {
+        "id": 6,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Can we please just get going?",
+        "start_time": "0.36",
+        "end_time": "2.859",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

@@ -1,0 +1,248 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "I What have I done? I cannot defeat you. I see that now."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "I"
+          }
+        ],
+        "start_time": "3.14",
+        "end_time": "3.92"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "What"
+          }
+        ],
+        "start_time": "5.429",
+        "end_time": "5.659"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "have"
+          }
+        ],
+        "start_time": "5.659",
+        "end_time": "5.829"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "I"
+          }
+        ],
+        "start_time": "5.829",
+        "end_time": "6.07"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "done"
+          }
+        ],
+        "start_time": "6.07",
+        "end_time": "6.63"
+      },
+      {
+        "id": 5,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "I"
+          }
+        ],
+        "start_time": "7.92",
+        "end_time": "8.359"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "cannot"
+          }
+        ],
+        "start_time": "8.359",
+        "end_time": "8.72"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "defeat"
+          }
+        ],
+        "start_time": "8.72",
+        "end_time": "9.159"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "you"
+          }
+        ],
+        "start_time": "9.159",
+        "end_time": "9.64"
+      },
+      {
+        "id": 10,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "10.529",
+        "end_time": "10.89"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "see"
+          }
+        ],
+        "start_time": "10.89",
+        "end_time": "11.1"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "that"
+          }
+        ],
+        "start_time": "11.1",
+        "end_time": "11.38"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "now"
+          }
+        ],
+        "start_time": "11.38",
+        "end_time": "11.909"
+      },
+      {
+        "id": 15,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "I",
+        "start_time": "3.019",
+        "end_time": "3.97",
+        "items": [
+          0
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "What have I done?",
+        "start_time": "5.139",
+        "end_time": "6.78",
+        "items": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": 2,
+        "transcript": "I cannot defeat you.",
+        "start_time": "7.909",
+        "end_time": "9.789",
+        "items": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "id": 3,
+        "transcript": "I see that now.",
+        "start_time": "10.359",
+        "end_time": "12.0",
+        "items": [
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

@@ -1,0 +1,141 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Yeah. Well, what's done is done."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Yeah"
+          }
+        ],
+        "start_time": "0.439",
+        "end_time": "0.959"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "Well"
+          }
+        ],
+        "start_time": "1.85",
+        "end_time": "1.97"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "what's"
+          }
+        ],
+        "start_time": "2.039",
+        "end_time": "2.289"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "done"
+          }
+        ],
+        "start_time": "2.289",
+        "end_time": "2.45"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "is"
+          }
+        ],
+        "start_time": "2.45",
+        "end_time": "2.68"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "done"
+          }
+        ],
+        "start_time": "2.68",
+        "end_time": "3.029"
+      },
+      {
+        "id": 8,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Yeah.",
+        "start_time": "0.31",
+        "end_time": "1.1",
+        "items": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "Well, what's done is done.",
+        "start_time": "1.72",
+        "end_time": "3.14",
+        "items": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

@@ -33,6 +33,7 @@ from modshop.kotor.steps import (
     StageDir,
     Symlink,
     Tlk,
+    Tool,
 )
 
 KMRP = "crashes with KMRP (its issue #15)"
@@ -358,4 +359,9 @@ def recipe(game_dir: Path) -> Recipe:
                                         Setting(key="kmrp.debug_logs", default="0"))))  # fmt: skip
     # KMRP's core fix for the self-minimise (patches/kmrp/ 0006) is in its main module, which is its release here.
     mod("repair:10-no-minimize-under-proton", repair("10-no-minimize-under-proton", GameDir()))
+    # our own mods, last so that changing one rebuilds nothing else; their scripts compile with the nws
+    # `mise run nws:build` installs, whose bytes are part of the key
+    mod("mod:juhani-clones", Script(path="./mods/juhani-clones/make.py",
+                                    args=(GameDir(), DataPath(rel="tools/nws/nws"), Tool(exe="ffmpeg"), Tool(exe="rhubarb")),
+                                    reads=("./mods/juhani-clones",)))  # fmt: skip
     return Recipe(tuple(entries))

@@ -1,0 +1,261 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "No, I don't suppose you did, but you just couldn't leave it alone, could you?"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "No"
+          }
+        ],
+        "start_time": "0.569",
+        "end_time": "1.269"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "1.73",
+        "end_time": "1.85"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "don't"
+          }
+        ],
+        "start_time": "1.85",
+        "end_time": "2.14"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "suppose"
+          }
+        ],
+        "start_time": "2.14",
+        "end_time": "2.329"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "2.329",
+        "end_time": "2.529"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "did"
+          }
+        ],
+        "start_time": "2.529",
+        "end_time": "3.039"
+      },
+      {
+        "id": 7,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "but"
+          }
+        ],
+        "start_time": "3.569",
+        "end_time": "3.68"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "3.68",
+        "end_time": "3.809"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "just"
+          }
+        ],
+        "start_time": "3.809",
+        "end_time": "3.97"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "couldn't"
+          }
+        ],
+        "start_time": "3.97",
+        "end_time": "4.21"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "leave"
+          }
+        ],
+        "start_time": "4.21",
+        "end_time": "4.369"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "it"
+          }
+        ],
+        "start_time": "4.369",
+        "end_time": "4.57"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "alone"
+          }
+        ],
+        "start_time": "4.57",
+        "end_time": "4.809"
+      },
+      {
+        "id": 15,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "could"
+          }
+        ],
+        "start_time": "4.929",
+        "end_time": "5.13"
+      },
+      {
+        "id": 17,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "5.13",
+        "end_time": "5.409"
+      },
+      {
+        "id": 18,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "No, I don't suppose you did, but you just couldn't leave it alone, could you?",
+        "start_time": "0.4",
+        "end_time": "5.53",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

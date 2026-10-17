@@ -1,0 +1,146 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Keep your apology, Jedi. It changes nothing."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "Keep"
+          }
+        ],
+        "start_time": "0.8",
+        "end_time": "1.12"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "your"
+          }
+        ],
+        "start_time": "1.12",
+        "end_time": "1.36"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "apology"
+          }
+        ],
+        "start_time": "1.36",
+        "end_time": "2.079"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "Jedi"
+          }
+        ],
+        "start_time": "2.109",
+        "end_time": "2.859"
+      },
+      {
+        "id": 5,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.981",
+            "content": "It"
+          }
+        ],
+        "start_time": "3.22",
+        "end_time": "3.48"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "changes"
+          }
+        ],
+        "start_time": "3.48",
+        "end_time": "4.079"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "nothing"
+          }
+        ],
+        "start_time": "4.079",
+        "end_time": "4.76"
+      },
+      {
+        "id": 9,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Keep your apology, Jedi. It changes nothing.",
+        "start_time": "0.509",
+        "end_time": "4.889",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

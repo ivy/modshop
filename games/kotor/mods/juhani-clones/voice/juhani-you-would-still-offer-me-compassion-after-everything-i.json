@@ -1,0 +1,253 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "You would still offer me compassion. After everything I have done. Even after this."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "You"
+          }
+        ],
+        "start_time": "0.85",
+        "end_time": "1.129"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "would"
+          }
+        ],
+        "start_time": "1.129",
+        "end_time": "1.49"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "still"
+          }
+        ],
+        "start_time": "1.49",
+        "end_time": "1.769"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "offer"
+          }
+        ],
+        "start_time": "1.769",
+        "end_time": "2.19"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "me"
+          }
+        ],
+        "start_time": "2.19",
+        "end_time": "2.45"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "compassion"
+          }
+        ],
+        "start_time": "2.45",
+        "end_time": "3.13"
+      },
+      {
+        "id": 6,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "After"
+          }
+        ],
+        "start_time": "4.119",
+        "end_time": "4.96"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "everything"
+          }
+        ],
+        "start_time": "4.96",
+        "end_time": "5.159"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "5.159",
+        "end_time": "5.32"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.989",
+            "content": "have"
+          }
+        ],
+        "start_time": "5.32",
+        "end_time": "5.5"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "done"
+          }
+        ],
+        "start_time": "5.5",
+        "end_time": "5.9"
+      },
+      {
+        "id": 12,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "Even"
+          }
+        ],
+        "start_time": "7.11",
+        "end_time": "7.51"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "after"
+          }
+        ],
+        "start_time": "7.51",
+        "end_time": "7.989"
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "this"
+          }
+        ],
+        "start_time": "7.989",
+        "end_time": "8.51"
+      },
+      {
+        "id": 16,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "You would still offer me compassion.",
+        "start_time": "0.72",
+        "end_time": "3.279",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "After everything I have done.",
+        "start_time": "3.99",
+        "end_time": "5.98",
+        "items": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      {
+        "id": 2,
+        "transcript": "Even after this.",
+        "start_time": "6.94",
+        "end_time": "8.59",
+        "items": [
+          13,
+          14,
+          15,
+          16
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

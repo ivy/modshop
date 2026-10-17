@@ -1,0 +1,35 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Don't"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "Don't"
+          }
+        ],
+        "start_time": "0.509",
+        "end_time": "1.11"
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Don't",
+        "start_time": "0.3",
+        "end_time": "1.139",
+        "items": [
+          0
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

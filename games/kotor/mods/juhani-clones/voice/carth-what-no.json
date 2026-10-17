@@ -1,0 +1,70 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "What? No."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.995",
+            "content": "What"
+          }
+        ],
+        "start_time": "0.15",
+        "end_time": "0.159"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.801",
+            "content": "No"
+          }
+        ],
+        "start_time": "1.549",
+        "end_time": "2.069"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "What? No.",
+        "start_time": "0.14",
+        "end_time": "2.17",
+        "items": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

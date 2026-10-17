@@ -11,7 +11,7 @@ GAME_DIR = Path(__file__).resolve().parents[2] / "games" / "kotor"
 
 def test_recipe_loads_without_data_and_matches_recipe_json() -> None:
     r = recipe(GAME_DIR)
-    assert len(r.entries) == 203 and len(r.active()) == 191
+    assert len(r.entries) == 204 and len(r.active()) == 192
     assert r.get("170-blaster-adjustment").steps[0].do == "script"
     text = recipe_json(r)
     committed = GAME_DIR / "build" / "recipe.json"

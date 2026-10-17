@@ -1,0 +1,163 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Whatever it was I don't want to do it again."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "Whatever"
+          }
+        ],
+        "start_time": "1.7",
+        "end_time": "2.099"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.953",
+            "content": "it"
+          }
+        ],
+        "start_time": "2.099",
+        "end_time": "2.299"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "was"
+          }
+        ],
+        "start_time": "2.299",
+        "end_time": "3.019"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "I"
+          }
+        ],
+        "start_time": "3.019",
+        "end_time": "3.14"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "don't"
+          }
+        ],
+        "start_time": "3.14",
+        "end_time": "3.38"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.652",
+            "content": "want"
+          }
+        ],
+        "start_time": "3.38",
+        "end_time": "3.5"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.677",
+            "content": "to"
+          }
+        ],
+        "start_time": "3.5",
+        "end_time": "3.579"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "do"
+          }
+        ],
+        "start_time": "3.579",
+        "end_time": "3.73"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "it"
+          }
+        ],
+        "start_time": "3.73",
+        "end_time": "3.94"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "again"
+          }
+        ],
+        "start_time": "3.94",
+        "end_time": "4.5"
+      },
+      {
+        "id": 10,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Whatever it was I don't want to do it again.",
+        "start_time": "1.409",
+        "end_time": "4.73",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

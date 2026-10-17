@@ -1,0 +1,7 @@
+1
+00:00:00,750 --> 00:00:01,490
+Maybe,
+
+2
+00:00:01,990 --> 00:00:03,470
+but that doesn't change what happened.

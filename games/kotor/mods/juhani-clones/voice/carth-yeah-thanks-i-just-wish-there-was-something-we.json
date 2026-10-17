@@ -1,0 +1,284 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Yeah, thanks. I just wish there was something we could do to keep it from happening again."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Yeah"
+          }
+        ],
+        "start_time": "0.319",
+        "end_time": "1.1"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.798",
+            "content": "thanks"
+          }
+        ],
+        "start_time": "1.679",
+        "end_time": "2.16"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "3.509",
+        "end_time": "3.67"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "just"
+          }
+        ],
+        "start_time": "3.67",
+        "end_time": "3.829"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "wish"
+          }
+        ],
+        "start_time": "3.829",
+        "end_time": "4.05"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "there"
+          }
+        ],
+        "start_time": "4.05",
+        "end_time": "4.15"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "was"
+          }
+        ],
+        "start_time": "4.15",
+        "end_time": "4.38"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "something"
+          }
+        ],
+        "start_time": "4.38",
+        "end_time": "4.67"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "we"
+          }
+        ],
+        "start_time": "4.67",
+        "end_time": "4.829"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "could"
+          }
+        ],
+        "start_time": "4.829",
+        "end_time": "4.989"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "do"
+          }
+        ],
+        "start_time": "4.989",
+        "end_time": "5.15"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "to"
+          }
+        ],
+        "start_time": "5.15",
+        "end_time": "5.349"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "keep"
+          }
+        ],
+        "start_time": "5.349",
+        "end_time": "5.469"
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "it"
+          }
+        ],
+        "start_time": "5.469",
+        "end_time": "5.659"
+      },
+      {
+        "id": 16,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "from"
+          }
+        ],
+        "start_time": "5.659",
+        "end_time": "5.869"
+      },
+      {
+        "id": 17,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "happening"
+          }
+        ],
+        "start_time": "5.869",
+        "end_time": "6.349"
+      },
+      {
+        "id": 18,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "again"
+          }
+        ],
+        "start_time": "6.349",
+        "end_time": "6.769"
+      },
+      {
+        "id": 19,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Yeah, thanks.",
+        "start_time": "0.189",
+        "end_time": "2.24",
+        "items": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "I just wish there was something we could do to keep it from happening again.",
+        "start_time": "3.5",
+        "end_time": "7.269",
+        "items": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

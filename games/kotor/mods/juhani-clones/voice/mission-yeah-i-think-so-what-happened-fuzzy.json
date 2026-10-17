@@ -1,0 +1,254 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Yeah, yeah, I think so. What the head accountant? Everything's kind of fuzzy."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Yeah"
+          }
+        ],
+        "start_time": "0.72",
+        "end_time": "1.429"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "yeah"
+          }
+        ],
+        "start_time": "1.75",
+        "end_time": "1.909"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "2.029",
+        "end_time": "2.23"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "think"
+          }
+        ],
+        "start_time": "2.23",
+        "end_time": "2.509"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "so"
+          }
+        ],
+        "start_time": "2.509",
+        "end_time": "2.95"
+      },
+      {
+        "id": 7,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "What"
+          }
+        ],
+        "start_time": "3.89",
+        "end_time": "4.09"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "the"
+          }
+        ],
+        "start_time": "4.09",
+        "end_time": "4.21"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.996",
+            "content": "head"
+          }
+        ],
+        "start_time": "4.21",
+        "end_time": "4.449"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.949",
+            "content": "accountant"
+          }
+        ],
+        "start_time": "4.449",
+        "end_time": "5.329"
+      },
+      {
+        "id": 12,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.812",
+            "content": "Everything's"
+          }
+        ],
+        "start_time": "5.88",
+        "end_time": "6.25"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "kind"
+          }
+        ],
+        "start_time": "6.25",
+        "end_time": "6.329"
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "of"
+          }
+        ],
+        "start_time": "6.329",
+        "end_time": "6.409"
+      },
+      {
+        "id": 16,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "fuzzy"
+          }
+        ],
+        "start_time": "6.409",
+        "end_time": "7.11"
+      },
+      {
+        "id": 17,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Yeah, yeah, I think so.",
+        "start_time": "0.54",
+        "end_time": "3.079",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "What the head accountant? Everything's kind of fuzzy.",
+        "start_time": "3.759",
+        "end_time": "7.219",
+        "items": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

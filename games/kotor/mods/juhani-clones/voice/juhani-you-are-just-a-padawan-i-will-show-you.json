@@ -1,0 +1,234 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "You are just a Padawan. I will show you the true meaning of power."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "You"
+          }
+        ],
+        "start_time": "0.67",
+        "end_time": "1.47"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "are"
+          }
+        ],
+        "start_time": "1.47",
+        "end_time": "1.789"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "just"
+          }
+        ],
+        "start_time": "1.789",
+        "end_time": "2.009"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "a"
+          }
+        ],
+        "start_time": "2.019",
+        "end_time": "2.269"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.942",
+            "content": "Padawan"
+          }
+        ],
+        "start_time": "2.269",
+        "end_time": "3.059"
+      },
+      {
+        "id": 5,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "I"
+          }
+        ],
+        "start_time": "3.859",
+        "end_time": "4.3"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "will"
+          }
+        ],
+        "start_time": "4.3",
+        "end_time": "4.619"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "show"
+          }
+        ],
+        "start_time": "4.619",
+        "end_time": "4.94"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "4.94",
+        "end_time": "5.51"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "the"
+          }
+        ],
+        "start_time": "5.739",
+        "end_time": "6.01"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "true"
+          }
+        ],
+        "start_time": "6.01",
+        "end_time": "6.3"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "meaning"
+          }
+        ],
+        "start_time": "6.3",
+        "end_time": "6.65"
+      },
+      {
+        "id": 13,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "of"
+          }
+        ],
+        "start_time": "6.65",
+        "end_time": "6.9"
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "power"
+          }
+        ],
+        "start_time": "6.9",
+        "end_time": "7.619"
+      },
+      {
+        "id": 15,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "You are just a Padawan.",
+        "start_time": "0.46",
+        "end_time": "3.13",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "I will show you the true meaning of power.",
+        "start_time": "3.69",
+        "end_time": "7.869",
+        "items": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

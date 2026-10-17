@@ -1,0 +1,96 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Oh, that's real mature."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "Oh"
+          }
+        ],
+        "start_time": "0.27",
+        "end_time": "0.769"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "that's"
+          }
+        ],
+        "start_time": "0.99",
+        "end_time": "1.269"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.983",
+            "content": "real"
+          }
+        ],
+        "start_time": "1.269",
+        "end_time": "1.519"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.008",
+            "content": "mature"
+          }
+        ],
+        "start_time": "1.519",
+        "end_time": "1.82"
+      },
+      {
+        "id": 5,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Oh, that's real mature.",
+        "start_time": "0.14",
+        "end_time": "2.019",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

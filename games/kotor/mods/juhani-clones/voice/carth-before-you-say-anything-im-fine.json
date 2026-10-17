@@ -1,0 +1,122 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Before you say anything, I'm fine."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Before"
+          }
+        ],
+        "start_time": "0.67",
+        "end_time": "0.86"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "you"
+          }
+        ],
+        "start_time": "0.86",
+        "end_time": "1.1"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "say"
+          }
+        ],
+        "start_time": "1.1",
+        "end_time": "1.58"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "anything"
+          }
+        ],
+        "start_time": "1.58",
+        "end_time": "2.16"
+      },
+      {
+        "id": 4,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I'm"
+          }
+        ],
+        "start_time": "2.619",
+        "end_time": "2.9"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "fine"
+          }
+        ],
+        "start_time": "2.9",
+        "end_time": "3.339"
+      },
+      {
+        "id": 7,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Before you say anything, I'm fine.",
+        "start_time": "0.449",
+        "end_time": "3.46",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

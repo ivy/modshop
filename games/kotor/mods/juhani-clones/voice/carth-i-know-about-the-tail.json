@@ -1,0 +1,87 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "I know about the tail"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "0.519",
+        "end_time": "0.68"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "know"
+          }
+        ],
+        "start_time": "0.68",
+        "end_time": "0.959"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "about"
+          }
+        ],
+        "start_time": "0.959",
+        "end_time": "1.11"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "the"
+          }
+        ],
+        "start_time": "1.11",
+        "end_time": "1.159"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.553",
+            "content": "tail"
+          }
+        ],
+        "start_time": "1.159",
+        "end_time": "1.7"
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "I know about the tale",
+        "start_time": "0.43",
+        "end_time": "1.809",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

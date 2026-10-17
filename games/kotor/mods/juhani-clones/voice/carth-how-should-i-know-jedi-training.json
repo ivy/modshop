@@ -1,0 +1,208 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "How should I know? He had a one without the Jedi training."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "How"
+          }
+        ],
+        "start_time": "0.939",
+        "end_time": "1.179"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "should"
+          }
+        ],
+        "start_time": "1.179",
+        "end_time": "1.34"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I"
+          }
+        ],
+        "start_time": "1.34",
+        "end_time": "1.519"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "know"
+          }
+        ],
+        "start_time": "1.539",
+        "end_time": "1.879"
+      },
+      {
+        "id": 4,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.068",
+            "content": "He"
+          }
+        ],
+        "start_time": "3.14",
+        "end_time": "3.15"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.705",
+            "content": "had"
+          }
+        ],
+        "start_time": "3.15",
+        "end_time": "3.16"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.559",
+            "content": "a"
+          }
+        ],
+        "start_time": "3.16",
+        "end_time": "3.17"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.932",
+            "content": "one"
+          }
+        ],
+        "start_time": "3.17",
+        "end_time": "3.349"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "without"
+          }
+        ],
+        "start_time": "3.349",
+        "end_time": "3.529"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "the"
+          }
+        ],
+        "start_time": "3.529",
+        "end_time": "3.69"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.993",
+            "content": "Jedi"
+          }
+        ],
+        "start_time": "3.69",
+        "end_time": "4.07"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "training"
+          }
+        ],
+        "start_time": "4.07",
+        "end_time": "4.429"
+      },
+      {
+        "id": 13,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "How should I know?",
+        "start_time": "0.73",
+        "end_time": "1.96",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "He had a one without the Jedi training.",
+        "start_time": "2.759",
+        "end_time": "4.55",
+        "items": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

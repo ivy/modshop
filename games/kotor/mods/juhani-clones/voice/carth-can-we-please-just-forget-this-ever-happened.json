@@ -1,0 +1,137 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Can we please just forget this ever happened."
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "Can"
+          }
+        ],
+        "start_time": "0.439",
+        "end_time": "0.639"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "we"
+          }
+        ],
+        "start_time": "0.639",
+        "end_time": "1.0"
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "please"
+          }
+        ],
+        "start_time": "1.0",
+        "end_time": "1.72"
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "just"
+          }
+        ],
+        "start_time": "1.72",
+        "end_time": "2.16"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "forget"
+          }
+        ],
+        "start_time": "2.16",
+        "end_time": "2.359"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "this"
+          }
+        ],
+        "start_time": "2.359",
+        "end_time": "2.559"
+      },
+      {
+        "id": 6,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "ever"
+          }
+        ],
+        "start_time": "2.559",
+        "end_time": "2.88"
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "happened"
+          }
+        ],
+        "start_time": "2.88",
+        "end_time": "3.44"
+      },
+      {
+        "id": 8,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Can we please just forget this ever happened.",
+        "start_time": "0.07",
+        "end_time": "3.559",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

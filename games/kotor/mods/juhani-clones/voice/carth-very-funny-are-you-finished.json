@@ -1,0 +1,109 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Very funny. Are you finished?"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Very"
+          }
+        ],
+        "start_time": "0.43",
+        "end_time": "0.8"
+      },
+      {
+        "id": 1,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "funny"
+          }
+        ],
+        "start_time": "0.8",
+        "end_time": "1.49"
+      },
+      {
+        "id": 2,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "Are"
+          }
+        ],
+        "start_time": "1.899",
+        "end_time": "1.99"
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "you"
+          }
+        ],
+        "start_time": "1.99",
+        "end_time": "2.19"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "finished"
+          }
+        ],
+        "start_time": "2.19",
+        "end_time": "2.64"
+      },
+      {
+        "id": 6,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Very funny. Are you finished?",
+        "start_time": "0.34",
+        "end_time": "2.75",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}

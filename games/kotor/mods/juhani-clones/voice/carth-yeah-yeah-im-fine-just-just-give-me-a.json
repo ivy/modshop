@@ -1,0 +1,241 @@
+{
+  "results": {
+    "transcripts": [
+      {
+        "transcript": "Yeah, yeah, I'm fine. Just Just give me a minute, all right?"
+      }
+    ],
+    "items": [
+      {
+        "id": 0,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "Yeah"
+          }
+        ],
+        "start_time": "0.439",
+        "end_time": "0.92"
+      },
+      {
+        "id": 1,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "yeah"
+          }
+        ],
+        "start_time": "1.12",
+        "end_time": "1.48"
+      },
+      {
+        "id": 3,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "I'm"
+          }
+        ],
+        "start_time": "1.6",
+        "end_time": "1.84"
+      },
+      {
+        "id": 5,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "1.0",
+            "content": "fine"
+          }
+        ],
+        "start_time": "1.84",
+        "end_time": "2.369"
+      },
+      {
+        "id": 6,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.99",
+            "content": "Just"
+          }
+        ],
+        "start_time": "2.769",
+        "end_time": "3.22"
+      },
+      {
+        "id": 8,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.997",
+            "content": "Just"
+          }
+        ],
+        "start_time": "3.89",
+        "end_time": "4.11"
+      },
+      {
+        "id": 9,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "give"
+          }
+        ],
+        "start_time": "4.11",
+        "end_time": "4.25"
+      },
+      {
+        "id": 10,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.998",
+            "content": "me"
+          }
+        ],
+        "start_time": "4.25",
+        "end_time": "4.329"
+      },
+      {
+        "id": 11,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "a"
+          }
+        ],
+        "start_time": "4.329",
+        "end_time": "4.449"
+      },
+      {
+        "id": 12,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.999",
+            "content": "minute"
+          }
+        ],
+        "start_time": "4.449",
+        "end_time": "4.61"
+      },
+      {
+        "id": 13,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": ","
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.993",
+            "content": "all"
+          }
+        ],
+        "start_time": "4.65",
+        "end_time": "4.809"
+      },
+      {
+        "id": 15,
+        "type": "pronunciation",
+        "alternatives": [
+          {
+            "confidence": "0.995",
+            "content": "right"
+          }
+        ],
+        "start_time": "4.809",
+        "end_time": "5.09"
+      },
+      {
+        "id": 16,
+        "type": "punctuation",
+        "alternatives": [
+          {
+            "confidence": "0.0",
+            "content": "?"
+          }
+        ]
+      }
+    ],
+    "audio_segments": [
+      {
+        "id": 0,
+        "transcript": "Yeah, yeah, I'm fine. Just",
+        "start_time": "0.349",
+        "end_time": "3.25",
+        "items": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "id": 1,
+        "transcript": "Just give me a minute, all right?",
+        "start_time": "3.759",
+        "end_time": "5.17",
+        "items": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ]
+      }
+    ]
+  },
+  "status": "COMPLETED"
+}
