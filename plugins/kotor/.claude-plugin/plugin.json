@@ -1,0 +1,16 @@
+{
+  "name": "kotor",
+  "description": "Knights of the Old Republic: skills for reading, searching and patching the game's files with PyKotor, for debugging the game under Proton, and for cutting a character's voice sample.",
+  "author": {
+    "name": "Ivy Evans"
+  },
+  "license": "ISC",
+  "keywords": [
+    "kotor",
+    "pykotor",
+    "modding",
+    "tslpatcher",
+    "proton",
+    "debugging"
+  ]
+}

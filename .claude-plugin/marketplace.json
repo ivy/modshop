@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "modshop",
+  "description": "Claude Code plugins for building modded games on Linux, from the modshop repository.",
+  "owner": {
+    "name": "Ivy Evans"
+  },
+  "plugins": [
+    {
+      "name": "kotor",
+      "source": "./plugins/kotor",
+      "description": "Knights of the Old Republic: skills for reading, searching and patching the game's files with PyKotor, for debugging the game under Proton, and for cutting a character's voice sample.",
+      "category": "development"
+    }
+  ]
+}

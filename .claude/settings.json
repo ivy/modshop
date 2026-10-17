@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "modshop": {
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
+    }
+  },
+  "enabledPlugins": {
+    "kotor@modshop": true
+  }
+}
