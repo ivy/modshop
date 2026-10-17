@@ -20,6 +20,7 @@ Onboarding for coding agents working on the KotOR build. The repository's rules 
 | `patches/` | `git format-patch` series over pykotor and KMRP; `patches/README.md` names the base commits and the fork branch |
 | `kmrp-build/` | building KMRP's controller module on Linux; the Wine container image for its installer |
 | `docs/ideas/` | tooling not yet built, with priorities |
+| `docs/research/` | measurements and findings worth referring back to, each dated and reproducible |
 | `data/` | gitignored: archives, `game/` (vanilla, `ckpt/`, the work tree, `build` symlink, `legacy/`), stage, logs, `hashcache.json` |
 
 ## How to work here
