@@ -1,0 +1,2 @@
+# Our mods' voice recordings are binary sources, kept in Git LFS (docs/conventions.md).
+games/*/mods/*/voice/*.mp3 filter=lfs diff=lfs merge=lfs -text
