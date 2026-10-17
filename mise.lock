@@ -2,6 +2,14 @@
 
 lockfile_version = 3
 
+[[tools."cargo:https://github.com/ivy/nwscript"]]
+version = "rev:c90437e5c733d051beae11289a9d8adddb444ce3"
+backend = "cargo:https://github.com/ivy/nwscript"
+specifiers = ["rev:c90437e5c733d051beae11289a9d8adddb444ce3"]
+
+[tools."cargo:https://github.com/ivy/nwscript".options]
+crate = "nws"
+
 [[tools."github:NationalSecurityAgency/ghidra"]]
 version = "Ghidra_12.1.4_build"
 backend = "github:NationalSecurityAgency/ghidra"
