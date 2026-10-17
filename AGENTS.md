@@ -10,7 +10,7 @@ A public repository of scripts, patches and notes for building modded games on L
 
 ## The three rules
 
-1. **No game or mod bytes in git.** Archives, game copies, build outputs, logs and venvs live under `games/<game>/data/`, ignored by git. A fix to a mod is a script that patches the mod's file at build time, taking the input from the user's own archive; the patched result is never committed either.
+1. **No mod authors' files or build outputs in git.** Archives, game copies, build outputs, logs and venvs live under `games/<game>/data/`, ignored by git. A fix to a mod is a script that patches the mod's file at build time, taking the input from the user's own archive; the patched result is never committed either. A mod of our own may commit the game files it is made from, such as a game script it decompiled and changed, beside it; its own binary sources, such as voice recordings, go through Git LFS ([`docs/conventions.md`](docs/conventions.md)).
 2. **No device identity in git.** Hostnames, usernames, home paths, account ids, tailnet names. They go in `local.toml` or `AGENTS.local.md`; the docs use the role names.
 3. **Reproducible and idempotent.** The modded install is built by script from a pristine copy of the game and the archives, every fix is a replayable step, and a problem is fixed in the tool or the mod rather than worked around by hand in the game folder. Nothing is edited in the game folder without a script that reproduces it.
 

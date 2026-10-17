@@ -26,7 +26,7 @@ What is wrong with it:
 3. Restore the tree as it was after any mod, quickly, for bisecting a crash.
 4. Prove reproducibility: a clean build and an incremental build from the same inputs give the same tree, and a mismatch names the mod where they diverged.
 5. Deploy to the handheld by content: a second deploy sends nothing, and a drift check compares content, never timestamps.
-6. Keep the repository rules: no game or mod bytes in git, no device identity, everything replayable.
+6. Keep the repository rules: no mod authors' files or build outputs in git, no device identity, everything replayable.
 
 ### Determinism, stated as behaviour
 

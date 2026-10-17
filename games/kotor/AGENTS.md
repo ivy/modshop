@@ -35,7 +35,7 @@ All commands run from the repository root.
 
 ## Change hygiene
 
-- No game or mod bytes in git, no device identity in git (`local.toml` holds it), nothing placed in a game folder by hand: a fix is a step, a repair folder, or a patch, and the next build carries it.
+- No mod authors' files or build outputs in git (a mod of our own may commit the game files it is made from, and keeps its recordings in Git LFS), no device identity in git (`local.toml` holds it), nothing placed in a game folder by hand: a fix is a step, a repair folder, or a patch, and the next build carries it.
 - A change to a step, to any module the step runner imports, or to `uv.lock`'s patcher packages rebuilds the whole chain (about 25 minutes) by design. Edit orchestration, the command line or docs freely; edit steps deliberately, and test on the synthetic game first.
 - A fix to pykotor is a commit on the fork's series branch, exported into `patches/pykotor/`, then pinned in `pyproject.toml`; see `patches/README.md`. Commit messages for upstream carry no AI attribution.
 - Run the drift check before and after any debugging session on the handheld; a difference becomes a step or is reverted, never left.

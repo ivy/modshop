@@ -2,11 +2,15 @@
 
 What every game directory in this repository follows, and why.
 
-## Nothing from a game or a mod is committed
+## Nothing from another mod is committed
 
-Game files belong to their publisher and mod files to their authors; most mod sites forbid redistribution, and the ones that allow it still want credit and a link. So this repository holds only what we wrote: scripts, patches to open-source tools, documentation. Everything else is input, fetched by the person building from the sources that offer it, and lives under `games/<game>/data/`, which `.gitignore` excludes whole.
+Mod files belong to their authors; most mod sites forbid redistribution, and the ones that allow it still want credit and a link. So other people's mods are input, fetched by the person building from the sources that offer them, and live under `games/<game>/data/`, which `.gitignore` excludes whole, together with the game copies, build outputs and logs.
 
-This is also what makes the result reproducible. A build that depends on a file somebody edited by hand once cannot be repeated; a build that extracts the mod's file from the mod's own archive and patches it by script can be repeated by anyone with the archive. A "repair" here is therefore always a script plus a README, never a repaired file.
+The game's own files are treated the way the modding community has treated them for twenty years: a mod of ours may commit the ones it is made from, beside it. A game script it decompiled and changed is committed as source, and the build compiles it. The game itself, and anything a build produces, stay under `data/`.
+
+Our own mods' binary sources, such as voice recordings, are committed through [Git LFS](https://git-lfs.com/), so a clone carries pointers until they are fetched; `.gitattributes` names the paths. The build turns them into what the game loads, so the committed file is the raw source, never the game-ready copy.
+
+Keeping inputs as inputs is also what makes the result reproducible. A build that depends on a file somebody edited by hand once cannot be repeated; a build that extracts the mod's file from the mod's own archive and patches it by script can be repeated by anyone with the archive. A "repair" here is therefore always a script plus a README, never a repaired file.
 
 ## No device identity
 
