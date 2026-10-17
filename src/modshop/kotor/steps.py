@@ -20,7 +20,7 @@ from modshop.kotor import kmrp, nwnnsscomp
 from modshop.kotor.context import StepContext
 from modshop.kotor.paths import ci_find, ci_path, collapse_case, files_in, put, subdirs
 
-WINE_IMAGE = "modshop-wine"  # kmrp-build/wine/Containerfile: KMRP's installer and nwnnsscomp run in it
+WINE_IMAGE = "modshop-wine"  # kmrp-build/wine/Containerfile: KMRP's installer runs in it
 
 
 class StepModel(BaseModel):
@@ -321,11 +321,11 @@ class Kmrp(StepModel):
 class HoloPatcher(StepModel):
     """HoloPatcher on a staged tslpatchdata (or its parent); `option` is the namespace index.
 
-    `compile` declares that the mod has a [CompileList]: its scripts are then compiled by
-    TSLPatcher's nwnnsscomp.exe under Wine, the compiler its author's installer runs, and the
-    step fails if pykotor's own compiler builds any of them, or if an undeclared step compiles.
-    `nwnnsscomp` names another mod's archive to take that compiler from, for a mod that
-    ships none.
+    `compile` declares that the mod has a [CompileList]: its scripts are then compiled by nws's
+    nwnnsscomp shim (`mise run nws:build`), whose bytes are part of the key, and the step fails
+    if pykotor's own compiler builds any of them, or if an undeclared step compiles.
+    `nwnnsscomp` names another mod's archive to take TSLPatcher's nwnnsscomp.exe and
+    nwscript.nss from, for a mod that ships none: pykotor calls the launcher only when one is there.
     """
 
     do: Literal["holopatcher"] = "holopatcher"
@@ -338,11 +338,7 @@ class HoloPatcher(StepModel):
     def inputs(self) -> tuple[str, ...]:
         if not self.compile:
             return ()
-        return (
-            f"image:{WINE_IMAGE}",
-            "./kmrp-build/wine/Containerfile",
-            *((self.nwnnsscomp,) if self.nwnnsscomp else ()),
-        )
+        return (nwnnsscomp.SHIM, *((self.nwnnsscomp,) if self.nwnnsscomp else ()))
 
     def apply(self, ctx: StepContext) -> None:
         td = ci_path(ctx.stage.path, self.src)
@@ -355,7 +351,7 @@ class HoloPatcher(StepModel):
             option=self.option,
             log_to=log_to,
             timeout=ctx.timeout,
-            launcher=nwnnsscomp.launcher(WINE_IMAGE) if self.compile else None,
+            launcher=nwnnsscomp.launcher(ctx.paths.data) if self.compile else None,
         )
         for line in report.tail:
             ctx.log.info("   %s", line[:200])
@@ -367,7 +363,7 @@ class HoloPatcher(StepModel):
                 ctx.entry, ctx.index, self.do, f"pykotor's compiler built: {report.builtin[0]}", log_to
             )
         if report.compiled:
-            ctx.log.info("   nwnnsscomp compiled %s", ", ".join(report.compiled))
+            ctx.log.info("   nws compiled %s", ", ".join(report.compiled))
         if report.errors is None or report.errors > self.allow_errors:
             raise StepFailed(ctx.entry, ctx.index, self.do, f"{report.errors} errors on {td}", log_to)
         for kept, gone in collapse_case(ctx.game.override):

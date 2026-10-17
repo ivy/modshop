@@ -38,3 +38,20 @@ mise x cmake@4 -- make -j"$(nproc)" nwnnsscomp > make.log
 install -D -m 0755 nwnnsscomp/nwnnsscomp "$root/games/kotor/data/tools/nwnnsscomp"
 echo "installed $root/games/kotor/data/tools/nwnnsscomp"
 '''
+
+[tasks."nws:build"]
+description = "build nws and its nwnnsscomp shim at the pinned commit into games/kotor/data/tools/nws/"
+env = { NWSCRIPT_REV = "acdeadee6f101e3ff9739ec5b2691a912d39325c" }
+run = '''
+set -eu
+root="$PWD"
+work="$root/games/kotor/data/build/nwscript"
+rm -rf "$work"
+git clone -q "${NWSCRIPT_REPO:-https://github.com/ivy/nwscript.git}" "$work"
+cd "$work"
+git -c advice.detachedHead=false checkout -q "$NWSCRIPT_REV"
+mise x rust@1.99.0 -- cargo build -q --release --locked -p nws -p nwnnsscomp
+install -D -m 0755 target/release/nws "$root/games/kotor/data/tools/nws/nws"
+install -D -m 0755 target/release/nwnnsscomp "$root/games/kotor/data/tools/nws/nwnnsscomp"
+echo "installed nws and nwnnsscomp at $NWSCRIPT_REV in $root/games/kotor/data/tools/nws/"
+'''

@@ -1,31 +1,32 @@
-"""TSLPatcher's nwnnsscomp.exe, run under Wine in a container: the compiler a mod's author
-expects for its [CompileList], where HoloPatcher would otherwise use pykotor's own.
+"""The compiler for a mod's [CompileList]: nws's nwnnsscomp shim, built from a pinned commit of
+github.com/ivy/nwscript by `mise run nws:build`, where HoloPatcher would otherwise use pykotor's
+own compiler.
 
-HoloPatcher runs `<launcher> <nwnnsscomp.exe> -c <source> -o <output>` with host paths; this
-file is that launcher. It mounts the folders those paths are in at the same paths, with no
-network, and hands Wine the `Z:` spelling of each, since nwnnsscomp is a Windows program.
-Standard library only: HoloPatcher runs it with `python -I`, outside this package.
+HoloPatcher runs `<launcher> <nwnnsscomp.exe> -c <source> -o <output>`; the shim is the launcher,
+skips the .exe it is handed, and compiles in nws's nwnnsscomp-compatible mode. pykotor uses a
+launcher only when the tslpatchdata holds an nwnnsscomp.exe, so `supply` puts TSLPatcher's there
+for a mod that ships none, with the nwscript.nss beside it.
 """
 
 from __future__ import annotations
 
 import hashlib
-import subprocess
-import sys
 import zipfile
 from pathlib import Path, PurePosixPath
 
 LAUNCHER_ENV = "PYKOTOR_NWNNSSCOMP_LAUNCHER"
 TIMEOUT_ENV = "PYKOTOR_NWNNSSCOMP_TIMEOUT"
-TIMEOUT = 120  # a container and a Wine start take about 4 s; pykotor's default is 5
-CONTAINER = "modshop-nwnnsscomp"  # one fixed name, so one a killed build left behind can be removed
+TIMEOUT = 120  # pykotor's default of 5 s is tight for a cold start
 
 # pykotor's KnownExternalCompilers.TSLPATCHER: tk102's v0.03b, the one TSLPatcher mods ship
 TSLPATCHER_SHA256 = "539eb689d2e0d3751aeed273385865278bef6696c46bc0cab116b40c3b2fe820"
 
 
-def launcher(image: str) -> list[str]:
-    return [sys.executable, "-I", __file__, image]
+SHIM = "data/tools/nws/nwnnsscomp"  # the spec of the shim as a step input; `mise run nws:build` makes it
+
+
+def launcher(data: Path) -> list[str]:
+    return [str(data / SHIM.removeprefix("data/"))]
 
 
 def supply(tslpatchdata: Path, archive: Path) -> bool:
@@ -44,47 +45,3 @@ def supply(tslpatchdata: Path, archive: Path) -> bool:
     if got != TSLPATCHER_SHA256:
         raise ValueError(f"{archive.name}'s nwnnsscomp.exe is not TSLPatcher's (sha256 {got})")
     return True
-
-
-def windows(path: str) -> str:
-    return "Z:" + path.replace("/", "\\")
-
-
-def main(argv: list[str]) -> int:
-    image, exe, *args = argv
-    paths = [a for a in args if a.startswith("/")]
-    dirs = sorted({str(Path(p).parent) for p in [exe, *paths]})
-    subprocess.run(["podman", "rm", "-f", "--ignore", CONTAINER], capture_output=True)
-    cmd = [
-        "podman",
-        "run",
-        "--rm",
-        "--name",
-        CONTAINER,
-        "--network",
-        "none",
-        "--security-opt",
-        "label=disable",
-    ]
-    for d in dirs:
-        cmd += ["-v", f"{d}:{d}"]
-    wine_args = " ".join(f"'{windows(a) if a.startswith('/') else a}'" for a in [exe, *args])
-    cmd += [
-        "-e",
-        "WINEDEBUG=-all",
-        image,
-        "bash",
-        "-c",
-        f"wine {wine_args}; rc=$?; wineserver --wait; exit $rc",
-    ]
-    r = subprocess.run(cmd, capture_output=True, text=True)
-    noise = ("XDG_RUNTIME_DIR", "X connection")
-    sys.stdout.write("".join(line + "\n" for line in r.stdout.splitlines() if not line.startswith(noise)))
-    sys.stderr.write(
-        "".join(line + "\n" for line in r.stderr.splitlines() if not any(n in line for n in noise))
-    )
-    return r.returncode
-
-
-if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
