@@ -1,6 +1,6 @@
 ---
 title: Virtual gamepad
-priority: p0
+priority: p1
 status: idea
 depends_on: []
 ---

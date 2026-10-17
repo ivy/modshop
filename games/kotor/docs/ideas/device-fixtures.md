@@ -15,6 +15,8 @@ Every diagnosis so far has needed a person on the device. Repair 08's cause was 
 
 Controller work pays this cost on every fix, not only on crashes. The swoop race (KMRP pull request 62), character generation's stick (pull request 64), the dialogue stick and the movement vector (pull requests 60 and 59) were each built in minutes and then waited on someone reaching the place and playing it; the Y-in-combat question is waiting the same way. A save at a swoop track, one in a fight with actions queued, and one at character generation would have been three fixtures that each fix used more than once.
 
+The Juhani mod (2026-10-16/17) paid it on every change: eight deploys while the scenes were being finished, each followed by the owner replaying from a save before the grove through the cutscene, the fight and the conversations, five to ten minutes a run, to check a change that touched one scene. Four of the owner's sessions in that stretch answered nothing new: a diagnostic that did not display, a run on the previous build while the deploy was refused, and two live-debugger attempts. The owner then made a save after the fight, which turned the next check of the recovery into a load. A fixture is that save, made on purpose, kept, and named for what it reproduces.
+
 ## The idea
 
 - **Saves built, not collected.** PyKotor reads and writes save games (`pykotor.extract.savedata`). A save generated from the build's own module files does not carry the stale area state a played save does; the [game README](../../README.md) already warns that areas a save has visited keep their old state after a deploy.

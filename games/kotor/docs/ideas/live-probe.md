@@ -16,6 +16,8 @@ Some questions are about what the engine holds at a moment of play, and neither 
 - **Y in combat** (open, 2026-10-16): the engine's handler for Y returns early unless BTN_CLEARONE carries its "drawn" bit (`[CSWGuiMainInterface+0x6D14] & 2`), and KMRP's controller checks the same bit before pressing it. Whether the bit is set while actions are queued decides where the press is lost. Answering it took a hand-written reader of `/proc/<pid>/mem` that follows the GUI manager (`0x007A39F4`) to its panel array (`+0x88`, count at `+0x8C`), finds the main interface by its vtable (`0x00753F50`) and prints two fields when they change. Its first version died on `/proc/1/maps` (permission denied), the same process-selection trap the first image dump fell into with the pressure-vessel wrapper.
 - **The swoop race**: which input class the minigame runs in, and what reaches its control vector, were read from the disassembly and then confirmed only by playing a race with debug logs on.
 
+- **Why a companion ignored the pad's A** (2026-10-17): the engine's choice between talk and attack turns on a byte of the targeted creature (`+0x2DC`), and whether the talk action ran turns on four more fields. A debugger was used instead of a probe: gdb attached with logging breakpoints (`stop()` returning `False`) on the game's code. The first attach logged one line and detached by itself; the second froze the game until gdb was sent `SIGHUP`. Two of the owner's sessions went on it, and the answer came from a save instead ([device state](device-state.md)). A probe reads without stopping anything, which is what that question needed.
+
 KMRP's logs answer what the controller module chooses to log; a probe answers anything with an address.
 
 ## The idea

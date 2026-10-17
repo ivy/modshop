@@ -1,6 +1,6 @@
 ---
 title: Engine symbols and disassembly helpers
-priority: p1
+priority: p0
 status: idea
 depends_on: []
 ---
@@ -17,6 +17,7 @@ A named, saved analysis of the decrypted executable, so every reverse-engineerin
 - **Functions Ghidra never defines.** A function reached only through a handler pointer has no procedure: decompiling `OnClearOneButtonPressed` at `0x0068B050` failed with "no loaded source mapping", and both references to `k_trg_transfail` (`0x0058C31A`, `0x0058F47C`) resolved to "not_in_procedure", inside the area transition handler at `0x0058B850`. Each time the fallback was capstone over raw bytes.
 - **The same helpers written again.** Disassembling a range (`dis.py`), finding a function's start from the padding before it (`func.py`), and listing every call to a function with the immediates pushed before it (`callargs.py`) were each written in a scratch directory and lost. `callargs.py` is how the class-1 registration of event `0x19` (the left mouse button, the minigame's fire) was found.
 - **Analysis that does not persist.** Each REA session re-runs Ghidra's auto-analysis (75 s on this executable) and drops any names given in the previous one.
+- **The same chain read again for a new question.** On 2026-10-17, why a pad's A did nothing on a companion: KMRP's world interaction sends event `0xEF`, whose handler calls `CClientExoAppInternal::GetDefaultActions` (`0x00620620`); that asks `0x0060FCC0` what kind of target it is, which for a creature calls its vtable's `+0x138` (`0x006170C0` on the client creature, vtable `0x0074F5F8`: is the byte at `+0x2DC` equal to 2), and the talk action itself (`0x0060F620`) has four more gates. `0x006170C0` and `0x0060F620` are not functions to Ghidra ("no loaded source mapping"), so they were read with Rizin, which REA will not run while its Ghidra session is open. The byte at `+0x2DC` turned out to be the creature's standing toward the player (the target box's colour: 1 friendly, 0 neutral, 2 hostile), written from the server's update message (`0x00666A4B`). None of these names exists anywhere yet but this paragraph.
 - **x87 code the decompiler muddles.** The minigame input block (`0x00623F48`) decompiled with its operands in the wrong places; the instruction listing was right. The decompiler is a first look, not the answer, for floating-point code.
 
 ## The idea
