@@ -1,7 +1,7 @@
 [tools]
 "github:NationalSecurityAgency/ghidra" = "Ghidra_12.1.4_build"
 "github:rizinorg/rizin" = { version = "0.9.1", matching = "static-x86_64" }
-java = "temurin-21.0.12+8.0.LTS"
+java = "liberica-21.0.13+11"
 "npm:rea-agents" = "6.5.0"
 "ubi:SteamRE/DepotDownloader" = { version = "DepotDownloader_3.4.0", exe = "DepotDownloader", matching = "linux-x64" }
 rust = "1.99.0"
