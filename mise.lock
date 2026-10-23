@@ -4158,6 +4158,49 @@ checksum = "sha256:ddac49f903da9d5bac833e5cc79395098b9c33cfd3279be5f31bd00387d2d
 url = "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.1.4_build/ghidra_12.1.4_PUBLIC_20260921.zip"
 url_api = "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/assets/579530646"
 
+[[tools."github:bell-sw/Liberica"]]
+version = "21.0.13.0.2+5"
+backend = "github:bell-sw/Liberica"
+specifiers = ["21.0.13.0.2+5"]
+
+[tools."github:bell-sw/Liberica".options]
+matching_regex = '^bellsoft-jdk[0-9.+]+-[a-z]+-[a-z0-9]+(-musl)?\.(tar\.gz|zip)$'
+
+[tools."github:bell-sw/Liberica"."platforms.linux-arm64"]
+checksum = "sha256:1320c1f99154fe74215e3f4e3cf63ea5d1de2b3fb0b9002e0baec1a73b1dac2e"
+url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13.0.2%2B5/bellsoft-jdk21.0.13.0.2%2B5-linux-aarch64.tar.gz"
+url_api = "https://api.github.com/repos/bell-sw/Liberica/releases/assets/666797128"
+
+[tools."github:bell-sw/Liberica"."platforms.linux-arm64-musl"]
+checksum = "sha256:07f0600b850d4018ad2dbedaf502b72fa911957f2807b90ec31b270d1101b5a4"
+url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13.0.2%2B5/bellsoft-jdk21.0.13.0.2%2B5-linux-aarch64-musl.tar.gz"
+url_api = "https://api.github.com/repos/bell-sw/Liberica/releases/assets/666794297"
+
+[tools."github:bell-sw/Liberica"."platforms.linux-x64"]
+checksum = "sha256:8f8a84b1a09d645507818eee249597ea7c8adf77c36cc5277d9d315045c4f5d1"
+url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13.0.2%2B5/bellsoft-jdk21.0.13.0.2%2B5-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/bell-sw/Liberica/releases/assets/666754181"
+
+[tools."github:bell-sw/Liberica"."platforms.linux-x64-musl"]
+checksum = "sha256:5c97190500187091e433721d25701d0a9b7bcd1e627e5e3676e44ab0c4ecd7aa"
+url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13.0.2%2B5/bellsoft-jdk21.0.13.0.2%2B5-linux-x64-musl.tar.gz"
+url_api = "https://api.github.com/repos/bell-sw/Liberica/releases/assets/666764603"
+
+[tools."github:bell-sw/Liberica"."platforms.macos-arm64"]
+checksum = "sha256:7bbfc53c2e7a214752d496fd6ef6b997e7ccab7d84a16d0b70fcac83db37e5d9"
+url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13.0.2%2B5/bellsoft-jdk21.0.13.0.2%2B5-macos-aarch64.tar.gz"
+url_api = "https://api.github.com/repos/bell-sw/Liberica/releases/assets/666723352"
+
+[tools."github:bell-sw/Liberica"."platforms.macos-x64"]
+checksum = "sha256:e5fdb4d9ee34a94591737732d575b51e39caee8161ba147e4e395f17447b8c86"
+url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13.0.2%2B5/bellsoft-jdk21.0.13.0.2%2B5-macos-amd64.tar.gz"
+url_api = "https://api.github.com/repos/bell-sw/Liberica/releases/assets/666696971"
+
+[tools."github:bell-sw/Liberica"."platforms.windows-x64"]
+checksum = "sha256:526660e99bddb8a3ccf1a4abd40eec6cefb84e73ff1e7d94dbb01d54684fd749"
+url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13.0.2%2B5/bellsoft-jdk21.0.13.0.2%2B5-windows-amd64.zip"
+url_api = "https://api.github.com/repos/bell-sw/Liberica/releases/assets/666663518"
+
 [[tools."github:rizinorg/rizin"]]
 version = "0.9.1"
 backend = "github:rizinorg/rizin"
@@ -4185,39 +4228,6 @@ url_api = "https://api.github.com/repos/rizinorg/rizin/releases/assets/460538308
 checksum = "sha256:9102249a9f0b6319c5334a2e5cf8d9cc3f2035e1d3def027c41f6a90f647e8cf"
 url = "https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1-static-x86_64.tar.xz"
 url_api = "https://api.github.com/repos/rizinorg/rizin/releases/assets/460538308"
-
-[[tools.java]]
-version = "liberica-21.0.13+11"
-backend = "core:java"
-specifiers = ["liberica-21.0.13+11"]
-
-[tools.java."platforms.linux-arm64"]
-checksum = "sha1:fce487017a8168778dfe41f1abf42075cb8cc263"
-url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13%2B11/bellsoft-jdk21.0.13%2B11-linux-aarch64.tar.gz"
-
-[tools.java."platforms.linux-arm64-musl"]
-checksum = "sha1:a2462af2eee6982eb35a99019e9c7bd6a9d57838"
-url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13%2B11/bellsoft-jdk21.0.13%2B11-linux-aarch64-musl.tar.gz"
-
-[tools.java."platforms.linux-x64"]
-checksum = "sha1:3832573962143033ee34aa480620f95720ee1839"
-url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13%2B11/bellsoft-jdk21.0.13%2B11-linux-amd64.tar.gz"
-
-[tools.java."platforms.linux-x64-musl"]
-checksum = "sha1:53e8b4be1125da012736b516632a75d55484ba5f"
-url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13%2B11/bellsoft-jdk21.0.13%2B11-linux-x64-musl.tar.gz"
-
-[tools.java."platforms.macos-arm64"]
-checksum = "sha1:b43fb4c75922ebdbd296219759b75ddf61d83eb3"
-url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13%2B11/bellsoft-jdk21.0.13%2B11-macos-aarch64.tar.gz"
-
-[tools.java."platforms.macos-x64"]
-checksum = "sha1:671398da56d96b534df209865101654995f271d0"
-url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13%2B11/bellsoft-jdk21.0.13%2B11-macos-amd64.tar.gz"
-
-[tools.java."platforms.windows-x64"]
-checksum = "sha1:1e867e3ecc01816b5e399afa061171aee575be9f"
-url = "https://github.com/bell-sw/Liberica/releases/download/21.0.13%2B11/bellsoft-jdk21.0.13%2B11-windows-amd64.zip"
 
 [[tools.node]]
 version = "26.12.1"
