@@ -18,9 +18,9 @@ checksum = "sha256:ac438ce5d3d3673a9188b535fc7cda413b479f0d52536aeeac1bd82faa656
 url = "https://conda.anaconda.org/conda-forge/linux-aarch64/bzip2-1.0.8-h4777abc_10.conda"
 checksum = "sha256:24eacc8a20fd7c4616566178562bef7f9344eb4a8700cfc3180fa75a6ff9d39f"
 
-[conda-packages.linux-arm64."ca-certificates-2026.7.22-hbd8a1cb_0"]
-url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.7.22-hbd8a1cb_0.conda"
-checksum = "sha256:0a0544cf95f64394fe4959286f5c71f5444ad58feb0602e53becb27448d24da6"
+[conda-packages.linux-arm64."ca-certificates-2026.10.19-hbd8a1cb_0"]
+url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.10.19-hbd8a1cb_0.conda"
+checksum = "sha256:9404ee878c6bd5b260655ab651366db43fac6be8d465fcc0acd0f7a50be91acb"
 
 [conda-packages.linux-arm64."cairo-1.18.6-hca320e2_0"]
 url = "https://conda.anaconda.org/conda-forge/linux-aarch64/cairo-1.18.6-hca320e2_0.conda"
@@ -534,9 +534,9 @@ checksum = "sha256:ac438ce5d3d3673a9188b535fc7cda413b479f0d52536aeeac1bd82faa656
 url = "https://conda.anaconda.org/conda-forge/linux-aarch64/bzip2-1.0.8-h4777abc_10.conda"
 checksum = "sha256:24eacc8a20fd7c4616566178562bef7f9344eb4a8700cfc3180fa75a6ff9d39f"
 
-[conda-packages.linux-arm64-musl."ca-certificates-2026.7.22-hbd8a1cb_0"]
-url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.7.22-hbd8a1cb_0.conda"
-checksum = "sha256:0a0544cf95f64394fe4959286f5c71f5444ad58feb0602e53becb27448d24da6"
+[conda-packages.linux-arm64-musl."ca-certificates-2026.10.19-hbd8a1cb_0"]
+url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.10.19-hbd8a1cb_0.conda"
+checksum = "sha256:9404ee878c6bd5b260655ab651366db43fac6be8d465fcc0acd0f7a50be91acb"
 
 [conda-packages.linux-arm64-musl."cairo-1.18.6-hca320e2_0"]
 url = "https://conda.anaconda.org/conda-forge/linux-aarch64/cairo-1.18.6-hca320e2_0.conda"
@@ -1050,9 +1050,9 @@ checksum = "sha256:b08ef033817b5f9f76ce62dfcac7694e7b6b4006420372de22494503decac
 url = "https://conda.anaconda.org/conda-forge/linux-64/bzip2-1.0.8-hda65f42_10.conda"
 checksum = "sha256:1a0d382c515ebf55f8ee1f38c8b81bc95af5c2acc42ad53b66bc5df932032f96"
 
-[conda-packages.linux-x64."ca-certificates-2026.7.22-hbd8a1cb_0"]
-url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.7.22-hbd8a1cb_0.conda"
-checksum = "sha256:0a0544cf95f64394fe4959286f5c71f5444ad58feb0602e53becb27448d24da6"
+[conda-packages.linux-x64."ca-certificates-2026.10.19-hbd8a1cb_0"]
+url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.10.19-hbd8a1cb_0.conda"
+checksum = "sha256:9404ee878c6bd5b260655ab651366db43fac6be8d465fcc0acd0f7a50be91acb"
 
 [conda-packages.linux-x64."cairo-1.18.6-h3c89d7e_0"]
 url = "https://conda.anaconda.org/conda-forge/linux-64/cairo-1.18.6-h3c89d7e_0.conda"
@@ -1606,9 +1606,9 @@ checksum = "sha256:b08ef033817b5f9f76ce62dfcac7694e7b6b4006420372de22494503decac
 url = "https://conda.anaconda.org/conda-forge/linux-64/bzip2-1.0.8-hda65f42_10.conda"
 checksum = "sha256:1a0d382c515ebf55f8ee1f38c8b81bc95af5c2acc42ad53b66bc5df932032f96"
 
-[conda-packages.linux-x64-musl."ca-certificates-2026.7.22-hbd8a1cb_0"]
-url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.7.22-hbd8a1cb_0.conda"
-checksum = "sha256:0a0544cf95f64394fe4959286f5c71f5444ad58feb0602e53becb27448d24da6"
+[conda-packages.linux-x64-musl."ca-certificates-2026.10.19-hbd8a1cb_0"]
+url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.10.19-hbd8a1cb_0.conda"
+checksum = "sha256:9404ee878c6bd5b260655ab651366db43fac6be8d465fcc0acd0f7a50be91acb"
 
 [conda-packages.linux-x64-musl."cairo-1.18.6-h3c89d7e_0"]
 url = "https://conda.anaconda.org/conda-forge/linux-64/cairo-1.18.6-h3c89d7e_0.conda"
@@ -2154,9 +2154,9 @@ checksum = "sha256:ec238f18ce8140485645252351a0eca9ef4f7a1c568a420f240a585229bc1
 url = "https://conda.anaconda.org/conda-forge/osx-arm64/bzip2-1.0.8-h4e30115_10.conda"
 checksum = "sha256:8ec22f0ba25cbfc2e64d70cf29459eccd7ffdf6436f6a6ff15bbfef799f7d4f6"
 
-[conda-packages.macos-arm64."ca-certificates-2026.7.22-hbd8a1cb_0"]
-url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.7.22-hbd8a1cb_0.conda"
-checksum = "sha256:0a0544cf95f64394fe4959286f5c71f5444ad58feb0602e53becb27448d24da6"
+[conda-packages.macos-arm64."ca-certificates-2026.10.19-hbd8a1cb_0"]
+url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.10.19-hbd8a1cb_0.conda"
+checksum = "sha256:9404ee878c6bd5b260655ab651366db43fac6be8d465fcc0acd0f7a50be91acb"
 
 [conda-packages.macos-arm64."cairo-1.18.6-h580cee5_0"]
 url = "https://conda.anaconda.org/conda-forge/osx-arm64/cairo-1.18.6-h580cee5_0.conda"
@@ -2514,9 +2514,9 @@ checksum = "sha256:3032f2f55d6eceb10d53217c2a7f43e1eac83603d91e21ce502e8179e63a7
 url = "https://conda.anaconda.org/conda-forge/osx-64/bzip2-1.0.8-h374f1ed_10.conda"
 checksum = "sha256:4ed83961876dc8844a6f0df49c07b408efbaea275ffb0b37133e24c006990b3a"
 
-[conda-packages.macos-x64."ca-certificates-2026.7.22-hbd8a1cb_0"]
-url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.7.22-hbd8a1cb_0.conda"
-checksum = "sha256:0a0544cf95f64394fe4959286f5c71f5444ad58feb0602e53becb27448d24da6"
+[conda-packages.macos-x64."ca-certificates-2026.10.19-hbd8a1cb_0"]
+url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.10.19-hbd8a1cb_0.conda"
+checksum = "sha256:9404ee878c6bd5b260655ab651366db43fac6be8d465fcc0acd0f7a50be91acb"
 
 [conda-packages.macos-x64."cairo-1.18.6-h5791faa_0"]
 url = "https://conda.anaconda.org/conda-forge/osx-64/cairo-1.18.6-h5791faa_0.conda"
@@ -2874,9 +2874,9 @@ checksum = "sha256:0524d0c0b61dacd0c22ac7a8067f977b1d52380210933b04141f5099c5b6f
 url = "https://conda.anaconda.org/conda-forge/win-64/bzip2-1.0.8-h0ad9c76_10.conda"
 checksum = "sha256:04767466ee9227c9c57ab2c6503e0149177d34111c7418d2f420297acb1eb229"
 
-[conda-packages.windows-x64."ca-certificates-2026.7.22-h4c7d964_0"]
-url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.7.22-h4c7d964_0.conda"
-checksum = "sha256:95e8e74062a5fe5f870ac8c90302b6e89945165fdaed7810606e84ddee6aac12"
+[conda-packages.windows-x64."ca-certificates-2026.10.19-h4c7d964_0"]
+url = "https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.10.19-h4c7d964_0.conda"
+checksum = "sha256:44a799ed27b3764416f8f26f56592e0ecfc67c161d79470e986e771cb2e0bf70"
 
 [conda-packages.windows-x64."cairo-1.18.6-h477c42c_0"]
 url = "https://conda.anaconda.org/conda-forge/win-64/cairo-1.18.6-h477c42c_0.conda"
@@ -3334,7 +3334,7 @@ conda_deps = [
     "pthread-stubs-0.4-h5bc82ec_1004",
     "xorg-libxau-1.0.12-h5bc82ec_2",
     "xorg-libxdmcp-1.1.5-h5bc82ec_2",
-    "ca-certificates-2026.7.22-hbd8a1cb_0",
+    "ca-certificates-2026.10.19-hbd8a1cb_0",
     "dbus-1.16.2-h71d469a_2",
     "libsndfile-1.2.2-h30591a0_2",
     "libsystemd0-262-hd1ea486_2",
@@ -3469,7 +3469,7 @@ conda_deps = [
     "pthread-stubs-0.4-h5bc82ec_1004",
     "xorg-libxau-1.0.12-h5bc82ec_2",
     "xorg-libxdmcp-1.1.5-h5bc82ec_2",
-    "ca-certificates-2026.7.22-hbd8a1cb_0",
+    "ca-certificates-2026.10.19-hbd8a1cb_0",
     "dbus-1.16.2-h71d469a_2",
     "libsndfile-1.2.2-h30591a0_2",
     "libsystemd0-262-hd1ea486_2",
@@ -3620,7 +3620,7 @@ conda_deps = [
     "pthread-stubs-0.4-h7cc23a3_1004",
     "xorg-libxau-1.0.12-h7cc23a3_2",
     "xorg-libxdmcp-1.1.5-h7cc23a3_2",
-    "ca-certificates-2026.7.22-hbd8a1cb_0",
+    "ca-certificates-2026.10.19-hbd8a1cb_0",
     "dbus-1.16.2-he8c428d_2",
     "libsndfile-1.2.2-hc7d488a_2",
     "libsystemd0-262-h26e0ef7_2",
@@ -3765,7 +3765,7 @@ conda_deps = [
     "pthread-stubs-0.4-h7cc23a3_1004",
     "xorg-libxau-1.0.12-h7cc23a3_2",
     "xorg-libxdmcp-1.1.5-h7cc23a3_2",
-    "ca-certificates-2026.7.22-hbd8a1cb_0",
+    "ca-certificates-2026.10.19-hbd8a1cb_0",
     "dbus-1.16.2-he8c428d_2",
     "libsndfile-1.2.2-hc7d488a_2",
     "libsystemd0-262-h26e0ef7_2",
@@ -3881,7 +3881,7 @@ conda_deps = [
     "libpango-devel-1.58.2-haa2d88b_3",
     "libpango-1.58.2-hc2ac4f2_3",
     "libogg-1.3.5-h48c0fde_1",
-    "ca-certificates-2026.7.22-hbd8a1cb_0",
+    "ca-certificates-2026.10.19-hbd8a1cb_0",
     "sdl3-3.4.18-h4bb5895_0",
     "libusb-1.0.30-h74c22ad_0",
     "glslang-16.6.0-h1a33c25_0",
@@ -3977,7 +3977,7 @@ conda_deps = [
     "libpango-devel-1.58.2-h432f75e_3",
     "libpango-1.58.2-hb06761d_3",
     "libogg-1.3.5-he3325bb_1",
-    "ca-certificates-2026.7.22-hbd8a1cb_0",
+    "ca-certificates-2026.10.19-hbd8a1cb_0",
     "sdl3-3.4.18-h2f783eb_0",
     "libusb-1.0.30-had63097_0",
     "glslang-16.6.0-he9b0248_0",
@@ -4059,7 +4059,7 @@ conda_deps = [
     "libpango-1.58.2-h02b4fad_3",
     "libogg-1.3.5-h2466b09_1",
     "icu-78.3-h5112557_2",
-    "ca-certificates-2026.7.22-h4c7d964_0",
+    "ca-certificates-2026.10.19-h4c7d964_0",
     "sdl3-3.4.18-h5112557_0",
     "libusb-1.0.30-h6a83c73_0",
     "glslang-16.6.0-h8fa7867_0",
@@ -4243,48 +4243,48 @@ matching = "linux-x64"
 checksum = "blake3:69c278ebb7e7c706b44fe53db7c67cb29f5cd9748b7a41b997eec348e2235a8d"
 
 [[tools.uv]]
-version = "0.13.1"
+version = "0.13.5"
 backend = "aqua:astral-sh/uv"
-specifiers = ["0.13.1"]
+specifiers = ["0.13.5"]
 
 [tools.uv."platforms.linux-arm64"]
-checksum = "sha256:9041c73c99fdc5892cf128140beb354eca9231d502068cc36e6cb53a8e59ad14"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.1/uv-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/639312990"
+checksum = "sha256:4bb69cf95ed13f23713bb7bc09f241896ea0c75b7c557e615a20604b82f9c403"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/664335837"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-arm64-musl"]
-checksum = "sha256:345a8308e4d1835cdfaadf692836fd3137a6d45864773f05ad7bf59442b1ba16"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.1/uv-aarch64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/639313013"
+checksum = "sha256:7906c79adb21c81abd559841ba76bb1d9af9d791acac7a041b2972e03ae16538"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/664335857"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64"]
-checksum = "sha256:eadd9d27c134ab5ac1ffd4473b97a741407f3ea238288f03121fc4deddf90220"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.1/uv-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/639313223"
+checksum = "sha256:f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/664336023"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64-musl"]
-checksum = "sha256:6c86040a8f045ab9adc9e3ec4cdafa03fd00e9a988ed2bf28971c7fc2d0debd0"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.1/uv-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/639313248"
+checksum = "sha256:57ef9d9ccb01fb1bd998df995b0dd221b52f7d7841fbea93f2d4463bf61fb7a9"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/664336027"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-arm64"]
-checksum = "sha256:cfe454573412ff7380d15fc7dae5997ab53ffce72fce0a78e91ddbc84001acd2"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.1/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/639312976"
+checksum = "sha256:743f85035a1996ecb350659e01cd9faea9709829be09b1b4b03c73eaf3c9cd73"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/664335803"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-x64"]
-checksum = "sha256:bb7b805bdcf3d0bc8c74ceb94569e6b3e8aa35bd492acdbb9d46bf46d9d4ff6b"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.1/uv-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/639313196"
+checksum = "sha256:b0f52b0e3945b4107d89024ea38e625683011fbfc05a0d98f9fa2d6dcee28c66"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/664335993"
 provenance = "github-attestations"
 
 [tools.uv."platforms.windows-x64"]
-checksum = "sha256:3b2661a463a5baea7f5076ea2b25ab71d77f36a6c0d809e5350651792f80a672"
-url = "https://github.com/astral-sh/uv/releases/download/0.13.1/uv-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/639313211"
+checksum = "sha256:a38b8d1902b7cfbc76b423ba1bb456f623f42064cdc72628b6075b89afd1019a"
+url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/664336006"
 provenance = "github-attestations"

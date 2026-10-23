@@ -6,7 +6,7 @@
 FROM docker.io/library/fedora:44
 # A prune can spare it: `podman system prune --all --filter label!=io.modshop.keep=true`.
 LABEL io.modshop.keep=true
-RUN dnf install -y --setopt=install_weak_deps=False wine wine-mono mingw64-win-iconv mingw32-win-iconv xorg-x11-server-Xvfb && dnf clean all
+RUN dnf upgrade -y ca-certificates && dnf install -y --setopt=install_weak_deps=False wine wine-mono mingw64-win-iconv mingw32-win-iconv xorg-x11-server-Xvfb && dnf clean all
 ENV WINEDEBUG=-all WINEPREFIX=/wine HOME=/wine
 RUN mkdir -p /wine /game && xvfb-run -a wineboot --init && wineserver --wait
 WORKDIR /game
