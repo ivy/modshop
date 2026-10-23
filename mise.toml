@@ -8,7 +8,7 @@ rust = "1.99.0"
 # Our mods' voice recordings: cut and wrapped for the game by ffmpeg, lip-synced by Rhubarb; committed through Git LFS.
 "conda:ffmpeg" = "8.0.1"
 "github:DanielSWolf/rhubarb-lip-sync" = "1.14.0"
-"aqua:git-lfs/git-lfs" = "3.7.1"
+"aqua:git-lfs/git-lfs" = "3.8.1"
 # nws on the PATH, for the nwscript plugin and by hand; the build compiles with the shim `nws:build` installs.
 "cargo:https://github.com/ivy/nwscript" = { version = "rev:c90437e5c733d051beae11289a9d8adddb444ce3", crate = "nws" }
 uv = "0.13.5"
