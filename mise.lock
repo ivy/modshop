@@ -3118,9 +3118,9 @@ checksum = "sha256:d8e9ea26b52a09d880d1e5371830c8dd5b4c099a6db64dbdf8236440744b7
 url = "https://conda.anaconda.org/conda-forge/win-64/pixman-0.46.4-h5112557_3.conda"
 checksum = "sha256:cad8b94c2b00264a15d469eed6dc53aac1c59c6d46f27ad1d91bfaf227cf136a"
 
-[conda-packages.windows-x64."python-3.15.0-h53f6dd8_101_cp315"]
-url = "https://conda.anaconda.org/conda-forge/win-64/python-3.15.0-h53f6dd8_101_cp315.conda"
-checksum = "sha256:3317969df32a384c6281fdf5d53e7f33700f529e77a856e47787618164cf4339"
+[conda-packages.windows-x64."python-3.15.1-h53f6dd8_100_cp315"]
+url = "https://conda.anaconda.org/conda-forge/win-64/python-3.15.1-h53f6dd8_100_cp315.conda"
+checksum = "sha256:c1086f7562010f4d588344cb2a3774e6414338ef76659ee5d424e9d410880051"
 
 [conda-packages.windows-x64."python_abi-3.15-9_cp315"]
 url = "https://conda.anaconda.org/conda-forge/noarch/python_abi-3.15-9_cp315.conda"
@@ -4074,7 +4074,7 @@ conda_deps = [
     "libjpeg-turbo-3.2.0-hfd05255_1",
     "libtiff-4.7.2-h8f73337_1",
     "lerc-4.2.0-hd936e49_0",
-    "python-3.15.0-h53f6dd8_101_cp315",
+    "python-3.15.1-h53f6dd8_100_cp315",
     "packaging-26.3-pyhc364b38_0",
     "libdeflate-1.25-h1a1d4e4_1",
     "zstd-1.5.7-h534d264_7",
